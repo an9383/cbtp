@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mes.mappers.cm.bbsMapper">
+
+	<resultMap id="BbsVo"
+		type="mes.domain.cm.BbsVo">
+		<result property="bbsNo"         column="BBS_NO" />
+		<result property="bbsType"       column="BBS_TYPE" />
+		<result property="upBbsNo"       column="UP_BBS_NO" />
+		<result property="bbsReSeq"      column="BBS_RE_SEQ" />
+		<result property="bbsReLevel"    column="BBS_RE_LEVEL" />
+		<result property="bbsTitle"      column="BBS_TITLE" />
+		<result property="bbsContent"    column="BBS_CONTENT" />
+		<result property="attchFileNm1"  column="ATTCH_FILE_NM1" />
+		<result property="attchFileNm2"  column="ATTCH_FILE_NM2" />
+		<result property="attchFileNm3"  column="ATTCH_FILE_NM3" />
+		<result property="attchPath"     column="ATTCH_PATH" />
+		<result property="etc1"          column="ETC1" />
+		<result property="etc2"          column="ETC2" />
+		<result property="bbsDesc"       column="BBS_DESC" />
+		<result property="useYn"         column="USE_YN" />
+		<result property="userNm"        column="USER_NM" />
+		<result property="regId"         column="REG_ID" />
+		<result property="regDate"       column="REG_DATE" />
+		<result property="updId"         column="UPD_ID" />
+		<result property="updDate"       column="UPD_DATE" />
+		<result property="bbsSeq"        column="BBS_SEQ" />
+	</resultMap>
+	
+	<!-- 게시판 목록 출력 -->
+	<select id="bbsList" resultMap="BbsVo">
+		<![CDATA[
+	        SELECT   
+        	  A.BBS_NO
+         	, A.BBS_TITLE
+         	, A.BBS_CONTENT
+            , ISNULL((SELECT USER_NM FROM TB_USER B WHERE B.USER_ID = A.REG_ID), '관리자') USER_NM
+         	, REG_DATE
+         	, A.UP_BBS_NO   
+         	, A.BBS_RE_SEQ 
+         	, A.BBS_RE_LEVEL
+         FROM  TB_BBS A
+         WHERE A.USE_YN = 'Y' 
+         ORDER BY UP_BBS_NO DESC, BBS_RE_SEQ, BBS_RE_LEVEL DESC
+		]]>
+	</select>
+	
+	<!-- 게시판 목록 상위10개 출력 -->
+	<select id="bbsTop10List" resultMap="BbsVo">
+		<![CDATA[
+	        SELECT TOP(10)
+        	  A.BBS_NO
+         	, A.BBS_TITLE
+         	, A.BBS_CONTENT
+            , ISNULL((SELECT USER_NM FROM TB_USER B WHERE B.USER_ID = A.REG_ID), '관리자') USER_NM
+         	, REG_DATE
+         	, A.UP_BBS_NO   
+         	, A.BBS_RE_SEQ 
+         	, A.BBS_RE_LEVEL
+         FROM  TB_BBS A
+         WHERE A.USE_YN = 'Y' 
+         ORDER BY UP_BBS_NO DESC, BBS_RE_SEQ, BBS_RE_LEVEL DESC
+		]]>
+	</select>
+
+	<select id="bbsRead" resultMap="BbsVo">
+		<![CDATA[
+			SELECT	
+			  BBS_NO
+			, BBS_TITLE
+	        , BBS_CONTENT
+	        , ATTCH_FILE_NM1
+	        , ATTCH_FILE_NM2
+	        , ATTCH_FILE_NM3
+	        , REG_ID
+			, REG_DATE
+			FROM	
+			TB_BBS 
+			WHERE
+			BBS_NO = #{bbsNo}
+		]]>
+	</select>
+	
+	<select id="bbsFilePath" resultType="int">
+		<![CDATA[
+			SELECT	
+			  ATTCH_PATH
+			FROM	
+			TB_BBS 
+			WHERE
+			BBS_NO = #{bbsNo}
+		]]>
+	</select>
+	
+	
+	<!-- 파일명 조회 -->
+	<select id="bbsFileNm" resultType="String">
+		<![CDATA[
+			SELECT	
+				ATTCH_FILE_NM1
+			FROM	
+			TB_BBS 
+			WHERE
+			BBS_NO = #{bbsNo}
+		]]>
+	</select>
+	<!-- 게시판 등록 -->
+	<insert id="bbsCreate" parameterType="mes.domain.cm.BbsVo">
+		  <![CDATA[
+			  INSERT INTO TB_BBS		
+				  ( BBS_NO
+				  , BBS_TYPE
+				  , UP_BBS_NO
+				  , BBS_RE_SEQ
+				  , BBS_RE_LEVEL
+				  , BBS_TITLE
+				  , BBS_CONTENT
+				  , ATTCH_FILE_NM1
+				  , ATTCH_FILE_NM2
+				  , ATTCH_FILE_NM3
+				  , ATTCH_PATH
+				  , USE_YN
+				  , REG_ID
+				  , REG_DATE
+				 ) 
+			 VALUES
+				  ( #{bbsNo}
+				  , 'NB'
+				  , #{upBbsNo}
+				  , #{bbsReSeq}
+				  , #{bbsReLevel}
+				  , #{bbsTitle}
+			      , #{bbsContent}
+			      , #{attchFileNm1}
+			      , #{attchFileNm2}
+			      , #{attchFileNm3}
+			      , #{attchPath}
+			      , 'Y'
+			      , #{regId}
+				  , GETDATE()
+				  )		  
+		  ]]>
+	</insert>
+	
+	<update id="bbsUpdate" parameterType="mes.domain.cm.BbsVo">
+	<![CDATA[
+		UPDATE	
+			TB_BBS 
+		SET	BBS_TYPE = 'NB'
+			, BBS_TITLE = #{bbsTitle}
+			, BBS_CONTENT = #{bbsContent}
+			, ATTCH_FILE_NM1 = #{attchFileNm1}
+			, ATTCH_FILE_NM2 = #{attchFileNm2}
+			, ATTCH_FILE_NM3 = #{attchFileNm3}
+		WHERE 
+			BBS_NO = #{bbsNo}
+		
+	]]>
+	</update>
+	
+	<delete id="bbsDelete" parameterType="mes.domain.cm.BbsVo">
+	<![CDATA[
+		UPDATE	
+			TB_BBS 
+		SET	USE_YN = 'N'
+		WHERE 
+			UP_BBS_NO = #{bbsNo} or BBS_NO = #{bbsNo}
+	]]>
+	</delete>
+	
+	<!-- 게시판 댓글 목록 출력 -->
+	<select id="bbsReList" resultMap="BbsVo">
+		<![CDATA[
+			SELECT   
+		   	  A.BBS_SEQ
+			, A.BBS_CONTENT
+	        , ISNULL((SELECT USER_NM FROM TB_USER B WHERE B.USER_ID = A.REG_ID), '관리자') USER_NM
+			, A.REG_DATE
+			FROM 
+			TB_BBS_COMMENT A
+			WHERE 
+			BBS_NO = #{bbsNo}
+		]]>
+	</select>
+	
+	<select id="bbsReCreate" parameterType="mes.domain.cm.BbsVo">
+	<![CDATA[
+		INSERT INTO TB_BBS_COMMENT (
+			BBS_NO
+			, BBS_SEQ
+			, BBS_CONTENT
+			, USE_YN
+			, REG_ID
+			, REG_DATE
+		) 
+		VALUES(
+			#{bbsNo}
+			, #{bbsSeq}
+			, #{bbsContent}
+			, 'Y'
+			, #{regId}
+			, getdate()
+		)
+	]]>
+	</select>
+	
+	<!--게시판 번호 No(bbsNo) -->
+	<select id="bbsNo" resultType="int">
+	<![CDATA[
+		SELECT 
+			ISNULL(MAX(BBS_NO)+1, 1) 
+		FROM   
+		TB_BBS 
+	]]>
+	</select>
+	
+	<!--게시판 상위 번호(upBbsNo) -->
+	<select id="upBbsNo" resultType="int">
+	<![CDATA[
+		SELECT 
+			UP_BBS_NO
+		FROM   
+		TB_BBS 
+		WHERE
+		BBS_NO = #{bbsNo}
+	]]>
+	</select>
+	
+	
+	<!--게시판 답변 번호 SEQ(bbs_re_seq) -->
+	<select id="bbsReSeq" resultType="int">
+	<![CDATA[
+		SELECT 
+		ISNULL(MAX(BBS_RE_SEQ)+1, 1)
+		FROM   
+		TB_BBS
+		WHERE
+		UP_BBS_NO = #{upBbsNo}
+	]]>
+	</select>
+	
+	<!--게시판 답변 레벨 번호SEQ(bbsReLevel) -->
+	<select id="bbsReLevel" resultType="int">
+	<![CDATA[
+		SELECT 
+			BBS_RE_SEQ
+		FROM   
+		TB_BBS
+		WHERE
+		BBS_NO = #{bbsNo}
+		
+	]]>
+	</select>
+	
+	<!--게시판 댓글(bbs_seq) -->
+	<select id="bbsCommentSeq" resultType="int">
+	<![CDATA[
+		SELECT ISNULL(MAX(BBS_SEQ)+1, 1)
+		FROM   
+		TB_BBS_COMMENT
+		WHERE
+		BBS_NO = #{bbsNo}
+	]]>
+	</select>
+
+
+</mapper>

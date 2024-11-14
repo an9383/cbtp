@@ -1,0 +1,699 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.bm.inspAdmMapper">
+
+	<resultMap id="InspAdmVo" type="mes.domain.bm.InspAdmVo">
+		<result property="inspCd"				column="INSP_CD"			/>
+		<result property="inspGubun"			column="INSP_GUBUN"			/>
+		<result property="itemSeq"				column="ITEM_SEQ"			/>
+		<result property="seqCheck"				column="SEQ_CHECK"			/>
+		<result property="mainGubun"			column="MAIN_GUBUN"			/>
+		<result property="itemCd"				column="ITEM_CD"			/>
+		<result property="itemCus"				column="ITEM_CUS"			/>
+		<result property="itemCusNm"			column="ITEM_CUS_NM"		/>
+		<result property="itemNm"				column="ITEM_NM"			/>
+		<result property="stateCd"				column="STATE_CD"			/>
+		
+		<result property="inspDesc1"			column="INSP_DESC1"			/>
+		<result property="inspDesc2"			column="INSP_DESC2"			/>
+		<result property="inspDesc3"			column="INSP_DESC3"			/>
+		<result property="inspDesc4"			column="INSP_DESC4"			/>
+		
+		<result property="inspType"				column="INSP_TYPE"			/>
+		<result property="inspSeq"				column="INSP_SEQ"			/>
+		<result property="inspList"				column="INSP_LIST"			/>
+		<result property="inspStandUpper"		column="INSP_STAND_UPPER"	/>
+		<result property="inspStandLower"		column="INSP_STAND_LOWER"	/>
+		<result property="inspPlanDate"			column="INSP_PLAN_DATE"		/>
+		<result property="inspPlan"				column="INSP_PLAN"			/>
+		<result property="inspReport"			column="INSP_REPORT"		/>
+		<result property="inspInputMethod"		column="INSP_INPUT_METHOD"	/>
+		<result property="inspCheck"			column="INSP_CHECK"			/>
+		<result property="inspSpc"				column="INSP_SPC"			/>
+		<result property="inspOrder"			column="INSP_ORDER"			/>
+		<result property="inspStandGubun"		column="INSP_STAND_GUBUN"	/>
+		
+		<!-- 검사항목 결과관리 -->
+		<result property="inspResultGubun"		column="INSP_RESULT_GUBUN"	/>
+		<result property="inspSourceNo"			column="INSP_SOURCE_NO"		/>
+		<result property="inspSourceSubNo"		column="INSP_SOURCE_SUB_NO"	/>
+		<result property="inspResult"			column="INSP_RESULT"	/>
+		<result property="inspX1"				column="INSP_X1"		/>
+		<result property="inspX2"				column="INSP_X2"		/>
+		<result property="inspX3"				column="INSP_X3"		/>
+		<result property="inspX4"				column="INSP_X4"		/>
+		<result property="inspX5"				column="INSP_X5"		/>
+		<result property="inspX6"				column="INSP_X6"		/>
+		<result property="inspX7"				column="INSP_X7"		/>
+		<result property="inspX8"				column="INSP_X8"		/>
+		<result property="inspX9"				column="INSP_X9"		/>
+		<result property="inspX10"				column="INSP_X10"		/>
+		<result property="inspX11"				column="INSP_X11"		/>
+		<result property="inspX12"				column="INSP_X12"		/>
+		<result property="inspX13"				column="INSP_X13"		/>
+		<result property="inspX14"				column="INSP_X14"		/>
+		<result property="inspX15"				column="INSP_X15"		/>
+		<result property="inspX16"				column="INSP_X16"		/>
+		<result property="inspX17"				column="INSP_X17"		/>
+		<result property="inspX18"				column="INSP_X18"		/>
+		<result property="inspX19"				column="INSP_X19"		/>
+		<result property="inspX20"				column="INSP_X20"		/>
+		<result property="inspX21"				column="INSP_X21"		/>
+		<result property="inspX22"				column="INSP_X22"		/>
+		<result property="inspX23"				column="INSP_X23"		/>
+		<result property="inspX24"				column="INSP_X24"		/>
+		<result property="inspectGubun"			column="INSPECT_GUBUN"	/>
+		<result property="inspCavity"			column="INSP_CAVITY"	/>
+		<result property="cavityCnt"			column="CAVITY_CNT"		/>
+		
+		<result property="poNo"					column="PO_NO"			/>
+		<result property="poSeq"				column="PO_SEQ"			/>
+		<result property="inSeq"				column="IN_SEQ"			/>
+		<result property="baseCd"				column="BASE_CD"		/>
+		<result property="baseNm"				column="BASE_NM"		/>
+		<result property="etc1"					column="ETC1"			/>
+		<result property="etc2"					column="ETC2"			/>
+		
+		<result property="regId"				column="REG_ID"			/>
+		<result property="regDate"				column="REG_DATE"		/>
+		<result property="updId"				column="UPD_ID"			/>
+		<result property="updDate"				column="UPD_DATE"		/>
+		<result property="inspPass"				column="INSP_PASS"		/>
+		<result property="inspCheckNm"			column="INSP_CHECK_NM"	/>
+		
+		<result property="cavityNo1"			column="CAVITY_NO1"		/>
+		<result property="cavityNo2"			column="CAVITY_NO2"		/>
+		<result property="cavityNo3"			column="CAVITY_NO3"		/>
+		<result property="cavityNo4"			column="CAVITY_NO4"		/>
+		<result property="cavityNo5"			column="CAVITY_NO5"		/>
+	</resultMap>
+
+	<!-- 검사항목관리 조회 -->
+	<select id="inspAdmList" resultMap="InspAdmVo">
+		SELECT
+			N.INSP_CD,
+			N.INSP_GUBUN,
+			N.ITEM_SEQ,
+			N.INSP_DESC1,
+			N.INSP_DESC2,
+			T.MAIN_GUBUN,
+			T.ITEM_CD,
+			T.ITEM_CUS,
+			(SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM D WHERE D.DEAL_CORP_CD = T.ITEM_CUS) ITEM_CUS_NM,
+			T.ITEM_NM,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '095' AND T.STATE_CD = B.BASE_CD) STATE_CD,
+			N.REG_ID,
+			N.REG_DATE,
+			N.UPD_ID,
+			N.UPD_DATE
+		FROM	TB_INSP_ITEM_ADM N
+		INNER JOIN TB_ITEM_INFO_ADM T
+		ON N.ITEM_SEQ = T.ITEM_SEQ
+		WHERE	INSP_GUBUN = #{inspGubun}
+		<if test="mainGubun != '' and mainGubun != null"> 
+			AND T.MAIN_GUBUN = #{mainGubun}
+		</if>
+	</select>
+	
+	<!-- 검사항목관리 등록 -->
+	<insert id="inspAdmCreate">
+		INSERT INTO TB_INSP_ITEM_ADM		(
+			INSP_CD,
+			INSP_GUBUN,
+			ITEM_SEQ,
+			INSP_DESC1,
+			INSP_DESC2,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{inspCd},
+			#{inspGubun},
+			#{itemSeq},
+			#{inspDesc1},
+			#{inspDesc2},
+			#{regId},
+			getDate()
+		)
+	</insert>
+	
+	<!-- 검사항목관리 상세 조회 -->
+	<select id="inspAdmRead" resultMap="InspAdmVo">
+		SELECT
+			N.INSP_CD,
+			N.INSP_GUBUN,
+			N.ITEM_SEQ,
+			N.INSP_DESC1,
+			N.INSP_DESC2,
+			T.MAIN_GUBUN,
+			T.ITEM_CD,
+			T.ITEM_CUS,
+			(SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM D WHERE D.DEAL_CORP_CD = T.ITEM_CUS) ITEM_CUS_NM,
+			T.ITEM_NM,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '095' AND T.STATE_CD = B.BASE_CD) STATE_CD,
+			N.REG_ID,
+			N.REG_DATE,
+			N.UPD_ID,
+			N.UPD_DATE
+		FROM	TB_INSP_ITEM_ADM N
+		INNER JOIN TB_ITEM_INFO_ADM T
+		ON N.ITEM_SEQ = T.ITEM_SEQ
+		WHERE	1=1
+		<if test="inspCd != null and !inspCd.equals('')">
+		AND N.INSP_CD = #{inspCd}
+		</if>
+		<if test="itemSeq != null and !itemSeq.equals('')">
+		AND N.ITEM_SEQ = #{itemSeq}
+		</if>
+	</select>
+	
+	<!-- 검사항목관리 수정 -->
+	<update id="inspAdmUpdate">
+		UPDATE	TB_INSP_ITEM_ADM		 
+		SET	INSP_CD = #{inspCd},
+			INSP_GUBUN = #{inspGubun},
+			ITEM_SEQ = #{itemSeq},
+			INSP_DESC1 = #{inspDesc1},
+			INSP_DESC2 = #{inspDesc2},
+			UPD_ID = #{updId},
+			UPD_DATE = getDate()
+		WHERE	INSP_CD = #{inspCd}
+	</update>
+	
+	<!-- 검사항목관리 삭제 -->
+	<delete id="inspAdmDelete">
+		DELETE 
+		FROM TB_INSP_ITEM_ADM		 
+		WHERE INSP_CD = #{inspCd}
+	</delete>
+	
+	<!-- seq 값 조회 -->
+	<select id="inspAdmSeq" resultType="String">
+			SELECT ISNULL(STUFF(100001+MAX(RIGHT(INSP_CD, 5)), 1, 1, #{seqCheck}), #{seqCheck} + '00001')
+			FROM TB_INSP_ITEM_ADM 
+			WHERE LEFT(INSP_CD, 1) = #{seqCheck}
+	</select>
+	
+	<!-- 검사항목상세 조회 -->
+	<select id="inspDtlList" resultMap="InspAdmVo">
+		SELECT	
+			INSP_CD,
+			INSP_TYPE,
+			INSP_SEQ,
+			INSP_LIST,
+			INSP_STAND_UPPER,
+			INSP_STAND_LOWER,
+			INSP_PLAN_DATE,
+			INSP_PLAN,
+			INSP_REPORT,
+			INSP_INPUT_METHOD,
+			INSP_CHECK,
+			INSP_SPC,
+			INSP_ORDER,
+			INSP_STAND_GUBUN
+		FROM	TB_INSP_ITEM_DTL		 
+		WHERE	1=1
+		<if test="inspCd != null and !inspCd.equals('')">
+		AND INSP_CD = #{inspCd}
+		</if>
+		<if test="inspType != null and !inspType.equals('')">
+		AND INSP_TYPE = #{inspType}
+		</if>
+		<if test="itemSeq != null">
+		AND INSP_CD = (SELECT INSP_CD FROM TB_INSP_ITEM_ADM WHERE ITEM_SEQ = #{itemSeq})
+		</if>
+		ORDER BY INSP_ORDER, REG_DATE
+	</select>
+	
+	<!-- 검사항목상세 등록 -->
+	<insert id="inspDtlCreate">
+		INSERT INTO TB_INSP_ITEM_DTL		(
+			INSP_CD,
+			INSP_TYPE,
+			INSP_SEQ,
+			INSP_LIST,
+			INSP_STAND_UPPER,
+			INSP_STAND_LOWER,
+			INSP_PLAN_DATE,
+			INSP_PLAN,
+			INSP_REPORT,
+			INSP_INPUT_METHOD,
+			INSP_CHECK,
+			INSP_SPC,
+			INSP_ORDER,
+			INSP_STAND_GUBUN,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{inspCd},
+			#{inspType},
+			#{inspSeq},
+			#{inspList},
+			#{inspStandUpper},
+			#{inspStandLower},
+			#{inspPlanDate},
+			#{inspPlan},
+			#{inspReport},
+			#{inspInputMethod},
+			#{inspCheck},
+			#{inspSpc},	
+			#{inspOrder},	
+			#{inspStandGubun},			
+			#{regId},
+			GETDATE()
+		)
+	</insert>
+	
+	<!-- 검사항목상세 삭제 -->
+	<delete id="inspDtlDelete">
+		DELETE 
+		FROM TB_INSP_ITEM_DTL
+		WHERE 1=1
+		AND INSP_CD = #{inspCd}
+		<if test="inspType!=null and !inspType.equals('')">
+		AND INSP_TYPE = #{inspType}
+		</if>
+		<if test="inspSeq!=null and !inspSeq.equals('')">
+		AND INSP_SEQ = #{inspSeq}
+		</if>
+	</delete>
+	
+	<!--검사항목상세 시퀀스 생성 -->
+	<select id="getInspSeq" resultType="String">
+		SELECT ISNULL(MAX(INSP_SEQ) + 1, '1')
+		FROM TB_INSP_ITEM_DTL 
+		WHERE 1=1
+		AND INSP_CD = #{inspCd}
+		AND INSP_TYPE = #{inspType}
+	</select>
+	
+	
+	
+	
+	<!-- 검사항목 결과조회 -->
+	
+	
+	<!-- 검사항목 공통코드 조회 -->
+	<select id="inspTypeList" resultMap="InspAdmVo">
+		SELECT
+			BASE_CD,
+			BASE_NM,
+			ETC1,
+			ETC2
+		FROM TB_COMMON_CODE_ADM 
+		WHERE BASE_GROUP_CD='126'
+		AND ETC1=#{inspGubun}
+	</select>
+	
+	<!-- 검사항목 결과조회 -->
+	<select id="inspResultAdmList" resultMap="InspAdmVo">
+		SELECT 
+			IA.INSP_CD,
+			IA.INSP_GUBUN,
+			ID.INSP_TYPE,
+			ID.INSP_SEQ,
+			ID.INSP_LIST,
+			ID.INSP_STAND_UPPER,
+			ID.INSP_STAND_LOWER,
+			ID.INSP_PLAN_DATE,
+			ID.INSP_PLAN,
+			ID.INSP_REPORT,
+			ID.INSP_SPC,
+			ID.INSP_ORDER,
+			ID.INSP_INPUT_METHOD,
+			ID.INSP_CHECK,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '134' AND ID.INSP_CHECK = B.BASE_CD) INSP_CHECK_NM,
+			IR.INSP_RESULT,
+			IR.INSP_X1,
+			IR.INSP_X2,
+			IR.INSP_X3,
+			IR.INSP_X4,
+			IR.INSP_X5,
+			IR.INSP_X6,
+			IR.INSP_X7,
+			IR.INSP_X8,
+			IR.INSP_X9,
+			IR.INSP_X10,
+			IR.INSP_X11,
+			IR.INSP_X12,
+			IR.INSP_X13,
+			IR.INSP_X14,
+			IR.INSP_X15,
+			IR.INSP_X16,
+			IR.INSP_X17,
+			IR.INSP_X18,
+			IR.INSP_X19,
+			IR.INSP_X20,
+			IR.INSP_X21,
+			IR.INSP_X22,
+			IR.INSP_X23,
+			IR.INSP_X24,
+			IR.INSP_PASS,
+			ID.INSP_STAND_GUBUN
+		FROM TB_INSP_ITEM_ADM IA
+		LEFT OUTER JOIN TB_INSP_ITEM_DTL ID
+		ON IA.INSP_CD=ID.INSP_CD
+		LEFT OUTER JOIN TB_INSP_RESULT_ADM IR
+		ON IA.INSP_CD=IR.INSP_CD
+		AND ID.INSP_TYPE=IR.INSP_TYPE
+		AND ID.INSP_SEQ=IR.INSP_SEQ
+		<if test="inspCavity!=null and !inspCavity.equals('')">
+		AND IR.INSP_CAVITY= #{inspCavity}
+		</if>
+		AND IR.INSP_RESULT_GUBUN = #{inspResultGubun}
+		AND IR.INSP_SOURCE_NO= #{inspSourceNo}
+		<if test="inspSourceSubNo!=null and !inspSourceSubNo.equals('')">
+		AND IR.INSP_SOURCE_SUB_NO= #{inspSourceSubNo}
+		</if>		
+		<if test="inspectGubun!=null and !inspectGubun.equals('')">
+		AND IR.INSPECT_GUBUN= #{inspectGubun}
+		</if>
+		WHERE 1=1
+		AND IA.INSP_GUBUN = #{inspGubun}
+		AND IA.ITEM_SEQ=#{itemSeq}
+		AND ID.INSP_TYPE = #{inspType}
+		ORDER BY INSP_ORDER
+	</select>
+	
+	
+	<!-- 검사항목결과상세조회 -->
+	<select id="inspResultAdmRead" resultType="int">
+		SELECT	COUNT(*)
+		FROM	TB_INSP_RESULT_ADM 
+		WHERE 1=1
+		AND INSP_RESULT_GUBUN = #{inspResultGubun}
+		AND INSP_SOURCE_NO = #{inspSourceNo}
+		AND INSP_SOURCE_SUB_NO = #{inspSourceSubNo}
+		AND	INSP_CD = #{inspCd}
+		AND	INSP_TYPE = #{inspType}
+		AND	INSP_SEQ = #{inspSeq}
+		<if test="inspCavity!=null and !inspCavity.equals('')">
+		AND INSP_CAVITY= #{inspCavity}
+		</if>
+		<if test="inspectGubun!=null and !inspectGubun.equals('')">
+		AND INSPECT_GUBUN= #{inspectGubun}
+		</if>
+	</select>
+	
+	<!-- 캐비티 데이터 확인 -->
+	<select id="inspCavityAdmRead" resultMap="InspAdmVo">
+		SELECT	
+			INSP_SOURCE_NO
+			, INSP_SOURCE_SUB_NO
+			, INSP_TYPE
+			, CAVITY_NO1
+			, CAVITY_NO2
+			, CAVITY_NO3
+			, CAVITY_NO4
+			, CAVITY_NO5
+			, REG_ID
+			, REG_DATE
+			, UPD_ID
+			, UPD_DATE
+		FROM	TB_INSP_CAVITY_ADM 
+		WHERE 1=1
+		AND INSP_SOURCE_NO = #{inspSourceNo}
+		AND INSP_SOURCE_SUB_NO = #{inspSourceSubNo}
+		AND	INSP_TYPE = #{inspType}
+	</select>
+	
+	<!-- 검사항목결과등록 -->
+	<insert id="inspResultAdmCreate">
+		INSERT INTO TB_INSP_RESULT_ADM(
+			INSP_RESULT_GUBUN,
+			INSP_SOURCE_NO,
+			INSP_SOURCE_SUB_NO,
+			INSP_CD,
+			INSP_TYPE,
+			INSP_SEQ,
+			INSP_CAVITY,
+			INSP_RESULT,
+			INSP_X1,
+			INSP_X2,
+			INSP_X3,
+			INSP_X4,
+			INSP_X5,
+			INSP_X6,
+			INSP_X7,
+			INSP_X8,
+			INSP_X9,
+			INSP_X10,
+			INSP_X11,
+			INSP_X12,
+			INSP_X13,
+			INSP_X14,
+			INSP_X15,
+			INSP_X16,
+			INSP_X17,
+			INSP_X18,
+			INSP_X19,
+			INSP_X20,
+			INSP_X21,
+			INSP_X22,
+			INSP_X23,
+			INSP_X24,
+			INSPECT_GUBUN,
+			INSP_PASS,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{inspResultGubun},
+			#{inspSourceNo},
+			#{inspSourceSubNo},
+			#{inspCd},
+			#{inspType},
+			#{inspSeq},
+			#{inspCavity},
+			#{inspResult},
+			#{inspX1},
+			#{inspX2},
+			#{inspX3},
+			#{inspX4},
+			#{inspX5},
+			#{inspX6},
+			#{inspX7},
+			#{inspX8},
+			#{inspX9},
+			#{inspX10},
+			#{inspX11},
+			#{inspX12},
+			#{inspX13},
+			#{inspX14},
+			#{inspX15},
+			#{inspX16},
+			#{inspX17},
+			#{inspX18},
+			#{inspX19},
+			#{inspX20},
+			#{inspX21},
+			#{inspX22},
+			#{inspX23},
+			#{inspX24},
+			#{inspectGubun},
+			#{inspPass},
+			#{regId},
+			GETDATE()
+		)
+	</insert>
+	
+	<!-- 검사항목결과등록 -->
+	<insert id="inspCavityAdmCreate">
+		INSERT INTO TB_INSP_CAVITY_ADM(
+			INSP_SOURCE_NO,
+			INSP_SOURCE_SUB_NO,
+			INSP_TYPE,
+			CAVITY_NO1,
+			CAVITY_NO2,
+			CAVITY_NO3,
+			CAVITY_NO4,
+			CAVITY_NO5,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{inspSourceNo},
+			#{inspSourceSubNo},
+			#{inspType},
+			#{cavityNo1},
+			#{cavityNo2},
+			#{cavityNo3},
+			#{cavityNo4},
+			#{cavityNo5},
+			#{regId},
+			getDate()
+		)
+	</insert>
+	
+	<!-- 검사항목결과수정 -->
+	<insert id="inspResultAdmUpdate">
+		UPDATE	TB_INSP_RESULT_ADM 
+		SET
+			INSP_RESULT = #{inspResult},
+			INSP_X1 = #{inspX1},
+			INSP_X2 = #{inspX2},
+			INSP_X3 = #{inspX3},
+			INSP_X4 = #{inspX4},
+			INSP_X5 = #{inspX5},
+			INSP_X6 = #{inspX6},
+			INSP_X7 = #{inspX7},
+			INSP_X8 = #{inspX8},
+			INSP_X9 = #{inspX9},
+			INSP_X10 = #{inspX10},
+			INSP_X11 = #{inspX11},
+			INSP_X12 = #{inspX12},
+			INSP_X13 = #{inspX13},
+			INSP_X14 = #{inspX14},
+			INSP_X15 = #{inspX15},
+			INSP_X16 = #{inspX16},
+			INSP_X17 = #{inspX17},
+			INSP_X18 = #{inspX18},
+			INSP_X19 = #{inspX19},
+			INSP_X20 = #{inspX20},
+			INSP_X21 = #{inspX21},
+			INSP_X22 = #{inspX22},
+			INSP_X23 = #{inspX23},
+			INSP_X24 = #{inspX24},
+			INSPECT_GUBUN = #{inspectGubun},
+			INSP_PASS = #{inspPass},
+			UPD_ID = #{updId},
+			UPD_DATE = GETDATE()
+		WHERE 1=1
+		AND INSP_RESULT_GUBUN = #{inspResultGubun}
+		AND INSP_SOURCE_NO = #{inspSourceNo}
+		AND INSP_SOURCE_SUB_NO = #{inspSourceSubNo}
+		AND	INSP_CD = #{inspCd}
+		AND	INSP_TYPE = #{inspType}
+		AND	INSP_SEQ = #{inspSeq}
+		<if test="inspCavity!=null and !inspCavity.equals('')">
+		AND INSP_CAVITY= #{inspCavity}
+		</if>
+		<if test="inspectGubun!=null and !inspectGubun.equals('')">
+		AND INSPECT_GUBUN= #{inspectGubun}
+		</if>
+	</insert>
+
+	<!-- 캐비티 수정 -->
+	<insert id="inspCavityAdmUpdate">
+		UPDATE	TB_INSP_CAVITY_ADM 
+		SET	
+			CAVITY_NO1 = #{cavityNo1},
+			CAVITY_NO2 = #{cavityNo2},
+			CAVITY_NO3 = #{cavityNo3},
+			CAVITY_NO4 = #{cavityNo4},
+			CAVITY_NO5 = #{cavityNo5},
+			UPD_ID = #{updId},
+			UPD_DATE = getDate()
+		WHERE	1=1
+		AND INSP_SOURCE_NO = #{inspSourceNo}
+		AND	INSP_SOURCE_SUB_NO = #{inspSourceSubNo}
+		AND	INSP_TYPE = #{inspType}
+	</insert>
+
+	<!-- 검사항목 판정결과 조회 -->
+	<select id="getInspResult" resultType="String">
+		SELECT
+		CASE WHEN (
+			(
+				SELECT SUM(T.CNT)
+				FROM (
+					SELECT INSP_TYPE,
+						(CASE WHEN INSP_TYPE='001' 
+							THEN COUNT(INSP_TYPE) 
+								ELSE COUNT(INSP_TYPE)
+									<if test="cavityCnt!=null and !cavityCnt.equals('')">
+										* CONVERT(INT,#{cavityCnt})
+									</if>
+									END) CNT
+					FROM TB_INSP_ITEM_DTL 
+					WHERE INSP_CD = #{inspCd}
+					<if test="inspType!=null and !inspType.equals('')">
+					AND INSP_TYPE = #{inspType}
+					</if> 
+					<if test="inspTypeArr.length>0">
+					AND INSP_TYPE IN 
+						<foreach collection="inspTypeArr" item="arr" open="(" close=")" separator=",">
+							#{arr}
+						</foreach>
+					</if>
+					GROUP BY INSP_TYPE
+				)T 
+			)=(
+				SELECT 
+					COUNT(*)
+				FROM TB_INSP_ITEM_DTL IID
+				LEFT OUTER JOIN TB_INSP_RESULT_ADM IRA
+				ON IID.INSP_CD=IRA.INSP_CD
+				AND IID.INSP_TYPE=IRA.INSP_TYPE
+				AND IID.INSP_SEQ=IRA.INSP_SEQ
+				AND IRA.INSP_RESULT_GUBUN=#{inspResultGubun}
+				AND IRA.INSP_SOURCE_NO=#{inspSourceNo}
+				<if test="inspSourceSubNo!=null and !inspSourceSubNo.equals('')">
+				AND IRA.INSP_SOURCE_SUB_NO=#{inspSourceSubNo}
+				</if>
+				WHERE 1=1
+				AND IID.INSP_CD=#{inspCd}
+				AND IID.INSP_TYPE IN 
+				<foreach collection="inspTypeArr" item="arr" open="(" close=")" separator=",">
+					#{arr}
+				</foreach>
+				AND IRA.INSP_RESULT = '001'
+			))
+			THEN 'Y' 
+			WHEN (
+			(
+				SELECT SUM(T.CNT)
+				FROM (
+					SELECT INSP_TYPE,
+						(CASE WHEN INSP_TYPE='001' 
+							THEN COUNT(INSP_TYPE) 
+								ELSE COUNT(INSP_TYPE)
+									<if test="cavityCnt!=null and !cavityCnt.equals('')">
+										* CONVERT(INT,#{cavityCnt})
+									</if>
+									END) CNT
+					FROM TB_INSP_ITEM_DTL 
+					WHERE INSP_CD = #{inspCd}
+					<if test="inspType!=null and !inspType.equals('')">
+					AND INSP_TYPE = #{inspType}
+					</if> 
+					<if test="inspTypeArr.length>0">
+					AND INSP_TYPE IN 
+						<foreach collection="inspTypeArr" item="arr" open="(" close=")" separator=",">
+							#{arr}
+						</foreach>
+					</if>
+					GROUP BY INSP_TYPE
+				)T 
+			)=(
+				SELECT 
+					COUNT(*)
+				FROM TB_INSP_ITEM_DTL IID
+				LEFT OUTER JOIN TB_INSP_RESULT_ADM IRA
+				ON IID.INSP_CD=IRA.INSP_CD
+				AND IID.INSP_TYPE=IRA.INSP_TYPE
+				AND IID.INSP_SEQ=IRA.INSP_SEQ
+				AND IRA.INSP_RESULT_GUBUN=#{inspResultGubun}
+				AND IRA.INSP_SOURCE_NO=#{inspSourceNo}
+				<if test="inspSourceSubNo!=null and !inspSourceSubNo.equals('')">
+				AND IRA.INSP_SOURCE_SUB_NO=#{inspSourceSubNo}
+				</if>
+				WHERE 1=1
+				AND IID.INSP_CD=#{inspCd}
+				AND IID.INSP_TYPE IN 
+				<foreach collection="inspTypeArr" item="arr" open="(" close=")" separator=",">
+					#{arr}
+				</foreach>
+				AND IRA.INSP_RESULT IN ('001','002')
+			))
+			THEN 'N' 
+			ELSE 'U'
+			END
+	</select>	
+
+
+</mapper>
+
+

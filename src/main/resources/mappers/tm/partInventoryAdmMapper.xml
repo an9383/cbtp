@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mes.mappers.tm.partInventoryAdmMapper">
+    
+    <resultMap id="PartInventoryAdmVo"        type="mes.domain.tm.PartInventoryAdmVo">
+        <result property="partCd"             	  column="PART_CD" 	 	/>
+        <result property="partRev"             	  column="PART_REV" 	/>
+        <result property="lotNo"             	  column="LOT_NO" 	 	/>
+        <result property="partGubun"              column="PART_GUBUN" 	/>
+        <result property="partGubunNm"            column="PART_GUBUN_NM"/>
+        <result property="partSpec"               column="PART_SPEC" 	/>
+        <result property="partUnit"               column="PART_UNIT" 	/>
+        <result property="partUnitNm"             column="PART_UNIT_NM" />
+        <result property="partNm"             	  column="PART_NM" 		/>
+        <result property="tmMon"             	  column="TM_MON" 		/>
+        <result property="tmQty"           		  column="TM_QTY" 		/>
+        <result property="inQty"           		  column="IN_QTY" 		/>
+        <result property="outQty"           	  column="OUT_QTY" 		/>
+        <result property="preTmQty"           	  column="PRE_TM_QTY" 	/>
+        <result property="regId"                  column="REG_ID" 		/>
+        <result property="regDate"           	  column="REG_DATE" 	/>
+        <result property="updId"             	  column="UPD_ID" 		/>
+        <result property="updDate"           	  column="UPD_DATE" 	/>
+  
+ 	 	<result property="locationCd"			column="LOCATION_CD"		/>		
+		<result property="locationNm"			column="LOCATION_NM"		/>
+		<result property="areaCd"				column="AREA_CD"			/>		
+		<result property="areaNm"				column="AREA_NM"			/>
+		
+    </resultMap>
+    
+	<!-- 기초재고관리 -->
+	<select id="partInventoryAdmList" resultMap="PartInventoryAdmVo">
+		<![CDATA[
+		 SELECT  
+				 A.PART_CD,
+				 A.PART_REV,
+				 A.PART_GUBUN,
+				 (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=A.PART_GUBUN AND X.BASE_GROUP_CD='035')PART_GUBUN_NM,
+				 A.PART_NM,
+				 A.PART_SPEC,
+				 A.PART_UNIT,
+				 (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=A.PART_UNIT AND X.BASE_GROUP_CD='036')PART_UNIT_NM,
+				 ISNULL(C.TM_QTY,0) PRE_TM_QTY,
+				 A.IN_QTY,
+				 B.OUT_QTY,
+				 ((A.IN_QTY+ISNULL(C.TM_QTY,0))-B.OUT_QTY) TM_QTY,
+				 SUBSTRING(ISNULL(C.TM_MON, CONVERT(varchar(14),DATEADD(M,-1,CONVERT(DATETIME,CONCAT(#{tmMon},'10'),120)),112)),0,7) TM_MON
+			 FROM 
+				(
+				  SELECT 
+				  A.PART_CD, 
+				  A.PART_REV,
+				  A.PART_GUBUN,
+				  A.PART_NM,
+				  A.PART_SPEC,
+				  A.PART_UNIT,
+				  ISNULL(SUM(B.INSPECT_QTY),0) IN_QTY
+				  FROM 
+				  TB_ITEM_PART_ADM A
+				  LEFT OUTER JOIN  TB_IN_OUT_WHS_ADM B ON A.PART_CD = B.PART_CD
+				  AND A.PART_REV = B.PART_REV
+				  AND B.IN_WHS_DATE LIKE #{tmMon}+'%'
+				  GROUP BY 
+				  A.PART_CD, A.PART_REV, A.PART_NM, A.PART_GUBUN, A.PART_UNIT, A.PART_SPEC
+			    ) A,
+				( 
+				  SELECT 
+				  A.PART_CD, 
+				  A.PART_REV,
+				  ISNULL(SUM(B.PRE_OUT_QTY),0) OUT_QTY
+				  FROM 
+				  TB_ITEM_PART_ADM A
+				  LEFT OUTER JOIN  TB_OUT_WHS_ADM B ON A.PART_CD = B.PART_CD
+				  AND A.PART_REV = B.PART_REV
+				  AND B.PRE_OUT_WHS_DATE LIKE #{tmMon}+'%'
+				  GROUP BY 
+				  A.PART_CD, A.PART_REV
+				) B, 
+				(
+				  SELECT 
+				  A.PART_CD, 
+				  A.PART_REV,
+				  B.TM_QTY,
+				  B.TM_MON
+				  FROM 
+				  TB_ITEM_PART_ADM A
+				  LEFT OUTER JOIN  TB_PART_INVENTORY_ADM B ON A.PART_CD = B.PART_CD
+				  AND A.PART_REV = B.PART_REV
+				  AND B.TM_MON LIKE SUBSTRING(CONVERT(varchar(14),DATEADD(M,-1,CONVERT(DATETIME,CONCAT(#{tmMon},'10'),120)),112),0,7)
+				  GROUP BY
+				  A.PART_CD, A.PART_REV ,B.TM_QTY, B.TM_MON
+				) C
+			  WHERE A.PART_CD = B.PART_CD
+			  AND A.PART_REV = B.PART_REV
+			  AND A.PART_CD=C.PART_CD
+			  AND A.PART_REV=C.PART_REV
+
+			 
+		]]>
+	</select>
+	
+	<!-- 재고위치관리 -->
+	<select id="partInventoryLocList" resultMap="PartInventoryAdmVo">
+	
+		use komotek
+
+		(SELECT  
+			 A.PART_CD SA_CD,
+			 A.PART_REV SA_REV,
+			 A.BARCODE_NO,
+			 (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=A.PART_GUBUN AND X.BASE_GROUP_CD='035')SA_GUBUN,
+			 A.PART_NM SA_NM,
+			 A.PART_SPEC SA_SPEC,
+			 A.IN_QTY SA_IN_QTY,
+			 B.OUT_QTY SA_OUT_QTY,
+			 ((A.IN_QTY+ISNULL(C.TM_QTY,0))-B.OUT_QTY) SA_TM_QTY,
+			 D.LOC_NO LOCATION_NO,
+			 D.LOC_CD LOCATION_CD,
+			 D.LOC_NM LOCATION_NM,
+			 D.AREA_CD,
+			 D.AREA_NM,
+			 D.FLOOR_NM
+		 FROM 
+			(
+			  SELECT 
+				  B.BARCODE_NO,
+				  A.PART_CD, 
+				  A.PART_REV,
+				  A.PART_GUBUN,
+				  A.PART_NM,
+				  A.PART_SPEC,
+				  B.INSPECT_QTY IN_QTY,
+				  B.LOCATION_NO
+			  FROM 
+			  TB_ITEM_PART_ADM A
+			  LEFT OUTER JOIN  TB_IN_OUT_WHS_ADM B ON A.PART_CD = B.PART_CD
+			  AND A.PART_REV = B.PART_REV
+			  AND B.IN_WHS_DATE LIKE '202105'+'%'
+		    ) A,
+			( 
+			  SELECT 
+			  B.BARCODE_NO,
+			  B.PRE_OUT_QTY OUT_QTY
+			  FROM 
+			  TB_ITEM_PART_ADM A
+			  LEFT OUTER JOIN  TB_OUT_WHS_ADM B ON A.PART_CD = B.PART_CD
+			  AND A.PART_REV = B.PART_REV
+			  AND B.PRE_OUT_WHS_DATE LIKE '202105'+'%'
+			) B,
+			(
+			  SELECT 
+			  A.PART_CD, 
+			  A.PART_REV,
+			  B.TM_QTY,
+			  B.TM_MON
+			  FROM 
+			  TB_ITEM_PART_ADM A
+			  LEFT OUTER JOIN  TB_PART_INVENTORY_ADM B ON A.PART_CD = B.PART_CD
+			  AND A.PART_REV = B.PART_REV
+			  AND B.TM_MON LIKE SUBSTRING(CONVERT(varchar(14),DATEADD(M,-1,CONVERT(DATETIME,CONCAT('202105','10'),120)),112),0,7)
+			) C,
+			(
+			 SELECT 
+				LOC_NO,
+				LOC_CD,
+				(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=LOC_CD AND X.BASE_GROUP_CD='073')LOC_NM,
+				AREA_CD,
+				(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=AREA_CD AND X.BASE_GROUP_CD='067')AREA_NM,
+				FLOOR_NM,
+				LOC_DESC
+			 FROM TB_LOCATION_ADM
+			) D
+		  WHERE A.BARCODE_NO = B.BARCODE_NO
+		  AND A.PART_CD=C.PART_CD
+		  AND A.PART_REV=C.PART_REV
+		  AND A.LOCATION_NO=D.LOC_NO
+		  AND D.LOC_NO='20210419-001'
+		  )
+		  UNION
+		  (
+		  SELECT  
+			 A.ITEM_CD SA_CD,
+			 A.ITEM_REV SA_REV,
+			 A.BARCODE_NO,
+			 (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=A.ITEM_GUBUN AND X.BASE_GROUP_CD='035')SA_GUBUN,
+			 A.ITEM_NM SA_NM,
+			 A.ITEM_SERIES SA_SPEC,
+			 A.IN_QTY SA_IN_QTY,
+			 A.OUT_QTY SA_OUT_QTY,
+			 (A.IN_QTY-A.OUT_QTY) SA_TM_QTY,
+			 B.LOC_NO LOCATION_NO,
+			 B.LOC_CD LOCATION_CD,
+			 B.LOC_NM LOCATION_NM,
+			 B.AREA_CD,
+			 B.AREA_NM,
+			 B.FLOOR_NM
+		 FROM 
+			(
+			  SELECT 
+				  B.BARCODE_NO,
+				  A.ITEM_CD, 
+				  A.ITEM_REV,
+				  A.ITEM_GUBUN,
+				  A.ITEM_NM,
+				  A.ITEM_SERIES,
+				  B.IN_QTY,
+				  B.OUT_QTY, 
+				  B.REMAIN_QTY,
+				  B.LOCATION_NO
+			  FROM 
+			  TB_ITEM_MOTOR_ADM A
+			  LEFT OUTER JOIN  TB_ITEM_WHS_ADM B ON A.ITEM_CD = B.ITEM_CD
+			  AND A.ITEM_REV = B.ITEM_REV
+			  AND B.IN_DATE LIKE '202105'+'%'
+		    ) A,
+			(
+			 SELECT 
+				LOC_NO,
+				LOC_CD,
+				(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=LOC_CD AND X.BASE_GROUP_CD='073')LOC_NM,
+				AREA_CD,
+				(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=AREA_CD AND X.BASE_GROUP_CD='067')AREA_NM,
+				FLOOR_NM,
+				LOC_DESC
+			 FROM TB_LOCATION_ADM
+			) B
+		  WHERE 1=1
+		  AND A.LOCATION_NO=B.LOC_NO
+		  AND B.LOC_NO='20210426-001'
+		  )
+	</select>
+	
+</mapper>  

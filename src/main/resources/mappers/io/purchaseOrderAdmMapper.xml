@@ -1,0 +1,1326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.io.purchaseOrderAdmMapper">
+
+	<resultMap id="PurchaseOrderAdmVo" type="mes.domain.io.PurchaseOrderAdmVo">
+		<result property="poNo"						column="PO_NO"				/>
+		<result property="poSeq"					column="PO_SEQ"				/>
+		<result property="mrpNo"					column="MRP_NO"				/>
+		<result property="mrpSeq"					column="MRP_SEQ"			/>
+		<result property="dealCorpCd"		    	column="DEAL_CORP_CD"		/>
+		<result property="dealCorpNm"		    	column="DEAL_CORP_NM"		/>
+		<result property="poDate"		        	column="PO_DATE"			/>
+		<result property="mainChargr"				column="MAIN_CHARGR"		/>			
+		<result property="mainChargrNm"				column="MAIN_CHARGR_NM"		/>			
+		<result property="receiptGubun"				column="RECEIPT_GUBUN"		/>
+		<result property="receiptGubunNm"			column="RECEIPT_GUBUN_NM"	/>
+		<result property="poDesc"					column="PO_DESC"			/>
+		<result property="importYn"					column="IMPORT_YN"			/>
+		
+		<result property="boxCount"					column="BOX_COUNT"			/>
+		
+		<result property="regId"					column="REG_ID"				/>
+		<result property="regDate"					column="REG_DATE"			/>
+		<result property="updId"					column="UPD_ID"				/>				
+		<result property="updDate"					column="UPD_DATE"			/>
+		
+		
+		<!-- 발주상세vo -->
+		<result property="itemSeq"					column="ITEM_SEQ"			/>
+		<result property="itemCd"					column="ITEM_CD"			/>
+		<result property="itemNm"					column="ITEM_NM"			/>
+		<result property="itemModel"				column="ITEM_MODEL"			/>
+		<result property="itemModelNm"				column="ITEM_MODEL_NM"		/>
+		<result property="itemGrade"				column="ITEM_GRADE"			/>
+		<result property="itemColor"				column="ITEM_COLOR"		/>
+		<result property="itemUnit"					column="ITEM_UNIT"			/>
+		<result property="itemUnitNm"				column="ITEM_UNIT_NM"		/>
+		<result property="unitCost"					column="UNIT_COST"			/>
+		<result property="inspectYn"				column="INSPECT_YN"			/>
+		
+		<result property="ordQty"					column="ORD_QTY"			/>		
+		<result property="ordPredQty"				column="ORD_PRED_QTY"		/>		
+		<result property="ordUnitCost"				column="ORD_UNIT_COST"		/>		
+		<result property="addQty"					column="ADD_QTY"			/>			
+		<result property="ordAmt"					column="ORD_AMT"			/>
+		
+		<result property="dlvDate"					column="DLV_DATE"			/>
+		<result property="dlvChangeDate"			column="DLV_CHANGE_DATE"	/>
+		<result property="poStatus"					column="PO_STATUS"			/>
+		<result property="poStatusNm"				column="PO_STATUS_NM"		/>
+		<result property="poEndDate"				column="PO_END_DATE"		/>
+		<result property="barcodeNo"				column="BARCODE_NO"			/>
+		<result property="lotNo"					column="LOT_NO"				/>
+		<result property="ordCorpNm"				column="ORD_CORP_NM"		/>
+		<result property="ordCorpCd"				column="ORD_CORP_CD"		/>
+		
+		<result property="startDate"				column="START_DATE"			/>
+		<result property="endDate"					column="END_DATE"			/>
+		<result property="today"					column="TODAY"				/>
+		
+		<result property="inWhsQty"					column="IN_WHS_QTY"			/>
+		<result property="preInWhsQty"				column="PRE_IN_WHS_QTY"		/>
+		<result property="preInWhsDate"				column="PRE_IN_WHS_DATE"	/>
+		<result property="inWhsDate"				column="IN_WHS_DATE"		/>
+		<result property="diffCnt"					column="DIFF_CNT"			/>
+		<result property="faultyQty"				column="FAULTY_QTY"			/>	
+		<result property="pairQty"					column="PAIR_QTY"			/>	
+			
+		<result property="savelocCd"				column="SAVELOC_CD"			/>
+		<result property="savelocNm"				column="SAVELOC_NM"			/>
+		<result property="inspectQty"				column="INSPECT_QTY"		/>
+		<result property="inspectDate"				column="INSPECT_DATE"		/>
+		<result property="inspectChargr"			column="INSPECT_CHARGR"		/>	
+		<result property="inspectChargrNm"			column="INSPECT_CHARGR_NM"	/>
+		<result property="inspectDesc"				column="INSPECT_DESC"		/>
+		<result property="qaEval"					column="QA_EVAL"		/>
+		<result property="approvalYn"				column="APPROVAL_YN"		/>
+		<result property="qaEvalNm"					column="QA_EVAL_NM"		/>
+		<result property="approvalYnNm"				column="APPROVAL_YN_NM"		/>
+		
+		
+		<!-- 발주DTL(발주서 출력 수정)부분 추가 -->
+		<result property="documentSubmitted"		column="DOCUMENT_SUBMITTED"			/>
+		<result property="paymentWay"				column="PAYMENT_WAY"				/>
+		<result property="deliveryPlace"			column="DELIVERY_PLACE"				/>
+		<result property="reference"				column="REFERENCE"					/>
+		<result property="runDate"					column="RUN_DATE"					/>
+		<result property="reception"				column="RECEPTION"					/>
+		<result property="designation"				column="DESIGNATION"				/>
+		<result property="title"					column="TITLE"						/>
+		<result property="cooperationDepartment"	column="COOPERATION_DEPARTMENT"		/>
+		<result property="purchaseHistory"			column="PURCHASE_HISTORY"			/>
+		<result property="printWhether"				column="PRINT_WHETHER"				/>
+		<result property="tmQty"					column="TM_QTY"						/>
+		<result property="itemNm"					column="ITEM_NM"					/>
+		<result property="dtlOrdCnt"				column="DTL_ORD_CNT"				/>
+		<result property="faxNo"					column="FAX_NO"						/>
+		<result property="officeCharger"			column="OFFICE_CHARGER"				/>
+		<result property="poNoGubun"				column="PO_NO_GUBUN"				/>
+		<result property="preOrderQty"				column="PRE_ORDER_QTY"				/>
+		<result property="orderQty"					column="ORDER_QTY"					/>
+		<result property="unOrderQty"				column="UN_ORDER_QTY"				/>
+		
+		<result property="poStatusOption"			column="PO_STATUS_OPTION"			/>
+		
+		<!-- 추가사항 -->
+		<result property="mainGubun"				column="MAIN_GUBUN"					/>
+		<result property="mainGubunNm"				column="MAIN_GUBUN_NM"				/>
+		<result property="itemGubun"				column="ITEM_GUBUN"					/>
+		<result property="itemGubunNm"				column="ITEM_GUBUN_NM"				/>
+		<result property="approvalCd"				column="APPROVAL_CD"				/>
+		<result property="statusCd"					column="STATUS_CD"					/>
+		<result property="faultyPcs"				column="FAULTY_PCS"					/>
+		<result property="faultyPcsNm"				column="FAULTY_PCS_NM"				/>
+		<result property="itemCus"					column="ITEM_CUS"					/>
+		<result property="inSlipNo"					column="IN_SLIP_NO"					/>
+		<result property="inSlipDate"				column="IN_SLIP_DATE"				/>
+		<result property="inspCheck"				column="INSP_CHECK"					/>
+		<result property="inspCheckNm"				column="INSP_CHECK_NM"				/>
+		
+		<!-- 수입검사 결과조회 -->
+		<result property="inspSeq"             column="INSP_SEQ"				/>
+	    <result property="inspResult"          column="INSP_RESULT"				/>
+	    <result property="inspResultNm"        column="INSP_RESULT_NM"			/>
+	    <result property="inspList"            column="INSP_LIST"				/>
+	    <result property="inspType"            column="INSP_TYPE"				/>
+	    <result property="inspTypeNm"          column="INSP_TYPE_NM"			/>
+	    <result property="inspStandUpper"      column="INSP_STAND_UPPER"		/>
+	    <result property="inspStandLower"      column="INSP_STAND_LOWER"		/>
+	    <result property="inspX1"              column="INSP_X1"					/>
+	    <result property="inspX2"              column="INSP_X2"					/>
+	    <result property="inspX3"              column="INSP_X3"					/>
+	    <result property="inspX4"              column="INSP_X4"					/>
+	    <result property="inspX5"              column="INSP_X5"					/>
+	    
+		<result property="locNo"      		column="LOC_NO"						/>
+		<result property="locCd"      		column="LOC_CD"						/>
+		<result property="locationNm"      	column="LOCATION_NM"				/>
+		<result property="floorNm"      	column="FLOOR_NM"					/>
+		<result property="areaCd"      		column="AREA_CD"					/>
+		<result property="areaCdNm"      	column="AREA_CD_NM"					/>
+		
+		<result property="inspCd"		  	column="INSP_CD"					/>
+		<result property="cavityCnt"		column="CAVITY_CNT"					/>
+
+		<result property="preOrderQtyCost"	column="PRE_ORDER_QTY_COST"			/>
+		<result property="orderQtyCost"		column="ORDER_QTY_COST"				/>
+		<result property="unOrderQtyCost"	column="UN_ORDER_QTY_COST"			/>
+	</resultMap>
+	
+	<!-- 발주 목록조회 -->
+	<select id="purchaseOrderList" resultMap="PurchaseOrderAdmVo">
+		SELECT 
+			A.MRP_NO
+			, A.ITEM_SEQ
+			, C.ITEM_CD
+			, C.ITEM_NM
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = C.ITEM_MODEL AND X.BASE_GROUP_CD = '099') ITEM_MODEL
+			, C.ITEM_UNIT
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = C.ITEM_UNIT AND X.BASE_GROUP_CD = '036') ITEM_UNIT_NM
+			, C.IMPORT_COST ORD_UNIT_COST
+			, ISNULL(SUM(A.PRE_ORDER_QTY), 0) PRE_ORDER_QTY
+			, C.IMPORT_COST * ISNULL(SUM(A.PRE_ORDER_QTY), 0) PRE_ORDER_QTY_COST
+			, ISNULL(SUM(B.ORDER_QTY), 0) ORDER_QTY
+			, C.IMPORT_COST * ISNULL(SUM(B.ORDER_QTY), 0) ORDER_QTY_COST
+			, ISNULL(SUM(A.PRE_ORDER_QTY), 0) - ISNULL(SUM(B.ORDER_QTY), 0) UN_ORDER_QTY
+			, C.IMPORT_COST * (ISNULL(SUM(A.PRE_ORDER_QTY), 0) - ISNULL(SUM(B.ORDER_QTY), 0)) UN_ORDER_QTY_COST
+			, C.ITEM_CUS DEAL_CORP_CD
+			, (SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD = C.ITEM_CUS) DEAL_CORP_NM
+			, B.PO_END_DATE
+		FROM
+		(
+			SELECT 
+				B.MRP_NO,
+				B.ITEM_SEQ,
+				ISNULL(SUM(B.ORD_PRED_QTY), 0) PRE_ORDER_QTY,
+				B.ORD_CORP_CD,
+				MRP_DATE
+			FROM TB_BIZ_ORDER_MRP A
+			LEFT OUTER JOIN TB_BIZ_ORDER_CONSUMPT B
+			ON A.MRP_NO = B.MRP_NO
+			WHERE 1=1
+			AND A.CONFIRM_YN = '001'
+			GROUP BY B.MRP_NO, B.ITEM_SEQ, B.ORD_CORP_CD, A.MRP_DATE
+		) A
+		LEFT OUTER JOIN (
+			SELECT 
+				X.MRP_NO,
+				X.ITEM_SEQ,
+				ISNULL(SUM(X.ORD_QTY), 0) ORDER_QTY,
+				X.PO_END_DATE
+			FROM TB_PURCHASE_ORDER_DTL X
+			WHERE 1=1
+			GROUP BY X.MRP_NO, X.ITEM_SEQ, X.PO_END_DATE
+		) B
+		ON A.MRP_NO = B.MRP_NO
+		AND A.ITEM_SEQ = B.ITEM_SEQ
+		INNER JOIN TB_ITEM_INFO_ADM C
+		ON A.ITEM_SEQ = C.ITEM_SEQ
+		WHERE 1=1
+		<if test="mainGubun != null and !mainGubun.equals('')">
+		AND C.MAIN_GUBUN = #{mainGubun}
+		</if>
+		GROUP BY A.MRP_NO,A.ITEM_SEQ,C.ITEM_CD,C.ITEM_NM,C.ITEM_MODEL,C.ITEM_UNIT,C.IMPORT_COST,B.PO_END_DATE,A.MRP_DATE,C.ITEM_CUS,C.PROD_GUBUN
+		HAVING 1=1
+		<if test="poStatusOption!=null and poStatusOption.equals('001')">
+		AND ISNULL(SUM(A.PRE_ORDER_QTY),0)-ISNULL(SUM(B.ORDER_QTY),0) > 0
+		AND (PO_END_DATE != '001' OR PO_END_DATE IS NULL)
+		</if>
+		<if test="poStatusOption!=null and poStatusOption.equals('002')">
+		AND ISNULL(SUM(A.PRE_ORDER_QTY),0)-ISNULL(SUM(B.ORDER_QTY),0) <![CDATA[<=]]> 0
+		AND (PO_END_DATE != '001' OR PO_END_DATE IS NULL)
+		</if>
+		<if test="poStatusOption!=null and poStatusOption.equals('003')">
+		AND PO_END_DATE='001'
+		</if>
+		<if test="startDate!=null and !startDate.equals('')">
+		AND A.MRP_DATE BETWEEN #{startDate} AND #{endDate}
+		</if>
+		<if test="itemCus != null and !itemCus.equals('')">
+		AND C.ITEM_CUS = #{itemCus}
+		</if>
+		AND (C.PROD_GUBUN IS NULL OR C.PROD_GUBUN NOT IN('002','003','005'))
+<!-- 		<if test="itemCus == null or itemCus.equals('')"> -->
+<!-- 		AND C.ITEM_CUS = ' ' -->
+<!-- 		</if> -->
+		ORDER BY A.MRP_NO DESC
+	</select>
+
+
+	<!-- 발주 상세조회 -->
+	<select id="purchaseOrderRead" resultMap="PurchaseOrderAdmVo">
+		SELECT 
+			B.PO_NO,
+			A.ITEM_SEQ,
+			C.ITEM_CD,
+			C.ITEM_NM,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=C.ITEM_MODEL AND X.BASE_GROUP_CD='099') ITEM_MODEL,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=C.ITEM_UNIT AND X.BASE_GROUP_CD='036') ITEM_UNIT,
+			ISNULL(SUM(A.ORD_PRED_QTY),0) PRE_ORDER_QTY,
+			ISNULL(SUM(B.ORD_QTY),0) ORD_QTY,
+			ISNULL(SUM(A.ORD_PRED_QTY),0)-ISNULL(SUM(B.ORD_QTY),0) UN_ORDER_QTY,
+			B.DLV_DATE,
+			B.DLV_CHANGE_DATE,
+			(SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD=B.DEAL_CORP_CD) DEAL_CORP_NM,
+			C.IMPORT_COST ORD_UNIT_COST
+		FROM
+		(
+			SELECT 
+				B.MRP_NO,
+				B.ITEM_SEQ,
+				ISNULL(SUM(B.ORD_PRED_QTY),0) ORD_PRED_QTY,
+				B.ORD_CORP_CD
+			FROM TB_BIZ_ORDER_MRP A
+			LEFT OUTER JOIN TB_BIZ_ORDER_CONSUMPT B
+			ON A.MRP_NO=B.MRP_NO
+			WHERE A.CONFIRM_YN='001'
+			GROUP BY B.MRP_NO,B.ITEM_SEQ, B.ORD_CORP_CD
+		) A
+		LEFT OUTER JOIN (
+			SELECT 
+				POA_TB.PO_NO,
+				X.MRP_NO,
+				X.ITEM_SEQ,
+				ISNULL(SUM(X.ORD_QTY),0) ORD_QTY,
+				X.DLV_DATE,
+				X.DLV_CHANGE_DATE,
+				POA_TB.DEAL_CORP_CD,
+				X.PO_STATUS
+			FROM TB_PURCHASE_ORDER_ADM POA_TB
+			LEFT OUTER JOIN TB_PURCHASE_ORDER_DTL X
+			ON POA_TB.PO_NO=X.PO_NO
+			WHERE 1=1
+			GROUP BY POA_TB.PO_NO,X.MRP_NO,X.ITEM_SEQ,X.ORD_UNIT_COST,X.DLV_DATE,X.DLV_CHANGE_DATE,POA_TB.DEAL_CORP_CD,X.PO_STATUS
+		) B
+		ON A.MRP_NO=B.MRP_NO
+		AND A.ITEM_SEQ=B.ITEM_SEQ
+		INNER JOIN TB_ITEM_INFO_ADM C
+		ON A.ITEM_SEQ=C.ITEM_SEQ
+		WHERE 1=1
+		AND A.MRP_NO = #{mrpNo}
+    	AND B.ITEM_SEQ = #{itemSeq}
+		GROUP BY B.PO_NO,A.ITEM_SEQ,C.ITEM_CD, C.ITEM_NM,C.ITEM_MODEL,C.ITEM_UNIT,B.DLV_DATE,B.DLV_CHANGE_DATE,B.DEAL_CORP_CD,C.IMPORT_COST
+		ORDER BY A.ITEM_SEQ ASC
+	</select>
+	
+	
+	<!-- 발주 상세탭 조회x -->
+	<select id="purchaseOrderDetailRead" resultMap="PurchaseOrderAdmVo">
+		SELECT 
+				A.MRP_NO,
+				A.CONT_DTL_NO,
+				A.PART_CD,
+				A.PART_REV,
+				C.PART_NM,
+				C.PART_SPEC,
+				(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=C.PART_UNIT AND X.BASE_GROUP_CD='036') PART_UNIT,
+				ISNULL(SUM(A.PRE_ORDER_QTY),0) PRE_ORDER_QTY,
+				ISNULL(SUM(B.ORDER_QTY),0) ORDER_QTY,
+				ISNULL(A.PRE_ORDER_QTY,0)-ISNULL(SUM(B.ORDER_QTY),0) UN_ORDER_QTY,
+				(SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD=MAX(A.ORD_CORP_CD)) DEAL_CORP_NM
+		FROM
+		(
+		
+			SELECT 
+					B.MRP_NO,
+					B.CONT_DTL_NO,
+					B.PART_CD,
+					B.PART_REV,
+					ISNULL(SUM(B.PART_CNT),0)+ISNULL(SUM(B.SAFY_STOCK_CNT),0) PRE_ORDER_QTY,
+					B.ORD_CORP_CD
+			FROM TB_BIZ_ORDER_MRP A
+			LEFT OUTER JOIN TB_BIZ_ORDER_CONSUMPT B
+			ON A.MRP_NO=B.MRP_NO
+			WHERE A.CONFIRM_YN='001'
+			GROUP BY B.MRP_NO,B.CONT_DTL_NO,B.PART_CD, B.PART_REV, B.ORD_CORP_CD
+		) A
+		LEFT OUTER JOIN (
+			SELECT 
+					X.MRP_NO,
+					X.CONT_DTL_NO,
+					X.PART_CD,
+					X.PART_REV,
+					ISNULL(SUM(X.PART_QTY),0)+ISNULL(SUM(X.SAFY_STOCK_CNT),0) ORDER_QTY,
+					X.PO_STATUS
+			FROM TB_PURCHASE_ORDER_DTL X
+			WHERE 1=1
+			GROUP BY X.MRP_NO,X.CONT_DTL_NO,X.PART_CD,X.PART_REV,X.PO_STATUS
+		) B
+		ON A.MRP_NO=B.MRP_NO
+		AND A.CONT_DTL_NO=B.CONT_DTL_NO
+		AND A.PART_CD=B.PART_CD
+		AND A.PART_REV=B.PART_REV
+		INNER JOIN TB_ITEM_PART_ADM C
+		ON A.PART_CD=C.PART_CD
+		AND A.PART_REV=C.PART_REV
+		WHERE 1=1
+		AND (PO_STATUS IS NULL OR PO_STATUS='001')
+		GROUP BY A.MRP_NO,A.CONT_DTL_NO,A.PART_CD, A.PART_REV, C.PART_NM,C.PART_SPEC,C.PART_UNIT,PRE_ORDER_QTY,ORDER_QTY
+		HAVING 1=1
+		AND A.MRP_NO IN 
+		<foreach collection="mrpNoArr" item="arr"  open="(" close=")" separator=",">
+          	#{arr}
+    	</foreach>	
+		AND A.PART_CD IN
+		<foreach collection="partCdArr" item="arr"  open="(" close=")" separator=",">
+          	#{arr}
+    	</foreach>	
+		
+		ORDER BY A.PART_CD ASC
+
+
+	</select>
+	
+	<!-- 발주상세 목록조회x -->
+	<select id="purchaseOrderDtlList" resultMap="PurchaseOrderAdmVo">
+		<![CDATA[
+			SELECT 
+				PO_NO
+				, PO_SEQ
+				, CONT_DTL_NO
+				, A.PART_CD
+				, A.PART_REV
+				, (SELECT PART_NM FROM TB_ITEM_PART_ADM X WHERE X.PART_CD=A.PART_CD AND X.PART_REV=A.PART_REV )PART_NM
+				, (SELECT PART_SPEC FROM TB_ITEM_PART_ADM X WHERE X.PART_CD=A.PART_CD AND X.PART_REV=A.PART_REV  )PART_SPEC
+				, INSPECT_YN
+				, DLV_DATE
+				, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=(SELECT PART_UNIT FROM TB_ITEM_PART_ADM X WHERE X.PART_CD=A.PART_CD AND X.PART_REV=A.PART_REV  ) AND X.BASE_GROUP_CD='036') PART_UNIT
+				, A.PART_QTY
+				, (SELECT UNIT_COST FROM TB_ITEM_PART_ADM X WHERE X.PART_CD=A.PART_CD AND X.PART_REV=A.PART_REV  )UNIT_COST
+				, (SELECT UNIT_COST FROM TB_ITEM_PART_ADM WHERE PART_CD=A.PART_CD AND PART_REV=A.PART_REV )PART_UNIT_COST
+				, A.PART_AMT
+				, A.ORD_CORP_CD
+				, (SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD=A.ORD_CORP_CD)ORD_CORP_NM
+			FROM TB_PURCHASE_ORDER_DTL A
+			WHERE PO_NO = #{poNo}
+		]]>
+	</select>
+	
+	<!-- 발주 등록 -->
+	<insert id="purchaseOrderAdmCreate">
+		INSERT INTO TB_PURCHASE_ORDER_ADM	(
+			PO_NO,
+			DEAL_CORP_CD,
+			PO_DATE,
+			MAIN_CHARGR,
+			RECEIPT_GUBUN,
+			PO_DESC,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{poNo},
+			#{dealCorpCd},
+			#{poDate},
+			#{mainChargr},
+			#{receiptGubun},
+			#{poDesc},
+			#{regId},
+			getDate()
+		)
+	</insert>
+	
+	
+	<!-- 발주상세 등록 -->
+	<insert id="purchaseOrderDtlCreate">
+		INSERT INTO TB_PURCHASE_ORDER_DTL(
+			PO_NO,
+			PO_SEQ,
+			MRP_NO,
+			ITEM_SEQ,
+			ORD_QTY,
+			DLV_DATE,
+			PO_STATUS,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{poNo},
+			#{poSeq},
+			#{mrpNo},
+			#{itemSeq},
+			#{ordQty},
+			#{dlvDate},
+			#{poStatus},
+			#{regId},
+			getDate()
+		)
+	</insert>
+	
+	<!-- 발주 수정 -->
+	<update id="purchaseOrderAdmUpdate">
+		UPDATE	TB_PURCHASE_ORDER_ADM	 
+		SET	DEAL_CORP_CD = #{dealCorpCd},
+			PO_DATE = #{poDate},
+			MAIN_CHARGR = #{mainChargr},
+			RECEIPT_GUBUN = #{receiptGubun},
+			PO_DESC = #{poDesc},
+			UPD_ID = #{updId},
+			UPD_DATE = getDate()
+		WHERE 1=1
+		AND PO_NO = #{poNo}
+	</update>
+	
+	
+	<!-- 발주상세 수정 -->
+	<update id="purchaseOrderDtlUpdate">
+		UPDATE	TB_PURCHASE_ORDER_DTL	 
+		<set>
+			<if test="itemCd!=null and !itemCd.equals('')">
+				ITEM_SEQ = #{itemSeq},
+			</if>
+			<if test="ordQty!=null and !ordQty.equals('')">
+				ORD_QTY = #{ordQty},
+			</if>
+			<if test="ordUnitCost!=null and !ordUnitCost.equals('')">
+				ORD_UNIT_COST = #{ordUnitCost},
+			</if>
+			<if test="ordQty!=null and !ordQty.equals('')">
+				ORD_AMT = ORD_QTY * ORD_UNIT_COST,
+			</if>
+			<if test="dlvDate!=null and !dlvDate.equals('')">
+				DLV_DATE = #{dlvDate},
+			</if>
+			<if test="dlvChangeDate!=null and !dlvChangeDate.equals('')">
+				DLV_CHANGE_DATE = #{dlvChangeDate},
+			</if>
+			UPD_ID = #{updId},
+			UPD_DATE = getDate()
+		</set>
+		WHERE 1=1
+		AND PO_NO = #{poNo}
+		AND PO_SEQ = #{poSeq}
+	</update>
+	
+	<!-- 발주관리 삭제 -->
+	<delete id="purchaseOrderDelete">
+		DELETE FROM TB_PURCHASE_ORDER_ADM 
+		WHERE 1=1
+		AND PO_NO = #{poNo}
+	</delete>
+	
+	<!-- 발주상세 삭제 -->
+	<delete id="purchaseOrderDtlDelete">
+		DELETE FROM TB_PURCHASE_ORDER_DTL 
+		WHERE 1=1
+		AND PO_NO = #{poNo} 
+		AND PO_SEQ = #{poSeq}
+	</delete>
+	
+	
+	<!-- 발주금액 수정 -->
+	<update id="ordAmtUpdate">
+	  UPDATE TB_PURCHASE_ORDER_DTL 
+	  SET ORD_AMT = ORD_QTY * ORD_UNIT_COST 
+	  WHERE 1=1
+	  AND PO_NO = #{poNo}
+	  AND PO_SEQ = #{poSeq}
+	</update>
+	
+	
+	<!--발주번호 생성 -->
+	<select id="getPoNo" resultType="String">
+		SELECT ISNULL(RIGHT('000' + CAST(MAX(RIGHT(PO_NO,3))+1 AS NVARCHAR),3), '001') 
+		FROM TB_PURCHASE_ORDER_ADM 
+		WHERE SUBSTRING(PO_NO,2,6) = #{today}
+	</select>
+	
+	
+	<!--발주시퀀스 생성 -->
+	<select id="getPoSeq" resultType="Integer">
+		SELECT ISNULL(MAX(PO_SEQ)+1,0) FROM TB_PURCHASE_ORDER_DTL WHERE PO_NO=#{poNo}
+	</select>
+	
+	
+	<!--발주번호 중복확인 -->
+	<select id="overlapPoNo" resultType="int">
+		SELECT COUNT(*) FROM TB_PURCHASE_ORDER_ADM X WHERE X.PO_NO=#{poNo}
+	</select>
+	
+	
+	<!-- 변경납기일 수정 -->
+	<update id="dlvChangeDateUpdate">
+		UPDATE TB_PURCHASE_ORDER_DTL 
+		SET DLV_CHANGE_DATE = #{dlvChangeDate}
+		WHERE 1=1
+		AND	PO_NO = #{poNo}
+	 	AND ITEM_SEQ = #{itemSeq}
+	</update>
+	
+	<!-- 발주예정수량과 발주수량 비교 -->
+	<select id="compareOrderQty" resultMap="PurchaseOrderAdmVo">
+		SELECT
+			A.ORD_PRED_QTY,
+			ISNULL(B.ORD_QTY,0) ORD_QTY
+		FROM (
+			SELECT 
+				MRP_NO,
+				ITEM_SEQ,
+				ORD_PRED_QTY ORD_PRED_QTY
+			FROM TB_BIZ_ORDER_CONSUMPT A
+			
+		)A LEFT OUTER JOIN
+		(
+			SELECT 
+				MRP_NO,
+				ITEM_SEQ,
+				SUM(ORD_QTY) ORD_QTY
+			FROM TB_PURCHASE_ORDER_DTL A
+			GROUP BY MRP_NO,ITEM_SEQ
+		)B
+		ON 1=1
+		AND A.MRP_NO=B.MRP_NO
+		AND A.ITEM_SEQ=B.ITEM_SEQ
+		WHERE 1=1
+		AND A.MRP_NO=#{mrpNo}
+		AND A.ITEM_SEQ = #{itemSeq}
+	</select>
+	
+	
+	<!-- 발주상태 수정(발주예정일<=발주수량) -->
+	<update id="poStatusYUpdate">
+		UPDATE TB_PURCHASE_ORDER_DTL
+		SET PO_STATUS='002'
+		WHERE 1=1
+		AND MRP_NO=#{mrpNo}
+		AND ITEM_SEQ=#{itemSeq}
+	</update>
+	
+	<!-- 발주현황 -->
+	<select id="purchaseOrderStatusList" resultMap="PurchaseOrderAdmVo">
+		SELECT 
+			T.PO_NO
+			,T.PO_SEQ
+			,T.PO_DATE
+			,T.MAIN_CHARGR
+			,(SELECT USER_NM FROM TB_USER X WHERE X.USER_NUMBER = T.MAIN_CHARGR) MAIN_CHARGR_NM
+			,T.DEAL_CORP_CD
+			,(SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD = T.DEAL_CORP_CD) DEAL_CORP_NM
+			,T.DLV_DATE
+			,T.DLV_CHANGE_DATE
+			,T.PO_END_DATE
+			,T.ORD_QTY
+			,T.ORD_UNIT_COST
+			,T.ORD_AMT
+			,T.PRE_IN_WHS_QTY
+			,T.DIFF_CNT	
+			,T.PRE_IN_WHS_DATE	
+			,T.IN_WHS_QTY
+			,T.IN_WHS_DATE
+			,T.PAIR_QTY
+			,T.FAULTY_QTY
+			,(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=T.STATUS_CD AND X.BASE_GROUP_CD='153') STATUS_CD
+			,T.PO_DESC
+			,T.RECEIPT_GUBUN
+			,(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = T.RECEIPT_GUBUN AND X.BASE_GROUP_CD = '051') RECEIPT_GUBUN_NM
+			,C.BOX_COUNT
+			,C.MAIN_GUBUN
+			,(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = C.MAIN_GUBUN AND X.BASE_GROUP_CD = '112') MAIN_GUBUN_NM
+			,C.ITEM_GUBUN
+			,(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD =ITEM_GUBUN AND X.BASE_GROUP_CD = '079') ITEM_GUBUN_NM
+			,C.ITEM_SEQ
+			,C.ITEM_CD
+			,C.ITEM_NM
+			,(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = C.ITEM_MODEL AND X.BASE_GROUP_CD = '099') ITEM_MODEL
+			,C.ITEM_UNIT
+			,C.MAIN_GUBUN
+			,(SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = C.ITEM_UNIT AND BASE_GROUP_CD = '036') ITEM_UNIT_NM
+			, C.SAVELOC_CD
+			,(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = C.SAVELOC_CD AND X.BASE_GROUP_CD = '101') SAVELOC_NM
+			,C.IMPORT_YN
+			,E.LOC_NO
+			,E.LOC_CD
+			,(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = E.LOC_CD AND X.BASE_GROUP_CD = '073') LOCATION_NM
+			,E.FLOOR_NM
+			,E.AREA_CD
+			,(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = E.AREA_CD AND X.BASE_GROUP_CD = '067') AREA_CD_NM
+		FROM 
+		(
+			SELECT 
+				A.PO_NO
+				, B.PO_SEQ
+				, B.ITEM_SEQ
+				, A.PO_DATE
+				, A.MAIN_CHARGR
+				, A.DEAL_CORP_CD
+				, B.DLV_DATE
+				, B.DLV_CHANGE_DATE
+				, B.PO_END_DATE
+				, ISNULL(SUM(B.ORD_QTY),0) ORD_QTY
+				, B.ORD_UNIT_COST
+				, ISNULL(SUM(B.ORD_AMT),0) ORD_AMT
+				, ISNULL(D.PRE_IN_WHS_QTY, 0) PRE_IN_WHS_QTY
+				, (ISNULL(SUM(B.ORD_QTY), 0) - ISNULL(D.IN_WHS_QTY, 0)) DIFF_CNT	
+				, D.PRE_IN_WHS_DATE	
+				, D.IN_WHS_QTY
+				, D.IN_WHS_QTY PAIR_QTY
+				, D.IN_WHS_DATE
+				, ISNULL(D.FAULTY_QTY, 0) FAULTY_QTY
+				, (CASE WHEN ISNULL(D.PRE_IN_WHS_QTY, 0)='0' THEN '001' ELSE 
+					(CASE WHEN ISNULL(D.IN_WHS_QTY, 0)='0' THEN '002' ELSE 
+					 (CASE WHEN ISNULL(B.ORD_QTY,0) > ISNULL(D.IN_WHS_QTY, 0) THEN '003' ELSE '004' END) END) END) STATUS_CD
+				, A.PO_DESC
+				, RECEIPT_GUBUN
+			FROM TB_PURCHASE_ORDER_ADM A
+			LEFT OUTER JOIN TB_PURCHASE_ORDER_DTL B 
+			ON A.PO_NO = B.PO_NO
+			LEFT OUTER JOIN (
+				SELECT 
+					Z.PO_NO,
+					Z.PO_SEQ,
+					Z.ITEM_SEQ,
+					SUM(PRE_IN_WHS_QTY) PRE_IN_WHS_QTY,
+					SUM(IN_WHS_QTY) IN_WHS_QTY,
+					SUM(FAULTY_QTY) FAULTY_QTY,
+					MAX(PRE_IN_WHS_DATE) PRE_IN_WHS_DATE,
+					MAX(IN_WHS_DATE) IN_WHS_DATE
+				FROM TB_IN_OUT_WHS_ADM Z
+				GROUP BY Z.PO_NO, Z.PO_SEQ,Z.ITEM_SEQ
+			) D
+			ON B.PO_NO = D.PO_NO
+			AND B.PO_SEQ = D.PO_SEQ
+			AND B.ITEM_SEQ = D.ITEM_SEQ
+			WHERE 1=1
+			GROUP BY 
+				A.PO_NO,
+				A.PO_DATE,
+				B.ITEM_SEQ,
+				A.MAIN_CHARGR, 
+				A.DEAL_CORP_CD,
+				A.RECEIPT_GUBUN,
+				A.PO_DESC,
+				B.PO_SEQ, 
+				B.DLV_DATE,
+				B.DLV_CHANGE_DATE, 
+				B.ORD_UNIT_COST,
+				B.PO_END_DATE,
+				D.IN_WHS_DATE,
+				D.IN_WHS_QTY,
+				D.FAULTY_QTY,
+				D.PRE_IN_WHS_DATE,
+				D.PRE_IN_WHS_QTY,
+				B.ORD_QTY
+		)T
+		LEFT OUTER JOIN TB_ITEM_INFO_ADM C 
+		ON T.ITEM_SEQ = C.ITEM_SEQ 
+		LEFT OUTER JOIN TB_LOCATION_ADM E
+		ON E.LOC_NO = C.LOC_NO
+		WHERE 1=1
+		<if test="statusCd!=null and !statusCd.equals('')">
+		AND T.STATUS_CD = #{statusCd}
+		</if>
+		<if test="poNo != null and !poNo.equals('')">
+		AND T.PO_NO = #{poNo}
+		</if>
+		<if test="mainGubun != null and !mainGubun.equals('')">
+		AND C.MAIN_GUBUN = #{mainGubun}
+		</if>
+		<if test="startDate!=null and !startDate.equals('')">
+			<if test="poStatusOption!=null and poStatusOption.equals('001')">
+			AND (ISNULL(T.ORD_QTY,0) - ISNULL(T.IN_WHS_QTY,0)) > 0
+			</if>
+			<if test="poStatusOption!=null and poStatusOption.equals('002')">
+			AND (ISNULL(T.ORD_QTY,0) - ISNULL(T.IN_WHS_QTY,0)) <![CDATA[<=]]>0
+			</if>
+			<if test="poStatusOption!=null and poStatusOption.equals('003')">
+			AND PO_END_DATE = '002'
+			</if>
+		</if>
+		
+		<if test="receiptGubun!=null and !receiptGubun.equals('')">
+		AND RECEIPT_GUBUN = #{receiptGubun}
+		</if>
+		<if test="value!=null and value.equals('발주종료')">
+		AND T.PO_END_DATE = '001'
+		</if>
+		<if test="startDate!=null and !startDate.equals('')">
+			<if test="searchOption == '001'">
+				AND  T.PO_DATE BETWEEN #{startDate} AND #{endDate}
+			</if>
+			<if test="searchOption == '002'">
+				AND  T.IN_WHS_DATE BETWEEN #{startDate} AND #{endDate}
+			</if>
+			<!-- 수입검사관리(입고일자 조회) -->
+			<if test="searchOption == '003'">
+				AND T.PRE_IN_WHS_QTY>0
+				AND T.PRE_IN_WHS_DATE BETWEEN #{startDate} AND #{endDate}
+			</if>
+			<if test="searchOption == '004'">
+				AND T.PRE_IN_WHS_QTY>0
+			</if>
+		</if>
+		<if test="dealCorpCd != null and !dealCorpCd.equals('')">
+		AND T.DEAL_CORP_CD = #{dealCorpCd}
+		</if>
+		<if test="dlvDate != null and !dlvDate.equals('')">
+		AND T.DLV_DATE = #{dlvDate}
+		</if>
+		
+		ORDER BY T.PO_NO DESC
+	</select>
+	
+	<!-- 입고등록(봉제) 공급사 조회 -->
+	<select id="purchaseDealCorpList" resultMap="PurchaseOrderAdmVo">
+		SELECT 
+			A.DEAL_CORP_CD
+			, DCA.DEAL_CORP_NM
+			, DCA.DEAL_GUBUN
+		FROM TB_PURCHASE_ORDER_ADM A
+		LEFT OUTER JOIN TB_PURCHASE_ORDER_DTL B
+		ON A.PO_NO = B.PO_NO
+		LEFT OUTER JOIN TB_IN_OUT_WHS_ADM D
+		ON B.PO_NO = D.PO_NO
+		AND B.PO_SEQ = D.PO_SEQ
+		LEFT OUTER JOIN TB_DEAL_CORP_ADM DCA
+		ON A.DEAL_CORP_CD=DCA.DEAL_CORP_CD
+		LEFT OUTER JOIN TB_ITEM_INFO_ADM C
+		ON B.ITEM_SEQ = C.ITEM_SEQ
+		WHERE 1=1
+		AND C.MAIN_GUBUN = '002'
+		AND DCA.DEAL_GUBUN!='003'
+		<if test="startDate != null and !startDate.equals('')">
+		AND A.PO_DATE BETWEEN #{startDate} AND #{endDate}
+		</if>
+		GROUP BY A.DEAL_CORP_CD,DCA.DEAL_CORP_NM,DCA.DEAL_GUBUN
+		HAVING 1=1
+		AND (ISNULL(CONVERT(INT,SUM(B.ORD_QTY)),0) - ISNULL(CONVERT(INT,SUM(D.IN_WHS_QTY)),0)) !=0
+		ORDER BY DEAL_CORP_NM
+		
+		SELECT DISTINCT
+			A.DEAL_CORP_CD
+			, DCA.DEAL_CORP_NM
+			, DCA.DEAL_GUBUN
+		FROM TB_PURCHASE_ORDER_ADM A
+		LEFT OUTER JOIN TB_PURCHASE_ORDER_DTL B
+		ON A.PO_NO = B.PO_NO
+		LEFT OUTER JOIN TB_ITEM_INFO_ADM C
+		ON B.ITEM_SEQ = C.ITEM_SEQ
+		LEFT OUTER JOIN TB_IN_OUT_WHS_ADM D
+		ON B.PO_NO = D.PO_NO
+		AND B.PO_SEQ = D.PO_SEQ
+		LEFT OUTER JOIN TB_DEAL_CORP_ADM DCA
+		ON A.DEAL_CORP_CD=DCA.DEAL_CORP_CD
+		WHERE 1=1
+		AND C.MAIN_GUBUN = '002'
+		AND DCA.DEAL_GUBUN!='003'	<!-- 외주사 포함x -->
+		<if test="startDate != null and !startDate.equals('')">
+		AND A.PO_DATE BETWEEN #{startDate} AND #{endDate}
+		</if>
+		AND NOT ((CONVERT(INT,D.ORD_QTY)) - (CONVERT(INT,D.IN_WHS_QTY))=0)
+		ORDER BY DEAL_CORP_NM
+	</select>
+	
+	<!-- 수입검사 관리대장 목록조회 -->
+	<select id="itemInspectMasterAdmList" resultMap="PurchaseOrderAdmVo">
+		SELECT 
+			IN_TB.IN_SLIP_NO
+			, SUBSTRING(IN_TB.IN_SLIP_NO,0,9) IN_SLIP_DATE
+		    , PO_TB.DEAL_CORP_CD
+			, (SELECT X.DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD = PO_TB.DEAL_CORP_CD) DEAL_CORP_NM
+			, ISNULL(IM_TB.APPROVAL_YN, '002') APPROVAL_YN
+			, IM_TB.QA_EVAL
+			, IM_TB.INSPECT_DATE
+			, IM_TB.INSPECT_CNT INSPECT_QTY
+			, IM_TB.INSPECT_CHARGR
+			, (SELECT X.USER_NM FROM TB_USER X WHERE X.USER_NUMBER = IM_TB.INSPECT_CHARGR) INSPECT_CHARGR_NM
+			, IM_TB.INSPECT_DESC
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = IIA_TB.ITEM_MODEL AND X.BASE_GROUP_CD = '099') ITEM_MODEL
+			, IIA_TB.ITEM_SEQ
+			, IIA_TB.ITEM_CD
+			, IIA_TB.ITEM_NM
+			, IIA_TB.MAIN_GUBUN
+			, IIA_TB.ITEM_GUBUN
+			, D.PRE_IN_WHS_DATE
+			, D.PRE_IN_WHS_QTY
+			, ISNULL(D.PRE_IN_WHS_QTY, 0) - ISNULL(D.FAULTY_QTY, 0) PAIR_QTY
+			, ISNULL(D.FAULTY_QTY, 0) FAULTY_QTY
+			, IM_TB.INSPECT_DATE
+			, IM_TB.CAVITY_CNT
+			, IFJ_TB.FAULTY_PCS
+			, IIA_TB.ITEM_UNIT
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = IIA_TB.ITEM_UNIT AND BASE_GROUP_CD = '036') ITEM_UNIT_NM
+			, PO_TB.RECEIPT_GUBUN
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = PO_TB.RECEIPT_GUBUN AND X.BASE_GROUP_CD = '051') RECEIPT_GUBUN_NM
+			, IN_TB.LOT_NO
+			, (SELECT X.INSP_CD FROM TB_INSP_ITEM_ADM X WHERE X.ITEM_SEQ = IIA_TB.ITEM_SEQ AND X.INSP_GUBUN = '003') INSP_CD
+		FROM TB_IN_OUT_WHS_ADM IN_TB
+		LEFT OUTER JOIN TB_PURCHASE_ORDER_ADM PO_TB
+		ON IN_TB.PO_NO = PO_TB.PO_NO
+		LEFT OUTER JOIN TB_ITEM_INSPECT_MASTER_ADM IM_TB
+		ON IN_TB.IN_SLIP_NO = IM_TB.IN_SLIP_NO
+		LEFT OUTER JOIN(
+			SELECT 
+				Z.IN_SLIP_NO
+				, SUM(PRE_IN_WHS_QTY) PRE_IN_WHS_QTY
+				, SUM(IN_WHS_QTY) IN_WHS_QTY
+				, SUM(FAULTY_QTY) FAULTY_QTY
+				, MAX(PRE_IN_WHS_DATE) PRE_IN_WHS_DATE
+				, MAX(IN_WHS_DATE) IN_WHS_DATE
+				, CASE WHEN COUNT(*) = (
+					SELECT COUNT(*)
+					FROM TB_IN_OUT_WHS_ADM 
+					GROUP BY IN_SLIP_NO,APPROVAL_CD
+					HAVING APPROVAL_CD = '001'
+					AND IN_SLIP_NO = Z.IN_SLIP_NO
+				) THEN '검사완료' ELSE '진행중' END STATUS_CD
+			FROM TB_IN_OUT_WHS_ADM Z
+			GROUP BY Z.IN_SLIP_NO
+		)D
+		ON D.IN_SLIP_NO = IN_TB.IN_SLIP_NO
+		LEFT OUTER JOIN (
+			SELECT
+				IFJ_TB.IN_SLIP_NO
+				, STUFF((SELECT ',' + (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = A.FAULTY_PCS AND X.BASE_GROUP_CD = '059')
+						FROM TB_ITEM_FAULTY_JDG_ADM A
+						WHERE A.IN_SLIP_NO = IFJ_TB.IN_SLIP_NO 
+						FOR XML PATH('')
+					), 1, 1, '') FAULTY_PCS
+				, SUM(ISNULL(IFJ_TB.FAULTY_CNT, 0)) FAULTY_CNT
+				, SUM(ISNULL(IFJ_TB.PAIR_CNT, 0)) PAIR_CNT
+			FROM TB_ITEM_FAULTY_JDG_ADM IFJ_TB 
+			GROUP BY IFJ_TB.IN_SLIP_NO
+		) IFJ_TB
+		ON IN_TB.IN_SLIP_NO = IFJ_TB.IN_SLIP_NO
+		LEFT OUTER JOIN TB_ITEM_INFO_ADM IIA_TB
+		ON IN_TB.ITEM_SEQ = IIA_TB.ITEM_SEQ
+		WHERE 1=1
+		<if test="mainGubun != null and !mainGubun.equals('')">
+		AND IIA_TB.MAIN_GUBUN = #{mainGubun}
+		</if>
+		GROUP BY 
+			IN_TB.IN_SLIP_NO
+			, PO_TB.DEAL_CORP_CD
+			, IM_TB.APPROVAL_YN
+			, IM_TB.QA_EVAL
+			, IIA_TB.ITEM_CD
+			, IIA_TB.ITEM_NM
+			, IIA_TB.MAIN_GUBUN
+			, IIA_TB.ITEM_GUBUN
+			, D.PRE_IN_WHS_DATE
+			, D.PRE_IN_WHS_QTY
+			, D.FAULTY_QTY
+			, IM_TB.INSPECT_DATE
+			, IM_TB.CAVITY_CNT
+			, IFJ_TB.FAULTY_PCS
+			, IIA_TB.ITEM_SEQ
+			, IIA_TB.ITEM_CD
+			, IIA_TB.ITEM_NM
+			, IIA_TB.ITEM_MODEL
+			, IIA_TB.ITEM_UNIT
+			, PO_TB.RECEIPT_GUBUN
+			, IM_TB.INSPECT_DATE
+			, IM_TB.INSPECT_CNT
+			, IM_TB.INSPECT_CHARGR
+			, IM_TB.INSPECT_DESC
+			, IN_TB.LOT_NO
+		HAVING 1=1
+		AND D.PRE_IN_WHS_QTY > 0
+		<if test="startDate != null and !startDate.equals('')">
+		AND SUBSTRING(IN_TB.IN_SLIP_NO, 0, 9) BETWEEN #{startDate} AND #{endDate}
+		</if>
+		<if test="approvalYn != null and approvalYn.equals('001')">
+		AND (IM_TB.APPROVAL_YN = '001')
+		</if>
+		<if test="approvalYn != null and approvalYn.equals('002')">
+		AND (IM_TB.APPROVAL_YN = '002' OR IM_TB.APPROVAL_YN IS NULL)
+		</if>
+		ORDER BY IN_TB.IN_SLIP_NO DESC
+	</select>
+	
+	
+	<!-- 발주서출력 목록조회 ADM -->
+	<select id="purchaseOrderPrintList" resultMap="PurchaseOrderAdmVo">
+		SELECT 
+			A.PO_NO
+			, A.PO_DATE
+			, A.DEAL_CORP_CD
+			, (SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD=A.DEAL_CORP_CD) DEAL_CORP_NM
+			, A.PO_DESC
+			, A.MAIN_CHARGR
+			, (SELECT USER_NM FROM TB_USER X WHERE X.USER_NUMBER=A.MAIN_CHARGR) MAIN_CHARGR_NM
+			, A.DOCUMENT_SUBMITTED
+			, A.PAYMENT_WAY
+			, A.DELIVERY_PLACE
+			, A.REFERENCE
+			, A.RUN_DATE
+			, A.RECEPTION
+			, A.DESIGNATION
+			, A.TITLE
+			, A.COOPERATION_DEPARTMENT
+			, A.PURCHASE_HISTORY
+			, C.PRINT_WHETHER
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=A.RECEIPT_GUBUN AND X.BASE_GROUP_CD='051') RECEIPT_GUBUN
+			, B.DEAL_CORP_CD
+			, B.TEL_NO
+			, B.FAX_NO
+			, B.OFFICE_CHARGER
+			, C.DLV_DATE
+		FROM TB_PURCHASE_ORDER_ADM A 
+		FULL OUTER JOIN TB_DEAL_CORP_ADM B
+		ON A.DEAL_CORP_CD = B.DEAL_CORP_CD 
+		LEFT OUTER JOIN TB_PURCHASE_ORDER_DTL C 
+		ON A.PO_NO = C.PO_NO
+		LEFT OUTER JOIN TB_ITEM_INFO_ADM D
+		ON C.ITEM_SEQ=D.ITEM_SEQ
+		WHERE 1=1
+		<if test="startDate!=null and !startDate.equals('')">
+			AND  A.PO_DATE BETWEEN #{startDate} AND #{endDate}
+		</if>	
+		AND D.MAIN_GUBUN=#{gubun}
+		GROUP BY A.PO_NO
+			, A.PO_DATE
+			, A.DEAL_CORP_CD
+			, A.PO_DESC
+			, A.MAIN_CHARGR
+			, A.DOCUMENT_SUBMITTED
+			, A.PAYMENT_WAY
+			, A.DELIVERY_PLACE
+			, A.REFERENCE
+			, A.RUN_DATE
+			, A.RECEPTION
+			, A.DESIGNATION
+			, A.TITLE
+			, A.COOPERATION_DEPARTMENT
+			, A.PURCHASE_HISTORY
+			, C.PRINT_WHETHER
+			, A.RECEIPT_GUBUN
+			, B.DEAL_CORP_CD
+			, B.TEL_NO
+			, B.FAX_NO
+			, B.OFFICE_CHARGER
+			, C.DLV_DATE
+		ORDER BY A.PO_NO DESC
+	</select>
+	
+	<!-- 발주서 출력 목록 조회2 DTL -->
+	<select id="purchaseOrderPrintToList" resultMap="PurchaseOrderAdmVo"> 
+		SELECT	
+			B.ITEM_SEQ
+			, C.ITEM_CD
+			, C.ITEM_NM
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=C.ITEM_MODEL AND BASE_GROUP_CD='099')ITEM_MODEL
+			, SUM(B.ORD_QTY) ORD_QTY
+			, C.ITEM_UNIT
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=C.ITEM_UNIT AND BASE_GROUP_CD='036')ITEM_UNIT_NM
+			, B.ORD_UNIT_COST
+			, B.ORD_AMT
+			, B.DLV_DATE
+			, B.DLV_CHANGE_DATE
+		FROM TB_PURCHASE_ORDER_DTL B , TB_ITEM_INFO_ADM C
+		WHERE 1=1
+		AND B.ITEM_SEQ = C.ITEM_SEQ
+		AND B.PO_NO = #{poNo}
+		GROUP BY B.ITEM_SEQ,C.ITEM_CD,C.ITEM_NM,C.ITEM_MODEL,C.ITEM_UNIT,B.ORD_UNIT_COST,B.ORD_AMT,B.DLV_DATE,B.DLV_CHANGE_DATE
+	</select>
+	
+	<!-- 발주서 출력 표1 목록 조회 DTL -->
+	<select id="purchaseOrderPrintTableList" resultMap="PurchaseOrderAdmVo"> 
+		<![CDATA[
+			SELECT	A.PO_NO
+				, B.PO_NO
+				, B.CONT_DTL_NO
+				, F.CONT_DTL_NO
+				, F.ITEM_CD
+				, X.ITEM_NM
+				, F.DTL_ORD_CNT
+				
+			FROM TB_PURCHASE_ORDER_ADM A, TB_PURCHASE_ORDER_DTL B, TB_BIZ_ORDER_DTL F, TB_ITEM_MOTOR_ADM X
+			WHERE 1=1
+			
+			AND A.PO_NO=B.PO_NO
+			
+			AND B.CONT_DTL_NO = F.CONT_DTL_NO
+			AND X.ITEM_CD=F.ITEM_CD
+			AND X.ITEM_REV=F.ITEM_REV
+				
+			AND A.PO_NO = #{poNo}
+			
+			GROUP BY A.PO_NO
+					, B.PO_NO
+					, B.CONT_DTL_NO
+					, F.CONT_DTL_NO
+					, F.ITEM_CD
+					, X.ITEM_NM
+					, F.DTL_ORD_CNT
+		]]>
+	</select>
+	
+	<!-- 발주서출력 상세 조회 -->
+	<select id="purchaseOrderStatusRead" resultMap="PurchaseOrderAdmVo">
+		<![CDATA[
+			SELECT PO_NO
+				, DEAL_CORP_CD
+				,(SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD=A.DEAL_CORP_CD) DEAL_CORP_NM
+				, MAIN_CHARGR
+				, PO_DATE
+				, REG_ID
+				, RECEIPT_GUBUN
+				, PO_DESC
+				, MAIN_CHARGR
+				, (SELECT USER_NM FROM TB_USER X WHERE X.USER_NUMBER=A.MAIN_CHARGR)PO_REG_CHARGR_NM
+				, DOCUMENT_SUBMITTED
+				, PAYMENT_WAY
+				, DELIVERY_PLACE
+				, REFERENCE
+				, RUN_DATE
+				, RECEPTION
+				, DESIGNATION
+				, TITLE
+				, COOPERATION_DEPARTMENT
+				, PURCHASE_HISTORY
+				, PRINT_WHETHER
+			FROM TB_PURCHASE_ORDER_ADM A
+			WHERE 1=1
+			AND PO_NO = #{poNo}
+		]]>
+	</select>
+	
+	<!-- 발주서출력 출력여부 -->
+	<update id="purchaseOrderPrintWhetherUpdate">
+		UPDATE	TB_PURCHASE_ORDER_DTL	 
+		SET	PRINT_WHETHER = #{printWhether}
+			, UPD_ID = #{updId}
+			, UPD_DATE = getDate()
+		WHERE 1=1	
+		AND PO_NO = #{poNo}
+		AND DLV_DATE = #{dlvDate} 
+	</update>
+	
+	<!-- 발주서출력 수정 DTL -->
+	<update id="purchaseOrderPrintUpdate">
+		<![CDATA[
+			UPDATE	TB_PURCHASE_ORDER_ADM	 
+			SET	DOCUMENT_SUBMITTED= #{documentSubmitted}
+				, PAYMENT_WAY= #{paymentWay}
+				, DELIVERY_PLACE= #{deliveryPlace}
+				, REFERENCE= #{reference}
+				, RUN_DATE= #{runDate}
+				, RECEPTION= #{reception}
+				, DESIGNATION= #{designation}
+				, TITLE= #{title}
+				, COOPERATION_DEPARTMENT= #{cooperationDepartment}
+				, PURCHASE_HISTORY= #{purchaseHistory}
+				, PRINT_WHETHER= #{printWhether}
+				, UPD_ID = #{updId}
+				, UPD_DATE = getDate()
+			WHERE 1=1	
+			AND PO_NO = #{poNo}
+		]]>
+	</update>
+	
+	<!-- 발주마감 발주상태 확인 -->
+	<select id="poStatusCheck" resultType="String">
+		<![CDATA[
+			SELECT PO_STATUS FROM TB_PURCHASE_ORDER_DTL WHERE PO_NO = #{poNo} AND PO_SEQ = #{poSeq}
+		]]>
+	</select>
+	
+		
+	<!-- 발주마감 발주종료일 수정 -->
+	<update id="poEndDateUpdate">
+		UPDATE TB_PURCHASE_ORDER_DTL SET PO_END_DATE=#{poEndDate} WHERE PO_NO = #{poNo} AND PART_CD = #{partCd}
+	</update>
+	
+	<!-- 발주마감 발주상태 수정 -->
+	<update id="poStatusUpdate">
+	<![CDATA[
+			UPDATE TB_PURCHASE_ORDER_DTL SET PO_STATUS=#{poStatus} WHERE PO_NO = #{poNo} AND PO_SEQ = #{poSeq}
+		]]>
+	</update>
+	
+	<!-- 수주상세별 발주현황 목록 -->
+	<select id="poMonitoringList" resultMap="PurchaseOrderAdmVo">
+		SELECT 
+			A.ITEM_CD
+         	, A.ITEM_REV
+         	, A.PART_CD
+         	, A.PART_REV
+         	, B.PART_UNIT
+         	, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=B.PART_UNIT AND X.BASE_GROUP_CD='036')PART_UNIT_NM
+         	, B.PART_SPEC
+         	, B.PART_NM
+         	, C.CONT_DTL_NO
+       		, E.PO_NO
+      		, E.PART_QTY
+       		, E.PART_QTY-SUM(F.PRE_IN_WHS_QTY) DIFF_QTY
+       		, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=E.PO_STATUS AND X.BASE_GROUP_CD='074') PO_STATUS
+		 	, E.ORD_CORP_CD
+		 	, (SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD=E.ORD_CORP_CD) ORD_CORP_NM
+		FROM TB_ITEM_MOTOR_EBOM A
+		INNER JOIN TB_ITEM_PART_ADM B
+		ON A.PART_CD = B.PART_CD 
+		AND A.PART_REV = B.PART_REV 
+		LEFT OUTER JOIN TB_PURCHASE_ORDER_DTL C
+		ON A.PART_CD = C.PART_CD
+		AND A.PART_REV = C.PART_REV
+		AND C.CONT_DTL_NO=#{contDtlNo}
+		LEFT OUTER JOIN TB_PURCHASE_ORDER_DTL E 
+		ON C.CONT_DTL_NO = E.CONT_DTL_NO
+		AND A.PART_CD = E.PART_CD
+		LEFT OUTER JOIN TB_IN_OUT_WHS_ADM F
+		ON E.PO_NO = F.PO_NO
+		AND E.PO_SEQ = F.PO_SEQ
+		WHERE 1=1
+		AND A.ITEM_CD = #{itemCd}
+		AND A.ITEM_REV = #{itemRev}
+		GROUP BY A.ITEM_CD, A.ITEM_REV, A.PART_CD, A.PART_REV, B.PART_UNIT, B.PART_SPEC, B.PART_NM, C.CONT_DTL_NO,E.PO_NO, E.PART_QTY, E.PO_STATUS, E.ORD_CORP_CD
+		ORDER BY E.PO_NO DESC
+	</select>
+	
+	<select id="poDateList" resultMap="PurchaseOrderAdmVo">
+		SELECT 
+			MIN(PO_DATE) START_DATE,
+			MAX(PO_DATE) END_DATE
+		FROM TB_PURCHASE_ORDER_ADM
+	</select>
+	
+	<!-- 수입검사 결과조회 -->
+	<select id="inspTestResultList" resultMap="PurchaseOrderAdmVo">
+		SELECT
+			 AA.ITEM_SEQ
+			 , (SELECT X.ITEM_CD FROM TB_ITEM_INFO_ADM X WHERE AA.ITEM_SEQ = X.ITEM_SEQ) ITEM_CD
+			 , (SELECT X.ITEM_NM FROM TB_ITEM_INFO_ADM X WHERE AA.ITEM_SEQ = X.ITEM_SEQ) ITEM_NM
+			 , AA.ITEM_GRADE
+			 , AA.ITEM_COLOR
+			 , (SELECT X.MAIN_GUBUN FROM TB_ITEM_INFO_ADM X WHERE AA.ITEM_SEQ = X.ITEM_SEQ) MAIN_GUBUN
+			 , (SELECT X.ITEM_MODEL FROM TB_ITEM_INFO_ADM X WHERE AA.ITEM_SEQ = X.ITEM_SEQ) ITEM_MODEL
+			 , (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_GROUP_CD = '099' AND (SELECT I.ITEM_MODEL FROM TB_ITEM_INFO_ADM I WHERE AA.ITEM_SEQ = I.ITEM_SEQ) = X.BASE_CD) ITEM_MODEL_NM
+			 , AA.ITEM_UNIT
+			 , AA.ITEM_UNIT_NM
+			 , AA.INSPECT_DATE
+			 , AA.QA_EVAL
+			 , (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_GROUP_CD = '072' AND X.BASE_CD = AA.QA_EVAL) QA_EVAL_NM
+			 , AA.APPROVAL_YN
+			 , (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_GROUP_CD = '062' AND X.BASE_CD = AA.APPROVAL_YN) APPROVAL_YN_NM
+			 , AA.DEAL_CORP_NM
+			 , AA.PRE_IN_WHS_DATE
+			 , AA.PRE_IN_WHS_QTY
+			 , AA.PAIR_QTY
+			 , AA.FAULTY_QTY
+			 , AA.FAULTY_PCS					
+			 , AA.IN_SLIP_NO
+			 , AA.LOT_NO
+			 , CC.INSP_CD
+			 , CC.INSP_SEQ
+			 , (SELECT INSP_D.INSP_LIST FROM TB_INSP_ITEM_DTL INSP_D WHERE INSP_D.INSP_CD = CC.INSP_CD AND INSP_D.INSP_TYPE = CC.INSP_TYPE AND INSP_D.INSP_SEQ = CC.INSP_SEQ) INSP_LIST
+			 , CC.INSP_RESULT
+			 , (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_GROUP_CD = '072' AND X.BASE_CD = CC.INSP_RESULT) INSP_RESULT_NM
+			 , CC.INSP_TYPE
+			 , (CASE WHEN CC.INSP_TYPE = '001' THEN '외관' ELSE '물성치' END) INSP_TYPE_NM
+			 , (SELECT X.INSP_STAND_UPPER FROM TB_INSP_ITEM_DTL X WHERE X.INSP_CD = CC.INSP_CD AND X.INSP_SEQ = CC.INSP_SEQ AND X.INSP_TYPE = CC.INSP_TYPE) INSP_STAND_UPPER
+			 , (SELECT X.INSP_STAND_LOWER FROM TB_INSP_ITEM_DTL X WHERE X.INSP_CD = CC.INSP_CD AND X.INSP_SEQ = CC.INSP_SEQ AND X.INSP_TYPE = CC.INSP_TYPE) INSP_STAND_LOWER
+			 , (SELECT X.INSP_CHECK FROM TB_INSP_ITEM_DTL X WHERE X.INSP_CD = CC.INSP_CD AND X.INSP_SEQ = CC.INSP_SEQ AND X.INSP_TYPE = CC.INSP_TYPE) INSP_CHECK
+			 , (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_GROUP_CD = '134' AND (SELECT I.INSP_CHECK FROM TB_INSP_ITEM_DTL I WHERE I.INSP_CD = CC.INSP_CD AND I.INSP_SEQ = CC.INSP_SEQ AND I.INSP_TYPE = CC.INSP_TYPE) = X.BASE_CD) INSP_CHECK_NM
+			 , CC.INSP_X1
+			 , CC.INSP_X2
+			 , CC.INSP_X3
+			 , CC.INSP_X4
+			 , CC.INSP_X5
+		FROM (
+			SELECT
+				IN_TB.IN_SLIP_NO
+				, IN_TB.LOT_NO
+				, PO_TB.DEAL_CORP_CD
+				, (SELECT X.DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD = PO_TB.DEAL_CORP_CD) DEAL_CORP_NM
+				, PO_TB.PO_NO
+				, IM_TB.APPROVAL_YN
+				, IM_TB.QA_EVAL
+				, IM_TB.INSPECT_DATE
+				, IM_TB.INSPECT_CNT INSPECT_QTY
+				, IM_TB.INSPECT_CHARGR
+				, IM_TB.INSPECT_DESC
+				, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = IIA_TB.ITEM_MODEL AND X.BASE_GROUP_CD = '099') ITEM_MODEL
+				, IIA_TB.ITEM_SEQ
+				, IIA_TB.ITEM_CD
+				, IIA_TB.ITEM_NM
+				, IIA_TB.MAIN_GUBUN
+				, D.PRE_IN_WHS_DATE
+				, D.PRE_IN_WHS_QTY
+				, ISNULL(D.PRE_IN_WHS_QTY, 0) - ISNULL(D.FAULTY_QTY, 0) PAIR_QTY
+				, ISNULL(D.FAULTY_QTY, 0) FAULTY_QTY
+				, IFJ_TB.FAULTY_PCS
+				, IIA_TB.ITEM_UNIT
+				, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = IIA_TB.ITEM_UNIT AND X.BASE_GROUP_CD = '036') ITEM_UNIT_NM
+				, IIA_TB.ITEM_GRADE
+				, IIA_TB.ITEM_COLOR
+				, PO_TB.RECEIPT_GUBUN
+				, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = PO_TB.RECEIPT_GUBUN AND X.BASE_GROUP_CD = '051') RECEIPT_GUBUN_NM
+			FROM TB_IN_OUT_WHS_ADM IN_TB
+			LEFT OUTER JOIN TB_PURCHASE_ORDER_ADM PO_TB
+			ON IN_TB.PO_NO = PO_TB.PO_NO
+			LEFT OUTER JOIN TB_ITEM_INSPECT_MASTER_ADM IM_TB
+			ON IN_TB.IN_SLIP_NO = IM_TB.IN_SLIP_NO
+			LEFT OUTER JOIN (
+				SELECT
+					Z.IN_SLIP_NO
+					, SUM(PRE_IN_WHS_QTY) PRE_IN_WHS_QTY
+					, SUM(IN_WHS_QTY) IN_WHS_QTY
+					, SUM(FAULTY_QTY) FAULTY_QTY
+					, MAX(PRE_IN_WHS_DATE) PRE_IN_WHS_DATE
+					, MAX(IN_WHS_DATE) IN_WHS_DATE
+					, CASE WHEN COUNT(*) = (
+						SELECT COUNT(*)
+						FROM TB_IN_OUT_WHS_ADM
+						GROUP BY IN_SLIP_NO, APPROVAL_CD
+						HAVING APPROVAL_CD = '001'
+						AND IN_SLIP_NO = Z.IN_SLIP_NO
+					) THEN '검사완료' ELSE '진행중' END STATUS_CD
+				FROM TB_IN_OUT_WHS_ADM Z
+				GROUP BY Z.IN_SLIP_NO
+			) D
+			ON D.IN_SLIP_NO = IN_TB.IN_SLIP_NO
+			LEFT OUTER JOIN (
+				SELECT
+					IFJ_TB.IN_SLIP_NO,
+					STUFF((
+						SELECT ',' + (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = I.FAULTY_PCS AND X.BASE_GROUP_CD = '059')
+						FROM TB_ITEM_FAULTY_JDG_ADM I
+						WHERE I.IN_SLIP_NO = IFJ_TB.IN_SLIP_NO 
+						FOR XML PATH('')
+					), 1, 1, '') FAULTY_PCS,
+					SUM(ISNULL(IFJ_TB.FAULTY_CNT, 0)) FAULTY_CNT,
+					SUM(ISNULL(IFJ_TB.PAIR_CNT, 0)) PAIR_CNT
+				FROM TB_ITEM_FAULTY_JDG_ADM IFJ_TB 
+				GROUP BY IFJ_TB.IN_SLIP_NO
+			) IFJ_TB
+			ON IN_TB.IN_SLIP_NO = IFJ_TB.IN_SLIP_NO
+			LEFT OUTER JOIN TB_ITEM_INFO_ADM IIA_TB
+			ON IN_TB.ITEM_SEQ = IIA_TB.ITEM_SEQ
+			GROUP BY
+				IN_TB.IN_SLIP_NO
+				, IN_TB.LOT_NO
+				, PO_TB.DEAL_CORP_CD
+				, PO_TB.PO_NO
+				, IM_TB.APPROVAL_YN
+				, IM_TB.QA_EVAL
+				, IIA_TB.ITEM_CD
+				, IIA_TB.ITEM_NM
+				, IIA_TB.MAIN_GUBUN
+				, D.PRE_IN_WHS_DATE
+				, D.PRE_IN_WHS_QTY
+				, D.FAULTY_QTY
+				, IM_TB.INSPECT_DATE
+				, IFJ_TB.FAULTY_PCS
+				, IIA_TB.ITEM_SEQ
+				, IIA_TB.ITEM_CD
+				, IIA_TB.ITEM_NM
+				, IIA_TB.ITEM_MODEL
+				, IIA_TB.ITEM_UNIT
+				, IIA_TB.ITEM_GRADE
+				, IIA_TB.ITEM_COLOR
+				, PO_TB.RECEIPT_GUBUN
+				, IM_TB.INSPECT_DATE
+				, IM_TB.INSPECT_CNT
+				, IM_TB.INSPECT_CHARGR
+				, IM_TB.INSPECT_DESC
+			HAVING 1=1
+			AND D.PRE_IN_WHS_QTY > 0
+		) AA , TB_INSP_RESULT_ADM CC
+		WHERE 1=1
+		AND CC.INSP_SOURCE_NO = AA.IN_SLIP_NO	
+		AND CC.INSP_RESULT_GUBUN = '003'
+		AND CC.INSP_RESULT != ''
+		<if test="mainGubun != null and !mainGubun.equals('')">
+		AND (SELECT X.MAIN_GUBUN FROM TB_ITEM_INFO_ADM X WHERE AA.ITEM_SEQ = X.ITEM_SEQ) = #{mainGubun}
+		</if>
+		<if test="startDate != null and !startDate.equals('')">
+		AND AA.PRE_IN_WHS_DATE BETWEEN #{startDate} AND #{endDate}
+		</if>
+		<if test="inspType != null and !inspType.equals('')">
+		AND CC.INSP_TYPE = #{inspType}
+		</if>	
+		<if test="itemSeq != null and !itemSeq.equals('')">
+		AND AA.ITEM_SEQ = #{itemSeq}
+		</if>	
+		<if test="qaEval != null and !qaEval.equals('')">
+		AND AA.QA_EVAL = #{qaEval}
+		</if>
+		<if test="approvalYn != null and !approvalYn.equals('')">
+		AND AA.APPROVAL_YN = #{approvalYn}
+		</if>
+		ORDER BY AA.PRE_IN_WHS_DATE ASC, AA.IN_SLIP_NO ASC, CC.INSP_TYPE ASC, CC.INSP_SEQ ASC
+	</select>
+	
+</mapper>

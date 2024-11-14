@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.qm.samJung5SAdmMapper">
+
+	<resultMap id="SamJung5SAdmVo" type="mes.domain.qm.SamJung5SAdmVo">
+
+		<result property="sjCd"			        column="SJ_CD"		/>
+		<result property="sjArea"		   	    column="SJ_AREA"		/>
+		<result property="sjDept"			    column="SJ_DEPT"		/>
+		<result property="checkChargr"			column="CHECK_CHARGR"		/>
+		<result property="checkDate"			column="CHECK_DATE"		/>
+		<result property="compChargr"			column="COMP_CHARGR"		/>
+		<result property="compDate"			    column="COMP_DATE"		/>
+		<result property="sjDesc"			    column="SJ_DESC"		/>
+		<result property="image1"			    column="IMAGE1"		/>
+		<result property="image2"			    column="IMAGE2"		/>
+		<result property="imageNm1"			    column="IMAGE_NM1"		/>
+		<result property="imageNm2"			    column="IMAGE_NM2"		/>
+		<result property="errorList"			column="ERROR_LIST"		/>
+		<result property="improvList"			column="IMPROV_LIST"		/>
+		<result property="fileNm1"			    column="FILE_NM1"		/>
+		<result property="fileNm2"			    column="FILE_NM2"		/>		
+		<result property="regId"			    column="REG_ID"		/>
+		<result property="regDate"			    column="REG_DATE"		/>
+		<result property="updId"			    column="UPD_ID"		/>
+		<result property="updDate"			    column="UPD_DATE"		/>		
+		<result property="checkChargrName"	    column="CHECK_CHARGR_NAME"		/>
+		<result property="compChargrName"		column="COMP_CHARGR_NAME"		/>	
+		
+		<result property="imageStatus1"			    column="IMAGE_STATUS1"		/>
+		<result property="imageStatus2"			    column="IMAGE_STATUS2"		/>		
+		<result property="fileStatus1"			    column="FILE_STATUS1"		/>
+		<result property="fileStatus2"			    column="FILE_STATUS2"		/>
+		<result property="value"			    column="VALUE"		/>
+	</resultMap>
+	
+	<!-- 3정5S 목록 조회 -->
+	<select id="samJung5SList" resultMap="SamJung5SAdmVo">
+		SELECT 
+			A.SJ_CD
+			, A.SJ_AREA
+			, A.SJ_DEPT
+			, A.CHECK_CHARGR
+			, A.CHECK_DATE
+			, A.COMP_CHARGR
+			, A.COMP_DATE
+			, A.SJ_DESC
+			<!-- , A.IMAGE1
+			, A.IMAGE2
+			, A.IMAGE_NM1
+			, A.IMAGE_NM2 -->
+			, A.ERROR_LIST
+			, A.IMPROV_LIST
+			, A.FILE_NM1
+			, A.FILE_NM2
+			, A.REG_ID
+			, A.REG_DATE
+			, A.UPD_ID
+			, A.UPD_DATE
+			, B.USER_NM as CHECK_CHARGR_NAME
+			, C.USER_NM as COMP_CHARGR_NAME
+		FROM TB_SAMJUNG5S_ADM A
+		LEFT OUTER JOIN TB_USER B
+		ON A.CHECK_CHARGR = B.USER_NUMBER
+		LEFT OUTER JOIN TB_USER C
+		ON A.COMP_CHARGR = C.USER_NUMBER		
+		WHERE 1=1
+		ORDER BY SJ_CD ASC
+	</select>
+	
+	<!--개선대책 상세 목록조회 -->
+	<select id="read" resultMap="SamJung5SAdmVo">
+		SELECT
+			A.SJ_CD
+			, A.SJ_AREA
+			, A.SJ_DEPT
+			, A.CHECK_CHARGR
+			, A.CHECK_DATE
+			, A.COMP_CHARGR
+			, A.COMP_DATE
+			, A.SJ_DESC
+			, A.IMAGE1
+			, A.IMAGE2
+			, A.IMAGE_NM1
+			, A.IMAGE_NM2
+			, A.ERROR_LIST
+			, A.IMPROV_LIST
+			, A.FILE_NM1
+			, A.FILE_NM2
+			, A.REG_ID
+			, A.REG_DATE
+			, A.UPD_ID
+			, A.UPD_DATE
+			, B.USER_NM as CHECK_CHARGR_NAME
+			, C.USER_NM as COMP_CHARGR_NAME
+		FROM TB_SAMJUNG5S_ADM A
+		LEFT OUTER JOIN TB_USER B
+		ON A.CHECK_CHARGR = B.USER_NUMBER
+		LEFT OUTER JOIN TB_USER C
+		ON A.COMP_CHARGR = C.USER_NUMBER	
+		WHERE 1=1 
+		AND SJ_CD = #{sjCd}
+	</select>
+	
+	<!-- 관리코드 시퀀스 -->
+	<select id="samJung5Seq" resultType="String">
+		SELECT 
+			ISNULL(RIGHT('00' + CAST(MAX(RIGHT(SJ_CD,3))+1 AS VARCHAR),3), '001') FROM TB_SAMJUNG5S_ADM
+	</select>
+	
+	
+	<!-- 3정5S 등록 -->
+	<insert id="samJung5SAdmCreate">
+		INSERT INTO TB_SAMJUNG5S_ADM (
+			SJ_CD
+			, SJ_AREA
+			, SJ_DEPT
+			, CHECK_CHARGR
+			, CHECK_DATE
+			, COMP_CHARGR
+			, COMP_DATE
+			, SJ_DESC
+			, IMAGE1
+			, IMAGE2
+			, IMAGE_NM1
+			, IMAGE_NM2
+			, ERROR_LIST
+			, IMPROV_LIST
+			, FILE_NM1
+			, FILE_NM2
+			, REG_ID
+			, REG_DATE
+        )
+		VALUES     (
+			#{sjCd},
+            #{sjArea},
+            #{sjDept},
+            #{checkChargr},
+            #{checkDate},
+            #{compChargr},
+            #{compDate},
+            #{sjDesc},
+            #{image1},
+            #{image2},
+            #{imageNm1},
+            #{imageNm2},
+            #{errorList},
+            #{improvList},
+            #{fileNm1},
+            #{fileNm2},
+            #{regId},
+            GETDATE()
+        ) 
+	</insert>
+	
+	<!-- 3정5S 수정 -->
+	<update id="samJung5SAdmUpdate">
+		UPDATE	TB_SAMJUNG5S_ADM		 
+		SET	
+			SJ_CD = #{sjCd}
+			,SJ_AREA = #{sjArea}
+			,SJ_DEPT = #{sjDept}
+			,CHECK_CHARGR = #{checkChargr}
+			,CHECK_DATE = #{checkDate}
+			,COMP_CHARGR = #{compChargr}
+			,COMP_DATE = #{compDate}
+			,SJ_DESC = #{sjDesc}
+			,ERROR_LIST = #{errorList}
+			,IMPROV_LIST = #{improvList}
+			,FILE_NM1 = #{fileNm1}
+			,FILE_NM2 = #{fileNm2}
+			,UPD_ID = #{updId}
+			,UPD_DATE = GETDATE()	
+			,IMAGE1 = #{image1}
+			,IMAGE_NM1 = #{imageNm1}
+			,IMAGE2 = #{image2}
+			,IMAGE_NM2 = #{imageNm2}
+		WHERE SJ_CD = #{sjCd}
+	</update>
+	
+	<!-- 3정5S 삭제 -->
+	<delete id="samJung5SAdmDelete">
+		DELETE FROM TB_SAMJUNG5S_ADM WHERE SJ_CD = #{sjCd}
+	</delete>
+	
+	<!-- 3정5S 이미지 삭제 -->
+	<update id="samJung5SAdmImageDelete">
+		UPDATE	TB_SAMJUNG5S_ADM		 
+		<set>
+			<if test="value==1">
+				IMAGE1 = NULL,
+				IMAGE_NM1 = '',
+			</if>
+			<if test="value==2">
+				IMAGE2 = NULL,
+				IMAGE_NM2 = '',
+			</if>
+			<if test="value==3">
+				FILE_NM1 = ''
+			</if>
+			<if test="value==4">
+				FILE_NM2 = ''
+			</if>
+		</set>
+		WHERE	SJ_CD = #{sjCd}
+	</update>
+</mapper>

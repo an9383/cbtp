@@ -1,0 +1,1766 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.tm.stockPaymentAdmMapper">
+
+	<resultMap id="StockPaymentAdmVo" type="mes.domain.tm.StockPaymentAdmVo">
+		<result property="rowId"				column="ROW_ID"				/>
+		<result property="spNo"					column="SP_NO"				/>
+		<result property="spSeq"		    	column="SP_SEQ"				/>
+		<result property="spTypeNm"				column="SP_TYPE_NM"			/>	
+		<result property="spType"				column="SP_TYPE"			/>			
+		<result property="spCd"					column="SP_CD"				/>		
+		<result property="spRev"		  	  	column="SP_REV"				/>
+		<result property="spNm"		  	  		column="SP_NM"				/>
+		<result property="spSpec"		  	  	column="SP_SPEC"			/>
+		<result property="spUnit"		  	  	column="SP_UNIT"			/>
+		<result property="unitCost"		  	  	column="UNIT_COST"			/>
+		<result property="spGubun"		        column="SP_GUBUN"			/>
+		<result property="spGubunNm"		    column="SP_GUBUN_NM"		/>
+		
+		<result property="spSubGubun"		    column="SP_SUB_GUBUN"		/>
+		<result property="spSubGubunNm"		    column="SP_SUB_GUBUN_NM"	/>
+		
+		
+		<result property="spDate"				column="SP_DATE"			/>
+		<result property="spQty"				column="SP_QTY"				/>	
+		<result property="inQty"				column="IN_QTY"				/>	
+		<result property="outQty"				column="OUT_QTY"			/>	
+		<result property="adjInQty"				column="ADJ_IN_QTY"			/>	
+		<result property="adjOutQty"			column="ADJ_OUT_QTY"		/>	
+		<result property="realQty"				column="REAL_QTY"			/>	
+		<result property="tmMon"				column="TM_MON"				/>	
+		<result property="tmQty"				column="TM_QTY"				/>			
+		<result property="barcodeNo"			column="BARCODE_NO"			/>	
+		<result property="sourceNo"				column="SOURCE_NO"			/>		
+		<result property="locationCd"			column="LOCATION_CD"		/>
+		<result property="locMainGubun"			column="LOC_MAIN_GUBUN"		/>
+		<result property="locMainGubunNm"		column="LOC_MAIN_GUBUN_NM"	/>		
+		<result property="locationNm"			column="LOCATION_NM"		/>		
+		<result property="areaCd"				column="AREA_CD"			/>		
+		<result property="areaNm"				column="AREA_NM"			/>		
+		<result property="floorCd"				column="FLOOR_CD"			/>		
+		<result property="floorNm"				column="FLOOR_NM"			/>		
+		<result property="locationNo"			column="LOCATION_NO"		/>		
+		<result property="spDesc"				column="SP_DESC"			/>
+		
+		<result property="partCd"		  	  	column="PART_CD"			/>
+		<result property="partRev"		  	  	column="PART_REV"			/>
+		<result property="partNm"		  	  	column="PART_NM"			/>
+		<result property="partSpec"		  	  	column="PART_SPEC"			/>
+		<result property="partUnitNm"		  	column="PART_UNIT_NM"		/>
+	
+		<result property="realQtyOption"		column="REAL_QTY_OPTION"	/>
+		<result property="startDate"			column="START_DATE"			/>
+		<result property="endDate"				column="END_DATE"			/>
+	
+		<result property="regId"				column="REG_ID"				/>
+		<result property="regDate"				column="REG_DATE"			/>
+		<result property="updId"				column="UPD_ID"				/>				
+		<result property="updDate"				column="UPD_DATE"			/>
+		
+<!-- 		추가사항 -->
+		<result property="itemSeq"				column="ITEM_SEQ"			/>
+		<result property="mainGubun"			column="MAIN_GUBUN"			/>
+		<result property="mainGubunNm"			column="MAIN_GUBUN_NM"		/>
+		<result property="itemGubun"			column="ITEM_GUBUN"			/>
+		<result property="itemGubunNm"			column="ITEM_GUBUN_NM"		/>
+		<result property="itemModel"			column="ITEM_MODEL"			/>
+		<result property="itemModelNm"			column="ITEM_MODEL_NM"		/>
+		<result property="itemCd"				column="ITEM_CD"			/>
+		<result property="itemNm"				column="ITEM_NM"			/>
+		<result property="itemMaker"			column="ITEM_MAKER"			/>
+		<result property="lhrhCd"				column="LHRH_CD"			/>
+		<result property="lhrhCdNm"				column="LHRH_CD_NM"			/>
+		<result property="boxCount"				column="BOX_COUNT"			/>
+		<result property="itemUnit"				column="ITEM_UNIT"			/>
+		<result property="itemUnitNm"			column="ITEM_UNIT_NM"		/>
+		<result property="itemFifoGubun"		column="ITEM_FIFO_GUBUN"	/>
+		<result property="cutSize"				column="CUT_SIZE"			/>
+		<result property="itemColor"			column="ITEM_COLOR"			/>
+		<result property="fillingWt"			column="FILLING_WT"			/>
+		
+		<result property="inDate"				column="IN_DATE"	/>
+		<result property="lotNo"				column="LOT_NO"		/>
+		<result property="qaEval"				column="QA_EVAL"	/>
+		<result property="itemCus"				column="ITEM_CUS"	/>
+		
+		
+		<result property="aQty"					column="A_QTY"				/>
+		<result property="bQty"					column="B_QTY"				/>
+		<result property="cQty"					column="C_QTY"				/>
+		<result property="dQty"					column="D_QTY"				/>
+		<result property="locationCdNm"			column="LOCATION_CD_NM"		/>
+		<result property="areaCdNm"				column="AREA_CD_NM"			/>
+		
+		<result property="initQty"				column="INIT_QTY"			/>
+		<result property="sumQty"				column="SUM_QTY"			/>
+		<result property="nowInQty"				column="NOW_IN_QTY"			/>
+		<result property="nowOutQty"			column="NOW_OUT_QTY"		/>
+
+		<result property="importCost"			column="IMPORT_COST"		/>
+		<result property="exportCost"			column="EXPORT_COST"		/>
+		<result property="initStockQty"			column="INIT_STOCK_QTY"		/>
+		<result property="spImQty1"				column="SP_IM_QTY_1"		/>
+		<result property="spImQty2"				column="SP_IM_QTY_2"		/>
+		<result property="spImQty3"				column="SP_IM_QTY_3"		/>
+		<result property="spImQty4"				column="SP_IM_QTY_4"		/>
+		<result property="spImQty5"				column="SP_IM_QTY_5"		/>
+		<result property="spImQty6"				column="SP_IM_QTY_6"		/>
+		<result property="spImQty7"				column="SP_IM_QTY_7"		/>
+		<result property="spImQty8"				column="SP_IM_QTY_8"		/>
+		<result property="spImQty9"				column="SP_IM_QTY_9"		/>
+		<result property="spImQty10"			column="SP_IM_QTY_10"		/>
+		<result property="spImQty11"			column="SP_IM_QTY_11"		/>
+		<result property="spImQty12"			column="SP_IM_QTY_12"		/>
+		<result property="spExQty1"				column="SP_EX_QTY_1"		/>
+		<result property="spExQty2"				column="SP_EX_QTY_2"		/>
+		<result property="spExQty3"				column="SP_EX_QTY_3"		/>
+		<result property="spExQty4"				column="SP_EX_QTY_4"		/>
+		<result property="spExQty5"				column="SP_EX_QTY_5"		/>
+		<result property="spExQty6"				column="SP_EX_QTY_6"		/>
+		<result property="spExQty7"				column="SP_EX_QTY_7"		/>
+		<result property="spExQty8"				column="SP_EX_QTY_8"		/>
+		<result property="spExQty9"				column="SP_EX_QTY_9"		/>
+		<result property="spExQty10"			column="SP_EX_QTY_10"		/>
+		<result property="spExQty11"			column="SP_EX_QTY_11"		/>
+		<result property="spExQty12"			column="SP_EX_QTY_12"		/>
+		<result property="spStockQty1"			column="SP_STOCK_QTY_1"		/>
+		<result property="spStockQty2"			column="SP_STOCK_QTY_2"		/>
+		<result property="spStockQty3"			column="SP_STOCK_QTY_3"		/>
+		<result property="spStockQty4"			column="SP_STOCK_QTY_4"		/>
+		<result property="spStockQty5"			column="SP_STOCK_QTY_5"		/>
+		<result property="spStockQty6"			column="SP_STOCK_QTY_6"		/>
+		<result property="spStockQty7"			column="SP_STOCK_QTY_7"		/>
+		<result property="spStockQty8"			column="SP_STOCK_QTY_8"		/>
+		<result property="spStockQty9"			column="SP_STOCK_QTY_9"		/>
+		<result property="spStockQty10"			column="SP_STOCK_QTY_10"	/>
+		<result property="spStockQty11"			column="SP_STOCK_QTY_11"	/>
+		<result property="spStockQty12"			column="SP_STOCK_QTY_12"	/>
+	</resultMap>
+	
+	<!-- 수불관리 조회(코드별) -->
+	<select id="stockPaymentAdmList" resultMap="StockPaymentAdmVo">
+	 	SELECT
+	 		ITEM_SEQ
+			, SP_CD
+			, SP_NM
+			, MAIN_GUBUN
+			, MAIN_GUBUN_NM
+			, SP_TYPE
+			, SP_TYPE_NM
+			, ITEM_MODEL
+			, ITEM_MODEL_NM
+			, ITEM_COLOR
+			, ITEM_MAKER
+			, LOCATION_NO
+			, LOCATION_CD
+			, LOCATION_NM
+			, AREA_CD
+			, AREA_NM
+			, FLOOR_NM
+			, ITEM_CUS
+			, SP_UNIT
+			, TM_QTY
+			, IN_QTY
+			, OUT_QTY
+			, NOW_IN_QTY
+			, NOW_OUT_QTY
+			, REAL_QTY
+		FROM (
+			SELECT
+				DD.ITEM_SEQ
+			    , DD.ITEM_CD SP_CD
+				, DD.ITEM_NM SP_NM
+				, DD.MAIN_GUBUN
+				, DD.MAIN_GUBUN_NM
+				, DD.ITEM_GUBUN SP_TYPE
+				, DD.ITEM_GUBUN_NM SP_TYPE_NM
+				, DD.ITEM_MODEL
+				, DD.ITEM_MODEL_NM
+				, DD.ITEM_UNIT
+				, DD.ITEM_UNIT_NM SP_UNIT
+				, DD.ITEM_COLOR
+				, DD.ITEM_MAKER
+				, DD.LOCATION_NO
+				, DD.LOCATION_CD
+				, DD.LOCATION_NM
+				, DD.AREA_CD
+				, DD.AREA_NM
+				, DD.FLOOR_NM
+				, DD.ITEM_CUS
+				, ISNULL(EE.TM_QTY, 0) TM_QTY
+				, ISNULL(EE.IN_QTY, 0) IN_QTY
+				, ISNULL(EE.OUT_QTY, 0) OUT_QTY
+				, ISNULL(EE.NOW_IN_QTY, 0) NOW_IN_QTY
+				, ISNULL(EE.NOW_OUT_QTY, 0) NOW_OUT_QTY
+				, ISNULL(EE.REAL_QTY, 0) REAL_QTY
+			FROM (
+				SELECT
+					Z.ITEM_SEQ
+					, Z.MAIN_GUBUN
+					, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '112' AND Z.MAIN_GUBUN = B.BASE_CD) MAIN_GUBUN_NM
+					, Z.ITEM_GUBUN
+					, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '091' AND Z.ITEM_GUBUN = B.BASE_CD) ITEM_GUBUN_NM
+					, Z.ITEM_MODEL
+					, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '099' AND Z.ITEM_MODEL = B.BASE_CD) ITEM_MODEL_NM
+					, Z.ITEM_CD
+					, Z.ITEM_NM
+					, Z.LHRH_CD
+					, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = Z.LHRH_CD AND X.BASE_GROUP_CD='097') LHRH_CD_NM
+					, Z.ITEM_COLOR
+					, Z.ITEM_MAKER
+					, Z.BOX_COUNT
+					, Z.ITEM_UNIT
+					, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=ITEM_UNIT AND X.BASE_GROUP_CD='036') ITEM_UNIT_NM
+					, Z.LOC_NO LOCATION_NO
+					, L.LOC_CD LOCATION_CD
+					, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '073' AND B.BASE_CD=L.LOC_CD ) LOCATION_NM
+					, L.AREA_CD
+					, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '067' AND B.BASE_CD=L.AREA_CD) AREA_NM
+					, L.FLOOR_NM
+					, (SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM WHERE DEAL_CORP_CD=Z.ITEM_CUS) ITEM_CUS
+				FROM TB_ITEM_INFO_ADM Z
+				LEFT OUTER JOIN TB_LOCATION_ADM L
+				ON Z.LOC_NO = L.LOC_NO
+				WHERE 1=1
+				AND Z.USE_YN = '001'
+			) DD
+			LEFT OUTER JOIN (
+				SELECT
+					SP_TYPE
+					, SP_CD
+					, SUM(BINPUT) TM_QTY
+					, SUM(AINPUT) + SUM(NINPUT) IN_QTY 
+					, SUM(AOUTPUT) + SUM(NOUTPUT) OUT_QTY
+					, SUM(NINPUT) NOW_IN_QTY
+					, SUM(NOUTPUT) NOW_OUT_QTY
+					, SUM(BINPUT) + SUM(AINPUT) + SUM(NINPUT) - SUM(AOUTPUT) - SUM(NOUTPUT) REAL_QTY
+				FROM (
+					SELECT
+						SP_TYPE
+						, SP_CD
+						, ISNULL(CASE WHEN DATE_GUBUN = 'BEFORE' THEN SUM(INPUT-OUTPUT) END, 0) BINPUT
+						, ISNULL(CASE WHEN DATE_GUBUN = 'AFTER' THEN SUM(INPUT) END, 0) AINPUT
+						, ISNULL(CASE WHEN DATE_GUBUN = 'AFTER' THEN SUM(OUTPUT) END, 0) AOUTPUT
+						, ISNULL(CASE WHEN DATE_GUBUN = 'NOW' THEN SUM(INPUT) END, 0) NINPUT
+						, ISNULL(CASE WHEN DATE_GUBUN = 'NOW' THEN SUM(OUTPUT) END, 0) NOUTPUT
+					FROM (
+						SELECT
+							SP_TYPE
+							, SP_CD
+							, SP_DATE
+							, (
+								CASE WHEN  AA.SP_DATE <![CDATA[<]]> #{tmMon} + '01'
+								THEN 'BEFORE'
+							 	WHEN  AA.SP_DATE = #{tmDate}
+							 	THEN 'NOW'
+							 	WHEN  AA.SP_DATE <![CDATA[>=]]> #{tmMon} + '01' AND SP_DATE <![CDATA[<=]]> #{tmMon} + '31'
+							 	THEN 'AFTER'
+							 	END
+							) DATE_GUBUN
+							, SUM(CASE WHEN SP_GUBUN = '001' THEN SP_QTY ELSE 0 END) INPUT
+							, SUM(CASE WHEN SP_GUBUN = '002' THEN SP_QTY ELSE 0 END) OUTPUT
+						FROM (
+							SELECT
+								SP_NO
+								, SP_SEQ
+								, SP_TYPE
+								, SP_CD
+								, SP_GUBUN
+								, SP_SUB_GUBUN
+								, SP_DATE
+								, SP_QTY
+								, SP_BOM_QTY
+								, BARCODE_NO
+								, SOURCE_NO
+								, LOCATION_CD
+								, AREA_CD
+								, FLOOR_CD
+								, LOCATION_NO
+							FROM TB_STOCK_PAYMENT_ADM
+							WHERE 1=1
+							<if test="spType != null and !spType.equals('')">
+							AND SP_TYPE = #{spType}
+							</if>
+							<if test="locationCd != null and !locationCd.equals('')">
+							AND LOCATION_CD = #{locationCd}
+							</if>
+							AND SP_DATE BETWEEN LEFT(#{tmMon}, 4) + '0101' AND #{tmMon} + '31'
+							
+							UNION ALL
+							
+							SELECT
+								SP_NO
+								, SP_SEQ
+								, SP_TYPE
+								, SP_CD
+								, SP_GUBUN
+								, ''SP_SUB_GUBUN
+								, SP_DATE
+								, SP_QTY
+								, SP_BOM_QTY
+								, BARCODE_NO
+								, SOURCE_NO
+								, LOCATION_CD
+								, AREA_CD
+								, FLOOR_CD
+								, LOCATION_NO
+							FROM TB_STOCK_CLOSING_ADM
+							WHERE 1=1
+							AND CLOSE_DATE = CONVERT(VARCHAR(4), DATEADD(YYYY, -1, #{tmMon} + '01'), 112)
+							<if test="spType != null and !spType.equals('')">
+							AND SP_TYPE = #{spType}
+							</if>
+							<if test="locationCd != null and !locationCd.equals('')">
+							AND LOCATION_CD = #{locationCd}
+							</if>
+						) AA
+						GROUP BY
+							SP_TYPE
+							, SP_CD
+							, SP_DATE
+							, SP_SUB_GUBUN
+							, (
+								CASE WHEN AA.SP_DATE <![CDATA[<]]> #{tmMon} + '01' 
+								THEN 'BEFORE'
+								WHEN AA.SP_DATE = #{tmDate}
+								THEN 'NOW'
+								WHEN AA.SP_DATE <![CDATA[>=]]> #{tmMon} AND AA.SP_DATE <![CDATA[<=]]> #{tmMon} + '31'
+								THEN 'AFTER'
+								END
+							)
+						<if test="locationCd == null or locationCd.equals('')">
+						HAVING SP_SUB_GUBUN NOT IN('이동입고','이동출고')
+						</if>
+					) BB
+					GROUP BY SP_TYPE, SP_CD, DATE_GUBUN
+				) CC
+				GROUP BY SP_TYPE, SP_CD
+			) EE
+			ON DD.ITEM_SEQ = EE.SP_CD
+		) FF
+		WHERE 1=1
+		<if test="mainGubun != null and !mainGubun.equals('')">
+		AND MAIN_GUBUN = #{mainGubun}
+		</if>
+		<if test="spType != null and !spType.equals('')">
+		AND SP_TYPE = #{spType}
+		</if>
+		<if test="realQtyOption!=null and !realQtyOption.equals('')">
+		AND REAL_QTY > 0
+		</if>
+	</select>
+	
+	<!-- 수불관리 조회 -->
+	<select id="stockPaymentAdmRead" resultMap="StockPaymentAdmVo">
+	   SELECT	
+	   		MAIN_GUBUN,
+			SP_GUBUN,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '082' AND S.SP_GUBUN = B.BASE_CD) SP_GUBUN_NM,
+			SP_SUB_GUBUN,
+			SP_DATE,
+			BARCODE_NO,
+			SP_QTY,
+			SP_NO,
+			SP_SEQ,
+			SP_TYPE,
+			SP_CD,
+			SOURCE_NO,
+			LOCATION_NO,
+			LOCATION_CD,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '073' AND S.LOCATION_CD = B.BASE_CD) LOCATION_CD_NM,
+			LOC_TB.AREA_CD,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '067' AND LOC_TB.AREA_CD = B.BASE_CD) AREA_CD_NM,
+			LOC_TB.FLOOR_NM FLOOR_CD,
+			SP_DESC
+		FROM	TB_STOCK_PAYMENT_ADM S
+		LEFT OUTER JOIN TB_LOCATION_ADM LOC_TB
+		ON LOC_TB.LOC_NO=S.LOCATION_NO 
+		WHERE 1=1
+		<if test="spCd != null and !spCd.equals('')">
+		AND SP_CD = #{spCd}
+		</if>
+		<if test="mainGubun != null and !mainGubun.equals('')">
+			AND MAIN_GUBUN = #{mainGubun}
+		</if>
+		<if test="locationCd!=null and !locationCd.equals('')">
+			AND LOCATION_CD=#{locationCd}
+		</if>
+		<if test="startDate!=null and !startDate.equals('')">
+			AND SUBSTRING(SP_DATE,0,7) = #{startDate}
+		</if>
+		<if test="spSubGubunYn!=null and !spSubGubunYn.equals('')">
+			AND SP_SUB_GUBUN NOT IN ('이동입고','이동출고')
+		</if>
+		<if test="sourceNo != null and !sourceNo.equals('')">
+		AND SOURCE_NO=#{sourceNo}
+		</if>
+	</select>
+	
+	<!-- 수불관리 조회(바코드별) -->
+	<select id="stockPaymentAdmBarcodeList" resultMap="StockPaymentAdmVo">
+		SELECT
+			ITEM_SEQ
+			, BARCODE_NO
+			, LOCATION_NO
+			, LOCATION_CD
+			, LOC_MAIN_GUBUN
+			, LOC_MAIN_GUBUN_NM
+			, LOCATION_NM
+			, AREA_CD
+			, AREA_NM
+			, FLOOR_NM
+			, SP_CD
+			, SP_NM
+			, MAIN_GUBUN
+			, MAIN_GUBUN_NM
+			, SP_TYPE
+			, SP_TYPE_NM
+			, ITEM_MODEL
+			, ITEM_MODEL_NM
+			, ITEM_COLOR
+			, ITEM_MAKER
+			, ITEM_FIFO_GUBUN
+			, LOT_NO
+			, QA_EVAL
+			<!-- , IN_DATE -->
+			, SP_UNIT
+			, TM_QTY
+			<!-- , INIT_QTY -->
+			, IN_QTY
+			, OUT_QTY
+			, REAL_QTY
+		FROM (
+			SELECT
+				DD.ITEM_SEQ
+				, EE.BARCODE_NO
+				, EE.LOCATION_NO
+				, EE.LOCATION_CD
+				, (SELECT MAIN_GUBUN FROM TB_LOCATION_ADM X WHERE X.LOC_NO = EE.LOCATION_NO) LOC_MAIN_GUBUN
+				, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE B.BASE_GROUP_CD='112'AND B.BASE_CD = (SELECT MAIN_GUBUN FROM TB_LOCATION_ADM X WHERE X.LOC_NO = EE.LOCATION_NO)) LOC_MAIN_GUBUN_NM
+				, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '073' AND B.BASE_CD = EE.LOCATION_CD ) LOCATION_NM
+				, (SELECT AREA_CD FROM TB_LOCATION_ADM X WHERE X.LOC_NO = EE.LOCATION_NO) AREA_CD
+				, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '067' AND B.BASE_CD = (SELECT AREA_CD FROM TB_LOCATION_ADM X WHERE X.LOC_NO = EE.LOCATION_NO)) AREA_NM
+				, (SELECT FLOOR_NM FROM TB_LOCATION_ADM X WHERE X.LOC_NO = EE.LOCATION_NO) FLOOR_NM
+			    , DD.ITEM_CD SP_CD
+				, DD.ITEM_NM SP_NM
+				, DD.MAIN_GUBUN
+				, DD.MAIN_GUBUN_NM
+				, DD.ITEM_GUBUN SP_TYPE
+				, DD.ITEM_GUBUN_NM SP_TYPE_NM
+				, DD.ITEM_MODEL
+				, DD.ITEM_MODEL_NM
+				, DD.ITEM_UNIT
+				, DD.ITEM_UNIT_NM SP_UNIT
+				, DD.ITEM_COLOR
+				, DD.ITEM_MAKER
+				, ITEM_FIFO_GUBUN
+				, (SELECT LOT_NO FROM TB_IN_OUT_WHS_ADM WHERE BARCODE_NO = EE.BARCODE_NO) LOT_NO
+				, (
+					SELECT QA_EVAL FROM TB_IN_OUT_WHS_ADM W
+					LEFT OUTER JOIN TB_ITEM_INSPECT_ADM I
+					ON W.IN_SLIP_NO=I.IN_SLIP_NO
+					AND W.IN_SLIP_SEQ=I.IN_SLIP_SEQ
+					WHERE W.BARCODE_NO=EE.BARCODE_NO
+				) QA_EVAL
+				, (
+					SELECT SUM(S.SP_QTY) SP_QTY
+					FROM TB_STOCK_PAYMENT_ADM S
+					GROUP BY S.BARCODE_NO, S.SP_GUBUN, S.SP_SUB_GUBUN, S.SP_DATE
+					HAVING 1=1
+					AND S.BARCODE_NO = EE.BARCODE_NO
+					AND S.SP_GUBUN = '001'
+					AND S.SP_SUB_GUBUN IN ('초기재고', '자재입고', '제품입고')
+				) INIT_QTY
+				, (
+					SELECT SP_DATE
+					FROM TB_STOCK_PAYMENT_ADM 
+					GROUP BY BARCODE_NO, SP_DATE, SP_GUBUN, SP_SUB_GUBUN
+					HAVING BARCODE_NO=EE.BARCODE_NO
+					AND SP_GUBUN='001'
+					AND SP_SUB_GUBUN IN ('초기재고','자재입고','제품입고')
+				) IN_DATE
+				, ISNULL(EE.TM_QTY, 0) TM_QTY
+				, ISNULL(EE.IN_QTY, 0) IN_QTY
+				, ISNULL(EE.OUT_QTY, 0) OUT_QTY
+				, ISNULL(EE.REAL_QTY, 0) REAL_QTY
+			FROM (
+				SELECT
+					Z.ITEM_SEQ
+					, Z.MAIN_GUBUN
+					, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '112' AND Z.MAIN_GUBUN = B.BASE_CD) MAIN_GUBUN_NM
+					, Z.ITEM_GUBUN
+					, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '091' AND Z.ITEM_GUBUN = B.BASE_CD) ITEM_GUBUN_NM
+					, Z.ITEM_MODEL
+					, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '099' AND Z.ITEM_MODEL = B.BASE_CD) ITEM_MODEL_NM
+					, Z.ITEM_CD
+					, Z.ITEM_NM
+					, Z.LHRH_CD
+					, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = Z.LHRH_CD AND X.BASE_GROUP_CD='097') LHRH_CD_NM
+					, Z.ITEM_COLOR
+					, Z.ITEM_MAKER
+					, Z.BOX_COUNT
+					, Z.ITEM_UNIT
+					, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=ITEM_UNIT AND X.BASE_GROUP_CD='036') ITEM_UNIT_NM
+					, ITEM_FIFO_GUBUN
+				FROM TB_ITEM_INFO_ADM Z
+				WHERE 1=1
+				AND USE_YN = '001'
+			) DD
+			LEFT OUTER JOIN (
+				SELECT
+					SP_TYPE
+					, SP_CD
+					, BARCODE_NO
+					, LOCATION_NO
+					, LOCATION_CD
+					, SUM(BINPUT) TM_QTY
+					, SUM(AINPUT) IN_QTY
+					, SUM(AOUTPUT) OUT_QTY
+					, SUM(BINPUT)+SUM(AINPUT)-SUM(AOUTPUT) REAL_QTY
+				FROM (
+					SELECT
+						SP_TYPE
+						, SP_CD
+						, BARCODE_NO
+						, LOCATION_NO
+						, LOCATION_CD
+						, ISNULL(CASE WHEN DATE_GUBUN = 'BEFORE' THEN SUM(INPUT-OUTPUT) END, 0) BINPUT
+						, ISNULL(CASE WHEN DATE_GUBUN = 'AFTER' THEN SUM(INPUT) END, 0) AINPUT
+						, ISNULL(CASE WHEN DATE_GUBUN = 'AFTER' THEN SUM(OUTPUT) END, 0) AOUTPUT
+					FROM (
+						SELECT
+							SP_TYPE
+							, SP_CD
+							, SP_DATE
+							, BARCODE_NO
+							, LOCATION_NO
+							, LOCATION_CD
+							, (
+								CASE WHEN AA.SP_DATE <![CDATA[<]]> #{tmMon} + '01' 
+								THEN 'BEFORE'
+								WHEN  AA.SP_DATE <![CDATA[>=]]> #{tmMon} + '01' AND SP_DATE <![CDATA[<=]]> #{tmMon} + '31'
+								THEN 'AFTER'
+								END
+							) DATE_GUBUN
+							, SUM(CASE WHEN SP_GUBUN = '001' THEN SP_QTY ELSE 0 END) INPUT
+							, SUM(CASE WHEN SP_GUBUN = '002' THEN SP_QTY ELSE 0 END) OUTPUT
+						FROM (
+							SELECT
+								SP_NO
+								, SP_SEQ
+								, SP_TYPE
+								, SP_CD
+								, SP_GUBUN
+								, SP_DATE
+								, SP_QTY
+								, SP_BOM_QTY
+								, BARCODE_NO
+								, SOURCE_NO
+								, LOCATION_CD
+								, AREA_CD
+								, FLOOR_CD
+								, LOCATION_NO
+							FROM TB_STOCK_PAYMENT_ADM
+							WHERE 1=1
+							<if test="spType != null and !spType.equals('')">
+							AND SP_TYPE = #{spType}
+							</if>
+							AND SP_DATE BETWEEN LEFT(#{tmMon},4)+'0101' AND #{tmMon} + '31'
+							
+							UNION ALL
+							
+							SELECT
+								SP_NO
+								, SP_SEQ
+								, SP_TYPE
+								, SP_CD
+								, SP_GUBUN
+								, SP_DATE
+								, SP_QTY
+								, SP_BOM_QTY
+								, BARCODE_NO
+								, SOURCE_NO
+								, LOCATION_CD
+								, AREA_CD
+								, FLOOR_CD
+								, LOCATION_NO
+							FROM TB_STOCK_CLOSING_ADM
+							WHERE 1=1
+							<if test="spType != null and !spType.equals('')">
+							AND SP_TYPE = #{spType}
+							</if>
+							AND CLOSE_DATE = CONVERT(VARCHAR(4), DATEADD(YYYY, -1, #{tmMon} + '01'), 112)
+						) AA
+						GROUP BY
+							SP_TYPE
+							, SP_CD
+							, SP_DATE
+							, BARCODE_NO
+							, LOCATION_NO
+							, LOCATION_CD
+							, (
+								CASE WHEN  AA.SP_DATE <![CDATA[<]]> #{tmMon} + '01'
+								THEN 'BEFORE'
+								WHEN AA.SP_DATE <![CDATA[>=]]> #{tmMon} + '01' AND AA.SP_DATE <![CDATA[<=]]> #{tmMon} + '31'
+								THEN 'AFTER'
+								END
+							)
+					) BB
+					GROUP BY SP_TYPE, SP_CD,BARCODE_NO,LOCATION_NO,LOCATION_CD,DATE_GUBUN
+				) CC
+				GROUP BY SP_TYPE, SP_CD,BARCODE_NO,LOCATION_NO,LOCATION_CD
+			) EE
+			ON DD.ITEM_SEQ = EE.SP_CD
+		) FF
+		WHERE 1=1
+		<if test="realQtyOption != null and !realQtyOption.equals('')">
+		AND REAL_QTY > 0
+		</if>
+		<if test="mainGubun != null and !mainGubun.equals('')">
+		AND MAIN_GUBUN = #{mainGubun}
+		AND LOC_MAIN_GUBUN = #{mainGubun}
+		</if>
+		<if test="itemSeq != null and !itemSeq.equals('')">
+		AND ITEM_SEQ = #{itemSeq}
+		</if>
+		<if test="spType != null and !spType.equals('')">
+		AND SP_TYPE = #{spType}
+		</if>
+		<if test="barcodeNo != null and !barcodeNo.equals('')">
+		AND BARCODE_NO = #{barcodeNo}
+		</if>
+		<if test="locationCd != null and !locationCd.equals('')">
+		AND LOCATION_CD = #{locationCd}
+		</if>
+		<if test='dateRange!=null and dateRange.equals("6")'>
+		AND IN_DATE <![CDATA[<]]> CONVERT(VARCHAR(10),DATEADD(M,-6,GETDATE()),112)
+		AND IN_DATE <![CDATA[>=]]> CONVERT(VARCHAR(10),DATEADD(M,-12,GETDATE()),112)
+		</if>
+		<if test='dateRange!=null and dateRange.equals("12")'>
+		AND IN_DATE <![CDATA[<]]> CONVERT(VARCHAR(10),DATEADD(M,-12,GETDATE()),112)
+		AND IN_DATE <![CDATA[>=]]> CONVERT(VARCHAR(10),DATEADD(M,-24,GETDATE()),112)
+		</if>
+		<if test='dateRange!=null and dateRange.equals("24")'>
+		AND IN_DATE <![CDATA[<]]> CONVERT(VARCHAR(10),DATEADD(M,-24,GETDATE()),112)
+		</if>
+		<if test="fifoOption!=null and !fifoOption.equals('')">
+		AND IN_DATE <![CDATA[<=]]> (
+		    SELECT SP_DATE
+			FROM TB_STOCK_PAYMENT_ADM
+			WHERE 1=1
+			AND SP_SUB_GUBUN IN ('자재입고','초기입고')
+			AND BARCODE_NO = #{fifoBarcodeNo}
+			AND LOCATION_CD = '001')
+		AND BARCODE_NO <![CDATA[<]]> #{fifoBarcodeNo}
+		</if>
+		<if test="fifoOption2!=null and !fifoOption2.equals('')">
+		AND IN_DATE <![CDATA[<=]]> (
+		    SELECT SP_DATE
+			FROM TB_STOCK_PAYMENT_ADM
+			WHERE 1=1
+			AND SP_SUB_GUBUN IN ('제품입고','초기입고')
+			AND BARCODE_NO = #{fifoBarcodeNo}
+			AND LOCATION_CD = '002')
+		AND BARCODE_NO <![CDATA[<]]> #{fifoBarcodeNo}
+		</if>
+		<if test="fifoOption3!=null and !fifoOption3.equals('')">
+		AND IN_DATE <![CDATA[<=]]> (
+		    SELECT SP_DATE
+			FROM TB_STOCK_PAYMENT_ADM
+			WHERE 1=1
+			AND SP_SUB_GUBUN IN ('자재입고','초기입고')
+			AND BARCODE_NO = #{fifoBarcodeNo}
+			AND LOCATION_CD = '006')
+		AND BARCODE_NO <![CDATA[<]]> #{fifoBarcodeNo}
+		</if>
+		<if test="fifoOption4!=null and !fifoOption4.equals('')">
+		AND IN_DATE <![CDATA[<=]]> (
+		    SELECT SP_DATE
+			FROM TB_STOCK_PAYMENT_ADM
+			WHERE 1=1
+			AND SP_SUB_GUBUN IN ('제품입고','초기입고')
+			AND BARCODE_NO = #{fifoBarcodeNo}
+			AND LOCATION_CD = '007')
+		AND BARCODE_NO <![CDATA[<]]> #{fifoBarcodeNo}
+		</if>
+		
+		
+		ORDER BY CASE SP_TYPE WHEN '001' THEN LOCATION_CD END
+	</select>
+	
+	<!-- 수불관리 조회(창고별) -->
+	<select id="stockPaymentAdmLocList" resultMap="StockPaymentAdmVo">
+		  SELECT
+			 MAIN_GUBUN,
+			 MAIN_GUBUN_NM,
+			 LOCATION_CD,
+			 LOCATION_NM, 
+			 DD.ITEM_SEQ,
+			 DD.ITEM_GUBUN SP_TYPE,
+			 DD.ITEM_GUBUN_NM SP_TYPE_NM,
+			 DD.ITEM_CD SP_CD,
+			 DD.ITEM_NM SP_NM,
+			 DD.ITEM_UNIT_NM SP_UNIT,
+			 DD.CUT_SIZE,
+			 DD.ITEM_COLOR,
+			 DD.FILLING_WT,
+			 SUM(REAL_QTY) REAL_QTY
+		  FROM
+			 (
+				SELECT
+					Z.ITEM_SEQ,
+					Z.MAIN_GUBUN,
+					(SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '112' AND Z.MAIN_GUBUN = B.BASE_CD) MAIN_GUBUN_NM,
+					Z.ITEM_GUBUN,
+					(SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '091' AND Z.ITEM_GUBUN = B.BASE_CD) ITEM_GUBUN_NM,
+					Z.ITEM_CD,
+					Z.ITEM_NM,
+					Z.ITEM_UNIT,
+					(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=Z.ITEM_UNIT AND X.BASE_GROUP_CD='036') ITEM_UNIT_NM,
+					Z.CUT_SIZE,
+					Z.ITEM_COLOR,
+					Z.FILLING_WT
+				FROM TB_ITEM_INFO_ADM Z
+				WHERE 1=1
+				AND USE_YN = '001'
+			) DD 
+			LEFT OUTER JOIN
+			(
+				SELECT 
+				SP_TYPE,
+				SP_CD,
+				LOCATION_CD,
+				(SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '073' AND B.BASE_CD=LOCATION_CD )LOCATION_NM,
+				SUM(BINPUT) TM_QTY,
+				SUM(AINPUT) IN_QTY,
+				SUM(AOUTPUT) OUT_QTY,
+				SUM(BINPUT)+SUM(AINPUT)-SUM(AOUTPUT) REAL_QTY
+				FROM 
+				(
+				SELECT 
+					 SP_TYPE,
+					 SP_CD,
+					 LOCATION_CD,
+					 ISNULL(CASE WHEN DATE_GUBUN = 'BEFORE' THEN SUM(INPUT-OUTPUT) END,0) BINPUT,
+					 ISNULL(CASE WHEN DATE_GUBUN = 'AFTER' THEN SUM(INPUT) END,0) AINPUT,
+					 ISNULL(CASE WHEN DATE_GUBUN = 'AFTER' THEN SUM(OUTPUT) END,0) AOUTPUT
+					FROM
+					(
+					SELECT
+						SP_TYPE,
+						SP_CD,
+						SP_DATE,
+						LOCATION_CD,
+						CASE WHEN  AA.SP_DATE <![CDATA[<]]> #{tmMon} + '01' THEN 'BEFORE'
+						 WHEN  AA.SP_DATE <![CDATA[>=]]> #{tmMon} + '01' AND SP_DATE <![CDATA[<=]]> #{tmMon} + '31' THEN 'AFTER' END DATE_GUBUN,
+						SUM(CASE WHEN SP_GUBUN = '001' THEN SP_QTY ELSE 0 END) INPUT,
+						SUM(CASE WHEN SP_GUBUN = '002' THEN SP_QTY ELSE 0 END) OUTPUT
+						FROM 
+						(
+							SELECT
+							SP_NO
+							,SP_SEQ
+							,SP_TYPE
+							,SP_CD
+							,SP_GUBUN
+							,SP_DATE
+							,SP_QTY
+							,SP_BOM_QTY
+							,BARCODE_NO
+							,SOURCE_NO
+							,LOCATION_CD
+							,AREA_CD
+							,FLOOR_CD
+							,LOCATION_NO
+							FROM TB_STOCK_PAYMENT_ADM
+							WHERE 1=1
+							AND SP_DATE BETWEEN LEFT(#{tmMon},4)+'0101' AND #{tmMon} + '31'
+							UNION ALL 
+							SELECT
+							SP_NO
+							,SP_SEQ
+							,SP_TYPE
+							,SP_CD
+							,SP_GUBUN
+							,SP_DATE
+							,SP_QTY
+							,SP_BOM_QTY
+							,BARCODE_NO
+							,SOURCE_NO
+							,LOCATION_CD
+							,AREA_CD
+							,FLOOR_CD
+							,LOCATION_NO
+							FROM TB_STOCK_CLOSING_ADM
+							WHERE 1=1
+							AND CLOSE_DATE = CONVERT(VARCHAR(4), DATEADD(YYYY, -1, #{tmMon} + '01'), 112)
+						) AA
+						GROUP BY SP_TYPE, SP_CD, SP_DATE,BARCODE_NO,LOCATION_NO,LOCATION_CD,
+						CASE WHEN  AA.SP_DATE <![CDATA[<]]> #{tmMon} + '01' THEN 'BEFORE'
+						 WHEN AA.SP_DATE <![CDATA[>=]]> #{tmMon} + '01' AND AA.SP_DATE <![CDATA[<=]]> #{tmMon} + '31' THEN 'AFTER' END 
+					) BB
+					GROUP BY SP_TYPE, SP_CD,LOCATION_CD,DATE_GUBUN
+					) CC
+				GROUP BY SP_TYPE, SP_CD,LOCATION_CD
+			) EE
+			ON DD.ITEM_SEQ = EE.SP_CD
+			
+		WHERE 1=1
+		<if test="realQtyOption != null and !realQtyOption.equals('')">
+			AND REAL_QTY > 0
+		</if>
+		<if test="mainGubun != null and !mainGubun.equals('')">
+			AND MAIN_GUBUN = #{mainGubun}
+		</if>
+		<if test="itemSeq != null and !itemSeq.equals('')">
+			AND ITEM_SEQ = #{itemSeq}
+		</if>
+		<if test="locationCd != null and !locationCd.equals('')">
+			AND LOCATION_CD = #{locationCd}
+		</if>
+		<if test="itemGubun != null and !itemGubun.equals('')">
+			AND ITEM_GUBUN = #{itemGubun}
+		</if>
+		GROUP BY MAIN_GUBUN,
+			MAIN_GUBUN_NM,
+			LOCATION_CD,
+			LOCATION_NM,
+			DD.ITEM_SEQ,
+			DD.ITEM_GUBUN,
+			DD.ITEM_GUBUN_NM,
+			DD.ITEM_CD,
+			DD.ITEM_NM,
+			DD.ITEM_UNIT_NM,
+			DD.CUT_SIZE,
+			DD.ITEM_COLOR,
+			DD.FILLING_WT
+	</select>
+	
+	<!-- 수불관리 조회(구역별)  -->
+	<select id="stockPaymentAdmAreaList" resultMap="StockPaymentAdmVo">
+		SELECT
+			 MAIN_GUBUN,
+			 MAIN_GUBUN_NM,
+			 LOCATION_NO,
+			 LOCATION_CD,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE BASE_CD=(SELECT AREA_CD FROM TB_LOCATION_ADM Z WHERE Z.LOC_NO=LOCATION_NO) AND BASE_GROUP_CD='067') AREA_NM,
+			(SELECT FLOOR_NM FROM TB_LOCATION_ADM Z WHERE Z.LOC_NO=LOCATION_NO) FLOOR_NM,
+			 SUM(REAL_QTY) REAL_QTY
+		  FROM
+			 (
+			 
+				SELECT
+					Z.ITEM_SEQ,
+					Z.MAIN_GUBUN,
+					(SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '112' AND Z.MAIN_GUBUN = B.BASE_CD) MAIN_GUBUN_NM
+				FROM TB_ITEM_INFO_ADM Z
+				WHERE 1=1
+				AND USE_YN = '001'
+			) DD 
+			LEFT OUTER JOIN
+			(
+				SELECT 
+				SP_TYPE,
+				SP_CD,
+				LOCATION_NO,
+				LOCATION_CD,
+				SUM(BINPUT) TM_QTY,
+				SUM(AINPUT) IN_QTY,
+				SUM(AOUTPUT) OUT_QTY,
+				SUM(BINPUT)+SUM(AINPUT)-SUM(AOUTPUT) REAL_QTY
+				FROM 
+				(
+				SELECT 
+					 SP_TYPE,
+					 SP_CD,
+					 LOCATION_NO,
+					 LOCATION_CD,
+					 ISNULL(CASE WHEN DATE_GUBUN = 'BEFORE' THEN SUM(INPUT-OUTPUT) END,0) BINPUT,
+					 ISNULL(CASE WHEN DATE_GUBUN = 'AFTER' THEN SUM(INPUT) END,0) AINPUT,
+					 ISNULL(CASE WHEN DATE_GUBUN = 'AFTER' THEN SUM(OUTPUT) END,0) AOUTPUT
+					FROM
+					(
+					SELECT
+						SP_TYPE,
+						SP_CD,
+						SP_DATE,
+						LOCATION_NO,
+						LOCATION_CD,
+						CASE WHEN  AA.SP_DATE <![CDATA[<]]> #{tmMon} + '01' THEN 'BEFORE'
+						 WHEN  AA.SP_DATE <![CDATA[>=]]> #{tmMon} + '01' AND SP_DATE <![CDATA[<=]]> #{tmMon} + '31' THEN 'AFTER' END DATE_GUBUN,
+						SUM(CASE WHEN SP_GUBUN = '001' THEN SP_QTY ELSE 0 END) INPUT,
+						SUM(CASE WHEN SP_GUBUN = '002' THEN SP_QTY ELSE 0 END) OUTPUT
+						FROM 
+						(
+							SELECT
+							SP_NO
+							,SP_SEQ
+							,SP_TYPE
+							,SP_CD
+							,SP_GUBUN
+							,SP_DATE
+							,SP_QTY
+							,SP_BOM_QTY
+							,BARCODE_NO
+							,SOURCE_NO
+							,LOCATION_CD
+							,AREA_CD
+							,FLOOR_CD
+							,LOCATION_NO
+							FROM TB_STOCK_PAYMENT_ADM
+							WHERE 1=1
+							AND SP_DATE BETWEEN LEFT(#{tmMon},4)+'0101' AND #{tmMon} + '31'
+							UNION ALL 
+							SELECT
+							SP_NO
+							,SP_SEQ
+							,SP_TYPE
+							,SP_CD
+							,SP_GUBUN
+							,SP_DATE
+							,SP_QTY
+							,SP_BOM_QTY
+							,BARCODE_NO
+							,SOURCE_NO
+							,LOCATION_CD
+							,AREA_CD
+							,FLOOR_CD
+							,LOCATION_NO
+							FROM TB_STOCK_CLOSING_ADM
+							WHERE 1=1
+							AND CLOSE_DATE = CONVERT(VARCHAR(4), DATEADD(YYYY, -1, #{tmMon} + '01'), 112)
+						) AA
+						GROUP BY SP_TYPE, SP_CD, SP_DATE,BARCODE_NO,LOCATION_NO,LOCATION_CD,
+						CASE WHEN  AA.SP_DATE <![CDATA[<]]> #{tmMon} + '01' THEN 'BEFORE'
+						 WHEN AA.SP_DATE <![CDATA[>=]]> #{tmMon} + '01' AND AA.SP_DATE <![CDATA[<=]]> #{tmMon} + '31' THEN 'AFTER' END 
+					) BB
+					GROUP BY SP_TYPE, SP_CD,LOCATION_NO,LOCATION_CD,DATE_GUBUN
+					) CC
+				GROUP BY SP_TYPE, SP_CD,LOCATION_NO,LOCATION_CD
+			) EE
+			ON DD.ITEM_SEQ = EE.SP_CD
+			
+		WHERE 1=1
+		
+		<if test="realQtyOption != null and !realQtyOption.equals('')">
+			AND REAL_QTY > 0
+		</if>
+		<if test="mainGubun != null and !mainGubun.equals('')">
+			AND MAIN_GUBUN = #{mainGubun}
+		</if>
+		<if test="itemSeq != null and !itemSeq.equals('')">
+			AND ITEM_SEQ = #{itemSeq}
+		</if>
+		<if test="locationCd != null and !locationCd.equals('')">
+			AND LOCATION_CD = #{locationCd}
+		</if>
+		
+		GROUP BY MAIN_GUBUN,MAIN_GUBUN_NM,LOCATION_NO,LOCATION_CD
+	</select>
+	
+	<!-- 수불관리 등록 -->
+	<insert id="stockPaymentAdmCreate">
+	    INSERT INTO TB_STOCK_PAYMENT_ADM	(
+	    	 SP_NO,
+             SP_SEQ,
+             SP_TYPE,
+             SP_CD,
+             SP_GUBUN,
+             SP_SUB_GUBUN,
+             SP_DATE,
+             SP_QTY,
+             BARCODE_NO,
+             SOURCE_NO,
+             LOCATION_CD,
+             LOCATION_NO,
+             SP_DESC,
+             REG_ID,
+             REG_DATE
+        )
+		VALUES     (
+			#{spNo},
+            #{spSeq},
+            #{spType},
+            #{spCd},
+            #{spGubun},
+            #{spSubGubun},
+            #{spDate},
+            #{spQty},
+            #{barcodeNo},
+            #{sourceNo},
+            #{locationCd},
+            #{locationNo},
+            #{spDesc},
+            #{regId},
+           	GETDATE()
+        ) 
+	    
+	</insert>
+	
+	<!-- 수불관리 등록 -->
+	<update id="stockPaymentAdmUpdate">
+	    UPDATE	TB_STOCK_PAYMENT_ADM 
+		SET
+			LOCATION_CD = #{locationCd},
+			LOCATION_NO = #{locationNo},
+			UPD_ID = #{updId},
+			UPD_DATE = getDate()
+		WHERE	SOURCE_NO = #{sourceNo}
+		AND	SP_GUBUN = #{spGubun}
+	</update>
+
+	<!-- 수불관리 삭제 -->
+	<delete id="stockPaymentAdmDelete">
+		DELETE 
+		FROM TB_STOCK_PAYMENT_ADM 
+		WHERE 1=1
+		<if test="spNo!=null and !spNo.equals('')">
+		AND SP_NO = #{spNo}
+		</if>
+		<if test="sourceNo!=null and !sourceNo.equals('')">
+		AND SOURCE_NO = #{sourceNo}
+		</if>
+	</delete>
+
+
+	<!-- 수불 전표번호 시퀀스 가져오기 -->
+	<select id="getSpNo" parameterType="String" resultType="String">
+		SELECT CONCAT(#{date},'_',ISNULL(RIGHT('000' + CAST(MAX(RIGHT(SP_NO,3))+1 AS NVARCHAR),3), '001')) FROM TB_STOCK_PAYMENT_ADM  WHERE SUBSTRING(SP_NO,0,9) = #{date}
+		
+	</select>
+	
+	<!-- 수불 순번 가져오기 -->
+	<select id="getSpSeq" resultType="String">
+	    SELECT ISNULL(MAX(SP_SEQ)+1,0) FROM TB_STOCK_PAYMENT_ADM WHERE SP_NO = #{spNo}
+	</select>
+	
+	<!-- 제품 LOTNO 생성 -->
+	<select id="getItemBarcodeNo" resultType="String">
+		SELECT ISNULL(RIGHT('00' + CAST(MAX(RIGHT(BARCODE_NO,2))+1 AS NVARCHAR),2), '01') 
+		FROM TB_STOCK_PAYMENT_ADM 
+		WHERE SUBSTRING(BARCODE_NO,0,11)=#{barcodeNo}
+	</select>
+	
+	<!-- 재고위치관리 -->
+	<select id="stockLocList" resultMap="StockPaymentAdmVo">
+		SELECT 
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=A.SP_TYPE AND X.BASE_GROUP_CD='079') SP_TYPE,
+			A.SP_CD,
+			A.SP_REV,
+			(CASE WHEN A.SP_TYPE = '001' 
+				THEN (SELECT BASE_NM FROM TB_COMMON_CODE_ADM WHERE BASE_CD=(SELECT PART_GUBUN FROM TB_ITEM_PART_ADM X WHERE X.PART_CD=A.SP_CD AND X.PART_REV=A.SP_REV) AND BASE_GROUP_CD='035')
+				ELSE (SELECT BASE_NM FROM TB_COMMON_CODE_ADM WHERE BASE_CD=(SELECT ITEM_GUBUN FROM TB_ITEM_MOTOR_ADM X WHERE X.ITEM_CD=A.SP_CD AND X.ITEM_REV=A.SP_REV) AND BASE_GROUP_CD='037')
+				END ) SP_GUBUN_NM,
+			(CASE WHEN A.SP_TYPE = '001' 
+				THEN (SELECT PART_NM FROM TB_ITEM_PART_ADM X WHERE X.PART_CD=A.SP_CD AND X.PART_REV=A.SP_REV)
+				ELSE (SELECT ITEM_NM FROM TB_ITEM_MOTOR_ADM X WHERE X.ITEM_CD=A.SP_CD AND X.ITEM_REV=A.SP_REV)
+				END ) SP_NM,
+			(CASE WHEN A.SP_TYPE = '001' 
+				THEN (SELECT PART_SPEC FROM TB_ITEM_PART_ADM X WHERE X.PART_CD=A.SP_CD AND X.PART_REV=A.SP_REV)
+				ELSE (SELECT ITEM_CAPA FROM TB_ITEM_MOTOR_ADM X WHERE X.ITEM_CD=A.SP_CD AND X.ITEM_REV=A.SP_REV)
+				END ) SP_SPEC,
+			ISNULL(B.IN_QTY,0) IN_QTY,
+			ISNULL(C.OUT_QTY,0) OUT_QTY,
+			ISNULL(D.AJD_IN_QTY,0) AJD_IN_QTY,
+			ISNULL(E.AJD_OUT_QTY,0) AJD_OUT_QTY,
+			(ISNULL(B.IN_QTY,0) + ISNULL(D.AJD_IN_QTY,0))-ISNULL(C.OUT_QTY,0)-ISNULL(E.AJD_OUT_QTY,0) REAL_QTY,
+			A.BARCODE_NO,
+			A.LOCATION_NO,
+			A.LOCATION_CD,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=A.LOCATION_CD AND X.BASE_GROUP_CD='073') LOCATION_NM,
+			A.AREA_CD,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=A.AREA_CD AND X.BASE_GROUP_CD='067') AREA_NM,
+			A.FLOOR_CD
+		FROM
+		(
+		SELECT 
+			LOCATION_NO,
+			LOCATION_CD,
+			AREA_CD,
+			FLOOR_CD,
+			BARCODE_NO,
+			SP_CD,
+			SP_REV,
+			SP_TYPE
+		FROM TB_STOCK_PAYMENT_ADM
+		WHERE 1=1
+		AND SP_TYPE=#{spType}
+		AND SUBSTRING(SP_DATE,0,7) = #{tmMon}
+		AND LOCATION_NO IN 
+		 <foreach collection="array" item="arr"  open="(" close=")" separator=",">
+          	#{arr}
+    	 </foreach>	
+		GROUP BY LOCATION_NO, LOCATION_CD, AREA_CD, FLOOR_CD, BARCODE_NO, SP_CD, SP_REV, SP_TYPE
+		) A
+		LEFT OUTER JOIN
+		(
+		SELECT 
+			BARCODE_NO,
+			ISNULL(SUM(SP_QTY),0) IN_QTY
+		FROM TB_STOCK_PAYMENT_ADM
+		WHERE 1=1
+		AND SP_TYPE=#{spType}
+		AND SUBSTRING(SP_DATE,0,7) = #{tmMon}
+		AND LOCATION_NO IN 
+		 <foreach collection="array" item="arr"  open="(" close=")" separator=",">
+          	#{arr}
+    	 </foreach>	
+		AND SP_GUBUN='001'
+		GROUP BY BARCODE_NO
+		) B
+		ON A.BARCODE_NO=B.BARCODE_NO
+		LEFT OUTER JOIN
+		(
+		SELECT 
+			BARCODE_NO,
+			ISNULL(SUM(SP_QTY),0) OUT_QTY
+		FROM TB_STOCK_PAYMENT_ADM
+		WHERE 1=1
+		AND SP_TYPE=#{spType}
+		AND SUBSTRING(SP_DATE,0,7) = #{tmMon}
+		AND LOCATION_NO IN 
+		 <foreach collection="array" item="arr"  open="(" close=")" separator=",">
+          	#{arr}
+    	 </foreach>	
+		AND SP_GUBUN='002'
+		GROUP BY BARCODE_NO
+		) C
+		ON A.BARCODE_NO=C.BARCODE_NO
+		LEFT OUTER JOIN
+		(
+		SELECT 
+			BARCODE_NO,
+			ISNULL(SUM(SP_QTY),0) AJD_IN_QTY
+		FROM TB_STOCK_PAYMENT_ADM
+		WHERE 1=1
+		AND SP_TYPE=#{spType}
+		AND SUBSTRING(SP_DATE,0,7) = #{tmMon}
+		AND LOCATION_NO IN 
+		 <foreach collection="array" item="arr"  open="(" close=")" separator=",">
+          	#{arr}
+    	 </foreach>	
+		AND SP_GUBUN='003'
+		GROUP BY BARCODE_NO
+		) D
+		ON A.BARCODE_NO=D.BARCODE_NO
+		LEFT OUTER JOIN 
+		(
+		SELECT 
+			BARCODE_NO,
+			ISNULL(SUM(SP_QTY),0) AJD_OUT_QTY
+		FROM TB_STOCK_PAYMENT_ADM
+		WHERE 1=1
+		AND SP_TYPE=#{spType}
+		AND SUBSTRING(SP_DATE,0,7) = #{tmMon}
+		AND LOCATION_NO IN 
+		 <foreach collection="array" item="arr"  open="(" close=")" separator=",">
+          	#{arr}
+    	 </foreach>	
+		AND SP_GUBUN='004'
+		GROUP BY BARCODE_NO
+		) E 
+		ON A.BARCODE_NO=E.BARCODE_NO
+		ORDER BY AREA_CD
+	
+	</select> 
+
+	<!-- 수불관리 부품 바코드 상세조회 -->
+	<select id="itemPartRead" resultMap="StockPaymentAdmVo">
+		SELECT 
+			A.BARCODE_NO,
+			A.SA_CD PART_CD,
+			A.SA_REV PART_REV,
+			B.PART_NM,
+			B.PART_SPEC,
+			B.PART_UNIT,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM  WHERE BASE_CD = B.PART_UNIT  AND BASE_GROUP_CD='036')PART_UNIT
+		FROM TB_STOCK_ADJUST_ADM A
+		INNER JOIN TB_ITEM_PART_ADM B
+		ON A.SA_CD=B.PART_CD
+		AND A.SA_REV=B.PART_REV
+		WHERE BARCODE_NO=#{barcodeNo}
+	</select>
+
+	<!-- ================================== 모니터링(재고현황) ======================================= -->
+	<!-- 원자재 목록조회 -->
+	<select id="stockPaymentAdmDtlList" resultMap="StockPaymentAdmVo">
+		SELECT
+			T_IN.SP_CD,
+			I.ITEM_CD,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '099' AND I.ITEM_MODEL = B.BASE_CD) ITEM_MODEL_NM,
+			I.ITEM_NM,
+			ISNULL(T_IN.IN_QTY,'0') IN_QTY,
+			ISNULL(T_OUT.OUT_QTY,'0') OUT_QTY,
+			ISNULL(T_IN.IN_QTY,'0') - ISNULL(T_OUT.OUT_QTY,'0') SUM_QTY,
+			ISNULL(T_NOW_IN.SP_QTY,'0') NOW_IN_QTY,
+			ISNULL(T_NOW_OUT.SP_QTY,'0') NOW_OUT_QTY
+		FROM TB_ITEM_INFO_ADM I,
+			(SELECT
+				I.ITEM_NM,
+				S.SP_CD,
+				SUM(S.SP_QTY) IN_QTY
+			FROM TB_STOCK_PAYMENT_ADM S, TB_ITEM_INFO_ADM I
+			WHERE 1=1
+			AND S.SP_CD = I.ITEM_SEQ
+			AND S.LOCATION_CD = #{locationCd}
+			AND S.SP_GUBUN IN ('001','003')
+			GROUP BY S.SP_CD, I.ITEM_NM) T_IN LEFT OUTER JOIN (SELECT
+																	I.ITEM_NM,
+																	S.SP_CD,
+																	SUM(S.SP_QTY) OUT_QTY
+																FROM TB_STOCK_PAYMENT_ADM S, TB_ITEM_INFO_ADM I
+																WHERE 1=1
+																AND S.SP_CD = I.ITEM_SEQ
+																AND S.LOCATION_CD = #{locationCd}
+																AND S.SP_GUBUN = '002'
+																GROUP BY S.SP_CD, I.ITEM_NM) T_OUT
+			ON 1=1
+			AND T_IN.SP_CD = T_OUT.SP_CD LEFT OUTER JOIN (SELECT
+																S.SP_CD,
+																SUM(S.SP_QTY) SP_QTY
+															FROM TB_STOCK_PAYMENT_ADM S, TB_ITEM_INFO_ADM I
+															WHERE 1=1
+															AND S.SP_CD = I.ITEM_SEQ
+															AND S.LOCATION_CD = #{locationCd}
+															AND S.SP_GUBUN = '001'
+															AND S.SP_DATE = CONVERT(CHAR(8), GETDATE(), 112)
+															GROUP BY S.SP_CD) T_NOW_IN
+			ON 1=1
+			AND T_IN.SP_CD = T_NOW_IN.SP_CD LEFT OUTER JOIN (SELECT
+																S.SP_CD,
+																SUM(S.SP_QTY) SP_QTY
+															FROM TB_STOCK_PAYMENT_ADM S, TB_ITEM_INFO_ADM I
+															WHERE 1=1
+															AND S.SP_CD = I.ITEM_SEQ
+															AND S.LOCATION_CD = #{locationCd}
+															AND S.SP_GUBUN = '002'
+															AND S.SP_DATE = CONVERT(CHAR(8), GETDATE(), 112)
+															GROUP BY S.SP_CD) T_NOW_OUT
+			ON 1=1
+			AND T_IN.SP_CD = T_NOW_OUT.SP_CD 
+		WHERE 1=1
+		AND I.ITEM_SEQ = T_IN.SP_CD
+	</select>
+	
+	<!-- 원자재 창고별 현재고 목록조회 -->
+	<select id="locationToStockPayment" resultMap="StockPaymentAdmVo">
+		SELECT
+			SPA_IN.SP_CD,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '067' AND B.BASE_CD=L.AREA_CD) AREA_NM,
+			L.FLOOR_NM,
+			SPA_IN.LOCATION_NO,
+			SUM(ISNULL(SPA_IN.SP_QTY_IN,'0')) IN_QTY,
+			SUM(ISNULL(SPA_OUT.SP_QTY_OUT,'0')) OUT_QTY,
+			SUM(ISNULL(SPA_IN.SP_QTY_IN,'0')) - SUM(ISNULL(SPA_OUT.SP_QTY_OUT,'0')) SUM_QTY
+		FROM (SELECT
+				SPA.SP_CD,
+				SUM(SPA.SP_QTY) SP_QTY_IN,
+				SPA.BARCODE_NO,
+				SPA.LOCATION_NO
+			FROM TB_STOCK_PAYMENT_ADM SPA
+			WHERE 1=1
+			AND SPA.SP_CD = #{spCd}
+			AND SPA.LOCATION_CD = #{locationCd}
+			AND SPA.SP_GUBUN IN ('001','003')
+			GROUP BY
+				SPA.SP_CD, SPA.BARCODE_NO, SPA.LOCATION_NO) SPA_IN LEFT OUTER JOIN (SELECT
+																						SPA.SP_CD,
+																						SUM(SPA.SP_QTY) SP_QTY_OUT,
+																						SPA.BARCODE_NO,
+																						SPA.LOCATION_NO
+																					FROM TB_STOCK_PAYMENT_ADM SPA
+																					WHERE 1=1
+																					AND SPA.SP_CD = #{spCd}
+																					AND SPA.LOCATION_CD = #{locationCd}
+																					AND SPA.SP_GUBUN IN ('002')
+																					GROUP BY
+																						SPA.SP_CD, SPA.BARCODE_NO, SPA.LOCATION_NO) SPA_OUT
+			ON 1=1
+			AND SPA_IN.BARCODE_NO = SPA_OUT.BARCODE_NO
+			AND SPA_IN.LOCATION_NO = SPA_OuT.LOCATION_NO
+			LEFT OUTER JOIN TB_LOCATION_ADM L
+			ON SPA_IN.LOCATION_NO=L.LOC_NO
+		WHERE 1=1
+		GROUP BY
+			SPA_IN.SP_CD,
+			L.AREA_CD,
+			L.FLOOR_NM,
+			SPA_IN.LOCATION_NO
+		HAVING
+			SUM(ISNULL(SPA_IN.SP_QTY_IN,'0')) - SUM(ISNULL(SPA_OUT.SP_QTY_OUT,'0')) != '0'
+	</select>
+	
+	<!-- 원자재 창고별 입고일자별 현재고 목록조회 -->
+	<select id="locationDateToStockPayment" resultMap="StockPaymentAdmVo">
+		SELECT
+			SPA_IN.SP_CD,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '067' AND B.BASE_CD=L.AREA_CD) AREA_NM,
+			L.FLOOR_NM,
+			SPA_IN.SP_DATE,
+			SPA_IN.LOCATION_NO,
+			SUM(ISNULL(SPA_IN.SP_QTY_IN,'0')) IN_QTY,
+			SUM(ISNULL(SPA_OUT.SP_QTY_OUT,'0')) OUT_QTY,
+			SUM(ISNULL(SPA_IN.SP_QTY_IN,'0')) - SUM(ISNULL(SPA_OUT.SP_QTY_OUT,'0')) SUM_QTY
+		FROM (SELECT
+				SPA.SP_CD,
+				SUM(SPA.SP_QTY) SP_QTY_IN,
+				MIN(SPA.SP_DATE) SP_DATE,
+				SPA.BARCODE_NO,
+				SPA.LOCATION_NO
+			FROM TB_STOCK_PAYMENT_ADM SPA
+			WHERE 1=1
+			AND SPA.SP_CD = #{spCd}
+			AND SPA.LOCATION_CD = #{locationCd}
+			AND SPA.SP_GUBUN IN ('001','003')
+			GROUP BY
+				SPA.SP_CD, SPA.BARCODE_NO, SPA.LOCATION_NO) SPA_IN LEFT OUTER JOIN (SELECT
+																						SPA.SP_CD,
+																						SUM(SPA.SP_QTY) SP_QTY_OUT,
+																						MIN(SPA.SP_DATE) SP_DATE,
+																						SPA.BARCODE_NO,
+																						SPA.LOCATION_NO
+																					FROM TB_STOCK_PAYMENT_ADM SPA
+																					WHERE 1=1
+																					AND SPA.SP_CD = #{spCd}
+																					AND SPA.LOCATION_CD = #{locationCd}
+																					AND SPA.SP_GUBUN IN ('002')
+																					GROUP BY
+																						SPA.SP_CD, SPA.BARCODE_NO, SPA.LOCATION_NO) SPA_OUT
+			ON 1=1
+			AND SPA_IN.BARCODE_NO = SPA_OUT.BARCODE_NO
+			AND SPA_IN.LOCATION_NO = SPA_OuT.LOCATION_NO
+			LEFT OUTER JOIN TB_LOCATION_ADM L
+			ON SPA_IN.LOCATION_NO=L.LOC_NO
+		WHERE 1=1
+		GROUP BY
+			SPA_IN.SP_CD,
+			L.AREA_CD,
+			L.FLOOR_NM,
+			SPA_IN.SP_DATE,
+			SPA_IN.LOCATION_NO
+		HAVING
+			SUM(ISNULL(SPA_IN.SP_QTY_IN,'0')) - SUM(ISNULL(SPA_OUT.SP_QTY_OUT,'0')) != '0'
+	</select>
+	
+	<!-- 창고별 LOT 목록조회 -->
+	<select id="locationToLot" resultMap="StockPaymentAdmVo">
+		SELECT
+			T.BARCODE_NO,
+			SUM(T.SP_QTY) SP_QTY,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '067' AND B.BASE_CD=L.AREA_CD) AREA_NM,
+			L.FLOOR_NM,
+			(
+				SELECT SP_DATE
+				FROM TB_STOCK_PAYMENT_ADM
+				WHERE 1=1
+				AND SP_SUB_GUBUN IN ('제품입고','자재입고','초기입고')
+				AND BARCODE_NO = T.BARCODE_NO
+				AND LOCATION_CD = #{locationCd}) SP_DATE
+		FROM (SELECT
+				BARCODE_NO,
+				CASE WHEN SP_GUBUN = '001' OR SP_GUBUN = '003' THEN SP_QTY * 1
+					 ELSE SP_QTY * (-1)
+				END SP_QTY,
+				(SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '067' AND S.AREA_CD = B.BASE_CD) AREA_CD_NM,
+				FLOOR_CD,
+				LOCATION_NO,
+				S.SP_DATE
+			FROM	TB_STOCK_PAYMENT_ADM S		 
+			WHERE	SP_CD = #{spCd}
+			AND LOCATION_CD = #{locationCd}
+			AND LOCATION_NO = #{locationNo}) T
+			LEFT OUTER JOIN TB_LOCATION_ADM L
+			ON T.LOCATION_NO = L.LOC_NO
+		WHERE 1=1
+		GROUP BY T.BARCODE_NO, L.FLOOR_NM, L.AREA_CD
+		HAVING SUM(T.SP_QTY) != '0'
+	</select>
+	
+	<!-- 위치별 품목 재고 목록조회 -->
+	<select id="floorToStockPayment" resultMap="StockPaymentAdmVo">
+		SELECT
+			T_IN.SP_CD,
+			I.ITEM_CD,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '099' AND I.ITEM_MODEL = B.BASE_CD) ITEM_MODEL_NM,
+			I.ITEM_NM,
+			ISNULL(T_IN.IN_QTY,'0') IN_QTY,
+			ISNULL(T_OUT.OUT_QTY,'0') OUT_QTY,
+			ISNULL(T_IN.IN_QTY,'0') - ISNULL(T_OUT.OUT_QTY,'0') SUM_QTY
+		FROM TB_ITEM_INFO_ADM I,
+			(SELECT
+				SP_CD,
+				SUM(SP_QTY) IN_QTY
+			FROM	TB_STOCK_PAYMENT_ADM S		
+			LEFT OUTER JOIN TB_LOCATION_ADM L
+			ON S.LOCATION_NO=L.LOC_NO
+			WHERE 1=1
+			AND LOCATION_CD = #{locationCd}
+			AND SP_GUBUN IN ('001','003')
+			AND (SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '067' AND L.AREA_CD = B.BASE_CD) = #{areaCdNm}
+			AND L.FLOOR_NM = #{floorCd}
+			GROUP BY
+				SP_GUBUN, SP_CD, LOCATION_CD,LOCATION_NO) T_IN LEFT OUTER JOIN (SELECT
+																										SP_CD,
+																										SUM(SP_QTY) OUT_QTY
+																									FROM	TB_STOCK_PAYMENT_ADM S	
+																									LEFT OUTER JOIN TB_LOCATION_ADM L
+																									ON S.LOCATION_NO=L.LOC_NO
+																									WHERE 1=1
+																									AND LOCATION_CD = #{locationCd}
+																									AND SP_GUBUN = '002'
+																									AND (SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE BASE_GROUP_CD = '067' AND L.AREA_CD = B.BASE_CD) = #{areaCdNm}
+																									AND L.FLOOR_NM = #{floorCd}
+																									GROUP BY
+																										SP_GUBUN, SP_CD, LOCATION_CD, LOCATION_NO) T_OUT
+			ON 1=1
+			AND T_IN.SP_CD = T_OUT.SP_CD
+		WHERE 1=1
+		AND I.ITEM_SEQ = T_IN.SP_CD
+		AND ISNULL(T_IN.IN_QTY,'0') - ISNULL(T_OUT.OUT_QTY,'0') != 0
+	</select>
+	
+	<!--모니터링(재고현황) 구역/위치 별 재고수량값 목록조회 -->
+	<select id="locationGroupStockQtyList" resultMap="StockPaymentAdmVo">
+	
+		SELECT Z.LOC_NO LOCATION_NO,
+				Z.LOC_CD LOCATION_CD,
+				(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=Z.LOC_CD AND X.BASE_GROUP_CD='073')LOCATION_NM,
+				Z.AREA_CD,
+				(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=Z.AREA_CD AND X.BASE_GROUP_CD='067')AREA_NM,
+				Z.FLOOR_NM FLOOR_CD,
+				ISNULL(A.SP_IN_QTY,0) IN_QTY,
+				ISNULL(B.SP_OUT_QTY,0) OUT_QTY,
+				ISNULL(C.SP_IN_ADJST_QTY,0) ADJ_IN_QTY,
+				ISNULL(D.SP_OUT_ADJST_QTY,0) ADJ_OUT_QTY,
+				(ISNULL(A.SP_IN_QTY,0)+ISNULL(C.SP_IN_ADJST_QTY,0))-(ISNULL(B.SP_OUT_QTY,0)+ISNULL(D.SP_OUT_ADJST_QTY,0)) REAL_QTY,
+				(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=A.ITEM_UNIT AND X.BASE_GROUP_CD='036') ITEM_UNIT_NM,
+				(SELECT ITEM_NM FROM TB_ITEM_INFO_ADM X WHERE X.ITEM_SEQ=A.ITEM_SEQ)ITEM_NM,
+				(SELECT ITEM_CD FROM TB_ITEM_INFO_ADM X WHERE X.ITEM_SEQ=A.ITEM_SEQ)ITEM_CD,
+				(SELECT ITEM_GUBUN FROM TB_ITEM_INFO_ADM X WHERE X.ITEM_SEQ=A.ITEM_SEQ)ITEM_GUBUN,
+				(
+				SELECT 
+				BASE_NM 
+				FROM TB_ITEM_INFO_ADM X, TB_COMMON_CODE_ADM Y
+				WHERE Y.BASE_CD = X.ITEM_MODEL 
+				AND Y.BASE_GROUP_CD='099'
+				AND X.ITEM_SEQ = A.ITEM_SEQ
+				) ITEM_MODEL_NM,
+				A.ITEM_SEQ,
+				#{barcodeNo} AS BARCODE_NO
+		FROM 
+		(
+			SELECT LOC_NO,
+					LOC_CD,
+					AREA_CD,
+					FLOOR_NM
+			FROM TB_LOCATION_ADM
+			WHERE MAIN_GUBUN = #{mainGubun}
+		) Z LEFT OUTER JOIN 
+		(
+			SELECT 
+				ISNULL(SUM(A.SP_QTY),0) SP_IN_QTY,
+				B.ITEM_UNIT,
+				LOCATION_NO,
+				B.ITEM_SEQ
+			FROM TB_STOCK_PAYMENT_ADM A, TB_ITEM_INFO_ADM B
+			WHERE SP_GUBUN='001'
+			AND BARCODE_NO = #{barcodeNo}
+			AND A.SP_CD = B.ITEM_SEQ
+			GROUP BY LOCATION_NO, ITEM_UNIT, ITEM_SEQ
+		) A
+		ON Z.LOC_NO=A.LOCATION_NO
+		LEFT OUTER JOIN 
+		(
+			SELECT 
+				ISNULL(SUM(A.SP_QTY),0) SP_OUT_QTY,
+				LOCATION_NO
+			FROM TB_STOCK_PAYMENT_ADM A
+			WHERE SP_GUBUN='002'
+			AND BARCODE_NO = #{barcodeNo}
+			GROUP BY LOCATION_NO
+		) B
+		ON Z.LOC_NO=B.LOCATION_NO
+		LEFT OUTER JOIN
+		(
+			SELECT 
+				ISNULL(SUM(A.SP_QTY),0) SP_IN_ADJST_QTY,
+				LOCATION_NO
+			FROM TB_STOCK_PAYMENT_ADM A
+			WHERE SP_GUBUN='003'
+			AND BARCODE_NO = #{barcodeNo}
+			GROUP BY LOCATION_NO
+		)C
+		ON Z.LOC_NO=C.LOCATION_NO
+		LEFT OUTER JOIN
+		(
+			SELECT 
+				ISNULL(SUM(A.SP_QTY),0) SP_OUT_ADJST_QTY,
+				LOCATION_NO
+			FROM TB_STOCK_PAYMENT_ADM A
+			WHERE SP_GUBUN='004'
+			AND BARCODE_NO = #{barcodeNo}
+			GROUP BY LOCATION_NO
+		)D 
+		ON Z.LOC_NO=D.LOCATION_NO
+		WHERE (ISNULL(A.SP_IN_QTY,0)+ISNULL(C.SP_IN_ADJST_QTY,0))-(ISNULL(B.SP_OUT_QTY,0)+ISNULL(D.SP_OUT_ADJST_QTY,0))<![CDATA[>]]>0
+		ORDER BY AREA_CD ASC, FLOOR_NM ASC
+	</select>
+	
+	<!-- 입고관리 테이블의 바코드 존재 여부 확인 -->
+	<select id="inOutBarcodeCheck" resultType="int">
+		SELECT COUNT(*)
+		FROM TB_IN_OUT_WHS_ADM 
+		WHERE BARCODE_NO = #{barcodeNo} 
+	</select>
+	
+	<!-- 제품입출고관리 테이블의 바코드 존재 여부 확인 -->
+	<select id="itemBarcodeCheck" resultType="int">
+		SELECT COUNT(*)
+		FROM TB_ITEM_WHS_ADM 
+		WHERE BARCODE_NO = #{barcodeNo}
+	</select>
+	
+	<!-- 해당하는 바코드에 맞는 자재 정보 읽어오기 -->
+	<select id="itemInfoAdmRead1" resultMap="StockPaymentAdmVo">
+		SELECT TOP 1
+			ITEM_CD,
+			ITEM_NM,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_GROUP_CD = '091' AND A.ITEM_GUBUN = X.BASE_CD) ITEM_GUBUN_NM,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_GROUP_CD = '099' AND A.ITEM_MODEL = X.BASE_CD) ITEM_MODEL_NM,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=A.ITEM_UNIT AND X.BASE_GROUP_CD='036') ITEM_UNIT_NM
+		FROM TB_ITEM_INFO_ADM A, TB_IN_OUT_WHS_ADM B
+		WHERE A.ITEM_SEQ = B.ITEM_SEQ
+		AND B.BARCODE_NO = #{barcodeNo}
+	</select>
+	
+	<!-- 해당하는 바코드에 맞는 제품 정보 읽어오기 -->
+	<select id="itemInfoAdmRead2" resultMap="StockPaymentAdmVo">
+		SELECT TOP 1
+			ITEM_CD,
+			ITEM_NM,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_GROUP_CD = '091' AND A.ITEM_GUBUN = X.BASE_CD) ITEM_GUBUN_NM,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_GROUP_CD = '099' AND A.ITEM_MODEL = X.BASE_CD) ITEM_MODEL_NM,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=A.ITEM_UNIT AND X.BASE_GROUP_CD='036') ITEM_UNIT_NM
+		FROM TB_ITEM_INFO_ADM A, TB_ITEM_WHS_ADM B
+		WHERE A.ITEM_SEQ = B.ITEM_SEQ
+		AND B.BARCODE_NO = #{barcodeNo}
+	</select>
+	
+	<!-- 수불부 현황 목록조회 -->
+	<select id="stockPaymentStatusList" resultMap="StockPaymentAdmVo">
+	 	SELECT
+	 		SP_CD
+			, ITEM_CUS
+			, ITEM_MODEL
+			, ITEM_CD
+			, ITEM_NM
+			, CUT_SIZE
+			, ITEM_COLOR
+			, FILLING_WT
+			, ITEM_UNIT
+			, ITEM_UNIT_NM
+			, IMPORT_COST
+			, EXPORT_COST
+			, SUM(INIT_STOCK_QTY) INIT_STOCK_QTY
+			, SUM(SP_IM_QTY_1) SP_IM_QTY_1 
+			, SUM(SP_IM_QTY_2) SP_IM_QTY_2 
+			, SUM(SP_IM_QTY_3) SP_IM_QTY_3 
+			, SUM(SP_IM_QTY_4) SP_IM_QTY_4 
+			, SUM(SP_IM_QTY_5) SP_IM_QTY_5 
+			, SUM(SP_IM_QTY_6) SP_IM_QTY_6 
+			, SUM(SP_IM_QTY_7) SP_IM_QTY_7 
+			, SUM(SP_IM_QTY_8) SP_IM_QTY_8 
+			, SUM(SP_IM_QTY_9) SP_IM_QTY_9 
+			, SUM(SP_IM_QTY_10) SP_IM_QTY_10
+			, SUM(SP_IM_QTY_11) SP_IM_QTY_11
+			, SUM(SP_IM_QTY_12) SP_IM_QTY_12
+			, SUM(SP_EX_QTY_1) SP_EX_QTY_1 
+			, SUM(SP_EX_QTY_2) SP_EX_QTY_2 
+			, SUM(SP_EX_QTY_3) SP_EX_QTY_3 
+			, SUM(SP_EX_QTY_4) SP_EX_QTY_4 
+			, SUM(SP_EX_QTY_5) SP_EX_QTY_5 
+			, SUM(SP_EX_QTY_6) SP_EX_QTY_6 
+			, SUM(SP_EX_QTY_7) SP_EX_QTY_7 
+			, SUM(SP_EX_QTY_8) SP_EX_QTY_8 
+			, SUM(SP_EX_QTY_9) SP_EX_QTY_9 
+			, SUM(SP_EX_QTY_10) SP_EX_QTY_10
+			, SUM(SP_EX_QTY_11) SP_EX_QTY_11
+			, SUM(SP_EX_QTY_12) SP_EX_QTY_12
+			, SUM(SP_STOCK_QTY_1) SP_STOCK_QTY_1 
+			, SUM(SP_STOCK_QTY_2) SP_STOCK_QTY_2 
+			, SUM(SP_STOCK_QTY_3) SP_STOCK_QTY_3 
+			, SUM(SP_STOCK_QTY_4) SP_STOCK_QTY_4 
+			, SUM(SP_STOCK_QTY_5) SP_STOCK_QTY_5 
+			, SUM(SP_STOCK_QTY_6) SP_STOCK_QTY_6 
+			, SUM(SP_STOCK_QTY_7) SP_STOCK_QTY_7 
+			, SUM(SP_STOCK_QTY_8) SP_STOCK_QTY_8 
+			, SUM(SP_STOCK_QTY_9) SP_STOCK_QTY_9 
+			, SUM(SP_STOCK_QTY_10) SP_STOCK_QTY_10
+			, SUM(SP_STOCK_QTY_11) SP_STOCK_QTY_11
+			, SUM(SP_STOCK_QTY_12) SP_STOCK_QTY_12
+	 	FROM (
+		 	SELECT
+				SP_CD
+				, ITEM_CUS
+				, ITEM_MODEL
+				, ITEM_CD
+				, ITEM_NM
+				, CUT_SIZE
+				, ITEM_COLOR
+				, FILLING_WT
+				, ITEM_UNIT
+				, ITEM_UNIT_NM
+				, IMPORT_COST
+				, EXPORT_COST
+				, ( CASE WHEN LEFT(SP_DATE, 6) <![CDATA[<=]]> CONCAT(#{stockYear} - 1, '12') THEN SUM(INPUT-OUTPUT) END ) INIT_STOCK_QTY
+				, ( CASE WHEN LEFT(SP_DATE, 6) = #{stockYear} + '01' THEN SUM(INPUT) END ) SP_IM_QTY_1
+				, ( CASE WHEN LEFT(SP_DATE, 6) = #{stockYear} + '02' THEN SUM(INPUT) END ) SP_IM_QTY_2
+				, ( CASE WHEN LEFT(SP_DATE, 6) = #{stockYear} + '03' THEN SUM(INPUT) END ) SP_IM_QTY_3
+				, ( CASE WHEN LEFT(SP_DATE, 6) = #{stockYear} + '04' THEN SUM(INPUT) END ) SP_IM_QTY_4
+				, ( CASE WHEN LEFT(SP_DATE, 6) = #{stockYear} + '05' THEN SUM(INPUT) END ) SP_IM_QTY_5
+				, ( CASE WHEN LEFT(SP_DATE, 6) = #{stockYear} + '06' THEN SUM(INPUT) END ) SP_IM_QTY_6
+				, ( CASE WHEN LEFT(SP_DATE, 6) = #{stockYear} + '07' THEN SUM(INPUT) END ) SP_IM_QTY_7
+				, ( CASE WHEN LEFT(SP_DATE, 6) = #{stockYear} + '08' THEN SUM(INPUT) END ) SP_IM_QTY_8
+				, ( CASE WHEN LEFT(SP_DATE, 6) = #{stockYear} + '09' THEN SUM(INPUT) END ) SP_IM_QTY_9
+				, ( CASE WHEN LEFT(SP_DATE, 6) = #{stockYear} + '10' THEN SUM(INPUT) END ) SP_IM_QTY_10
+				, ( CASE WHEN LEFT(SP_DATE, 6) = #{stockYear} + '11' THEN SUM(INPUT) END ) SP_IM_QTY_11
+				, ( CASE WHEN LEFT(SP_DATE, 6) = #{stockYear} + '12' THEN SUM(INPUT) END ) SP_IM_QTY_12
+				, ( CASE WHEN LEFT(SP_DATE, 6) = #{stockYear} + '01' THEN SUM(OUTPUT) END ) SP_EX_QTY_1
+				, ( CASE WHEN LEFT(SP_DATE, 6) = #{stockYear} + '02' THEN SUM(OUTPUT) END ) SP_EX_QTY_2
+				, ( CASE WHEN LEFT(SP_DATE, 6) = #{stockYear} + '03' THEN SUM(OUTPUT) END ) SP_EX_QTY_3
+				, ( CASE WHEN LEFT(SP_DATE, 6) = #{stockYear} + '04' THEN SUM(OUTPUT) END ) SP_EX_QTY_4
+				, ( CASE WHEN LEFT(SP_DATE, 6) = #{stockYear} + '05' THEN SUM(OUTPUT) END ) SP_EX_QTY_5
+				, ( CASE WHEN LEFT(SP_DATE, 6) = #{stockYear} + '06' THEN SUM(OUTPUT) END ) SP_EX_QTY_6
+				, ( CASE WHEN LEFT(SP_DATE, 6) = #{stockYear} + '07' THEN SUM(OUTPUT) END ) SP_EX_QTY_7
+				, ( CASE WHEN LEFT(SP_DATE, 6) = #{stockYear} + '08' THEN SUM(OUTPUT) END ) SP_EX_QTY_8
+				, ( CASE WHEN LEFT(SP_DATE, 6) = #{stockYear} + '09' THEN SUM(OUTPUT) END ) SP_EX_QTY_9
+				, ( CASE WHEN LEFT(SP_DATE, 6) = #{stockYear} + '10' THEN SUM(OUTPUT) END ) SP_EX_QTY_10
+				, ( CASE WHEN LEFT(SP_DATE, 6) = #{stockYear} + '11' THEN SUM(OUTPUT) END ) SP_EX_QTY_11
+				, ( CASE WHEN LEFT(SP_DATE, 6) = #{stockYear} + '12' THEN SUM(OUTPUT) END ) SP_EX_QTY_12
+				, ( CASE WHEN LEFT(SP_DATE, 6) <![CDATA[<=]]> #{stockYear} + '01' THEN SUM(INPUT-OUTPUT) END ) SP_STOCK_QTY_1
+				, ( CASE WHEN LEFT(SP_DATE, 6) <![CDATA[<=]]> #{stockYear} + '02' THEN SUM(INPUT-OUTPUT) END ) SP_STOCK_QTY_2
+				, ( CASE WHEN LEFT(SP_DATE, 6) <![CDATA[<=]]> #{stockYear} + '03' THEN SUM(INPUT-OUTPUT) END ) SP_STOCK_QTY_3
+				, ( CASE WHEN LEFT(SP_DATE, 6) <![CDATA[<=]]> #{stockYear} + '04' THEN SUM(INPUT-OUTPUT) END ) SP_STOCK_QTY_4
+				, ( CASE WHEN LEFT(SP_DATE, 6) <![CDATA[<=]]> #{stockYear} + '05' THEN SUM(INPUT-OUTPUT) END ) SP_STOCK_QTY_5
+				, ( CASE WHEN LEFT(SP_DATE, 6) <![CDATA[<=]]> #{stockYear} + '06' THEN SUM(INPUT-OUTPUT) END ) SP_STOCK_QTY_6
+				, ( CASE WHEN LEFT(SP_DATE, 6) <![CDATA[<=]]> #{stockYear} + '07' THEN SUM(INPUT-OUTPUT) END ) SP_STOCK_QTY_7
+				, ( CASE WHEN LEFT(SP_DATE, 6) <![CDATA[<=]]> #{stockYear} + '08' THEN SUM(INPUT-OUTPUT) END ) SP_STOCK_QTY_8
+				, ( CASE WHEN LEFT(SP_DATE, 6) <![CDATA[<=]]> #{stockYear} + '09' THEN SUM(INPUT-OUTPUT) END ) SP_STOCK_QTY_9
+				, ( CASE WHEN LEFT(SP_DATE, 6) <![CDATA[<=]]> #{stockYear} + '10' THEN SUM(INPUT-OUTPUT) END ) SP_STOCK_QTY_10
+				, ( CASE WHEN LEFT(SP_DATE, 6) <![CDATA[<=]]> #{stockYear} + '11' THEN SUM(INPUT-OUTPUT) END ) SP_STOCK_QTY_11
+				, ( CASE WHEN LEFT(SP_DATE, 6) <![CDATA[<=]]> #{stockYear} + '12' THEN SUM(INPUT-OUTPUT) END ) SP_STOCK_QTY_12
+			FROM (
+				SELECT
+					SP_CD
+					, SP_DATE
+					, SUM(CASE WHEN SP_GUBUN = '001' THEN SP_QTY ELSE 0 END) INPUT
+					, SUM(CASE WHEN SP_GUBUN = '002' THEN SP_QTY ELSE 0 END) OUTPUT
+					, (SELECT X.DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD = IIA_TB.ITEM_CUS ) ITEM_CUS
+					, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_GROUP_CD = '099' AND X.BASE_CD = IIA_TB.ITEM_MODEL) ITEM_MODEL
+					, IIA_TB.ITEM_CD
+					, IIA_TB.ITEM_NM
+					, IIA_TB.CUT_SIZE
+					, IIA_TB.ITEM_COLOR
+					, IIA_TB.FILLING_WT
+					, IIA_TB.ITEM_UNIT
+					, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=IIA_TB.ITEM_UNIT AND X.BASE_GROUP_CD='036') ITEM_UNIT_NM
+					, IIA_TB.IMPORT_COST
+					, IIA_TB.EXPORT_COST
+				FROM  TB_STOCK_PAYMENT_ADM SPA_TB
+				LEFT OUTER JOIN TB_ITEM_INFO_ADM IIA_TB
+				ON SPA_TB.SP_CD = IIA_TB.ITEM_SEQ
+				WHERE 1=1
+				AND SPA_TB.SP_SUB_GUBUN NOT IN('이동입고', '이동출고')
+				<if test="mainGubun != null and !mainGubun.equals('')">
+				AND IIA_TB.MAIN_GUBUN = #{mainGubun}
+				</if>
+				<if test="itemGubun != null and !itemGubun.equals('')">
+				AND IIA_TB.ITEM_GUBUN = #{itemGubun}
+				</if>
+				GROUP BY
+					SPA_TB.SP_CD
+					, SPA_TB.SP_DATE
+					, IIA_TB.ITEM_CUS
+					, IIA_TB.ITEM_MODEL
+					, IIA_TB.ITEM_CD
+					, IIA_TB.ITEM_NM
+					, IIA_TB.CUT_SIZE
+					, IIA_TB.ITEM_COLOR
+					, IIA_TB.FILLING_WT
+					, IIA_TB.ITEM_UNIT
+					, IIA_TB.IMPORT_COST
+					, IIA_TB.EXPORT_COST
+			) AA
+			GROUP BY 
+				SP_CD
+				, ITEM_CUS
+				, ITEM_MODEL
+				, ITEM_CD
+				, ITEM_NM
+				, CUT_SIZE
+				, ITEM_COLOR
+				, FILLING_WT
+				, ITEM_UNIT
+				, ITEM_UNIT_NM
+				, IMPORT_COST
+				, EXPORT_COST
+				, SP_DATE
+		) BB
+		WHERE 1=1
+		AND (
+			SP_IM_QTY_1 IS NOT NULL
+			OR SP_IM_QTY_2 IS NOT NULL 
+			OR SP_IM_QTY_3 IS NOT NULL 
+			OR SP_IM_QTY_4 IS NOT NULL 
+			OR SP_IM_QTY_5 IS NOT NULL 
+			OR SP_IM_QTY_6 IS NOT NULL 
+			OR SP_IM_QTY_7 IS NOT NULL 
+			OR SP_IM_QTY_8 IS NOT NULL 
+			OR SP_IM_QTY_9 IS NOT NULL 
+			OR SP_IM_QTY_10 IS NOT NULL
+			OR SP_IM_QTY_11 IS NOT NULL
+			OR SP_IM_QTY_12 IS NOT NULL
+			OR SP_EX_QTY_1 IS NOT NULL 
+			OR SP_EX_QTY_2 IS NOT NULL 
+			OR SP_EX_QTY_3 IS NOT NULL 
+			OR SP_EX_QTY_4 IS NOT NULL 
+			OR SP_EX_QTY_5 IS NOT NULL 
+			OR SP_EX_QTY_6 IS NOT NULL 
+			OR SP_EX_QTY_7 IS NOT NULL 
+			OR SP_EX_QTY_8 IS NOT NULL 
+			OR SP_EX_QTY_9 IS NOT NULL 
+			OR SP_EX_QTY_10 IS NOT NULL
+			OR SP_EX_QTY_11 IS NOT NULL
+			OR SP_EX_QTY_12 IS NOT NULL
+			OR SP_STOCK_QTY_1 IS NOT NULL 
+			OR SP_STOCK_QTY_2 IS NOT NULL 
+			OR SP_STOCK_QTY_3 IS NOT NULL 
+			OR SP_STOCK_QTY_4 IS NOT NULL 
+			OR SP_STOCK_QTY_5 IS NOT NULL 
+			OR SP_STOCK_QTY_6 IS NOT NULL 
+			OR SP_STOCK_QTY_7 IS NOT NULL 
+			OR SP_STOCK_QTY_8 IS NOT NULL 
+			OR SP_STOCK_QTY_9 IS NOT NULL 
+			OR SP_STOCK_QTY_10 IS NOT NULL
+			OR SP_STOCK_QTY_11 IS NOT NULL
+			OR SP_STOCK_QTY_12 IS NOT NULL
+		)
+		GROUP BY
+			SP_CD
+			, ITEM_CUS
+			, ITEM_MODEL
+			, ITEM_CD
+			, ITEM_NM
+			, CUT_SIZE
+			, ITEM_COLOR
+			, FILLING_WT
+			, ITEM_UNIT
+			, ITEM_UNIT_NM
+			, IMPORT_COST
+			, EXPORT_COST
+		ORDER BY ITEM_CUS, ITEM_CD
+	</select>
+	
+</mapper>

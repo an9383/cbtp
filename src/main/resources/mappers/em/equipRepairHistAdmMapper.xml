@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.em.equipRepairHistAdmMapper">
+
+<resultMap id="EquipRepairHistAdmVo" type="mes.domain.em.EquipRepairHistAdmVo">
+	<result property="repairNo"				column="REPAIR_NO"				/>
+	<result property="equipCd"				column="EQUIP_CD"				/>
+	<result property="equipGubun"			column="EQUIP_GUBUN"			/>
+	<result property="equipGubunNm"			column="EQUIP_GUBUN_NM"			/>
+	<result property="changeTime"			column="CHANGE_TIME"			/>
+	<result property="repairRegDate"		column="REPAIR_REG_DATE"		/>
+	<result property="troubleDate"			column="TROUBLE_DATE"			/>
+	<result property="troublePart"			column="TROUBLE_PART"			/>
+	<result property="troubleCont"			column="TROUBLE_CONT"			/>
+	<result property="equipNm"				column="EQUIP_NM"				/>
+	<result property="equipModelNm"			column="EQUIP_MODEL_NM"			/>
+	<result property="troubleCause"			column="TROUBLE_CAUSE"			/>
+	<result property="repairCorpNm"			column="REPAIR_CORP_NM"			/>
+	<result property="repairMan"			column="REPAIR_MAN"				/>
+	<result property="repairStatus"			column="REPAIR_STATUS"			/>
+	<result property="repairStartDate"		column="REPAIR_START_DATE"		/>
+	<result property="repairEndDate"		column="REPAIR_END_DATE"		/>
+	<result property="beforeImageFile"		column="BEFORE_IMAGE_FILE"		/>
+	<result property="afterImageFile"		column="AFTER_IMAGE_FILE"		/>
+	<result property="beforeImageFileNm"	column="BEFORE_IMAGE_FILE_NM"	/>
+	<result property="afterImageFileNm"		column="AFTER_IMAGE_FILE_NM"	/>
+	<result property="repairDesc"			column="REPAIR_DESC"			/>
+	<result property="regId"				column="REG_ID"					/>
+	<result property="regDate"				column="REG_DATE"				/>
+	<result property="updId"				column="UPD_ID"					/>
+	<result property="updDate"				column="UPD_DATE"				/>	
+	<result property="change"				column="CHANGE"					/>
+	
+<!-- 	추가사항 -->
+	<result property="assetCd"				column="ASSET_CD"				/>
+	<result property="admNo"				column="ADM_NO"					/>
+	<result property="repairCost"			column="REPAIR_COST"			/>
+	<result property="partCost"				column="PART_COST"				/>
+	<result property="totalCost"			column="TOTAL_COST"				/>
+	<result property="mfcCorpCd"			column="MFC_CORP_CD"			/>
+	<result property="equipNo"				column="EQUIP_NO"				/>
+	<result property="mainGubun"			column="MAIN_GUBUN"				/>
+	<result property="repairStatusNm"		column="REPAIR_STATUS_NM"		/>
+	<result property="equipType"			column="EQUIP_TYPE"				/>
+	<result property="workResult"			column="WORK_RESULT"			/>
+	<result property="qualityCheck"			column="QUALITY_CHECK"			/>
+	
+	<result property="attachFnOne"			column="ATTACH_FN_ONE"			/>
+	<result property="attachSeqOne"			column="ATTACH_SEQ_ONE"			/>
+	<result property="attachFnTwo"			column="ATTACH_FN_TWO"			/>
+	<result property="attachSeqTwo"			column="ATTACH_SEQ_TWO"			/>
+</resultMap>
+
+	<!-- 수리이력관리 목록 -->
+	<select id="equipRepairHistAdmList" resultMap="EquipRepairHistAdmVo">
+  		SELECT	
+  			A.REPAIR_NO,
+			A.EQUIP_CD,
+			A.EQUIP_GUBUN,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM C WHERE C.BASE_GROUP_CD = '123' AND A.EQUIP_GUBUN = C.BASE_CD) EQUIP_GUBUN_NM,
+			A.CHANGE_TIME,
+			A.REPAIR_MAN,
+			A.REPAIR_REG_DATE,
+			A.TROUBLE_DATE,
+			A.TROUBLE_PART,
+			A.TROUBLE_CONT,
+			A.TROUBLE_CAUSE,
+			A.REPAIR_CORP_NM,
+			A.REPAIR_STATUS,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM C WHERE C.BASE_GROUP_CD = '066' AND A.REPAIR_STATUS = C.BASE_CD) REPAIR_STATUS_NM,
+			A.ADM_NO,
+			A.REPAIR_COST,
+			A.PART_COST,
+			A.TOTAL_COST,
+			A.REPAIR_START_DATE,
+			A.REPAIR_END_DATE,
+			A.BEFORE_IMAGE_FILE,
+			A.AFTER_IMAGE_FILE,
+			A.BEFORE_IMAGE_FILE_NM,
+			A.AFTER_IMAGE_FILE_NM,
+			A.REPAIR_DESC,
+			A.REG_ID,
+			A.REG_DATE,
+			A.UPD_ID,
+			A.UPD_DATE,
+			B.EQUIP_CD,
+			B.EQUIP_NO,
+			B.EQUIP_NM,
+			B.ASSET_CD,
+			B.MFC_CORP_CD,
+			B.EQUIP_TYPE,
+			A.WORK_RESULT,
+			A.QUALITY_CHECK,
+			(SELECT TOP(1) ATTACH_FN FROM TB_ATTACH_DATA T WHERE T.ATTACH_GUBUN = 'ER' AND T.ATTACH_CD = A.REPAIR_NO AND T.ETC1 = '001' ORDER BY T.REG_DATE DESC) ATTACH_FN_ONE,
+			(SELECT TOP(1) ATTACH_SEQ FROM TB_ATTACH_DATA T WHERE T.ATTACH_GUBUN = 'ER' AND T.ATTACH_CD = A.REPAIR_NO AND T.ETC1 = '001' ORDER BY T.REG_DATE DESC) ATTACH_SEQ_ONE,
+			(SELECT TOP(1) ATTACH_FN FROM TB_ATTACH_DATA T WHERE T.ATTACH_GUBUN = 'ER' AND T.ATTACH_CD = A.REPAIR_NO AND T.ETC1 = '002' ORDER BY T.REG_DATE DESC) ATTACH_FN_TWO,
+			(SELECT TOP(1) ATTACH_SEQ FROM TB_ATTACH_DATA T WHERE T.ATTACH_GUBUN = 'ER' AND T.ATTACH_CD = A.REPAIR_NO AND T.ETC1 = '002' ORDER BY T.REG_DATE DESC) ATTACH_SEQ_TWO
+		FROM TB_EQUIP_REPAIR_HIST_ADM A
+		INNER JOIN TB_EQUIP_CODE_ADM B
+		ON A.EQUIP_CD = B.EQUIP_CD
+		WHERE 1=1
+		<if test="mainGubun != null and !mainGubun.equals('')">
+		AND B.MAIN_GUBUN = #{mainGubun}
+		</if>
+		<if test="equipCd != null and !equipCd.equals('')">
+		AND A.EQUIP_CD = #{equipCd}
+		</if>
+		<if test="equipGubun != null and !equipGubun.equals('')">
+		AND A.EQUIP_GUBUN = #{equipGubun}
+		</if>
+		ORDER BY A.REG_DATE
+	</select>
+	
+	<!-- 수리이력관리 상세 목록 -->
+	<select id="equipRepairHistAdmRead" resultMap="EquipRepairHistAdmVo">
+  		SELECT	
+  			A.REPAIR_NO,
+			A.EQUIP_CD,
+			A.EQUIP_GUBUN,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM C WHERE C.BASE_GROUP_CD = '123' AND A.EQUIP_GUBUN = C.BASE_CD) EQUIP_GUBUN_NM,
+			A.CHANGE_TIME,
+			A.REPAIR_MAN,
+			A.REPAIR_REG_DATE,
+			A.TROUBLE_DATE,
+			A.TROUBLE_PART,
+			A.TROUBLE_CONT,
+			A.TROUBLE_CAUSE,
+			A.REPAIR_CORP_NM,
+			A.REPAIR_STATUS,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM C WHERE C.BASE_GROUP_CD = '066' AND A.REPAIR_STATUS = C.BASE_CD) REPAIR_STATUS_NM,
+			A.ADM_NO,
+			A.REPAIR_COST,
+			A.PART_COST,
+			A.TOTAL_COST,
+			A.REPAIR_START_DATE,
+			A.REPAIR_END_DATE,
+			A.BEFORE_IMAGE_FILE,
+			A.AFTER_IMAGE_FILE,
+			A.BEFORE_IMAGE_FILE_NM,
+			A.AFTER_IMAGE_FILE_NM,
+			A.REPAIR_DESC,
+			A.REG_ID,
+			A.REG_DATE,
+			A.UPD_ID,
+			A.UPD_DATE,
+			B.EQUIP_CD,
+			B.EQUIP_NO,
+			B.EQUIP_NM,
+			B.ASSET_CD,
+			B.MFC_CORP_CD,
+			B.EQUIP_TYPE,
+			A.WORK_RESULT,
+			A.QUALITY_CHECK,
+			(SELECT TOP(1) ATTACH_FN FROM TB_ATTACH_DATA T WHERE T.ATTACH_GUBUN = 'ER' AND T.ATTACH_CD = A.REPAIR_NO AND T.ETC1 = '001' ORDER BY T.REG_DATE DESC) ATTACH_FN_ONE,
+			(SELECT TOP(1) ATTACH_SEQ FROM TB_ATTACH_DATA T WHERE T.ATTACH_GUBUN = 'ER' AND T.ATTACH_CD = A.REPAIR_NO AND T.ETC1 = '001' ORDER BY T.REG_DATE DESC) ATTACH_SEQ_ONE,
+			(SELECT TOP(1) ATTACH_FN FROM TB_ATTACH_DATA T WHERE T.ATTACH_GUBUN = 'ER' AND T.ATTACH_CD = A.REPAIR_NO AND T.ETC1 = '002' ORDER BY T.REG_DATE DESC) ATTACH_FN_TWO,
+			(SELECT TOP(1) ATTACH_SEQ FROM TB_ATTACH_DATA T WHERE T.ATTACH_GUBUN = 'ER' AND T.ATTACH_CD = A.REPAIR_NO AND T.ETC1 = '002' ORDER BY T.REG_DATE DESC) ATTACH_SEQ_TWO
+		FROM TB_EQUIP_REPAIR_HIST_ADM A
+		INNER JOIN TB_EQUIP_CODE_ADM B
+		ON A.EQUIP_CD = B.EQUIP_CD
+		WHERE REPAIR_NO = #{repairNo}
+	</select>
+	
+	<!-- 수리이력관리 생성 -->
+	<insert id="equipRepairHistAdmCreate">
+		INSERT INTO TB_EQUIP_REPAIR_HIST_ADM		(
+			REPAIR_NO,
+			EQUIP_CD,
+			A.EQUIP_GUBUN,
+			CHANGE_TIME,
+			REPAIR_MAN,
+			REPAIR_REG_DATE,
+			TROUBLE_DATE,
+			TROUBLE_PART,
+			TROUBLE_CONT,
+			TROUBLE_CAUSE,
+			REPAIR_CORP_NM,
+			REPAIR_STATUS,
+			ADM_NO,
+			REPAIR_COST,
+			PART_COST,
+			TOTAL_COST,
+			REPAIR_START_DATE,
+			REPAIR_END_DATE,
+			WORK_RESULT,
+			QUALITY_CHECK,
+			REPAIR_DESC,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{repairNo},
+			#{equipCd},
+			#{equipGubun},
+			#{changeTime},
+			#{repairMan},
+			#{repairRegDate},
+			#{troubleDate},
+			#{troublePart},
+			#{troubleCont},
+			#{troubleCause},
+			#{repairCorpNm},
+			#{repairStatus},
+			#{admNo},
+			#{repairCost},
+			#{partCost},
+			#{totalCost},
+			#{repairStartDate},
+			#{repairEndDate},
+			#{workResult},
+			#{qualityCheck},
+			#{repairDesc},
+			#{regId},
+			getDate()
+		)			
+	</insert>
+	
+	<!-- 수리이력관리 수정 -->
+	<update id="equipRepairHistAdmUpdate" parameterType="mes.domain.em.EquipRepairHistAdmVo">
+		UPDATE	TB_EQUIP_REPAIR_HIST_ADM		 
+		SET	REPAIR_NO = #{repairNo},
+			EQUIP_CD = #{equipCd},
+			EQUIP_GUBUN = #{equipGubun},
+			CHANGE_TIME = #{changeTime},
+			REPAIR_MAN = #{repairMan},
+			REPAIR_REG_DATE = #{repairRegDate},
+			TROUBLE_DATE = #{troubleDate},
+			TROUBLE_PART = #{troublePart},
+			TROUBLE_CONT = #{troubleCont},
+			TROUBLE_CAUSE = #{troubleCause},
+			REPAIR_CORP_NM = #{repairCorpNm},
+			REPAIR_STATUS = #{repairStatus},
+			ADM_NO = #{admNo},
+			REPAIR_COST = #{repairCost},
+			PART_COST = #{partCost},
+			TOTAL_COST = #{totalCost},
+			REPAIR_START_DATE = #{repairStartDate},
+			REPAIR_END_DATE = #{repairEndDate},
+			WORK_RESULT = #{workResult},
+			QUALITY_CHECK = #{qualityCheck},
+			REPAIR_DESC = #{repairDesc},
+			UPD_ID = #{updId},
+			UPD_DATE = getDate()
+		WHERE	REPAIR_NO = #{repairNo}
+	</update>
+	
+	<!-- 수리이력관리 삭제 -->
+	<delete id="equipRepairHistAdmDelete">
+		DELETE  	 
+		FROM TB_EQUIP_REPAIR_HIST_ADM 
+		WHERE REPAIR_NO = #{repairNo}
+	</delete>
+	
+	<!--이미지 업로드 -->
+	<update id="equipRepairHistAdmImgUpload">
+		UPDATE 
+			TB_EQUIP_REPAIR_HIST_ADM 	 
+		SET	
+			AFTER_IMAGE_FILE = #{afterImageFile},
+			AFTER_IMAGE_FILE_NM = #{afterImageFileNm},
+			BEFORE_IMAGE_FILE = #{beforeImageFile},
+			BEFORE_IMAGE_FILE_NM = #{beforeImageFileNm}
+		WHERE 
+			REPAIR_NO = #{repairNo}
+	</update>
+	
+	<!-- 설비관리 이미지 경로조회 -->
+	<select id="equipRepairHistAdmImgRead" resultMap="EquipRepairHistAdmVo">
+		SELECT
+			REPAIR_NO,
+			BEFORE_IMAGE_FILE,
+			BEFORE_IMAGE_FILE_NM,
+			AFTER_IMAGE_FILE,
+			AFTER_IMAGE_FILE_NM
+		FROM 
+			TB_EQUIP_REPAIR_HIST_ADM
+		WHERE 
+			REPAIR_NO = #{repairNo}
+	</select>
+	
+	<select id="equipRepairHistAdmSeq" resultType="String">
+		SELECT 
+			ISNULL(RIGHT('00' + CAST(MAX(RIGHT(REPAIR_NO,3))+1 AS VARCHAR),3), '001') FROM TB_EQUIP_REPAIR_HIST_ADM
+	</select>
+	
+<!-- 	 <select id="repairRegDateCreate" resultType="String">
+    	select ISNULL(RIGHT('000' + CAST(MAX(SUBSTRING(REPAIR_REG_DATE,10,12))+1 AS NVARCHAR),3), '001') from TB_EQUIP_REPAIR_HIST_ADM WHERE LEFT(REPAIR_REG_DATE,8) = #{time}
+	 </select> -->
+</mapper>

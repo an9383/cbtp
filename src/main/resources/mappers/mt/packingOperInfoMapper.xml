@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.mt.packingOperInfoMapper">
+
+	<resultMap id="PackingOperInfoVo" type="mes.domain.mt.PackingOperInfoVo">
+		<result property="idx"						column="Idx"						/>
+		<result property="workOrdNo"				column="WorkOrdNo"					/>
+		<result property="equipCd"					column="EquipCd"					/>
+		<result property="fillSetupWeight"			column="FillSetupWeight"			/>
+		<result property="fillStartSignal"			column="FillStartSignal"			/>
+		<result property="fillStartYn"				column="FillStartYn"				/>
+		<result property="fillSpeed"				column="FillSpeed"					/>
+		<result property="fillWeight"				column="FillWeight"					/>
+		<result property="fillOutputCount"			column="FillOutputCount"			/>
+		<result property="fillPvFrontTemp"			column="FillPvFrontTemp"			/>
+		<result property="fillSvFrontTemp"			column="FillSvFrontTemp"			/>
+		<result property="fillPvBackTemp"			column="FillPvBackTemp"				/>
+		<result property="fillSvBackTemp"			column="FillSvBackTemp"				/>
+		<result property="fillNozzle1OpenTime"		column="FillNozzle1OpenTime"		/>
+		<result property="fillNozzle2OpenTime"		column="FillNozzle2OpenTime"		/>
+		<result property="fillNozzle3OpenTime"		column="FillNozzle3OpenTime"		/>
+		<result property="fillNozzle4OpenTime"		column="FillNozzle4OpenTime"		/>
+		<result property="fillDriveStatus"			column="FillDriveStatus"			/>
+		<result property="fillUseYn"				column="FillUseYn"					/>
+		<result property="fillErrorBitData"			column="FillErrorBitData"			/>
+		<result property="fillVisionError"			column="FillVisionError"			/>
+		<result property="fillPressure"				column="FillPressure"				/>
+		<result property="fillTime"					column="FillTime"					/>
+		<result property="fillOperStatus"			column="FillOperStatus"				/>
+		<result property="fillErrorStatus"			column="FillErrorStatus"			/>
+		<result property="fillErrorInfo"			column="FillErrorInfo"				/>
+		<result property="wchkUnderCount"			column="WchkUnderCount"				/>
+		<result property="wchkRqtCount"				column="WchkRqtCount"				/>
+		<result property="wchkOverCount"			column="WchkOverCount"				/>
+		<result property="wchkNgCount"				column="WchkNgCount"				/>
+		<result property="wchkExNgCount"			column="WchkExNgCount"				/>
+		<result property="wchkTotalCount"			column="WchkTotalCount"				/>
+		<result property="wchkResult"				column="WchkResult"					/>
+		<result property="wchkCurrWeight"			column="WchkCurrWeight"				/>
+		<result property="wchkOperStatus"			column="WchkOperStatus"				/>
+		<result property="wchkAlarmStatus"			column="WchkAlarmStatus"			/>
+		<result property="capInputCount"			column="CapInputCount"				/>
+		<result property="capOutputCount"			column="CapOutputCount"				/>
+		<result property="capOperStatus"			column="CapOperStatus"				/>
+		<result property="checkFaultyCount"			column="CheckFaultyCount"			/>
+		<result property="capFilmLength"			column="CapFilmLength"				/>
+		<result property="capUnit"					column="CapUnit"					/>
+		<result property="capDriveStatus"			column="CapDriveStatus"				/>
+		<result property="capUseYn"					column="CapUseYn"					/>
+		<result property="capErrorBitData"			column="CapErrorBitData"			/>
+		<result property="capErrorStatus"			column="CapErrorStatus"				/>
+		<result property="capErrorInfo"				column="CapErrorInfo"				/>
+		<result property="boxMoldOperStatus"		column="BoxMoldOperStatus"			/>
+		<result property="boxErrorBitData"			column="BoxErrorBitData"			/>
+		<result property="boxErrorBit2Data"			column="BoxErrorBit2Data"			/>
+		<result property="boxMoldDriveStatus"		column="BoxMoldDriveStatus"			/>
+		<result property="boxMoldFaulty"			column="BoxMoldFaulty"				/>
+		<result property="boxErrorStatus"			column="BoxErrorStatus"				/>
+		<result property="boxErrorInfo"				column="BoxErrorInfo"				/>
+		<result property="deltaRobotOperStatus"		column="DeltaRobotOperStatus"		/>
+		<result property="deltaRobotDriveStatus"	column="DeltaRobotDriveStatus"		/>
+		<result property="boxMarkingOperStatus"		column="BoxMarkingOperStatus"		/>
+		<result property="boxMarkingDriveStatus"	column="BoxMarkingDriveStatus"		/>
+		<result property="articulRobotOperStatus"	column="ArticulRobotOperStatus"		/>
+		<result property="articulRobotDriveStatus"	column="ArticulRobotDriveStatus"	/>
+		<result property="articulRobotOutputCount"	column="ArticulRobotOutputCount"	/>
+		<result property="robotErrorBitData"		column="RobotErrorBitData"			/>
+		<result property="robotErrorBit2Data"		column="RobotErrorBit2Data"			/>
+		<result property="robotErrorStatus"			column="RobotErrorStatus"			/>
+		<result property="robotErrorInfo"			column="RobotErrorInfo"				/>
+		<result property="fillUpdateDate"			column="FillUpdateDate"				/>
+		<result property="wchkUpdateDate"			column="WchkUpdateDate"				/>
+		<result property="capUpdateDate"			column="CapUpdateDate"				/>
+		<result property="boxUpdateDate"			column="BoxUpdateDate"				/>
+		<result property="robotUpdateDate"			column="RobotUpdateDate"			/>
+		<result property="updateDate"				column="UpdateDate"					/>
+		<result property="regId"					column="RegId"						/>
+		<result property="regDate"					column="RegDate"					/>
+		
+		<result property="itemNm"					column="ITEM_NM"					/>
+		<result property="dtlOrdCnt"				column="DTL_ORD_CNT"				/>
+	</resultMap>
+	
+	<!-- 금일 가장 최신 데이터 조회 -->
+	<select id="packingOperInfoTodayData" resultMap="PackingOperInfoVo">
+		SELECT TOP 1
+			*
+		FROM (SELECT
+					WOA.WORK_ORD_NO WorkOrdNo,
+					WOA.EQUIP_CD EquipCd,
+					IIA.ITEM_NM,
+					BOD.DTL_ORD_CNT,
+					POI.FillSetupWeight,
+					POI.FillStartSignal,
+					LEAD(POI.FillStartSignal, 1)
+						OVER(ORDER BY
+								POI.RegDate DESC) AS FillStartSignal_PREV,
+					POI.FillStartYn,
+					LEAD(POI.FillStartYn, 1)
+						OVER(ORDER BY
+								POI.RegDate DESC) AS FillStartYn_PREV,
+					POI.FillSpeed,
+					POI.FillWeight,
+					POI.FillOutputCount,
+					POI.FillPvFrontTemp,
+					POI.FillSvFrontTemp,
+					POI.FillPvBackTemp,
+					POI.FillSvBackTemp,
+					POI.FillNozzle1OpenTime,
+					POI.FillNozzle2OpenTime,
+					POI.FillNozzle3OpenTime,
+					POI.FillNozzle4OpenTime,
+					POI.FillDriveStatus,
+					POI.FillUseYn,
+					POI.FillErrorBitData,
+					POI.FillVisionError,
+					POI.FillPressure,
+					POI.FillTime,
+					POI.FillOperStatus,
+					POI.FillErrorStatus,
+					POI.FillErrorInfo,
+					POI.WchkUnderCount,
+					POI.WchkRqtCount,
+					POI.WchkOverCount,
+					POI.WchkNgCount,
+					POI.WchkExNgCount,
+					POI.WchkTotalCount,
+					POI.WchkResult,
+					POI.WchkCurrWeight,
+					POI.WchkOperStatus,
+					POI.WchkAlarmStatus,
+					POI.CapInputCount,
+					POI.CapOutputCount,
+					POI.CapOperStatus,
+					POI.CheckFaultyCount,
+					POI.CapFilmLength,
+					POI.CapUnit,
+					POI.CapDriveStatus,
+					POI.CapUseYn,
+					POI.CapErrorBitData,
+					POI.CapErrorStatus,
+					POI.CapErrorInfo,
+					POI.BoxMoldOperStatus,
+					POI.BoxErrorBitData,
+					POI.BoxErrorBit2Data,
+					POI.BoxMoldDriveStatus,
+					POI.BoxMoldFaulty,
+					POI.BoxErrorStatus,
+					POI.BoxErrorInfo,
+					POI.DeltaRobotOperStatus,
+					POI.DeltaRobotDriveStatus,
+					POI.BoxMarkingOperStatus,
+					POI.BoxMarkingDriveStatus,
+					POI.ArticulRobotOperStatus,
+					POI.ArticulRobotDriveStatus,
+					POI.ArticulRobotOutputCount,
+					POI.RobotErrorBitData,
+					POI.RobotErrorBit2Data,
+					POI.RobotErrorStatus,
+					POI.RobotErrorInfo,
+					POI.FillUpdateDate,
+					POI.WchkUpdateDate,
+					POI.CapUpdateDate,
+					POI.BoxUpdateDate,
+					POI.RobotUpdateDate,
+					POI.UpdateDate,
+					POI.RegId,
+					POI.RegDate
+				FROM TB_PACKING_OPER_INFO POI
+					LEFT OUTER JOIN (SELECT TOP 1
+										WOA.CONT_DTL_NO,
+										WOA.WORK_ORD_NO,
+										WOA.ITEM_SEQ,
+										WOA.EQUIP_CD
+									FROM TB_WORK_ORDER_ADM WOA
+										LEFT OUTER JOIN TB_EQUIP_CODE_ADM ECA
+										ON 1=1
+										AND WOA.EQUIP_CD = ECA.EQUIP_CD
+									WHERE 1=1
+									AND ECA.PRC_NM = '002'
+									AND ECA.MAIN_GUBUN = '001'
+									AND CONVERT(CHAR(8), WOA.REG_DATE, 112) = CONVERT(CHAR(8), GETDATE(), 112)
+									ORDER BY
+										WOA.REG_DATE ASC) WOA
+					ON 1=1
+					LEFT OUTER JOIN TB_ITEM_INFO_ADM IIA
+					ON 1=1
+					AND WOA.ITEM_SEQ = IIA.ITEM_SEQ
+					LEFT OUTER JOIN TB_BIZ_ORDER_DTL BOD
+					ON 1=1
+					AND WOA.CONT_DTL_NO = BOD.CONT_DTL_NO
+				WHERE 1=1) T
+		WHERE 1=1
+		-- AND T.FillStartSignal_PREV = '0'
+		-- AND T.FillStartYn_PREV = '0'
+		AND T.FillStartSignal = '1'
+		AND T.FillStartYn = '1'
+		AND CONVERT(CHAR(8), T.RegDate, 112) = CONVERT(CHAR(8), GETDATE(), 112)
+		ORDER BY
+			T.RegDate ASC
+	</select>
+</mapper>

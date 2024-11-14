@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.bs.deliveryOrderAdmMapper">
+
+	<resultMap id="DeliveryOrderAdmVo" type="mes.domain.bs.DeliveryOrderAdmVo">
+		<result property="doNo"				column="DO_NO"				/>
+		<result property="contDtlNo"		column="CONT_DTL_NO"		/>
+		<result property="mainGubun"		column="MAIN_GUBUN"			/>
+		<result property="mainGubunNm"		column="MAIN_GUBUN_NM"		/>
+		<result property="itemSeq"			column="ITEM_SEQ"			/>
+		<result property="itemCd"			column="ITEM_CD"			/>
+		<result property="itemNm"			column="ITEM_NM"			/>
+		<result property="ordCorpCd"		column="ORD_CORP_CD"		/>
+		<result property="ordCorpNm"		column="ORD_CORP_NM"		/>
+		<result property="outCorpCd"		column="OUT_CORP_CD"		/>
+		<result property="outCorpNm"		column="OUT_CORP_NM"		/>
+		<result property="doDate"			column="DO_DATE"			/>
+		<result property="doQty"			column="DO_QTY"				/>
+		<result property="doChargr"			column="DO_CHARGR"			/>
+		<result property="dueDate"			column="DUE_DATE"			/>
+		<result property="doStatus"			column="DO_STATUS"			/>
+		<result property="doDesc"			column="DO_DESC"			/>
+		<result property="regId"			column="REG_ID"				/>
+		<result property="regDate"			column="REG_DATE"			/>
+		<result property="updId"			column="UPD_ID"				/>
+		<result property="updDate"			column="UPD_DATE"			/>
+		
+		<result property="contNo"			column="CONT_NO"			/>
+		<result property="bizGubun"			column="BIZ_GUBUN"			/>
+		<result property="bizGubunNm"		column="BIZ_GUBUN_NM"		/>
+		<result property="itemUnit"			column="ITEM_UNIT"			/>
+		<result property="dtlOrdCnt"		column="DTL_ORD_CNT"		/>
+		<result property="doChargrNm"		column="DO_CHARGR_NM"		/>
+		<result property="doStatusNm"		column="DO_STATUS_NM"		/>
+		
+		<result property="dpNo"				column="DP_NO"				/>
+		<result property="barcodeNo"		column="BARCODE_NO"			/>
+		<result property="dpQty"			column="DP_QTY"				/>
+		<result property="dpDate"			column="DP_DATE"			/>
+		
+		
+		<result property="supplyPrice"		column="SUPPLY_PRICE"		/>
+		<result property="vat"				column="VAT"				/>
+		<result property="total"			column="TOTAL"				/>
+		<result property="exportCost"		column="EXPORT_COST"		/>
+	</resultMap>
+	
+	<!-- 출고요청 목록조회 -->
+	<select id="deliveryOrderAdmList" resultMap="DeliveryOrderAdmVo">
+		SELECT	
+			BOA.CONT_NO,
+			BOD.CONT_DTL_NO,
+			BOD.BIZ_GUBUN,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=BOD.BIZ_GUBUN AND X.BASE_GROUP_CD='045') BIZ_GUBUN_NM,
+			DOA.DO_NO,
+			BOA.ORD_CORP_CD,
+			(SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD=BOA.ORD_CORP_CD) ORD_CORP_NM,
+			IIA.MAIN_GUBUN,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=IIA.MAIN_GUBUN AND X.BASE_GROUP_CD='112') MAIN_GUBUN_NM,
+			IIA.ITEM_SEQ,
+			IIA.ITEM_CD,
+			IIA.ITEM_NM,
+			IIA.ITEM_UNIT,
+			IIA.EXPORT_COST,
+			BOD.DTL_ORD_CNT,
+			DOA.DO_QTY,
+			DOA.DO_DATE,
+			DOA.OUT_CORP_CD,
+			(SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD=DOA.OUT_CORP_CD) OUT_CORP_NM,
+			DOA.DO_CHARGR,
+			(SELECT USER_NM FROM TB_USER WHERE USER_NUMBER=DOA.DO_CHARGR) DO_CHARGR_NM,
+			DOA.DO_STATUS,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=ISNULL(DOA.DO_STATUS,'001') AND X.BASE_GROUP_CD='061') DO_STATUS_NM,
+			DOA.DO_DESC,
+			DPD.DP_QTY,
+			ISNULL(DPD.DP_QTY,0) * ISNULL(IIA.EXPORT_COST,0) SUPPLY_PRICE,
+			ISNULL(DPD.DP_QTY,0) * ISNULL(IIA.EXPORT_COST,0) * 0.1 VAT,
+			(ISNULL(DPD.DP_QTY,0) * ISNULL(IIA.EXPORT_COST,0)) + (ISNULL(DPD.DP_QTY,0) * ISNULL(IIA.EXPORT_COST,0) * 0.1) TOTAL,
+			STUFF((
+				SELECT 
+					','+DP_DATE
+				FROM TB_DELIVERY_PROC_DTL X
+				WHERE 1=1
+					AND DOA.DO_NO=X.DO_NO
+				FOR XML PATH('')
+			),1,1,'') DP_DATE
+		FROM TB_BIZ_ORDER_ADM BOA
+		LEFT OUTER JOIN TB_BIZ_ORDER_DTL BOD
+		ON BOA.CONT_NO=BOD.CONT_NO
+		LEFT OUTER JOIN TB_DELIVERY_ORDER_ADM DOA
+		ON BOD.CONT_DTL_NO=DOA.CONT_DTL_NO
+		LEFT OUTER JOIN (
+			SELECT DO_NO,
+				SUM(DP_QTY) DP_QTY
+			FROM TB_DELIVERY_PROC_DTL DPD
+			GROUP BY DO_NO
+		)DPD
+		ON DOA.DO_NO=DPD.DO_NO
+		LEFT OUTER JOIN TB_ITEM_INFO_ADM IIA
+		ON IIA.ITEM_SEQ=BOD.ITEM_CD
+		WHERE 1=1
+		<if test="doStatus2 != null and !doStatus2.equals('')">
+		AND DO_STATUS IS NOT NULL
+		</if>
+		<if test="mainGubun != null and !mainGubun.equals('')">
+		AND IIA.MAIN_GUBUN=#{mainGubun}
+		</if>
+		<if test="doStatus == '001'">
+		AND ISNULL(DOA.DO_STATUS,'001') = '001'
+		</if>
+		<if test="doStatus == '002'">
+		AND ISNULL(DOA.DO_STATUS,'001') = '002'
+		</if>
+		<if test="doStatus == '003'">
+		AND ISNULL(DOA.DO_STATUS,'001') = '003'
+		</if>
+		<if test="doStatus == '004'">
+		AND ISNULL(DOA.DO_STATUS,'001') = '004'
+		</if>
+		<if test="startDate != null and !startDate.equals('')">
+		AND ((DOA.DO_DATE BETWEEN #{startDate} AND #{endDate}) OR (DOA.DO_DATE IS NULL))
+		</if>
+		<if test="doNo != null and !doNo.equals('')">
+		AND DOA.DO_NO=#{doNo}
+		</if>
+		
+	</select>
+	
+	<!-- 출고요청등록 조회 -->
+	<select id="deliveryOrderAdmRead" resultMap="DeliveryOrderAdmVo">
+		SELECT	
+			DO_NO,
+			CONT_DTL_NO,
+			DO_DATE,
+			ORD_CORP_CD,
+			ITEM_SEQ,
+			DO_QTY,
+			DUE_DATE,
+			DO_STATUS,
+			DO_DESC
+		FROM TB_DELIVERY_ORDER_ADM		 
+		WHERE 1=1
+		AND DO_NO = #{doNo}
+	</select>
+	
+	
+	<!-- 출고요청등록 등록 -->
+	<insert id="deliveryOrderAdmIns" >
+		INSERT INTO TB_DELIVERY_ORDER_ADM		(
+			DO_NO,
+			CONT_DTL_NO,
+			DO_DATE,
+			OUT_CORP_CD,
+			ITEM_SEQ,
+			DO_CHARGR,
+			DO_QTY,
+			DUE_DATE,
+			DO_STATUS,
+			DO_DESC,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{doNo},
+			#{contDtlNo},
+			#{doDate},
+			#{outCorpCd},
+			#{itemSeq},
+			#{doChargr},
+			#{doQty},
+			#{dueDate},
+			#{doStatus},
+			#{doDesc},
+			#{regId},
+			GETDATE()
+		)
+	</insert>
+	
+	
+	<!-- 출고요청등록 수정 -->
+	<update id="deliveryOrderAdmUpd" >
+		UPDATE	TB_DELIVERY_ORDER_ADM	
+		<set>
+			<if test="doDate !=null and !doDate.equals('')">
+				DO_DATE = #{doDate},
+			</if>
+			<if test="doChargr !=null and !doChargr.equals('')">
+				DO_CHARGR = #{doChargr},
+			</if>
+			<if test="outCorpCd !=null and !outCorpCd.equals('')">
+				OUT_CORP_CD = #{outCorpCd},,
+			</if>
+			<if test="doQty !=null and !doQty.equals('')">
+				DO_QTY = #{doQty},
+			</if>
+			<if test="dueDate !=null and !dueDate.equals('')">
+				DUE_DATE = #{dueDate},
+			</if>
+			<if test="doStatus !=null and !doStatus.equals('')">
+				DO_STATUS = #{doStatus},
+			</if>
+			<if test="doDesc !=null and !doDesc.equals('')">
+				DO_DESC = #{doDesc},
+			</if>
+			UPD_ID = #{updId},
+			UPD_DATE = GETDATE()
+		</set>
+		WHERE 1=1
+		AND DO_NO = #{doNo}
+	</update>
+
+
+	<!-- 출고요청등록 삭제 -->
+	<delete id="deliveryOrderAdmDel" >
+		DELETE FROM TB_DELIVERY_ORDER_ADM		 
+		WHERE	DO_NO = #{doNo}
+	</delete>
+	
+	
+	<!-- 출고요청번호 생성-->
+	<select id="getDoNo" resultType="String">
+		SELECT
+			CONCAT(#{date},'-',FORMAT(CONVERT(INT,ISNULL(RIGHT(MAX(DO_NO),3),'0'))+1,'000'))
+		FROM TB_DELIVERY_ORDER_ADM
+		WHERE 1=1
+		AND SUBSTRING(DO_NO,1,8) = #{date}
+	</select>
+
+</mapper>

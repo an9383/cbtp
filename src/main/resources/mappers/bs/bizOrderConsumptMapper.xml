@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.bs.bizOrderConsumptMapper">
+	
+	<resultMap id="BizOrderConsumptVo" type="mes.domain.bs.BizOrderConsumptVo">
+		<result property="mrpNo"			column="MRP_NO"				/>
+		<result property="mrpSeq"			column="MRP_SEQ"			/>
+		<result property="itemSeq"			column="ITEM_SEQ"			/>
+		<result property="itemCd"			column="ITEM_CD"			/>
+		<result property="itemNm"			column="ITEM_NM"			/>
+		<result property="reqQty"			column="REQ_QTY"			/>
+		<result property="tmQty"			column="TM_QTY"				/>
+		<result property="unuseQty"			column="UNUSE_QTY"			/>
+		<result property="availStock"		column="AVAIL_STOCK"		/>
+		<result property="purPredQty"		column="PUR_PRED_QTY"		/>
+		<result property="originOrdQty"		column="ORIGIN_ORD_QTY"		/>
+		<result property="ordPredQty"		column="ORD_PRED_QTY"		/>
+		<result property="stockUseYn"		column="STOCK_USE_YN"		/>
+		<result property="ordCorpCd"		column="ORD_CORP_CD"		/>
+		<result property="ordCorpNm"		column="ORD_CORP_NM"		/>
+		
+		<result property="salesYear"		column="SALES_YEAR"			/>
+		<result property="salesMon"			column="SALES_MON"			/>
+		
+		<result property="regId"			column="REG_ID"				/>
+		<result property="regDate"			column="REG_DATE"			/>
+		<result property="updId"			column="UPD_ID"				/>
+		<result property="updDate"			column="UPD_DATE"			/>
+		
+		<!-- 		추가사항 -->
+		<result property="itemModel"		column="ITEM_MODEL"			/>
+		<result property="itemModelNm"		column="ITEM_MODEL_NM"		/>
+		<result property="itemCus"			column="ITEM_CUS_NM"		/>
+		<result property="itemCusNm"		column="ITEM_CUS_NM"		/>
+		<result property="showReqQty"		column="SHOW_REQ_QTY"		/>
+		<result property="monPlanQty"		column="MON_PLAN_QTY"		/>
+		<result property="prodGubun"		column="PROD_GUBUN"			/>
+	</resultMap>
+
+	
+	<!-- 소요량분석 목록조회 -->
+	<select id="bizOrderConsumptList" resultMap="BizOrderConsumptVo">
+		WITH TEMP (ITEM_SEQ,UPPER_ITEM_SEQ,ITEM_CONSUMPT,sSORT,ITEM_LVL,SALES_PLAN_QTY) AS (
+			SELECT
+	        	A.ITEM_SEQ
+	            , A.UPPER_ITEM_SEQ
+				, A.ITEM_CONSUMPT
+	            , CONVERT(VARCHAR(500), A.ITEM_SEQ) SORT
+	         	, 0 AS Level
+				, MPP.PROD_TOTAL_QTY
+	        FROM TB_ITEM_MOTOR_EBOM A
+			LEFT OUTER JOIN TB_MON_PROD_PLAN_ADM MPP
+			ON A.ITEM_SEQ = MPP.ITEM_SEQ
+			AND MPP.PROD_YEAR = #{salesYear}
+			AND MPP.PROD_MON = #{salesMon}
+			WHERE 1=1
+			AND A.ITEM_SEQ IN
+			<foreach collection="itemSeqArray" item="item" separator="," open="(" close=")">
+				#{item}
+			</foreach>
+	        UNION ALL
+	        
+	        SELECT
+	            A.ITEM_SEQ
+	            , A.UPPER_ITEM_SEQ
+				, A.ITEM_CONSUMPT
+	            , CONVERT(VARCHAR(500), CONVERT(VARCHAR(500), B.sSORT) + N'>' + CONVERT(VARCHAR(500), A.ITEM_SEQ)) SORT
+				, B.ITEM_LVL + 1 AS Level
+				, B.SALES_PLAN_QTY
+	        FROM TB_ITEM_MOTOR_EBOM A
+			INNER JOIN TEMP B
+	        ON A.UPPER_ITEM_SEQ = B.ITEM_SEQ
+		)
+		SELECT
+		   A.ITEM_SEQ
+		   , B.ITEM_CD
+   		   , B.ITEM_NM
+		   , (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=B.ITEM_GUBUN AND X.BASE_GROUP_CD='079') ITEM_GUBUN
+		   , (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=B.ITEM_MODEL AND X.BASE_GROUP_CD='099') ITEM_MODEL
+		   , (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=B.ITEM_UNIT AND X.BASE_GROUP_CD='036') ITEM_UNIT
+		   , B.ITEM_MODEL
+		   , (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=B.ITEM_MODEL AND X.BASE_GROUP_CD='099') ITEM_MODEL_NM
+		   , B.ITEM_CUS
+		   , (SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD = B.ITEM_CUS) ITEM_CUS_NM
+		   , B.PROD_GUBUN
+		   , SUM(CONVERT(FLOAT, A.SALES_PLAN_QTY)) MON_PLAN_QTY
+		   , SUM(CONVERT(FLOAT, A.SALES_PLAN_QTY) * CONVERT(FLOAT, A.ITEM_CONSUMPT)) REQ_QTY
+		   , '0' UNUSE_QTY
+		   , '0' AVAIL_STOCK
+		   , '0' PUR_PRED_QTY
+		   , '0' ORIGIN_ORD_QTY
+		   , X.TM_QTY
+		FROM TEMP A
+		LEFT OUTER JOIN TB_ITEM_INFO_ADM B
+		ON A.ITEM_SEQ = B.ITEM_SEQ
+		LEFT OUTER JOIN (
+			SELECT
+				Z.ITEM_SEQ
+				, ISNULL(A.QTY,0) A_QTY
+				, ISNULL(B.QTY,0) B_QTY
+				, ISNULL(C.QTY,0) C_QTY
+				, ISNULL(D.QTY,0) D_QTY
+				, (ISNULL(A.QTY,0)+ISNULL(C.QTY,0)) IN_QTY
+				, (ISNULL(B.QTY,0)+ISNULL(D.QTY,0)) OUT_QTY
+				, (ISNULL(A.QTY,0)+ISNULL(C.QTY,0) - ISNULL(B.QTY,0)+ISNULL(D.QTY,0)) TM_QTY
+			FROM TB_ITEM_INFO_ADM Z
+			LEFT OUTER JOIN TB_STOCK_PAYMENT_ADM S
+			ON Z.ITEM_SEQ = S.SP_CD
+			LEFT OUTER JOIN (
+				SELECT 
+				    SP_CD
+					, SUM(SP_QTY) QTY
+				FROM TB_STOCK_PAYMENT_ADM
+				WHERE SP_GUBUN = '001'
+				AND LOCATION_CD IN ('001', '002')
+				GROUP BY SP_CD
+			) A
+			ON S.SP_CD = A.SP_CD
+			LEFT OUTER JOIN (
+				SELECT
+				    SP_CD
+					, SUM(SP_QTY) QTY
+				FROM TB_STOCK_PAYMENT_ADM
+				WHERE SP_GUBUN = '002'
+				AND LOCATION_CD IN ('001', '002')
+				GROUP BY SP_CD
+			) B
+			ON S.SP_CD = B.SP_CD
+			LEFT OUTER JOIN (
+				SELECT
+				    SP_CD
+					, SUM(SP_QTY) QTY
+				FROM TB_STOCK_PAYMENT_ADM
+				WHERE SP_GUBUN = '003'
+				AND LOCATION_CD IN ('001', '002')
+				GROUP BY SP_CD
+			) C
+			ON S.SP_CD = C.SP_CD
+			LEFT OUTER JOIN (
+				SELECT
+				    SP_CD
+					, SUM(SP_QTY) QTY
+				FROM TB_STOCK_PAYMENT_ADM
+				WHERE SP_GUBUN = '004'
+				AND LOCATION_CD IN ('001', '002')
+				GROUP BY SP_CD
+			) D
+			ON S.SP_CD = D.SP_CD
+			WHERE 1=1
+			GROUP BY Z.ITEM_SEQ, A.QTY, B.QTY, C.QTY, D.QTY
+		) X
+		ON A.ITEM_SEQ = X.ITEM_SEQ		
+		WHERE 1=1
+		AND A.ITEM_LVL != '0'
+		<if test="itemGubun != null and !itemGubun.equals('')">
+		AND B.ITEM_GUBUN = #{itemGubun}
+		</if>
+		GROUP BY
+			A.ITEM_SEQ
+			, B.ITEM_CD
+			, B.ITEM_NM
+			, B.ITEM_GUBUN
+			, B.ITEM_MODEL
+			, B.ITEM_UNIT
+			, B.ITEM_MODEL
+			, B.ITEM_CUS
+			, B.PROD_GUBUN
+			, X.TM_QTY
+	</select>
+	
+	<!-- 소요량분석 상세조회 -->
+	<select id="bizOrderConsumptRead" resultMap="BizOrderConsumptVo">
+		SELECT 
+			MRP_NO
+			, MRP_SEQ
+			, A.ITEM_SEQ
+			, B.ITEM_CD
+			, B.ITEM_NM
+			, B.ITEM_MODEL
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=B.ITEM_MODEL AND X.BASE_GROUP_CD='099') ITEM_MODEL_NM
+			, B.ITEM_CUS
+			, (SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD = B.ITEM_CUS) ITEM_CUS_NM
+			, B.PROD_GUBUN
+			, A.REQ_QTY
+			, A.TM_QTY
+			, A.UNUSE_QTY
+			, A.AVAIL_STOCK
+			, A.PUR_PRED_QTY
+			, A.ORIGIN_ORD_QTY
+			, A.ORD_PRED_QTY
+			, A.MON_PLAN_QTY
+			, A.STOCK_USE_YN
+			, A.ORD_CORP_CD
+			, (SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD=A.ORD_CORP_CD) ORD_CORP_NM
+		FROM TB_BIZ_ORDER_CONSUMPT A
+		INNER JOIN TB_ITEM_INFO_ADM B
+		ON A.ITEM_SEQ = B.ITEM_SEQ
+		WHERE 1=1 
+		AND MRP_NO = #{mrpNo}
+	</select>
+	
+	<!-- 소요량분석 등록 -->
+	<insert id="bizOrderConsumptCreate">
+		INSERT INTO TB_BIZ_ORDER_CONSUMPT(
+			MRP_NO,
+			MRP_SEQ,
+			ITEM_SEQ,
+			REQ_QTY,
+			TM_QTY,
+			UNUSE_QTY,
+			AVAIL_STOCK,
+			PUR_PRED_QTY,
+			ORIGIN_ORD_QTY,
+			ORD_PRED_QTY,
+			MON_PLAN_QTY,
+			STOCK_USE_YN,
+			ORD_CORP_CD,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{mrpNo},
+			#{mrpSeq},
+			#{itemSeq},
+			#{reqQty},
+			#{tmQty},
+			#{unuseQty},
+			#{availStock},
+			#{purPredQty},
+			#{originOrdQty},
+			#{ordPredQty},
+			#{monPlanQty},
+			#{stockUseYn},
+			#{ordCorpCd},
+			#{regId},
+			GETDATE()
+		)
+	</insert>
+	
+	
+	<!-- 소요량분석 수정 -->
+	<update id="bizOrderConsumptUpdate">
+		UPDATE	TB_BIZ_ORDER_CONSUMPT 
+		SET	
+			REQ_QTY = #{reqQty},
+			TM_QTY = #{tmQty},
+			UNUSE_QTY = #{unuseQty},
+			AVAIL_STOCK = #{availStock},
+			PUR_PRED_QTY = #{purPredQty},
+			ORIGIN_ORD_QTY = #{originOrdQty},
+			ORD_PRED_QTY = #{ordPredQty},
+			MON_PLAN_QTY = #{monPlanQty},
+			STOCK_USE_YN = #{stockUseYn},
+			ORD_CORP_CD = #{ordCorpCd},
+			UPD_ID = #{updId},
+			UPD_DATE = GETDATE()
+		WHERE 1=1
+		AND MRP_NO = #{mrpNo}
+		AND	MRP_SEQ = #{mrpSeq}
+		AND	ITEM_SEQ = #{itemSeq}
+	</update>
+	
+	
+	<!-- 소요량분석 삭제 -->
+	<delete id="bizOrderConsumptDelete">
+		DELETE FROM TB_BIZ_ORDER_CONSUMPT 
+		WHERE 1=1
+		AND MRP_NO = #{mrpNo}
+		AND MRP_SEQ = #{mrpSeq}
+		<if test='deleteCheck != null and !deleteCheck.equals("")'>
+		AND ITEM_SEQ = #{itemSeq}
+		</if>
+	</delete>
+
+	
+	
+</mapper>

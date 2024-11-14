@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mapper.bm.planStopMapper">
+
+	<resultMap id="PlanStopVo" type="mes.domain.bm.PlanStopVo">
+		<result property="stopDate" 		column="STOP_DATE"		/>
+		<result property="stopSequence"		column="STOP_SEQUENCE"	/>
+		<result property="stopType" 		column="STOP_TYPE"		/>
+		<result property="stopTypeNm" 		column="STOP_TYPE_NM"	/>
+		<result property="equipCd" 			column="EQUIP_CD"		/>
+		<result property="timeCode" 		column="TIME_CODE"		/>
+		<result property="startTime" 		column="START_TIME"		/>
+		<result property="endTime" 			column="END_TIME"		/>
+		<result property="stopTime" 		column="STOP_TIME"		/>
+		<result property="regId" 			column="REG_ID"			/>
+		<result property="regDate" 			column="REG_DATE"		/>
+		<result property="updId" 			column="UPD_ID"			/>
+		<result property="updDate" 			column="UPD_DATE"		/>
+		<result property="sumTime" 			column="SUM_TIME"		/>
+		<result property="totalTime" 		column="TOTAL_TIME"		/>
+		<result property="timeChangeYn"		column="TIME_CHANGE_YN"	/>
+		<result property="weekend" 			column="weekend"		/>
+		<result property="searchMonth" 		column="searchMonth"	/>
+		
+		<result property="startDate" 		column="START_DATE"		/>
+		<result property="endDate" 			column="END_DATE"		/>
+		<result property="timeCodeNm" 		column="TIME_CODE_NM"	/>
+		<result property="startDatetime" 	column="START_DATETIME"	/>
+		<result property="endDatetime" 		column="END_DATETIME"	/>
+	</resultMap>
+	
+	<!-- ===================== 공장력 ========================= -->
+	<!-- 월별 계획정지 목록조회 -->
+	<select id="planStopList" resultMap="PlanStopVo" parameterType="mes.domain.bm.PlanStopVo">
+		SELECT
+			STOP_DATE,
+			STOP_SEQUENCE,
+			STOP_TYPE,
+			EQUIP_CD,
+			TIME_CODE,
+			START_TIME,
+			END_TIME,
+			STOP_TIME,
+			(
+				CASE WHEN (SELECT ETC1 FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = A.TIME_CODE AND X.BASE_GROUP_CD = '151') =''
+				THEN 'O'
+				ELSE 'X'
+				END
+			) TIME_CHANGE_YN
+		FROM TB_PLAN_STOP A
+		WHERE 1=1
+			AND A.STOP_DATE LIKE CONCAT(#{searchMonth},'%')
+			AND A.STOP_TYPE = #{stopType}
+		<if test="equipCd != '' and equipCd != null"> 
+			AND A.EQUIP_CD = #{equipCd}
+		</if>
+	</select>
+	
+	<!-- 월, 설비별 누적시간 조회 -->
+	<select id="planStopMonthSummaryList" resultMap="PlanStopVo" parameterType="mes.domain.bm.PlanStopVo">
+		SELECT 
+			B.EQUIP_CD,
+			B.EQUIP_NM,
+			ISNULL(SUM(STOP_TIME), 0) AS SUM_TIME
+		FROM TB_PLAN_STOP A RIGHT JOIN TB_EQUIP_CODE_ADM B
+		ON A.EQUIP_CD = B.EQUIP_CD
+		AND A.STOP_DATE LIKE CONCAT(#{searchMonth},'%')
+		WHERE 1=1
+			AND B.PRC_NM = #{stopType}
+		<if test="equipCd != '' and equipCd != null"> 
+			AND B.EQUIP_CD = #{equipCd}
+		</if>
+		GROUP BY B.EQUIP_CD, B.EQUIP_NM
+	</select>
+	
+	<!-- 일, 설비별 목록조회 -->
+	<select id="planStopDaySummaryList" resultMap="PlanStopVo" parameterType="mes.domain.bm.PlanStopVo">
+		SELECT
+			A.STOP_DATE,
+			A.EQUIP_CD,
+			SUM(STOP_TIME) AS SUM_TIME
+		FROM TB_PLAN_STOP A
+		WHERE 1=1
+			AND A.STOP_TYPE = #{stopType}
+			AND A.STOP_DATE LIKE CONCAT(#{searchMonth},'%')
+		<if test="equipCd != '' and equipCd != null"> 
+			AND A.EQUIP_CD = #{equipCd}
+		</if>
+		GROUP BY A.STOP_DATE, A.EQUIP_CD
+	</select>
+	
+	<!-- 기간별 목록 조회 -->
+	<select id="planStopLstByDate" resultMap="PlanStopVo">
+		<![CDATA[
+			SELECT
+				PS.STOP_SEQUENCE,
+				PS.STOP_DATE,
+				PS.STOP_TYPE,
+				PS.EQUIP_CD,
+				PS.TIME_CODE,
+				(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = PS.TIME_CODE AND X.BASE_GROUP_CD = '151') TIME_CODE_NM,
+				PS.START_TIME,
+				PS.END_TIME,
+				PS.STOP_TIME
+			FROM TB_PLAN_STOP PS
+			WHERE 1=1
+		]]>
+		<if test="startDate != null and startDate != ''">
+			AND (CONCAT(PS.STOP_DATE, PS.START_TIME) <![CDATA[>=]]> #{startDate} OR CONCAT(PS.STOP_DATE, PS.END_TIME) <![CDATA[>=]]> #{startDate} )
+		</if>
+		<if test="endDate != null and endDate != ''">
+			AND (CONCAT(PS.STOP_DATE, PS.START_TIME) <![CDATA[<=]]> #{endDate} OR CONCAT(PS.STOP_DATE, PS.END_TIME) <![CDATA[<=]]> #{endDate} )
+		</if>
+	</select>
+	
+	<!--  기간별 목록 조회(날짜 그룹) -->
+	<select id="planStopLstByDateGroup" resultMap="PlanStopVo">
+		<![CDATA[
+			SELECT
+				MIN(R.STOP_SEQUENCE) STOP_SEQUENCE,
+				R.EQUIP_CD,
+				STRING_AGG(R.TIME_CODE_NM, '/') TIME_CODE_NM,
+				MIN(R.START_DATETIME) START_DATETIME, 
+				MAX(R.END_DATETIME) END_DATETIME
+			FROM (SELECT
+					*,
+					SUM(T.FLAG) OVER(ORDER BY START_DATETIME, END_DATETIME) GRP
+				FROM (SELECT
+						*,
+						LAG(END_DATETIME) OVER(ORDER BY START_DATETIME ASC) PREV_END_DATETIME,
+						MAX(END_DATETIME) OVER(ORDER BY START_DATETIME, END_DATETIME
+							ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING
+						) MAX_END_DATETIME,
+						CASE WHEN MAX(END_DATETIME) OVER(ORDER BY START_DATETIME, END_DATETIME
+								ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING
+							) >= START_DATETIME THEN 0
+							 ELSE 1
+						END FLAG
+					FROM (SELECT
+							PS.STOP_SEQUENCE,
+							PS.STOP_DATE,
+							PS.STOP_TYPE,
+							PS.EQUIP_CD,
+							PS.TIME_CODE,
+							(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = PS.TIME_CODE AND X.BASE_GROUP_CD = '151') TIME_CODE_NM,
+							PS.START_TIME,
+							PS.END_TIME,
+							PS.STOP_TIME,
+							CONCAT(PS.STOP_DATE,PS.START_TIME) START_DATETIME,
+							CONCAT(PS.STOP_DATE,PS.END_TIME) END_DATETIME
+						FROM TB_PLAN_STOP PS
+						WHERE 1=1
+		]]>
+		<if test="startDate != null and startDate != ''">
+							AND (CONCAT(PS.STOP_DATE, PS.START_TIME) <![CDATA[>=]]> #{startDate} OR CONCAT(PS.STOP_DATE, PS.END_TIME) <![CDATA[>=]]> #{startDate} )
+		</if>
+		<if test="endDate != null and endDate != ''">
+							AND (CONCAT(PS.STOP_DATE, PS.START_TIME) <![CDATA[<=]]> #{endDate} OR CONCAT(PS.STOP_DATE, PS.END_TIME) <![CDATA[<=]]> #{endDate} )
+		</if>
+		<if test="equipCd != null and equipCd != ''">
+							AND PS.EQUIP_CD = #{equipCd}
+		</if>
+		<![CDATA[
+						) PS
+					) T
+				) R
+			GROUP BY
+				R.GRP,
+				R.EQUIP_CD
+		]]>
+		
+	</select>
+	
+	<!-- 계획정지등록리스트 등록 -->
+	<insert id="planStopCreate" parameterType="mes.domain.bm.PlanStopVo">
+		<![CDATA[
+		INSERT INTO TB_PLAN_STOP (
+			STOP_DATE,
+			STOP_TYPE,
+			EQUIP_CD,
+			TIME_CODE,
+			START_TIME,
+			END_TIME,
+			STOP_TIME,
+			REG_ID,
+			REG_DATE
+		) VALUES (
+			#{stopDate},
+			#{stopType},
+			#{equipCd},
+			#{timeCode},
+			#{startTime},
+			#{endTime},
+			#{stopTime},
+			#{regId},
+			GETDATE()
+		)
+		]]>
+	</insert>
+	
+	<!-- 계획정지등록리스트 삭제 -->
+	<delete id="planStopDelete" parameterType="mes.domain.bm.PlanStopVo">
+		DELETE FROM TB_PLAN_STOP 
+		WHERE STOP_DATE LIKE CONCAT(#{stopDate},'%')
+			AND STOP_TYPE = #{stopType}
+		<if test="equipCd != '' and equipCd != null"> 
+			AND EQUIP_CD = #{equipCd}
+		</if>
+	</delete>
+	
+	<!-- 계획정지등록리스트 등록 -->
+	<insert id="planStopListCreate" parameterType="java.util.List">
+		<![CDATA[
+		INSERT INTO TB_PLAN_STOP (
+			STOP_DATE,
+			STOP_TYPE,
+			EQUIP_CD,
+			TIME_CODE,
+			START_TIME,
+			END_TIME,
+			STOP_TIME,
+			REG_ID,
+			REG_DATE
+		) VALUES 
+		]]>
+		<foreach collection="list" item="item" separator=",">
+		(
+			#{item.stopDate},
+			#{item.stopType},
+			#{item.equipCd},
+			#{item.timeCode},
+			#{item.startTime},
+			#{item.endTime},
+			#{item.stopTime},
+			#{item.regId},
+			GETDATE()
+		)	
+		</foreach>
+	</insert>
+</mapper>

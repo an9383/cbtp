@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.qm.unfitAdmMapper">
+
+	<resultMap id="UnfitAdmVo" type="mes.domain.qm.UnfitAdmVo">
+		<result property="unfitNo"				column="UNFIT_NO"			/>
+		<result property="unfitGubun"			column="UNFIT_GUBUN"		/>
+		<result property="unfitLot"				column="UNFIT_LOT"			/>
+		<result property="unfitProc"			column="UNFIT_PROC"			/> <!-- 부적합처리 -->
+		<result property="unfitDate"			column="UNFIT_DATE"			/> <!-- 폐기일자 -->
+		<result property="unfitManager"			column="UNFIT_MANAGER"		/>
+		<result property="cmApproDate"			column="CM_APPRO_DATE"		/>
+		<result property="cmComplDate"			column="CM_COMPL_DATE"		/>
+		<result property="approvalYn"			column="APPROVAL_YN"		/>
+		<result property="approvalYnNm"			column="APPROVAL_YN_NM"		/>
+		<result property="unfitDesc"			column="UNFIT_DESC"			/> <!-- 비고 -->
+		<result property="regId"				column="REG_ID"				/>
+		<result property="regDate"				column="REG_DATE"			/>
+		<result property="updId"				column="UPD_ID"				/>
+		<result property="updDate"				column="UPD_DATE"			/>
+		
+		<!-- 추가사항 -->
+		<result property="inspectDate"			column="INSPECT_DATE"		/> <!-- 발생일자 -->
+		<result property="attribPlace"			column="ATTRIB_PLACE"		/> <!-- 귀책처 -->
+		<result property="generateProc"			column="GENERATE_PROC"		/> <!-- 발생공정 -->
+		<result property="modelNm"				column="MODEL_NM"			/> <!-- 모델명 -->
+		<result property="itemCd"				column="ITEM_CD"			/> <!-- 부품명 -->
+		<result property="itemNm"				column="ITEM_NM"			/> <!-- 부품명 -->
+		<result property="faultyCd"				column="FAULTY_CD"			/> <!-- 불량코드 -->
+		<result property="faultyDtl"			column="FAULTY_DTL"			/> <!-- 불량내역 -->
+		<result property="lotNo"				column="LOT_NO"				/> <!-- LOT NO -->
+		<result property="lotCount"				column="LOT_COUNT"			/> <!-- LOT 수 -->
+		<result property="faultyCnt"			column="FAULTY_CNT"			/> <!-- 불량수 -->
+		<result property="initFaultyCnt"		column="INIT_FAULTY_CNT"	/> <!-- 초기허용불량수 -->
+		<result property="etFaultyCnt"			column="ET_FAULTY_CNT"		/> <!-- 공정불량수 -->
+		<result property="unfitProcNm"			column="UNFIT_PROC_NM"		/>
+		<result property="itemModel"			column="ITEM_MODEL"			/>
+		<result property="itemModelNm"			column="ITEM_MODEL_NM"		/>
+		<result property="itemCus"				column="ITEM_CUS"			/>
+		<result property="itemCusNm"			column="ITEM_CUS_NM"		/>
+		<result property="inSlipNo"				column="IN_SLIP_NO"			/>
+		<result property="inSlipSeq"			column="IN_SLIP_SEQ"		/>
+		<result property="itemSeq"				column="ITEM_SEQ"			/>
+		<result property="itemGubun"			column="ITEM_GUBUN"			/>
+		
+		<result property="equipCd"				column="EQUIP_CD"			/>
+		<result property="equipNm"				column="EQUIP_NM"			/>
+		
+		<result property="faultyCavity"			column="FAULTY_CAVITY"		/>
+		<result property="faultyQty"			column="FAULTY_QTY"			/>
+		<result property="ordLotNo"				column="ORD_LOT_NO"			/>
+		<result property="mainGubun"			column="MAIN_GUBUN"			/>
+		<result property="minorPrcssCd"			column="MINOR_PRCSS_CD"		/>
+		<result property="fairQty"				column="FAIR_QTY"			/>
+		
+		<result property="unfitPairCnt"			column="UNFIT_PAIR_CNT"		/>
+		<result property="unfitFaultyCnt"		column="UNFIT_FAULTY_CNT"	/>
+		<result property="unfitFaultyDate"		column="UNFIT_FAULTY_DATE"	/>
+		<result property="unfitResultNo"		column="UNFIT_RESULT_NO"	/>
+		<result property="unfitFaultyChargr"	column="UNFIT_FAULTY_CHARGR"		/>
+		<result property="unfitFaultyChargrNm"	column="UNFIT_FAULTY_CHARGR_NM"		/>
+		<result property="unfitDesc"			column="UNFIT_DESC"			/>
+	</resultMap>
+	
+	<!-- 부적합관리대장(수입) 목록조회 -->
+	<select id="unfitInspectAdmList" resultMap="UnfitAdmVo">
+		SELECT 
+			IIA_TB.IN_SLIP_NO
+			, IIA_TB.IN_SLIP_SEQ 
+			, IINA_TB.MAIN_GUBUN
+			, IIMA_TB.INSPECT_DATE
+			, IINA_TB.ITEM_CUS 
+			, (SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD = IINA_TB.ITEM_CUS) ITEM_CUS_NM 
+			, IINA_TB.ITEM_MODEL
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM H WHERE H.BASE_CD = IINA_TB.ITEM_MODEL AND H.BASE_GROUP_CD = '099' ) ITEM_MODEL_NM
+			, IINA_TB.ITEM_NM
+			, IINA_TB.ITEM_SEQ
+			, IINA_TB.ITEM_GUBUN 
+			, IFA_TB.FAULTY_TYPE_CD FAULTY_CD
+			, (SELECT BASE_INFO_NM FROM TB_BASE_INFO_ADM X WHERE X.BASE_INFO_TYPE='FT' AND X.BASE_INFO_CD=IFA_TB.FAULTY_TYPE_CD) FAULTY_DTL
+			, IOWA_TB.BARCODE_NO LOT_NO
+			, IOWA_TB.PRE_IN_WHS_QTY FAIR_QTY
+			, ISNULL(IFA_TB.FAULTY_TYPE_QTY, 0) FAULTY_QTY
+			, UA_TB.UNFIT_NO
+			, UA_TB.UNFIT_LOT
+			, UA_TB.CM_APPRO_DATE 
+			, UA_TB.CM_COMPL_DATE
+			, ISNULL(UA_TB.APPROVAL_YN,'N') APPROVAL_YN
+			, UA_TB.UNFIT_DESC
+			, IOWA_TB.APPROVAL_CD
+			, URA.UNFIT_PROC
+			,(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = URA.UNFIT_PROC AND X.BASE_GROUP_CD = '139') UNFIT_PROC_NM
+			, URA.UNFIT_PAIR_CNT
+			, URA.UNFIT_FAULTY_CNT
+			, URA.UNFIT_FAULTY_DATE
+			, URA.UNFIT_FAULTY_CHARGR
+			,(SELECT USER_NM FROM TB_USER X WHERE X.USER_NUMBER=URA.UNFIT_FAULTY_CHARGR) UNFIT_FAULTY_CHARGR_NM
+		FROM TB_ITEM_INSPECT_ADM IIA_TB
+		LEFT JOIN TB_IN_OUT_WHS_ADM IOWA_TB
+		ON IOWA_TB.IN_SLIP_NO = IIA_TB.IN_SLIP_NO
+		AND IOWA_TB.IN_SLIP_SEQ = IIA_TB.IN_SLIP_SEQ
+		LEFT JOIN TB_ITEM_INSPECT_MASTER_ADM IIMA_TB
+		ON IOWA_TB.IN_SLIP_NO = IIMA_TB.IN_SLIP_NO
+		LEFT JOIN TB_ITEM_INSPECT_FAULTY_TYPE IFA_TB
+		ON IIA_TB.IN_SLIP_NO = IFA_TB.IN_SLIP_NO
+		AND IIA_TB.IN_SLIP_SEQ = IFA_TB.IN_SLIP_SEQ
+		AND IFA_TB.FAULTY_TYPE_QTY>0
+		LEFT JOIN TB_UNFIT_ADM UA_TB
+		ON IOWA_TB.BARCODE_NO = UA_TB.UNFIT_LOT		
+		AND IFA_TB.FAULTY_TYPE_CD  = UA_TB.FAULTY_CD
+		AND UA_TB.UNFIT_GUBUN = '001'
+		LEFT OUTER JOIN TB_UNFIT_RESULT_ADM URA
+		ON URA.UNFIT_NO=UA_TB.UNFIT_NO
+		LEFT JOIN TB_ITEM_INFO_ADM IINA_TB
+		ON IIA_TB.ITEM_SEQ = IINA_TB.ITEM_SEQ
+		WHERE 1=1
+		AND IIA_TB.QA_EVAL = '002'
+		<if test="startDate != null and !startDate.equals('')">
+		AND IIMA_TB.INSPECT_DATE BETWEEN #{startDate} AND #{endDate}
+		</if>
+		<if test="mainGubun != null and !mainGubun.equals('')">
+		AND IINA_TB.MAIN_GUBUN = #{mainGubun}
+		</if>
+		<if test="unfitProc != null and !unfitProc.equals('')">
+		AND URA.UNFIT_PROC=#{unfitProc}
+		</if>
+		<if test="approvalYn != null and !approvalYn.equals('')">
+			<if test="approvalYn == '001'">
+				AND UA_TB.APPROVAL_YN = 'Y'
+			</if>
+			<if test="approvalYn == '002'">
+				AND (UA_TB.APPROVAL_YN = '' OR UA_TB.APPROVAL_YN IS NULL)
+			</if>
+		</if>
+		<if test="insertYn != null and !insertYn.equals('')">
+			<if test="insertYn == '001'">
+				AND (SELECT COUNT(*) FROM TB_UNFIT_RESULT_ADM WHERE UNFIT_NO = UA_TB.UNFIT_NO) > 0
+			</if>
+			<if test="insertYn == '002'">
+				AND (SELECT COUNT(*) FROM TB_UNFIT_RESULT_ADM WHERE UNFIT_NO = UA_TB.UNFIT_NO) = 0
+			</if>
+		</if>
+		ORDER BY IIMA_TB.INSPECT_DATE, IOWA_TB.BARCODE_NO
+	</select>
+	
+	<!-- 부적합관리대장(공정) 목록조회 -->
+	<select id="unfitPrcssAdmList" resultMap="UnfitAdmVo">
+			SELECT
+			IIA.MAIN_GUBUN,
+			UA.UNFIT_NO,
+			WOFT.FAULTY_TYPE_DATE INSPECT_DATE,
+			(SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD=IIA.ITEM_CUS) ITEM_CUS_NM,
+			WOA.EQUIP_CD,
+			(SELECT EQUIP_NM FROM TB_EQUIP_CODE_ADM X WHERE X.EQUIP_CD=WOA.EQUIP_CD) EQUIP_NM,
+			IIA.ITEM_SEQ,
+			IIA.ITEM_NM,
+			IIA.ITEM_GUBUN,
+			WOFT.FAULTY_TYPE_CD FAULTY_CD,
+			(SELECT BASE_INFO_NM FROM TB_BASE_INFO_ADM X WHERE X.BASE_INFO_TYPE='FT' AND X.BASE_INFO_GUBUN='003' AND X.BASE_INFO_CD=WOFT.FAULTY_TYPE_CD) FAULTY_DTL,
+	        WOFT.WORK_ORD_NO LOT_NO,
+	        WOFT.FAULTY_TYPE_QTY AS FAULTY_QTY,
+	        URA.UNFIT_PROC,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = URA.UNFIT_PROC AND X.BASE_GROUP_CD = '139') UNFIT_PROC_NM,
+			URA.UNFIT_PAIR_CNT,
+			URA.UNFIT_FAULTY_CNT,
+			URA.UNFIT_FAULTY_DATE,
+			(SELECT USER_NM FROM TB_USER X WHERE X.USER_NUMBER=URA.UNFIT_FAULTY_CHARGR) UNFIT_FAULTY_CHARGR_NM,
+			UA.CM_APPRO_DATE,
+			UA.CM_COMPL_DATE,
+			UA.APPROVAL_YN,
+			UA.UNFIT_DESC
+		FROM TB_WORK_ORDER_FAULTY_TYPE WOFT 
+		LEFT JOIN TB_UNFIT_ADM UA
+		ON WOFT.WORK_ORD_NO = UA.UNFIT_LOT
+		AND WOFT.FAULTY_TYPE_CD=UA.FAULTY_CD
+		LEFT JOIN TB_UNFIT_RESULT_ADM URA
+		ON UA.UNFIT_NO = URA.UNFIT_NO
+		LEFT JOIN TB_WORK_ORDER_ADM WOA
+		ON WOFT.WORK_ORD_NO = WOA.WORK_ORD_NO
+		LEFT JOIN TB_ITEM_INFO_ADM IIA
+		ON WOA.ITEM_SEQ = IIA.ITEM_SEQ
+		WHERE 1=1
+		AND WOA.WORK_STATUS = 'E'
+		<if test="mainGubun != null and !mainGubun.equals('')">
+		AND IIA.MAIN_GUBUN = #{mainGubun}
+		</if>
+		<if test="unfitProc != null and !unfitProc.equals('')">
+		AND URA.UNFIT_PROC=#{unfitProc}
+		</if>
+		<if test="approvalYn != null and !approvalYn.equals('')">
+			<if test="approvalYn == '001'">
+				AND UA.APPROVAL_YN = 'Y'
+			</if>
+			<if test="approvalYn == '002'">
+				AND (UA.APPROVAL_YN = '' OR UA.APPROVAL_YN IS NULL)
+			</if>
+		</if>
+		<if test="insertYn != null and !insertYn.equals('')">
+			<if test="insertYn == '001'">
+				AND (SELECT COUNT(*) FROM TB_UNFIT_RESULT_ADM WHERE UNFIT_NO = UA.UNFIT_NO) > 0
+			</if>
+			<if test="insertYn == '002'">
+				AND (SELECT COUNT(*) FROM TB_UNFIT_RESULT_ADM WHERE UNFIT_NO = UA.UNFIT_NO) = 0
+			</if>
+		</if>
+		AND WOFT.FAULTY_TYPE_DATE BETWEEN #{startDate} AND #{endDate}
+		AND WOFT.FAULTY_TYPE_QTY  > 0
+	</select>
+	
+	<!-- 부적합관리대장(출하) 목록조회 -->
+	<select id="unfitCompleteAdmList" resultMap="UnfitAdmVo">
+		SELECT 
+			ICM_TB.DO_NO
+			, ICA_TB.DO_SEQ
+			, ICM_TB.INSPECT_DATE
+			, IIA_TB.ITEM_CUS
+			, (SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD = IIA_TB.ITEM_CUS) ITEM_CUS_NM 
+			, IIA_TB.ITEM_CD
+			, IIA_TB.ITEM_NM
+			, IIA_TB.ITEM_SEQ
+			, IIA_TB.ITEM_GUBUN
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=IIA_TB.ITEM_GUBUN AND X.BASE_GROUP_CD='079') ITEM_GUBUN_NM
+			, IIA_TB.MAIN_GUBUN
+			, ICFT.FAULTY_TYPE_CD FAULTY_CD
+			, (SELECT BASE_INFO_NM FROM TB_BASE_INFO_ADM X WHERE X.BASE_INFO_TYPE='FT' AND X.BASE_INFO_CD=ICFT.FAULTY_TYPE_CD) FAULTY_DTL
+			, ICA_TB.WORK_ORD_NO LOT_NO
+			, ICFT.FAULTY_TYPE_QTY FAULTY_QTY
+			, UA_TB.UNFIT_NO
+			, UA_TB.UNFIT_LOT
+			, URA.UNFIT_PROC
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = URA.UNFIT_PROC AND X.BASE_GROUP_CD = '139') UNFIT_PROC_NM
+			, URA.UNFIT_PAIR_CNT
+			, URA.UNFIT_FAULTY_CNT
+			, URA.UNFIT_FAULTY_DATE
+			, URA.UNFIT_FAULTY_CHARGR
+			,(SELECT USER_NM FROM TB_USER X WHERE X.USER_NUMBER=URA.UNFIT_FAULTY_CHARGR) UNFIT_FAULTY_CHARGR_NM
+			, UA_TB.CM_APPRO_DATE
+			, UA_TB.CM_COMPL_DATE 
+			, UA_TB.UNFIT_DESC
+			, UA_TB.APPROVAL_YN
+		FROM TB_BIZ_ORDER_DTL BOD 
+		LEFT OUTER JOIN TB_ITEM_COMPLETE_MASTER_ADM ICM_TB
+		ON BOD.CONT_DTL_NO = ICM_TB.CONT_DTL_NO
+		LEFT OUTER JOIN TB_ITEM_COMPLETE_ADM ICA_TB
+		ON ICM_TB.DO_NO=ICA_TB.DO_NO
+		LEFT OUTER JOIN TB_ITEM_COMPLETE_FAULTY_TYPE ICFT
+		ON ICA_TB.DO_NO = ICFT.DO_NO
+		AND ICA_TB.DO_SEQ=ICFT.DO_SEQ
+		LEFT OUTER JOIN TB_UNFIT_ADM UA_TB
+		ON ICA_TB.WORK_ORD_NO = UA_TB.UNFIT_LOT 
+		AND ICFT.FAULTY_TYPE_CD  = UA_TB.FAULTY_CD
+		AND UA_TB.UNFIT_GUBUN = '003'
+		LEFT OUTER JOIN TB_UNFIT_RESULT_ADM URA
+		ON URA.UNFIT_NO=UA_TB.UNFIT_NO
+		LEFT OUTER JOIN TB_ITEM_INFO_ADM IIA_TB
+		ON ICM_TB.ITEM_SEQ = IIA_TB.ITEM_SEQ
+		GROUP BY
+			ICM_TB.DO_NO
+			, ICA_TB.DO_SEQ
+			, ICM_TB.INSPECT_DATE
+			, IIA_TB.ITEM_CUS
+			, IIA_TB.ITEM_CD
+			, IIA_TB.ITEM_NM
+			, IIA_TB.ITEM_SEQ
+			, IIA_TB.ITEM_GUBUN
+			, IIA_TB.MAIN_GUBUN
+			, ICFT.FAULTY_TYPE_CD
+			, ICA_TB.WORK_ORD_NO
+			, ICFT.FAULTY_TYPE_QTY
+			, UA_TB.CM_APPRO_DATE
+			, UA_TB.CM_COMPL_DATE 
+			, UA_TB.UNFIT_DESC
+			, ICA_TB.PAIR_QTY
+			, ICA_TB.FAULTY_QTY
+			, URA.UNFIT_PROC
+			, UA_TB.UNFIT_PROC
+			, UA_TB.UNFIT_NO
+			, UA_TB.UNFIT_LOT
+			, URA.UNFIT_PAIR_CNT
+			, URA.UNFIT_FAULTY_CNT
+			, URA.UNFIT_FAULTY_DATE
+			, URA.UNFIT_FAULTY_CHARGR
+			, UA_TB.APPROVAL_YN
+		HAVING 1=1
+		AND FAULTY_TYPE_QTY > 0
+		
+		<if test="startDate != null and !startDate.equals('')">
+		AND ICM_TB.INSPECT_DATE BETWEEN #{startDate} AND #{endDate}
+		</if>
+		<if test="mainGubun != null and !mainGubun.equals('')">
+		AND IIA_TB.MAIN_GUBUN = #{mainGubun}
+		</if>
+		<if test="unfitProc != null and !unfitProc.equals('')">
+		AND URA.UNFIT_PROC=#{unfitProc}
+		</if>
+		<if test="approvalYn != null and !approvalYn.equals('')">
+			<if test="approvalYn == '001'">
+				AND UA_TB.APPROVAL_YN = 'Y'
+			</if>
+			<if test="approvalYn == '002'">
+				AND (UA_TB.APPROVAL_YN = '' OR UA_TB.APPROVAL_YN IS NULL)
+			</if>
+		</if>
+		<if test="insertYn != null and !insertYn.equals('')">
+			<if test="insertYn == '001'">
+				AND (SELECT COUNT(*) FROM TB_UNFIT_RESULT_ADM WHERE UNFIT_NO = UA_TB.UNFIT_NO) > 0
+			</if>
+			<if test="insertYn == '002'">
+				AND (SELECT COUNT(*) FROM TB_UNFIT_RESULT_ADM WHERE UNFIT_NO = UA_TB.UNFIT_NO) = 0
+			</if>
+		</if>
+	</select>
+	
+	<!-- 부적합관리대장(레이저) 등록 -->
+	<insert id="unfitAdmCreate">
+		INSERT INTO TB_UNFIT_ADM(
+			UNFIT_NO,
+			UNFIT_GUBUN,
+			UNFIT_LOT,
+			FAULTY_CD,
+			UNFIT_PROC,
+			UNFIT_DATE,
+			UNFIT_MANAGER,
+			CM_APPRO_DATE,
+			CM_COMPL_DATE,
+			APPROVAL_YN,
+			UNFIT_DESC,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{unfitNo},
+			#{unfitGubun},
+			#{unfitLot},
+			#{faultyCd},
+			#{unfitProc},
+			#{unfitDate},
+			#{unfitManager},
+			#{cmApproDate},
+			#{cmComplDate},
+			#{approvalYn},
+			#{unfitDesc},
+			#{regId},
+			getDate()
+		)
+	</insert>
+	
+	<!-- 부적합관리대장(레이저) 수정 -->
+	<update id="unfitAdmUpdate">
+		UPDATE	TB_UNFIT_ADM 
+		SET	UNFIT_GUBUN = #{unfitGubun},
+			UNFIT_LOT = #{unfitLot},
+			FAULTY_CD = #{faultyCd},
+			UNFIT_PROC = #{unfitProc},
+			UNFIT_DATE = #{unfitDate},
+			UNFIT_MANAGER = #{unfitManager},
+			CM_APPRO_DATE = #{cmApproDate},
+			CM_COMPL_DATE = #{cmComplDate},
+			UNFIT_DESC = #{unfitDesc},
+			UPD_ID = #{updId},
+			UPD_DATE = getDate()
+		WHERE	1=1
+		AND	UNFIT_NO = #{unfitNo}
+	</update>
+	
+	<!-- 부적합관리대장(레이저) 승인여부 수정 -->
+	<update id="unfitApprovalYnUpdate">
+		UPDATE	TB_UNFIT_ADM 
+		SET	APPROVAL_YN = #{approvalYn}
+		WHERE	1=1
+		AND	UNFIT_NO = #{unfitNo}
+	</update>
+	
+	<!-- 부적합관리대장(레이저) 중복확인 -->
+	<select id="unfitAdmCheck" resultType="Integer">
+		SELECT 
+			COUNT(*) 
+		FROM TB_UNFIT_ADM 
+		WHERE	1=1
+		AND	UNFIT_LOT = #{unfitLot}
+		AND	UNFIT_GUBUN = #{unfitGubun}
+		AND FAULTY_CD = #{faultyCd}
+	</select>
+	
+	<!-- 부적합번호 생성 -->
+	<select id="getUnfitNo" resultType="String">
+		SELECT 
+			ISNULL(RIGHT('000' + CAST(MAX(RIGHT(UNFIT_NO, 3)) + 1 AS NVARCHAR), 3), '001') 
+		FROM TB_UNFIT_ADM 
+		WHERE SUBSTRING(UNFIT_NO, 1, 8) = #{unfitToday}
+	</select>
+	
+	<!-- 불량유형 합계(공정) -->
+	<select id="faultyTypeTotalList" resultMap="UnfitAdmVo">
+		SELECT
+			FAULTY_TYPE_CD FAULTY_CD,
+			(SELECT BS.BASE_INFO_NM FROM TB_BASE_INFO_ADM BS WHERE BS.BASE_INFO_TYPE = 'FT' AND BS.BASE_INFO_CD = FAULTY_TYPE_CD) FAULTY_DTL,
+			SUM(FAULTY_TYPE_QTY) FAULTY_CNT
+		FROM TB_WORK_ORDER_FAULTY_TYPE FT
+		LEFT OUTER JOIN TB_WORK_ORDER_ADM  WOA
+		ON FT.WORK_ORD_NO=WOA.WORK_ORD_NO
+		WHERE 1=1
+		<if test="startDate!=null and !startDate.equals('')">
+		AND FAULTY_TYPE_DATE BETWEEN #{startDate} AND #{endDate}
+		</if>
+		GROUP BY FAULTY_TYPE_CD, WORK_STATUS
+		HAVING WORK_STATUS = 'E'
+		ORDER BY FAULTY_CNT DESC
+	</select>
+	
+	<!-- 불량유형 합계(수입) -->
+	<select id="faultyTypeTotalList2" resultMap="UnfitAdmVo">
+		SELECT 
+			FAULTY_TYPE_CD,
+			(SELECT BS.BASE_INFO_NM FROM TB_BASE_INFO_ADM BS WHERE BS.BASE_INFO_TYPE = 'FT' AND BS.BASE_INFO_CD = FAULTY_TYPE_CD) FAULTY_DTL,
+			SUM(FAULTY_TYPE_QTY) FAULTY_CNT
+		FROM TB_ITEM_INSPECT_FAULTY_TYPE A
+		LEFT OUTER JOIN TB_ITEM_INSPECT_MASTER_ADM B
+		ON A.IN_SLIP_NO=B.IN_SLIP_NO
+		WHERE 1=1
+		<if test="startDate!=null and !startDate.equals('')">
+		AND B.INSPECT_DATE BETWEEN #{startDate} AND #{endDate}
+		</if>
+		GROUP BY FAULTY_TYPE_CD
+		HAVING SUM(FAULTY_TYPE_QTY) > 0
+		ORDER BY FAULTY_CNT DESC
+	</select>
+	
+	<!-- 불량유형 합계(출하) -->
+	<select id="faultyTypeTotalList3" resultMap="UnfitAdmVo">
+		SELECT 
+			FAULTY_TYPE_CD,
+			(SELECT BS.BASE_INFO_NM FROM TB_BASE_INFO_ADM BS WHERE BS.BASE_INFO_TYPE = 'FT' AND BS.BASE_INFO_CD = FAULTY_TYPE_CD) FAULTY_DTL,
+			SUM(FAULTY_TYPE_QTY) FAULTY_CNT
+		FROM TB_ITEM_COMPLETE_FAULTY_TYPE A
+		LEFT OUTER JOIN TB_ITEM_COMPLETE_MASTER_ADM B
+		ON A.DO_NO=B.DO_NO
+		WHERE 1=1
+		<if test="startDate!=null and !startDate.equals('')">
+			AND B.INSPECT_DATE BETWEEN #{startDate} AND #{endDate}
+		</if>
+		GROUP BY FAULTY_TYPE_CD
+		HAVING SUM(FAULTY_TYPE_QTY) > 0
+		ORDER BY FAULTY_CNT DESC
+	</select>
+	
+	<!-- 불량cavity -->
+	<select id="faultyTypeCavityList" resultMap="UnfitAdmVo">
+		SELECT 
+			WOF.FAULTY_CAVITY,
+			SUM(ISNULL(WOF.FAULTY_TYPE_QTY,0)) FAULTY_QTY
+		FROM TB_WORK_ORDER_FAULTY_TYPE WOF
+		LEFT OUTER JOIN TB_WORK_ORDER_PRCSS  WO
+		ON WOF.WORK_ORD_NO=WO.WORK_ORD_NO
+		WHERE 1=1
+		AND WOF.FAULTY_TYPE_CD=#{faultyCd}
+		AND WOF.FAULTY_TYPE_DATE BETWEEN #{startDate} AND #{endDate}
+		GROUP BY WOF.FAULTY_CAVITY, WORK_STATUS
+		HAVING WORK_STATUS = '003'
+	</select>
+	
+	<!-- 부적합관리대장(봉제) 결과 등록 -->
+	<insert id="unfitResultCreate">
+		INSERT INTO TB_UNFIT_RESULT_ADM(
+			UNFIT_NO,
+			UNFIT_LOT,
+			UNFIT_PROC,
+			UNFIT_FAULTY_DATE,
+			UNFIT_FAULTY_CHARGR,
+			UNFIT_PAIR_CNT,
+			UNFIT_FAULTY_CNT,
+			UNFIT_DESC,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{unfitNo},
+			#{unfitLot},
+			#{unfitProc},
+			#{unfitFaultyDate},
+			#{unfitFaultyChargr},
+			#{unfitPairCnt},
+			#{unfitFaultyCnt},
+			#{unfitDesc},
+			#{regId},
+			getDate()
+		)
+	</insert>
+	
+	<!-- 부적합관리대장(봉제) 결과 수정 -->
+	<update id="unfitResultUpdate">
+		UPDATE	TB_UNFIT_RESULT_ADM 
+		SET	UNFIT_NO = #{unfitNo},
+			UNFIT_LOT = #{unfitLot},
+			UNFIT_PROC = #{unfitProc},
+			UNFIT_FAULTY_DATE = #{unfitFaultyDate},
+			UNFIT_FAULTY_CHARGR = #{unfitFaultyChargr},
+			UNFIT_PAIR_CNT = #{unfitPairCnt},
+			UNFIT_FAULTY_CNT = #{unfitFaultyCnt},
+			UNFIT_DESC = #{unfitDesc},
+			UPD_ID = #{updId},
+			UPD_DATE = getDate()
+		WHERE	1=1
+		AND	UNFIT_RESULT_NO = #{unfitResultNo}
+	</update>
+	
+	<!-- 부적합관리대장 삭제 -->
+	<delete id="unfitResultDel">
+		DELETE FROM TB_UNFIT_RESULT_ADM 
+		WHERE 1=1 
+		AND UNFIT_RESULT_NO=#{unfitResultNo}
+	</delete>
+	
+	
+	<!-- 부적합관리대장 조회 -->
+	<select id="unfitResultList" resultMap="UnfitAdmVo">
+		select 
+			UNFIT_RESULT_NO
+			, UNFIT_NO
+			, UNFIT_LOT
+			, UNFIT_PROC
+			, UNFIT_FAULTY_DATE
+			, UNFIT_FAULTY_CHARGR
+			, (SELECT USER_NM FROM TB_USER X WHERE X.USER_NUMBER = UNFIT_FAULTY_CHARGR) UNFIT_FAULTY_CHARGR_NM
+			, UNFIT_PAIR_CNT
+			, UNFIT_FAULTY_CNT
+			, UNFIT_DESC
+			, REG_ID
+			, REG_DATE
+			, UPD_ID
+			, UPD_DATE
+		from TB_UNFIT_RESULT_ADM
+	</select>
+	
+	
+	<!-- 부적합관리대장 상세조회 -->
+	<select id="unfitResultRead" resultMap="UnfitAdmVo">
+		SELECT 
+			UNFIT_RESULT_NO
+			, UNFIT_NO
+			, UNFIT_LOT
+			, UNFIT_PROC
+			, UNFIT_FAULTY_DATE
+			, UNFIT_FAULTY_CHARGR
+			, (SELECT USER_NM FROM TB_USER X WHERE X.USER_NUMBER = UNFIT_FAULTY_CHARGR) UNFIT_FAULTY_CHARGR_NM
+			, UNFIT_PAIR_CNT
+			, UNFIT_FAULTY_CNT
+			, UNFIT_DESC
+			, REG_ID
+			, REG_DATE
+			, UPD_ID
+			, UPD_DATE
+		FROM TB_UNFIT_RESULT_ADM
+		WHERE 1=1
+		AND UNFIT_NO = #{unfitNo}
+	</select>
+	
+</mapper>

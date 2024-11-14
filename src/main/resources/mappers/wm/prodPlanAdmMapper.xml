@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.wm.prodPlanAdmMapper">
+
+	<resultMap id="MonProdPlanAdmVo" type="mes.domain.wm.MonProdPlanAdmVo">
+		<result property="prodYear"				column="PROD_YEAR"				/>
+		<result property="prodMon"		    	column="PROD_MON"				/>
+		<result property="itemSeq"				column="ITEM_SEQ"				/>	
+		<result property="itemCd"				column="ITEM_CD"				/>	
+		<result property="itemNm"		    	column="ITEM_NM"			    />
+		<result property="itemModel"		    column="ITEM_MODEL"				/>
+		<result property="itemGenre"		    column="ITEM_GENRE"				/>
+		<result property="itemType"		   	 	column="ITEM_TYPE"				/>
+		<result property="itemWorkplace"		column="ITEM_WORKPLACE"			/>
+		<result property="itemWorkplaceNm"		column="ITEM_WORKPLACE_NM"		/>
+		
+		<result property="accCd"		    	column="ACC_CD"					/>
+		<result property="accNm"		   	 	column="ACC_NM"			   		/>
+		
+		<result property="unitCost"		   	 	column="UNIT_COST"				/>
+		<result property="exportCost"		   	column="EXPORT_COST"			/>
+	
+		
+		<result property="safyStockQty"			column="SAFY_STOCK_QTY"			/>
+		<result property="initStockQty"		    column="INIT_STOCK_QTY"			/>
+		<result property="salesOrderQty"		column="SALES_ORDER_QTY"		/>	
+		<result property="prodTotalQty"			column="PROD_TOTAL_QTY"			/>
+		<result property="endStockQty"		    column="END_STOCK_QTY"			/>
+		<result property="safyStockAmt"			column="SAFY_STOCK_AMT"			/>
+		<result property="initStockAmt"		    column="INIT_STOCK_AMT"			/>
+		<result property="salesOrderAmt"		column="SALES_ORDER_AMT"		/>	
+		<result property="prodTotalAmt"			column="PROD_TOTAL_AMT"			/>
+		<result property="endStockAmt"		    column="END_STOCK_AMT"			/>
+		
+		<result property="confirmYn"		    column="CONFIRM_YN"				/>
+		<result property="confirmYnNm"		    column="CONFIRM_YN_NM"			/>
+		
+		<result property="regId"				column="REG_ID"					/>
+		<result property="regDate"				column="REG_DATE"				/>
+		<result property="updId"				column="UPD_ID"					/>				
+		<result property="updDate"				column="UPD_DATE"				/>
+		
+		<!-- 		추가사항 -->
+		<result property="mainGubun"			column="MAIN_GUBUN"				/>
+		<result property="mainGubunNm"			column="MAIN_GUBUN_NM"			/>
+		<result property="itemCus"				column="ITEM_CUS"				/>
+		<result property="itemCusNm"			column="ITEM_CUS_NM"			/>
+	</resultMap>
+	
+	
+	<resultMap id="DayProdPlanAdmVo" type="mes.domain.wm.DayProdPlanAdmVo">
+		<result property="prodYear"				column="PROD_YEAR"				/>
+		<result property="prodMon"		    	column="PROD_MON"				/>
+		<result property="prodDay"		    	column="PROD_DAY"				/>
+		<result property="itemSeq"				column="ITEM_SEQ"				/>	
+		<result property="itemCd"				column="ITEM_CD"				/>	
+		<result property="itemNm"		    	column="ITEM_NM"			    />
+		<result property="itemModel"		    column="ITEM_MODEL"				/>
+		
+		<result property="itemGubun"		    column="ITEM_GUBUN"				/>
+		<result property="itemGubunNm"		    column="ITEM_GUBUN_NM"			/>
+		
+		<result property="itemColor"		    column="ITEM_COLOR"				/>
+		<result property="itemGenre"		    column="ITEM_GENRE"				/>
+		<result property="itemType"		   	 	column="ITEM_TYPE"				/>
+		<result property="itemWorkplace"		column="ITEM_WORKPLACE"			/>
+		<result property="accCd"		    	column="ACC_CD"					/>
+		<result property="accNm"		   	 	column="ACC_NM"			   		/>
+		
+		<result property="monConfirmYn"		    column="MON_CONFIRM_YN"			/>
+		<result property="dayConfirmYn"		   	 column="DAY_CONFIRM_YN"		/>
+		<result property="dayConfirmYnNm"		 column="DAY_CONFIRM_YN_NM"		/>
+		<result property="prodDayQty"		   	 column="PROD_DAY_QTY"			/>
+		<result property="prodSumQty"		   	 column="PROD_SUM_QTY"			/>
+		<result property="prodMonQty"		   	 column="PROD_MON_QTY"			/>
+		<result property="confirmYn"		    column="CONFIRM_YN"				/>
+		
+		
+		<result property="d01"			column="01"				/>	
+		<result property="d02"			column="02"				/>	
+		<result property="d03"			column="03"				/>	
+		<result property="d04"			column="04"				/>	
+		<result property="d05"			column="05"				/>	
+		<result property="d06"			column="06"				/>	
+		<result property="d07"			column="07"				/>	
+		<result property="d08"			column="08"				/>	
+		<result property="d09"			column="09"				/>	
+		<result property="d10"			column="10"				/>	
+		<result property="d11"			column="11"				/>	
+		<result property="d12"			column="12"				/>	
+		<result property="d13"			column="13"				/>	
+		<result property="d14"			column="14"				/>	
+		<result property="d15"			column="15"				/>	
+		<result property="d16"			column="16"				/>	
+		<result property="d17"			column="17"				/>	
+		<result property="d18"			column="18"				/>	
+		<result property="d19"			column="19"				/>	
+		<result property="d20"			column="20"				/>	
+		<result property="d21"			column="21"				/>	
+		<result property="d22"			column="22"				/>	
+		<result property="d23"			column="23"				/>	
+		<result property="d24"			column="24"				/>	
+		<result property="d25"			column="25"				/>	
+		<result property="d26"			column="26"				/>	
+		<result property="d27"			column="27"				/>	
+		<result property="d28"			column="28"				/>	
+		<result property="d29"			column="29"				/>	
+		<result property="d30"			column="30"				/>	
+		<result property="d31"			column="31"				/>	
+		
+		<result property="regId"				column="REG_ID"					/>
+		<result property="regDate"				column="REG_DATE"				/>
+		<result property="updId"				column="UPD_ID"					/>				
+		<result property="updDate"				column="UPD_DATE"				/>
+		
+		<!-- 		추가사항 -->
+		<result property="mainGubun"			column="MAIN_GUBUN"				/>
+		<result property="mainGubunNm"			column="MAIN_GUBUN_NM"			/>
+		<result property="itemCus"				column="ITEM_CUS"				/>
+		<result property="itemCusNm"			column="ITEM_CUS_NM"			/>
+		
+	</resultMap>
+	
+	
+	<!-- 월생산계획 목록조회 -->
+	<select id="monProdPlanAdmList" resultMap="MonProdPlanAdmVo">
+		SELECT 
+			A.ITEM_SEQ
+			, B.MAIN_GUBUN
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = B.MAIN_GUBUN AND X.BASE_GROUP_CD = '112') MAIN_GUBUN_NM
+			, B.ITEM_CUS
+			, (SELECT X.DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD = B.ITEM_CUS) ITEM_CUS_NM
+			, B.ITEM_CD
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = B.ITEM_MODEL AND X.BASE_GROUP_CD = '099') ITEM_MODEL
+			, B.ITEM_NM
+			, B.ITEM_GENRE
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = B.ITEM_TYPE AND X.BASE_GROUP_CD = '092') ITEM_TYPE
+			, B.ITEM_WORKPLACE
+			,(CASE WHEN B.MAIN_GUBUN='001' THEN (SELECT PRCSS_NM FROM TB_PRCSS_CODE_ADM X WHERE X.PRCSS_CD=X.LOWER_PRCSS_CD AND X.PRCSS_GUBUN='001' AND X.PRCSS_CD=B.ITEM_WORKPLACE)
+				WHEN B.MAIN_GUBUN='002' THEN (SELECT PRCSS_NM FROM TB_PRCSS_CODE_ADM X WHERE X.PRCSS_CD=X.LOWER_PRCSS_CD AND X.PRCSS_GUBUN='002' AND X.PRCSS_TYPE='001' AND X.PRCSS_CD=B.ITEM_WORKPLACE)
+				END
+			) ITEM_WORKPLACE_NM
+			, ISNULL(C.SAFY_STOCK_QTY, 0) SAFY_STOCK_QTY
+			, ISNULL(X.TM_QTY, 0) INIT_STOCK_QTY
+			, ISNULL(A.SALES_PLAN_QTY, 0) SALES_ORDER_QTY
+			, (
+				CASE WHEN C.PROD_TOTAL_QTY IS NULL
+				THEN CONVERT(FLOAT, ISNULL(REPLACE(B.SAFETY_STOCK, ',', ''), 0)) + CONVERT(FLOAT, ISNULL(REPLACE(A.SALES_PLAN_QTY, ',', ''), 0)) - CONVERT(FLOAT, ISNULL(0, 0))
+				ELSE C.PROD_TOTAL_QTY END
+			) PROD_TOTAL_QTY
+			, 0 END_STOCK_QTY
+			, ISNULL(B.EXPORT_COST, 0) UNIT_COST
+			, CONVERT(FLOAT, ISNULL(REPLACE(B.SAFETY_STOCK, ',', ''), 0)) * ISNULL(REPLACE(B.EXPORT_COST, ',', ''), 0) SAFY_STOCK_AMT
+			, CONVERT(FLOAT, ISNULL(0, 0)) * ISNULL(REPLACE(B.EXPORT_COST, ',', ''), 0) INIT_STOCK_AMT
+			, CONVERT(FLOAT, ISNULL(REPLACE(A.SALES_PLAN_QTY, ',', ''), 0)) * ISNULL(REPLACE(B.EXPORT_COST, ',', ''), 0) SALES_ORDER_AMT
+			, (
+				CASE WHEN C.PROD_TOTAL_QTY IS NULL
+				THEN (CONVERT(FLOAT, ISNULL(REPLACE(B.SAFETY_STOCK, ',', ''), 0)) + CONVERT(FLOAT, ISNULL(REPLACE(A.SALES_PLAN_QTY, ',', ''), 0)) - CONVERT(FLOAT, ISNULL(0, 0))) * ISNULL(B.EXPORT_COST, 0)
+				ELSE C.PROD_TOTAL_AMT END
+			) PROD_TOTAL_AMT
+			, 0 END_STOCK_AMT
+			, C.CONFIRM_YN
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = C.CONFIRM_YN AND X.BASE_GROUP_CD = '046') CONFIRM_YN_NM
+		FROM TB_MON_SALES_PLAN_ADM A
+		LEFT OUTER JOIN TB_ITEM_INFO_ADM B
+		ON A.ITEM_SEQ = B.ITEM_SEQ
+		LEFT OUTER JOIN (
+			SELECT
+				X.PROD_YEAR
+				, X.PROD_MON
+				, X.ITEM_SEQ
+				, X.SAFY_STOCK_QTY
+				, X.SAFY_STOCK_AMT
+				, X.INIT_STOCK_QTY
+				, X.INIT_STOCK_AMT
+				, X.SALES_ORDER_QTY
+				, X.SALES_ORDER_AMT
+				, X.PROD_TOTAL_QTY
+				, X.PROD_TOTAL_AMT
+				, X.END_STOCK_QTY
+				, X.END_STOCK_AMT
+				, X.CONFIRM_YN
+			FROM TB_MON_PROD_PLAN_ADM X
+		) C
+		ON A.SALES_YEAR = C.PROD_YEAR
+		AND A.SALES_MON = C.PROD_MON
+		AND A.ITEM_SEQ = C.ITEM_SEQ
+		LEFT OUTER JOIN (
+			SELECT	
+				Z.ITEM_SEQ
+				, ISNULL(A.QTY, 0) A_QTY
+				, ISNULL(B.QTY, 0) B_QTY
+				, ISNULL(C.QTY, 0) C_QTY
+				, ISNULL(D.QTY, 0) D_QTY
+				, (ISNULL(A.QTY, 0) + ISNULL(C.QTY, 0)) IN_QTY
+				, (ISNULL(B.QTY, 0) + ISNULL(D.QTY, 0)) OUT_QTY
+				, (ISNULL(A.QTY, 0) + ISNULL(C.QTY, 0) - ISNULL(B.QTY, 0) + ISNULL(D.QTY, 0)) TM_QTY
+			FROM TB_ITEM_INFO_ADM Z
+			LEFT JOIN TB_STOCK_PAYMENT_ADM S
+			ON Z.ITEM_SEQ = S.SP_CD
+			LEFT OUTER JOIN (
+				SELECT
+				    S.SP_CD
+					, SUM(S.SP_QTY) QTY
+				FROM TB_STOCK_PAYMENT_ADM S
+				WHERE S.SP_GUBUN = '001'
+				AND S.LOCATION_CD IN ('001', '002')
+				GROUP BY S.SP_CD
+			) A
+			ON S.SP_CD = A.SP_CD
+			LEFT OUTER JOIN (
+				SELECT 
+				    S.SP_CD
+					, SUM(S.SP_QTY) QTY
+				FROM TB_STOCK_PAYMENT_ADM S
+				WHERE S.SP_GUBUN = '002'
+				AND S.LOCATION_CD IN ('001', '002')
+				GROUP BY S.SP_CD
+			) B
+			ON S.SP_CD = B.SP_CD
+			LEFT OUTER JOIN (
+				SELECT
+				    S.SP_CD
+					, SUM(S.SP_QTY) QTY
+				FROM TB_STOCK_PAYMENT_ADM S
+				WHERE S.SP_GUBUN = '003'
+				AND S.LOCATION_CD IN ('001', '002')
+				GROUP BY S.SP_CD
+			) C
+			ON S.SP_CD = C.SP_CD
+			LEFT OUTER JOIN (
+				SELECT
+				    S.SP_CD
+					, SUM(S.SP_QTY) QTY
+				FROM TB_STOCK_PAYMENT_ADM S
+				WHERE S.SP_GUBUN = '004'
+				AND S.LOCATION_CD IN ('001', '002')
+				GROUP BY S.SP_CD
+			) D
+			ON S.SP_CD = D.SP_CD
+			WHERE 1=1
+			GROUP BY Z.ITEM_SEQ, A.QTY, B.QTY, C.QTY, D.QTY
+		) X
+		ON A.ITEM_SEQ = X.ITEM_SEQ
+		WHERE 1=1
+		AND A.CONFIRM_YN = '001'
+		AND A.SALES_YEAR = #{prodYear}
+		AND A.SALES_MON = #{prodMon}
+		AND A.ITEM_SEQ = B.ITEM_SEQ
+		<if test="mainGubun != null and mainGubun != ''">
+		AND (SELECT Z.MAIN_GUBUN FROM TB_ITEM_INFO_ADM Z WHERE Z.ITEM_SEQ = A.ITEM_SEQ) = #{mainGubun}
+		</if>
+		<if test="confirmYn!=null and confirmYn.equals('001')">
+		AND C.CONFIRM_YN = #{confirmYn}
+		</if>
+		<if test="confirmYn!=null and confirmYn.equals('002')">
+		AND (C.CONFIRM_YN = #{confirmYn} OR C.CONFIRM_YN IS NULL)
+		</if>
+		ORDER BY PROD_TOTAL_QTY DESC
+	</select>
+	
+	<!-- 월생산계획 상세조회 -->
+	<select id="monProdPlanAdmRead" resultType="int">
+		SELECT COUNT(*)
+		FROM TB_MON_PROD_PLAN_ADM
+		WHERE 1=1
+		AND PROD_YEAR=#{prodYear}
+		AND PROD_MON=#{prodMon}
+		AND ITEM_SEQ=#{itemSeq}
+	</select>
+	
+	
+	<!-- 월생산계획 등록 -->
+	<insert id="monProdPlanAdmCreate">
+		INSERT INTO TB_MON_PROD_PLAN_ADM(
+			PROD_YEAR,
+			PROD_MON,
+			ITEM_SEQ,
+			SAFY_STOCK_QTY,
+			INIT_STOCK_QTY,
+			SALES_ORDER_QTY,
+			PROD_TOTAL_QTY,
+			END_STOCK_QTY,
+			UNIT_COST,
+			SAFY_STOCK_AMT,
+			INIT_STOCK_AMT,
+			SALES_ORDER_AMT,
+			PROD_TOTAL_AMT,
+			END_STOCK_AMT,
+			CONFIRM_YN,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{prodYear},
+			#{prodMon},
+			#{itemSeq},
+			#{safyStockQty},
+			#{initStockQty},
+			#{salesOrderQty},
+			#{prodTotalQty},
+			#{endStockQty},
+			#{unitCost},
+			#{safyStockAmt},
+			#{initStockAmt},
+			#{salesOrderAmt},
+			#{prodTotalAmt},
+			#{endStockAmt},
+			#{confirmYn},
+			#{regId},
+			GETDATE()
+		)
+	</insert>
+	
+	
+	<!-- 월생산계획 수정 -->
+	<update id="monProdPlanAdmUpdate">
+	UPDATE	TB_MON_PROD_PLAN_ADM 
+	<set>
+		<if test="safyStockQty!=null and !safyStockQty.equals('')">
+			SAFY_STOCK_QTY = #{safyStockQty},
+			INIT_STOCK_QTY = #{initStockQty},
+			SALES_ORDER_QTY = #{salesOrderQty},
+			PROD_TOTAL_QTY = #{prodTotalQty},
+			END_STOCK_QTY = #{endStockQty},
+			UNIT_COST = #{unitCost},
+			SAFY_STOCK_AMT = #{safyStockAmt},
+			INIT_STOCK_AMT = #{initStockAmt},
+			SALES_ORDER_AMT = #{salesOrderAmt},
+			PROD_TOTAL_AMT = #{prodTotalAmt},
+			END_STOCK_AMT = #{endStockAmt},
+		</if>
+		<if test="confirmYn!=null and !confirmYn.equals('')">
+			CONFIRM_YN = #{confirmYn},
+		</if>
+		UPD_ID = #{updId},
+		UPD_DATE = GETDATE()
+	</set>
+	WHERE 1=1
+	AND	PROD_YEAR = #{prodYear}
+	AND	PROD_MON = #{prodMon}
+	AND ITEM_SEQ=#{itemSeq}
+	</update>
+	
+	
+	
+	<!-- 일 생산계획관리 목록조회 -->
+	<select id="dayProdPlanAdmList" resultMap="DayProdPlanAdmVo">
+		SELECT 
+			C.ITEM_SEQ
+			, C.MAIN_GUBUN
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = C.MAIN_GUBUN AND X.BASE_GROUP_CD = '112') MAIN_GUBUN_NM
+			, C.ITEM_CD
+			, C.ITEM_NM
+			, C.ITEM_GUBUN
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = C.ITEM_GUBUN AND X.BASE_GROUP_CD = '079') ITEM_GUBUN_NM
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = C.ITEM_MODEL AND X.BASE_GROUP_CD = '099') ITEM_MODEL
+			, C.ITEM_CUS
+			, (SELECT X.DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD = C.ITEM_CUS) ITEM_CUS_NM
+			, C.ITEM_COLOR
+			, B.PROD_YEAR
+			, B.PROD_MON
+			, ISNULL(Z.PROD_TOTAL_QTY, 0) PROD_MON_QTY
+			, ISNULL(D.PROD_SUM_QTY, ISNULL(A.SALES_SUM_QTY, 0)) PROD_SUM_QTY
+			, B.[01]
+			,A.[03] 
+			, (CASE WHEN B.[01] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[01] END) ELSE B.[01] END ) [01]
+			, (CASE WHEN B.[02] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[02] END) ELSE B.[02] END ) [02]
+			, (CASE WHEN B.[03] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[03] END) ELSE B.[03] END ) [03]
+			, (CASE WHEN B.[04] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[04] END) ELSE B.[04] END ) [04]
+			, (CASE WHEN B.[05] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[05] END) ELSE B.[05] END ) [05]
+			, (CASE WHEN B.[06] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[06] END) ELSE B.[06] END ) [06]
+			, (CASE WHEN B.[07] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[07] END) ELSE B.[07] END ) [07]
+			, (CASE WHEN B.[08] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[08] END) ELSE B.[08] END ) [08]
+			, (CASE WHEN B.[09] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[09] END) ELSE B.[09] END ) [09]
+			, (CASE WHEN B.[10] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[10] END) ELSE B.[10] END ) [10]
+			, (CASE WHEN B.[11] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[11] END) ELSE B.[11] END ) [11]
+			, (CASE WHEN B.[12] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[12] END) ELSE B.[12] END ) [12]
+			, (CASE WHEN B.[13] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[13] END) ELSE B.[13] END ) [13]
+			, (CASE WHEN B.[14] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[14] END) ELSE B.[14] END ) [14]
+			, (CASE WHEN B.[15] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[15] END) ELSE B.[15] END ) [15]
+			, (CASE WHEN B.[16] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[16] END) ELSE B.[16] END ) [16]
+			, (CASE WHEN B.[17] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[17] END) ELSE B.[17] END ) [17]
+			, (CASE WHEN B.[18] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[18] END) ELSE B.[18] END ) [18]
+			, (CASE WHEN B.[19] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[19] END) ELSE B.[19] END ) [19]
+			, (CASE WHEN B.[20] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[20] END) ELSE B.[20] END ) [20]
+			, (CASE WHEN B.[21] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[21] END) ELSE B.[21] END ) [21]
+			, (CASE WHEN B.[22] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[22] END) ELSE B.[22] END ) [22]
+			, (CASE WHEN B.[23] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[23] END) ELSE B.[23] END ) [23]
+			, (CASE WHEN B.[24] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[24] END) ELSE B.[24] END ) [24]
+			, (CASE WHEN B.[25] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[25] END) ELSE B.[25] END ) [25]
+			, (CASE WHEN B.[26] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[26] END) ELSE B.[26] END ) [26]
+			, (CASE WHEN B.[27] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[27] END) ELSE B.[27] END ) [27]
+			, (CASE WHEN B.[28] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[28] END) ELSE B.[28] END ) [28]
+			, (CASE WHEN B.[29] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[29] END) ELSE B.[29] END ) [29]
+			, (CASE WHEN B.[30] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[30] END) ELSE B.[30] END ) [30]
+			, (CASE WHEN B.[31] IS NULL THEN (CASE WHEN A.[01] IS NULL THEN '0' ELSE A.[31] END) ELSE B.[31] END ) [31]
+			, E.CONFIRM_YN DAY_CONFIRM_YN
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = E.CONFIRM_YN AND X.BASE_GROUP_CD = '046') DAY_CONFIRM_YN_NM
+		FROM TB_ITEM_INFO_ADM C
+		LEFT OUTER JOIN (
+			SELECT *
+			FROM (
+				SELECT 
+					B.PROD_YEAR
+					, B.PROD_MON
+					, B.PROD_DAY
+					, B.ITEM_SEQ ITEM_SEQ2
+					, B.PROD_SUM_QTY
+					, ISNULL(B.PROD_DAY_QTY, 0) PROD_DAY_QTY
+				FROM TB_DAY_PROD_PLAN_ADM B
+				WHERE 1=1
+			) AS RESULT
+			PIVOT (
+				SUM(PROD_DAY_QTY)
+				FOR PROD_DAY
+				IN ([01],[02],[03],[04],[05],[06],[07],[08],[09],[10],
+				[11],[12],[13],[14],[15],[16],[17],[18],[19],[20],
+				[21],[22],[23],[24],[25],[26],[27],[28],[29],[30],[31])
+			) AS PIVOT_RESULT
+		) B
+		ON B.PROD_YEAR =#{prodYear}
+		AND B.PROD_MON =#{prodMon}
+		AND C.ITEM_SEQ=B.ITEM_SEQ2
+		LEFT OUTER JOIN (
+			SELECT
+				X.PROD_YEAR
+				, X.PROD_MON
+				, X.PROD_DAY
+				, X.ITEM_SEQ ITEM_SEQ3
+				, X.CONFIRM_YN
+			FROM TB_DAY_PROD_PLAN_ADM X
+			WHERE 1=1
+			AND X.PROD_DAY = '01'
+		) E
+		ON B.PROD_YEAR = E.PROD_YEAR
+		AND B.PROD_MON = E.PROD_MON
+		AND B.ITEM_SEQ2 = E.ITEM_SEQ3
+		LEFT OUTER JOIN (
+			SELECT 
+				X.PROD_SUM_QTY
+				, X.PROD_YEAR
+				, X.PROD_MON
+				, X.ITEM_SEQ
+			FROM TB_DAY_PROD_PLAN_ADM X
+			GROUP BY X.PROD_YEAR, X.PROD_MON, X.ITEM_SEQ, X.PROD_SUM_QTY
+		) D
+		ON B.PROD_YEAR = D.PROD_YEAR
+		AND B.PROD_MON = D.PROD_MON
+		AND B.ITEM_SEQ2 = D.ITEM_SEQ
+		LEFT OUTER JOIN  TB_MON_PROD_PLAN_ADM Z 
+		ON Z.ITEM_SEQ = C.ITEM_SEQ
+		AND Z.PROD_YEAR = #{prodYear}
+		AND Z.PROD_MON = #{prodMon}
+		LEFT OUTER JOIN (
+			SELECT *
+			FROM (
+				SELECT
+					B.SALES_YEAR
+					, B.SALES_MON
+					, B.SALES_DAY
+					, B.ITEM_SEQ ITEM_SEQ2
+					, B.CONFIRM_YN DAY_CONFIRM_YN 
+					, B.SALES_SUM_QTY
+					, ISNULL(B.SALES_DAY_QTY, 0) SALES_DAY_QTY
+				FROM TB_DAY_SALES_PLAN_ADM B
+				WHERE 1=1
+			) AS RESULT
+			PIVOT (
+				SUM(SALES_DAY_QTY)
+				FOR SALES_DAY
+				IN ([01],[02],[03],[04],[05],[06],[07],[08],[09],[10],
+				[11],[12],[13],[14],[15],[16],[17],[18],[19],[20],
+				[21],[22],[23],[24],[25],[26],[27],[28],[29],[30],[31])
+			) AS PIVOT_RESULT
+			WHERE 1=1
+		) A
+		ON Z.PROD_YEAR = A.SALES_YEAR
+		AND Z.PROD_MON = A.SALES_MON
+		AND Z.ITEM_SEQ = A.ITEM_SEQ2
+		WHERE 1=1
+
+		<if test="mainGubun != null and mainGubun != ''">
+		AND (SELECT K.MAIN_GUBUN FROM TB_ITEM_INFO_ADM K WHERE K.ITEM_SEQ = C.ITEM_SEQ) = #{mainGubun}
+		</if>
+		<if test="itemGubun!=null and itemGubun.equals('001')">
+		AND C.ITEM_GUBUN = '001'
+		</if>
+		<if test="itemGubun!=null and itemGubun.equals('002')">
+		AND C.ITEM_GUBUN = '002'
+		</if>
+		<if test="itemGubun!=null and itemGubun.equals('003')">
+		AND C.ITEM_GUBUN = '003'
+		</if>
+		<if test="itemGubun==null or itemGubun.equals('')">
+		AND C.ITEM_GUBUN IN ('001','002','003')
+		</if>
+		ORDER BY CONVERT(FLOAT, ISNULL(B.PROD_SUM_QTY, 0)) DESC
+	</select>
+	
+	
+	<!-- 일생산계획관리 상세조회 -->
+	<select id="dayProdPlanAdmRead" resultType="int">
+		SELECT COUNT(*)
+		FROM TB_DAY_PROD_PLAN_ADM
+		WHERE 1=1
+		AND PROD_YEAR=#{prodYear}
+		AND PROD_MON=#{prodMon}
+		AND PROD_DAY=#{prodDay}
+		AND ITEM_SEQ=#{itemSeq}
+	</select>
+	
+	<!-- 일생산계획관리 상세조회2 -->
+	<select id="dayProdPlanAdmRead2" resultMap="DayProdPlanAdmVo">
+		SELECT	
+			A.PROD_YEAR,
+			A.PROD_MON,
+			A.ITEM_SEQ,
+			A.PROD_DAY,
+			PROD_DAY_QTY,
+			PROD_SUM_QTY,
+			B.CONFIRM_YN
+		FROM TB_DAY_PROD_PLAN_ADM A
+		LEFT OUTER JOIN 
+		(SELECT 
+			PROD_YEAR,
+			PROD_DAY,
+			ITEM_SEQ,
+			CONFIRM_YN
+		FROM TB_DAY_PROD_PLAN_ADM
+		GROUP BY PROD_YEAR, PROD_DAY,ITEM_SEQ,CONFIRM_YN
+		) B
+		ON A.PROD_YEAR=B.PROD_YEAR
+		AND A.PROD_DAY=B.PROD_DAY
+		AND A.ITEM_SEQ=B.ITEM_SEQ
+		WHERE 1=1
+		AND A.PROD_YEAR=#{prodYear}
+		AND A.PROD_MON=#{prodMon}
+		AND A.ITEM_SEQ=#{itemSeq}
+		
+		ORDER BY PROD_DAY
+	</select>
+	
+	<!-- 일생산계획관리 등록 -->
+	<insert id="dayProdPlanAdmCreate">
+		INSERT INTO TB_DAY_PROD_PLAN_ADM(
+			PROD_YEAR,
+			PROD_MON,
+			ITEM_SEQ,
+			PROD_DAY,
+			PROD_DAY_QTY,
+			PROD_SUM_QTY,
+			PROD_MON_QTY,
+			CONFIRM_YN,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{prodYear},
+			#{prodMon},
+			#{itemSeq},
+			#{prodDay},
+			#{prodDayQty},
+			#{prodSumQty},
+			#{prodMonQty},
+			#{confirmYn},
+			#{regId},
+			GETDATE()
+		)
+	
+	</insert>
+	
+	
+	<!-- 일생산계획관리 수정 -->
+	<update id="dayProdPlanAdmUpdate">
+		UPDATE	TB_DAY_PROD_PLAN_ADM 
+		<set>
+			<if test="prodDayQty!=null and !prodDayQty.equals('')">
+				PROD_DAY_QTY = #{prodDayQty},
+			</if>
+			<if test="prodSumQty!=null and !prodSumQty.equals('')">
+				PROD_SUM_QTY = #{prodSumQty},
+			</if>
+			<if test="prodMonQty!=null and !prodMonQty.equals('')">
+				PROD_MON_QTY = #{prodMonQty},
+			</if>
+			<if test="confirmYn!=null and !confirmYn.equals('')">
+				CONFIRM_YN = #{confirmYn},
+			</if>
+			UPD_ID = #{updId},
+			UPD_DATE = GETDATE()
+		</set>
+			
+		WHERE 1=1
+		AND PROD_YEAR = #{prodYear}
+		AND	PROD_MON = #{prodMon}
+		AND	ITEM_SEQ = #{itemSeq}
+		<if test="prodDay!=null and !prodDay.equals('')">
+		AND	PROD_DAY = #{prodDay}
+		</if>
+		
+	</update>
+	
+	
+</mapper>

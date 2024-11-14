@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.bm.prcssBomDtlMapper">
+
+	<resultMap id="PrcssBomDtlVo" type="mes.domain.bm.PrcssBomDtlVo">
+		<result property="bomCd"				column="BOM_CD"				/>
+		<result property="productPrcssNm"		column="PRODUCT_PRCSS_NM"	/>
+		<result property="useYn"				column="USE_YN"				/>
+		<result property="useYnNm"				column="USE_YN_NM"			/>
+		<result property="prcssSeq"				column="PRCSS_SEQ"			/>		
+		<result property="prcssCd"				column="PRCSS_CD"			/>
+		<result property="prcssNm"				column="PRCSS_NM"			/>
+		<result property="prcssCd"				column="PRCSS_CD"			/>
+		<result property="prcssNm"				column="PRCSS_NM"			/>
+		<result property="prcssGubun"			column="PRCSS_GUBUN"		/>
+		<result property="prcssGubunNm"			column="PRCSS_GUBUN_NM"		/>
+		<result property="prcssInitial"			column="PRCSS_INITIAL"		/>		
+		<result property="outsrcingCorpCd"		column="OUTSRCING_CORP_CD"	/>
+		<result property="outsrcingCorpNm"		column="OUTSRCING_CORP_NM"	/>
+		<result property="equipCd"				column="EQUIP_CD"			/>
+		<result property="equipNm"				column="EQUIP_NM"			/>		
+		<result property="prcssDesc"			column="PRCSS_DESC"			/>
+		<result property="regId"				column="REG_ID"				/>
+		<result property="regDate"				column="REG_DATE"			/>
+		<result property="updId"				column="UPD_ID"				/>		
+		<result property="updDate"				column="UPD_DATE"			/>
+		
+	</resultMap>
+
+	
+	<!-- 시스템공통그룹 전체조회 -->
+	<select id="listAll" resultMap="PrcssBomDtlVo">
+		<![CDATA[
+			SELECT BOM_CD
+			       ,PRCSS_SEQ
+			       ,PRCSS_CD
+			       ,EQUIP_CD
+			       ,REG_ID
+			       ,REG_DATE
+			       ,UPD_ID
+			       ,UPD_DATE		
+			FROM TB_PRCSS_BOM_DTL A
+				
+		]]>
+	</select>
+	
+	<select id="read" resultMap="PrcssBomDtlVo">
+		<![CDATA[
+			SELECT BOM_CD
+			       ,PRCSS_SEQ
+			       ,PRCSS_CD
+			       ,EQUIP_CD
+			       ,REG_ID
+			       ,REG_DATE
+			       ,UPD_ID
+			       ,UPD_DATE		
+			FROM TB_PRCSS_BOM_DTL A
+				
+			WHERE BOM_CD = #{bomCd}
+		]]>
+	</select>
+	
+	
+	<select id="BomDtlView" resultMap="PrcssBomDtlVo">
+		SELECT A.PRCSS_SEQ
+	       ,B.PRCSS_NM
+	       ,B.PRCSS_INITIAL
+	       ,B.PRCSS_CD			  
+		   ,(SELECT EQUIP_CD FROM TB_EQUIP_CODE_ADM D WHERE D.EQUIP_CD = A.EQUIP_CD) EQUIP_CD
+		   ,(SELECT EQUIP_NM FROM TB_EQUIP_CODE_ADM D WHERE D.EQUIP_CD = A.EQUIP_CD) EQUIP_NM
+	       ,(SELECT BASE_NM FROM TB_SYSTEM_COMMON_CODE D WHERE D.BASE_GROUP_CD='015' AND D.BASE_CD = B.PRCSS_GUBUN) PRCSS_GUBUN_NM
+	       ,(SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM D WHERE D.DEAL_CORP_CD = B.OUTSRCING_CORP_CD) OUTSRCING_CORP_NM
+	       ,B.OUTSRCING_CORP_CD     
+		       
+		FROM TB_PRCSS_BOM_DTL	A
+			 ,TB_PRCSS_CODE_ADM B			
+			 
+		WHERE A.BOM_CD = #{bomCd}
+			 AND A.PRCSS_CD = B.PRCSS_CD			
+			
+		ORDER BY A.PRCSS_SEQ ASC
+				
+	</select>
+	
+	<select id="selectBomCdCreate" resultType="String">
+		SELECT ISNULL(RIGHT('100' + CAST(MAX(BOM_CD)+1 AS NVARCHAR),4), '1001') FROM TB_PRCSS_BOM_DTL
+	</select>
+
+	<insert id="create">
+		<![CDATA[
+			INSERT INTO TB_PRCSS_BOM_DTL(
+				BOM_CD
+				,PRCSS_SEQ
+				,PRCSS_CD
+				,EQUIP_CD				
+				,REG_ID
+				,REG_DATE
+				
+			) 
+			VALUES(
+				#{bomCd}
+				,#{prcssSeq}
+				,#{prcssCd}
+				,#{equipCd}				
+				,#{regId}
+				,GETDATE()
+				
+			)
+		]]>
+	</insert>
+	
+	<update id="update">
+		<![CDATA[
+			UPDATE	TB_PRCSS_BOM_DTL 
+			SET	BOM_CD = #{bomCd}
+				,PRCSS_SEQ = #{prcssSeq}
+				,PRCSS_CD = #{prcssCd}
+				,EQUIP_CD = #{equipCd}					
+				,UPD_ID = #{updId}
+				,UPD_DATE = GETDATE()
+			WHERE	BOM_CD = #{bomCd}
+		]]>
+	</update>
+	
+	<delete id="delete">
+		<![CDATA[
+			DELETE FROM TB_PRCSS_BOM_DTL
+			WHERE BOM_CD = #{bomCd}
+		
+		]]>
+	
+	</delete>
+	
+</mapper>

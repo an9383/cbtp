@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.bm.baseInfoAdmMapper">
+	
+	<resultMap id="BaseInfoAdmVo" type="mes.domain.bm.BaseInfoAdmVo">
+		<result property="baseInfoSeq"		column="BASE_INFO_SEQ"			/>
+		<result property="baseInfoType"		column="BASE_INFO_TYPE"			/>
+		<result property="baseInfoGubunNm"	column="BASE_INFO_GUBUN_NM"		/>
+		<result property="baseInfoGubun"	column="BASE_INFO_GUBUN"		/>
+		<result property="baseInfoCd"		column="BASE_INFO_CD"			/>
+		<result property="baseInfoNm"		column="BASE_INFO_NM"			/>
+		<result property="etc1"				column="ETC1"					/>
+		<result property="etc1Nm"			column="ETC1_NM"				/>
+		<result property="etc2"				column="ETC2"					/>
+		<result property="etc3"				column="ETC3"					/>
+		<result property="etc4"				column="ETC4"					/>
+		<result property="etc5"				column="ETC5"					/>
+		<result property="useYn"			column="USE_YN"					/>
+		<result property="useYnNm"			column="USE_YN_NM"				/>		
+		<result property="baseInfoDesc"		column="BASE_INFO_DESC"			/>
+		<result property="regId"			column="REG_ID"					/>
+		<result property="regDate"			column="REG_DATE"				/>
+		<result property="updId"			column="UPD_ID"					/>
+		<result property="updDate"			column="UPD_DATE"				/>
+		<result property="areaCd"			column="AREA_CD"				/>
+		<result property="areaNm"			column="AREA_NM"				/>
+	</resultMap>
+	
+	<!-- 검사항목 전체 목록 -->
+	<select id="baseInfoItList" resultMap="BaseInfoAdmVo">
+			SELECT BASE_INFO_SEQ
+			, BASE_INFO_TYPE
+			, BASE_INFO_GUBUN
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE B.BASE_GROUP_CD='033' AND B.BASE_CD = A.BASE_INFO_GUBUN) BASE_INFO_GUBUN_NM
+			, ETC1
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE B.BASE_GROUP_CD='034' AND B.BASE_CD = A.ETC1) ETC1_NM
+			, ETC2
+			, BASE_INFO_CD
+			, BASE_INFO_NM
+			FROM
+			TB_BASE_INFO_ADM A
+			WHERE
+			BASE_INFO_TYPE = 'IT'
+	</select>
+	
+	<!-- 검사항목 상세 목록 -->
+	<select id="baseInfoItRead" resultMap="BaseInfoAdmVo">
+		<![CDATA[
+			SELECT BASE_INFO_SEQ
+			, BASE_INFO_GUBUN
+			, BASE_INFO_CD
+			, BASE_INFO_NM
+			, USE_YN
+			, BASE_INFO_DESC
+			, ETC1
+			, ETC2
+			, ETC3
+			FROM
+			TB_BASE_INFO_ADM
+			WHERE	
+			BASE_INFO_SEQ = #{baseInfoSeq}
+			And 
+			BASE_INFO_TYPE = #{baseInfoType}
+		]]>
+	</select>
+
+	<!-- 검사항목 등록 -->
+	<insert id="baseInfoItCreate" parameterType="mes.domain.bm.BaseInfoAdmVo">
+		<![CDATA[
+			INSERT INTO TB_BASE_INFO_ADM 
+			(
+				BASE_INFO_SEQ
+				, BASE_INFO_TYPE
+				, BASE_INFO_GUBUN
+				, BASE_INFO_CD
+				, BASE_INFO_NM
+				, ETC1
+				, ETC2
+				, ETC3
+				, BASE_INFO_DESC
+				, USE_YN
+				, REG_ID
+				, REG_DATE
+			) 
+			VALUES(
+				#{baseInfoSeq}
+				, #{baseInfoType}
+				, #{baseInfoGubun}
+				, #{baseInfoCd}
+				, #{baseInfoNm}
+				, #{etc1}
+				, #{etc2}
+				, #{etc3}
+				, #{baseInfoDesc}
+				, #{useYn}
+				, #{regId}
+				, getdate()			)
+		]]>
+	</insert>
+
+	<!-- 검사항목 수정 -->
+	<update id="baseInfoItUpdate" parameterType="mes.domain.bm.BaseInfoAdmVo">
+		<![CDATA[
+			UPDATE TB_BASE_INFO_ADM
+			SET	
+			BASE_INFO_GUBUN = #{baseInfoGubun}
+			, BASE_INFO_NM = #{baseInfoNm}
+			, ETC1 = #{etc1}
+			, ETC2 = #{etc2}
+			, ETC3 = #{etc3}
+			, BASE_INFO_DESC = #{baseInfoDesc}
+			, USE_YN = #{useYn}
+			, UPD_ID = #{updId}
+			, UPD_DATE = getdate()
+			WHERE BASE_INFO_SEQ = #{baseInfoSeq}
+			And 
+			BASE_INFO_TYPE = #{baseInfoType}
+
+		]]>
+	</update>
+	
+	<!-- 불량유형 전체 목록 -->
+	<select id="baseInfoFtList" resultMap="BaseInfoAdmVo">
+		SELECT BASE_INFO_SEQ
+		, BASE_INFO_TYPE
+		, BASE_INFO_GUBUN
+		, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE B.BASE_GROUP_CD='032' AND B.BASE_CD = A.BASE_INFO_GUBUN) BASE_INFO_GUBUN_NM
+		, BASE_INFO_CD
+		, BASE_INFO_NM
+		, BASE_INFO_DESC
+		, ETC1
+		, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE B.BASE_GROUP_CD='103' AND B.BASE_CD = A.ETC1) ETC1_NM
+		, ETC2
+		, ETC3
+		, ETC4
+		, USE_YN
+		,(SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE B.BASE_GROUP_CD='001' AND B.BASE_CD = A.USE_YN) USE_YN_NM
+		FROM TB_BASE_INFO_ADM A
+		WHERE 1=1
+		AND BASE_INFO_TYPE = 'FT'
+		AND ETC3 = ''
+		<if test="baseInfoGubun != '' and baseInfoGubun != null">
+			AND BASE_INFO_GUBUN = #{baseInfoGubun}
+		</if>
+		<if test="etc1 != '' and etc1 != null">
+			AND ETC1 = #{etc1}
+		</if>
+<!-- 		<if test="etc3 != '' and etc3 != null"> -->
+<!-- 			AND ETC3 = #{etc3} -->
+<!-- 		</if> -->
+	</select>
+	
+	<!-- 불량유형 상세 목록 -->
+	<select id="baseInfoFtRead" resultMap="BaseInfoAdmVo">
+		<![CDATA[
+			SELECT BASE_INFO_SEQ
+			, BASE_INFO_GUBUN
+			, BASE_INFO_CD
+			, BASE_INFO_NM
+			, USE_YN
+			, ETC1
+			, BASE_INFO_DESC
+			FROM
+			TB_BASE_INFO_ADM
+			WHERE	
+			BASE_INFO_SEQ = #{baseInfoSeq}
+			And 
+			BASE_INFO_TYPE = #{baseInfoType}
+		]]>
+	</select>
+
+	<!-- 불량유형 등록 -->
+	<insert id="baseInfoFtCreate" parameterType="mes.domain.bm.BaseInfoAdmVo">
+		INSERT INTO TB_BASE_INFO_ADM 
+		(
+			BASE_INFO_SEQ
+			, BASE_INFO_TYPE
+			, BASE_INFO_GUBUN
+			, BASE_INFO_CD
+			, BASE_INFO_NM
+			, BASE_INFO_DESC
+			, USE_YN
+			, ETC1
+			, ETC2
+			, ETC3
+			, REG_ID
+			, REG_DATE
+		) 
+		VALUES(
+			#{baseInfoSeq}
+			, #{baseInfoType}
+			, #{baseInfoGubun}
+			, #{baseInfoCd}
+			, #{baseInfoNm}
+			, #{baseInfoDesc}
+			, #{useYn}
+			, #{etc1}
+			, #{etc2}
+			, #{etc3}
+			, #{regId}
+			, GETDATE()			)
+	</insert>
+
+	<!-- 불량유형 수정 -->
+	<update id="baseInfoFtUpdate" parameterType="mes.domain.bm.BaseInfoAdmVo">
+		<![CDATA[
+			UPDATE TB_BASE_INFO_ADM
+			SET	
+			BASE_INFO_GUBUN = #{baseInfoGubun}
+			, BASE_INFO_NM = #{baseInfoNm}
+			, BASE_INFO_DESC = #{baseInfoDesc}
+			, USE_YN = #{useYn}
+			, UPD_ID = #{updId}
+			, UPD_DATE = GETDATE()
+			WHERE BASE_INFO_SEQ = #{baseInfoSeq}
+			AND
+			BASE_INFO_TYPE = #{baseInfoType}
+		]]>
+	</update>
+	
+	<select id="faultyTypeSeq" resultType="String">
+		SELECT ISNULL(MAX(CONVERT(INT,ETC2))+1,0) FROM TB_BASE_INFO_ADM
+		WHERE BASE_INFO_TYPE='FT'
+		AND BASE_INFO_GUBUN=#{baseInfoGubun}
+	</select>
+	
+	<delete id="baseInfoFtDelete">
+		<![CDATA[
+			DELETE FROM TB_BASE_INFO_ADM WHERE BASE_INFO_TYPE=#{baseInfoType} AND BASE_INFO_GUBUN=#{baseInfoGubun} AND ETC3=#{etc3}
+		]]>
+	</delete>
+	
+	
+	<!-- 선택 삭제 -->
+	<delete id="baseInfoArDelete">
+		<![CDATA[
+			DELETE FROM TB_BASE_INFO_ADM
+			WHERE ETC1 = #{etc1} AND BASE_INFO_SEQ = #{baseInfoSeq} 
+		]]>
+	</delete>
+
+	<!-- 전체 삭제 -->
+	<delete id="baseInfoArAllDelete">
+		<![CDATA[
+			DELETE FROM TB_BASE_INFO_ADM
+			WHERE ETC1 = #{etc1}
+		]]>
+	</delete>	
+
+	<!-- 시퀀스 값 조회 -->
+	<select id="baseInfoSeq" resultType="String">
+		<![CDATA[
+			SELECT ISNULL(CAST(MAX(BASE_INFO_SEQ)+1 AS NVARCHAR), '100001') FROM TB_BASE_INFO_ADM 			
+		]]>
+	</select>
+	
+	<!-- 코드시퀀스 값 조회 -->
+	<select id="baseInfoCdSeq" resultType="String">
+			SELECT ISNULL(RIGHT('000000' + CAST(MAX(BASE_INFO_CD)+1 AS nvarchar), 6), '000001')
+			FROM TB_BASE_INFO_ADM 
+			WHERE BASE_INFO_TYPE = #{baseInfoType}
+	</select>
+	
+	<delete id="baseInfoFtDataDelete">
+			DELETE 
+			FROM TB_BASE_INFO_ADM 
+			WHERE BASE_INFO_SEQ = #{baseInfoSeq}
+	</delete>
+	
+	<!-- 검사항목 전체 목록 -->
+	<select id="prcssCodeNoList" resultMap="BaseInfoAdmVo">
+			SELECT	BASE_INFO_SEQ,
+				BASE_INFO_TYPE,
+				BASE_INFO_CD,
+				BASE_INFO_NM,
+				BASE_INFO_GUBUN,
+				ETC1,
+				ETC2,
+				ETC3,
+				USE_YN,
+				(SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE B.BASE_GROUP_CD='001' AND B.BASE_CD = A.USE_YN) USE_YN_NM,
+				BASE_INFO_DESC,
+				REG_ID,
+				REG_DATE,
+				UPD_ID,
+				UPD_DATE
+			FROM	TB_BASE_INFO_ADM A
+			WHERE BASE_INFO_TYPE = #{baseInfoType}
+			AND ETC3 = #{etc3}
+	</select>
+	
+	<!-- 공정정보관리(봉제조립) 항목설정 등록 -->
+	<insert id="prcssCodeNoCreate" parameterType="mes.domain.bm.BaseInfoAdmVo">
+			INSERT INTO TB_BASE_INFO_ADM 
+			(
+				BASE_INFO_SEQ
+				, BASE_INFO_TYPE
+				, BASE_INFO_CD
+				, BASE_INFO_NM
+				, BASE_INFO_DESC
+				, USE_YN
+				, ETC3
+				, REG_ID
+				, REG_DATE
+			) 
+			VALUES(
+				#{baseInfoSeq}
+				, #{baseInfoType}
+				, #{baseInfoCd}
+				, #{baseInfoNm}
+				, #{baseInfoDesc}
+				, #{useYn}
+				, #{etc3}
+				, #{regId}
+				, getdate()			
+			)
+	</insert>
+	
+	<!-- 공정정보관리(봉제조립) 비가동항목설정 삭제 -->
+	<delete id="prcssCodeNoDelete">
+			DELETE FROM TB_BASE_INFO_ADM
+			WHERE ETC3 = #{etc3}
+			AND BASE_INFO_TYPE = #{baseInfoType}
+	</delete>
+
+	
+</mapper>

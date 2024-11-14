@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.bm.matrlCodeAdmMapper">
+
+<resultMap id="MatrlCodeAdmVo" type="mes.domain.bm.MatrlCodeAdmVo">
+
+		<result property="matrlSeq"							column="MATRL_SEQ"							/>
+		<result property="matrlCd"							column="MATRL_CD"							/>
+		<result property="matrlNm"							column="MATRL_NM"							/>
+		<result property="matrlCtgry"						column="MATRL_CTGRY"						/>
+		<result property="matrlCtgryNm"						column="MATRL_CTGRY_NM"						/>
+		<result property="matrlGubun"						column="MATRL_GUBUN"						/>
+		<result property="matrlGubunNm"						column="MATRL_GUBUN_NM"						/>
+		<result property="matrlModel"						column="MATRL_MODEL"						/>
+		<result property="matrlThickness"					column="MATRL_THICKNESS"					/>
+		<result property="matrlWidth"						column="MATRL_WIDTH"						/>
+		<result property="productUnit"						column="PRODUCT_UNIT"						/>
+		<result property="productUnitNm"					column="PRODUCT_UNIT_NM"					/>
+		<result property="tmUnit"							column="TM_UNIT"							/>
+		<result property="tmUnitNm"							column="TM_UNIT_NM"							/>
+		<result property="inwhsCorpCd"						column="INWHS_CORP_CD"						/>
+		<result property="inwhsCorpNm"						column="INWHS_CORP_NM"						/>
+		<result property="matrlGravity"						column="MATRL_GRAVITY"						/>
+		<result property="etc1"								column="ETC1"								/>
+		<result property="etc2"								column="ETC2"								/>
+		<result property="useYn"							column="USE_YN"								/>
+		<result property="matrlDesc"						column="MATRL_DESC"							/>
+		<result property="inspectItem1"						column="INSPECT_ITEM1"						/>
+		<result property="inspectItem1Model"				column="INSPECT_ITEM1_MODEL"				/>
+		<result property="inspectItem1AllwncePlus"			column="INSPECT_ITEM1_ALLWNCE_PLUS"			/>
+		<result property="inspectItem1AllwnceMinus"			column="INSPECT_ITEM1_ALLWNCE_MINUS"		/>
+		<result property="inspectItem2"						column="INSPECT_ITEM2"						/>
+		<result property="inspectItem2Model"				column="INSPECT_ITEM2_MODEL"				/>
+		<result property="inspectItem2AllwncePlus"			column="INSPECT_ITEM2_ALLWNCE_PLUS"			/>
+		<result property="inspectItem2AllwnceMinus"			column="INSPECT_ITEM2_ALLWNCE_MINUS"		/>
+		<result property="inspectItem3"						column="INSPECT_ITEM3"						/>
+		<result property="inspectItem3Model"				column="INSPECT_ITEM3_MODEL"				/>
+		<result property="inspectItem3AllwncePlus"			column="INSPECT_ITEM3_ALLWNCE_PLUS"			/>
+		<result property="inspectItem3AllwnceMinus"			column="INSPECT_ITEM3_ALLWNCE_MINUS"		/>
+		<result property="inspectItem4"						column="INSPECT_ITEM4"						/>
+		<result property="inspectItem4Model"				column="INSPECT_ITEM4_MODEL"				/>
+		<result property="inspectItem4AllwnceThickPlus"		column="INSPECT_ITEM4_ALLWNCE_THICK_PLUS"	/>
+		<result property="inspectItem4AllwnceThickMinus"	column="INSPECT_ITEM4_ALLWNCE_THICK_MINUS"	/>
+		<result property="inspectItem4AllwnceWidthPlus"		column="INSPECT_ITEM4_ALLWNCE_WIDTH_PLUS"	/>
+		<result property="inspectItem4AllwnceWidthMinus"	column="INSPECT_ITEM4_ALLWNCE_WIDTH_MINUS"	/>
+		<result property="inspectItem5"						column="INSPECT_ITEM5"						/>
+		<result property="inspectItem5Model1"				column="INSPECT_ITEM5_MODEL1"				/>
+		<result property="inspectItem5Model2"				column="INSPECT_ITEM5_MODEL2"				/>
+		<result property="inspectItem5Model3"				column="INSPECT_ITEM5_MODEL3"				/>
+		<result property="inspectItem5Model4"				column="INSPECT_ITEM5_MODEL4"				/>
+		<result property="inspectItem5Model5"				column="INSPECT_ITEM5_MODEL5"				/>
+		<result property="inspectItem5Model6"				column="INSPECT_ITEM5_MODEL6"				/>
+		<result property="inspectItem5Model7"				column="INSPECT_ITEM5_MODEL7"				/>
+		<result property="inspectItem5Model8"				column="INSPECT_ITEM5_MODEL8"				/>
+		<result property="inspectItem5Allwnce1Plus"			column="INSPECT_ITEM5_ALLWNCE1_PLUS"		/>
+		<result property="inspectItem5Allwnce1Minus"		column="INSPECT_ITEM5_ALLWNCE1_MINUS"		/>
+		<result property="inspectItem5Allwnce2Plus"			column="INSPECT_ITEM5_ALLWNCE2_PLUS"		/>
+		<result property="inspectItem5Allwnce2Minus"		column="INSPECT_ITEM5_ALLWNCE2_MINUS"		/>
+		<result property="inspectItem5Allwnce3Plus"			column="INSPECT_ITEM5_ALLWNCE3_PLUS"		/>
+		<result property="inspectItem5Allwnce3Minus"		column="INSPECT_ITEM5_ALLWNCE3_MINUS"		/>
+		<result property="inspectItem5Allwnce4Plus"			column="INSPECT_ITEM5_ALLWNCE4_PLUS"		/>
+		<result property="inspectItem5Allwnce4Minus"		column="INSPECT_ITEM5_ALLWNCE4_MINUS"		/>
+		<result property="inspectItem5Allwnce5Plus"			column="INSPECT_ITEM5_ALLWNCE5_PLUS"		/>
+		<result property="inspectItem5Allwnce5Minus"		column="INSPECT_ITEM5_ALLWNCE5_MINUS"		/>
+		<result property="inspectItem5Allwnce6Plus"			column="INSPECT_ITEM5_ALLWNCE6_PLUS"		/>
+		<result property="inspectItem5Allwnce6Minus"		column="INSPECT_ITEM5_ALLWNCE6_MINUS"		/>
+		<result property="inspectItem5Allwnce7Plus"			column="INSPECT_ITEM5_ALLWNCE7_PLUS"		/>
+		<result property="inspectItem5Allwnce7Minus"		column="INSPECT_ITEM5_ALLWNCE7_MINUS"		/>
+		<result property="inspectItem5Allwnce8Plus"			column="INSPECT_ITEM5_ALLWNCE8_PLUS"		/>
+		<result property="inspectItem5Allwnce8Minus"		column="INSPECT_ITEM5_ALLWNCE8_MINUS"		/>
+		<result property="inspectItem6"						column="INSPECT_ITEM6"						/>
+		<result property="inspectItem6Model1"				column="INSPECT_ITEM6_MODEL1"				/>
+		<result property="inspectItem6Model2"				column="INSPECT_ITEM6_MODEL2"				/>
+		<result property="inspectItem6Model3"				column="INSPECT_ITEM6_MODEL3"				/>
+		<result property="inspectItem6Model4"				column="INSPECT_ITEM6_MODEL4"				/>
+		<result property="inspectItem6Model5"				column="INSPECT_ITEM6_MODEL5"				/>
+		<result property="inspectItem6Model6"				column="INSPECT_ITEM6_MODEL6"				/>
+		<result property="inspectItem6Model7"				column="INSPECT_ITEM6_MODEL7"				/>
+		<result property="inspectItem6Allwnce1Plus"			column="INSPECT_ITEM6_ALLWNCE1_PLUS"		/>
+		<result property="inspectItem6Allwnce1Minus"		column="INSPECT_ITEM6_ALLWNCE1_MINUS"		/>
+		<result property="inspectItem6Allwnce2Plus"			column="INSPECT_ITEM6_ALLWNCE2_PLUS"		/>
+		<result property="inspectItem6Allwnce2Minus"		column="INSPECT_ITEM6_ALLWNCE2_MINUS"		/>
+		<result property="inspectItem6Allwnce3Plus"			column="INSPECT_ITEM6_ALLWNCE3_PLUS"		/>
+		<result property="inspectItem6Allwnce3Minus"		column="INSPECT_ITEM6_ALLWNCE3_MINUS"		/>
+		<result property="inspectItem6Allwnce4Plus"			column="INSPECT_ITEM6_ALLWNCE4_PLUS"		/>
+		<result property="inspectItem6Allwnce4Minus"		column="INSPECT_ITEM6_ALLWNCE4_MINUS"		/>
+		<result property="inspectItem6Allwnce5Plus"			column="INSPECT_ITEM6_ALLWNCE5_PLUS"		/>
+		<result property="inspectItem6Allwnce5Minus"		column="INSPECT_ITEM6_ALLWNCE5_MINUS"		/>
+		<result property="inspectItem6Allwnce6Plus"			column="INSPECT_ITEM6_ALLWNCE6_PLUS"		/>
+		<result property="inspectItem6Allwnce6Minus"		column="INSPECT_ITEM6_ALLWNCE6_MINUS"		/>
+		<result property="inspectItem6Allwnce7Plus"			column="INSPECT_ITEM6_ALLWNCE7_PLUS"		/>
+		<result property="inspectItem6Allwnce7Minus"		column="INSPECT_ITEM6_ALLWNCE7_MINUS"		/>
+		<result property="inspectItem7"						column="INSPECT_ITEM7"						/>
+		<result property="inspectItem7Model1"				column="INSPECT_ITEM7_MODEL1"				/>
+		<result property="inspectItem7Model2"				column="INSPECT_ITEM7_MODEL2"				/>
+		<result property="inspectItem7AllwncePlus"			column="INSPECT_ITEM7_ALLWNCE_PLUS"			/>
+		<result property="inspectItem7AllwnceMinus"			column="INSPECT_ITEM7_ALLWNCE_MINUS"		/>
+		<result property="inspectItem8"						column="INSPECT_ITEM8"						/>
+		<result property="inspectItem8Model1"				column="INSPECT_ITEM8_MODEL1"				/>
+		<result property="inspectItem8Model2"				column="INSPECT_ITEM8_MODEL2"				/>
+		<result property="inspectItem8Model3"				column="INSPECT_ITEM8_MODEL3"				/>
+		<result property="inspectItem8Model4"				column="INSPECT_ITEM8_MODEL4"				/>
+		<result property="inspectItem8Model5"				column="INSPECT_ITEM8_MODEL5"				/>
+		<result property="inspectItem8Model6"				column="INSPECT_ITEM8_MODEL6"				/>
+		<result property="inspectItem8Model7"				column="INSPECT_ITEM8_MODEL7"				/>
+		<result property="inspectItem8Model8"				column="INSPECT_ITEM8_MODEL8"				/>
+		<result property="inspectItem8Model9"				column="INSPECT_ITEM8_MODEL9"				/>
+		<result property="inspectItem8Model10"				column="INSPECT_ITEM8_MODEL10"				/>
+		<result property="inspectItem8Allwnce1Plus"			column="INSPECT_ITEM8_ALLWNCE1_PLUS"		/>
+		<result property="inspectItem8Allwnce1Minus"		column="INSPECT_ITEM8_ALLWNCE1_MINUS"		/>
+		<result property="inspectItem8Allwnce2Plus"			column="INSPECT_ITEM8_ALLWNCE2_PLUS"		/>
+		<result property="inspectItem8Allwnce2Minus"		column="INSPECT_ITEM8_ALLWNCE2_MINUS"		/>
+		<result property="inspectItem8Allwnce3Plus"			column="INSPECT_ITEM8_ALLWNCE3_PLUS"		/>
+		<result property="inspectItem8Allwnce3Minus"		column="INSPECT_ITEM8_ALLWNCE3_MINUS"		/>
+		<result property="inspectItem8Allwnce4Plus"			column="INSPECT_ITEM8_ALLWNCE4_PLUS"		/>
+		<result property="inspectItem8Allwnce4Minus"		column="INSPECT_ITEM8_ALLWNCE4_MINUS"		/>
+		<result property="inspectItem8Allwnce5Plus"			column="INSPECT_ITEM8_ALLWNCE5_PLUS"		/>
+		<result property="inspectItem8Allwnce5Minus"		column="INSPECT_ITEM8_ALLWNCE5_MINUS"		/>
+		<result property="inspectItem8Allwnce6Plus"			column="INSPECT_ITEM8_ALLWNCE6_PLUS"		/>
+		<result property="inspectItem8Allwnce6Minus"		column="INSPECT_ITEM8_ALLWNCE6_MINUS"		/>
+		<result property="inspectItem8Allwnce7Plus"			column="INSPECT_ITEM8_ALLWNCE7_PLUS"		/>
+		<result property="inspectItem8Allwnce7Minus"		column="INSPECT_ITEM8_ALLWNCE7_MINUS"		/>
+		<result property="inspectItem8Allwnce8Plus"			column="INSPECT_ITEM8_ALLWNCE8_PLUS"		/>
+		<result property="inspectItem8Allwnce8Minus"		column="INSPECT_ITEM8_ALLWNCE8_MINUS"		/>
+		<result property="inspectItem8Allwnce9Plus"			column="INSPECT_ITEM8_ALLWNCE9_PLUS"		/>
+		<result property="inspectItem8Allwnce9Minus"		column="INSPECT_ITEM8_ALLWNCE9_MINUS"		/>
+		<result property="inspectItem8Allwnce10Plus"		column="INSPECT_ITEM8_ALLWNCE10_PLUS"		/>
+		<result property="inspectItem8Allwnce10Minus"		column="INSPECT_ITEM8_ALLWNCE10_MINUS"		/>
+		
+</resultMap>
+
+
+	<select id="listAll" resultMap="MatrlCodeAdmVo">
+  		SELECT
+  			MATRL_SEQ	
+  			,MATRL_CD
+			,MATRL_NM
+			,MATRL_CTGRY
+			,(SELECT BASE_NM FROM TB_SYSTEM_COMMON_CODE B WHERE B.BASE_GROUP_CD='005' AND B.BASE_CD = A.MATRL_CTGRY) MATRL_CTGRY_NM
+			,MATRL_GUBUN
+			,(SELECT BASE_NM FROM TB_SYSTEM_COMMON_CODE B WHERE B.BASE_GROUP_CD='008' AND B.BASE_CD = A.MATRL_GUBUN) MATRL_GUBUN_NM
+			,MATRL_MODEL
+			,MATRL_THICKNESS
+			,MATRL_WIDTH
+			,PRODUCT_UNIT
+			,(SELECT BASE_NM FROM TB_SYSTEM_COMMON_CODE B WHERE B.BASE_GROUP_CD='006' AND B.BASE_CD = A.PRODUCT_UNIT) PRODUCT_UNIT_NM
+			,TM_UNIT
+			,(SELECT BASE_NM FROM TB_SYSTEM_COMMON_CODE B WHERE B.BASE_GROUP_CD='007' AND B.BASE_CD = A.TM_UNIT) TM_UNIT_NM
+			,INWHS_CORP_CD
+			,(SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM B WHERE B.DEAL_CORP_CD = A.INWHS_CORP_CD) INWHS_CORP_NM
+			,MATRL_GRAVITY
+			,ETC1
+			,ETC2
+			,USE_YN
+			,(SELECT BASE_NM FROM TB_SYSTEM_COMMON_CODE B WHERE B.BASE_GROUP_CD='004' AND B.BASE_CD = A.USE_YN) USE_YN_NM
+			,MATRL_DESC
+			,REG_ID
+			,REG_DATE
+			,UPD_ID
+			,UPD_DATE
+		FROM TB_MATRL_CODE_ADM A
+		WHERE 1=1
+		<if test="matrlCd != null and matrlCd != ''">
+			AND MATRL_CD = #{matrlCd}
+		</if>
+		<if test="matrlNm != null and matrlNm != ''">
+			AND MATRL_NM LIKE '%' +#{matrlNm}+ '%'
+		</if>
+		<if test="matrlCtgry != null and matrlCtgry != ''">
+			AND MATRL_CTGRY = #{matrlCtgry}
+		</if>
+	</select>
+	
+	<select id="read" resultMap="MatrlCodeAdmVo">
+  		SELECT	
+			MATRL_SEQ	
+  			,MATRL_CD
+			,MATRL_NM
+			,MATRL_CTGRY
+			,(SELECT BASE_NM FROM TB_SYSTEM_COMMON_CODE B WHERE B.BASE_GROUP_CD='008' AND B.BASE_CD = A.MATRL_CTGRY) MATRL_CTGRY_NM
+			,MATRL_GUBUN
+			,(SELECT BASE_NM FROM TB_SYSTEM_COMMON_CODE B WHERE B.BASE_GROUP_CD='005' AND B.BASE_CD = A.MATRL_GUBUN) MATRL_GUBUN_NM
+			,MATRL_MODEL
+			,MATRL_THICKNESS
+			,MATRL_WIDTH
+			,PRODUCT_UNIT
+			,(SELECT BASE_NM FROM TB_SYSTEM_COMMON_CODE B WHERE B.BASE_GROUP_CD='006' AND B.BASE_CD = A.PRODUCT_UNIT) PRODUCT_UNIT_NM
+			,TM_UNIT
+			,(SELECT BASE_NM FROM TB_SYSTEM_COMMON_CODE B WHERE B.BASE_GROUP_CD='007' AND B.BASE_CD = A.TM_UNIT) TM_UNIT_NM
+			,INWHS_CORP_CD
+			,(SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM B WHERE B.DEAL_CORP_CD = A.INWHS_CORP_CD) INWHS_CORP_NM
+			,MATRL_GRAVITY
+			,ETC1
+			,ETC2
+			,USE_YN
+			,(SELECT BASE_NM FROM TB_SYSTEM_COMMON_CODE B WHERE B.BASE_GROUP_CD='004' AND B.BASE_CD = A.USE_YN) USE_YN_NM
+			,MATRL_DESC
+			,REG_ID
+			,REG_DATE
+			,UPD_ID
+			,UPD_DATE
+			,INSPECT_ITEM1
+			,INSPECT_ITEM1_MODEL
+			,INSPECT_ITEM1_ALLWNCE_PLUS
+			,INSPECT_ITEM1_ALLWNCE_MINUS
+			,INSPECT_ITEM2
+			,INSPECT_ITEM2_MODEL
+			,INSPECT_ITEM2_ALLWNCE_PLUS
+			,INSPECT_ITEM2_ALLWNCE_MINUS
+			,INSPECT_ITEM3
+			,INSPECT_ITEM3_MODEL
+			,INSPECT_ITEM3_ALLWNCE_PLUS
+			,INSPECT_ITEM3_ALLWNCE_MINUS
+			,INSPECT_ITEM4
+			,INSPECT_ITEM4_MODEL
+			,INSPECT_ITEM4_ALLWNCE_THICK_PLUS
+			,INSPECT_ITEM4_ALLWNCE_THICK_MINUS
+			,INSPECT_ITEM4_ALLWNCE_WIDTH_PLUS
+			,INSPECT_ITEM4_ALLWNCE_WIDTH_MINUS
+			,INSPECT_ITEM5
+			,INSPECT_ITEM5_MODEL1
+			,INSPECT_ITEM5_MODEL2
+			,INSPECT_ITEM5_MODEL3
+			,INSPECT_ITEM5_MODEL4
+			,INSPECT_ITEM5_MODEL5
+			,INSPECT_ITEM5_MODEL6
+			,INSPECT_ITEM5_MODEL7
+			,INSPECT_ITEM5_MODEL8
+			,INSPECT_ITEM5_ALLWNCE1_PLUS
+			,INSPECT_ITEM5_ALLWNCE1_MINUS
+			,INSPECT_ITEM5_ALLWNCE2_PLUS
+			,INSPECT_ITEM5_ALLWNCE2_MINUS
+			,INSPECT_ITEM5_ALLWNCE3_PLUS
+			,INSPECT_ITEM5_ALLWNCE3_MINUS
+			,INSPECT_ITEM5_ALLWNCE4_PLUS
+			,INSPECT_ITEM5_ALLWNCE4_MINUS
+			,INSPECT_ITEM5_ALLWNCE5_PLUS
+			,INSPECT_ITEM5_ALLWNCE5_MINUS
+			,INSPECT_ITEM5_ALLWNCE6_PLUS
+			,INSPECT_ITEM5_ALLWNCE6_MINUS
+			,INSPECT_ITEM5_ALLWNCE7_PLUS
+			,INSPECT_ITEM5_ALLWNCE7_MINUS
+			,INSPECT_ITEM5_ALLWNCE8_PLUS
+			,INSPECT_ITEM5_ALLWNCE8_MINUS
+			,INSPECT_ITEM6
+			,INSPECT_ITEM6_MODEL1
+			,INSPECT_ITEM6_MODEL2
+			,INSPECT_ITEM6_MODEL3
+			,INSPECT_ITEM6_MODEL4
+			,INSPECT_ITEM6_MODEL5
+			,INSPECT_ITEM6_MODEL6
+			,INSPECT_ITEM6_MODEL7
+			,INSPECT_ITEM6_ALLWNCE1_PLUS
+			,INSPECT_ITEM6_ALLWNCE1_MINUS
+			,INSPECT_ITEM6_ALLWNCE2_PLUS
+			,INSPECT_ITEM6_ALLWNCE2_MINUS
+			,INSPECT_ITEM6_ALLWNCE3_PLUS
+			,INSPECT_ITEM6_ALLWNCE3_MINUS
+			,INSPECT_ITEM6_ALLWNCE4_PLUS
+			,INSPECT_ITEM6_ALLWNCE4_MINUS
+			,INSPECT_ITEM6_ALLWNCE5_PLUS
+			,INSPECT_ITEM6_ALLWNCE5_MINUS
+			,INSPECT_ITEM6_ALLWNCE6_PLUS
+			,INSPECT_ITEM6_ALLWNCE6_MINUS
+			,INSPECT_ITEM6_ALLWNCE7_PLUS
+			,INSPECT_ITEM6_ALLWNCE7_MINUS
+			,INSPECT_ITEM7
+			,INSPECT_ITEM7_MODEL1
+			,INSPECT_ITEM7_MODEL2
+			,INSPECT_ITEM7_ALLWNCE1_PLUS
+			,INSPECT_ITEM7_ALLWNCE1_MINUS
+			,INSPECT_ITEM7_ALLWNCE2_PLUS
+			,INSPECT_ITEM7_ALLWNCE2_MINUS
+			,INSPECT_ITEM8
+			,INSPECT_ITEM8_MODEL1
+			,INSPECT_ITEM8_MODEL2
+			,INSPECT_ITEM8_MODEL3
+			,INSPECT_ITEM8_MODEL4
+			,INSPECT_ITEM8_MODEL5
+			,INSPECT_ITEM8_MODEL6
+			,INSPECT_ITEM8_MODEL7
+			,INSPECT_ITEM8_MODEL8
+			,INSPECT_ITEM8_MODEL9
+			,INSPECT_ITEM8_MODEL10
+			,INSPECT_ITEM8_ALLWNCE1_PLUS
+			,INSPECT_ITEM8_ALLWNCE1_MINUS
+			,INSPECT_ITEM8_ALLWNCE2_PLUS
+			,INSPECT_ITEM8_ALLWNCE2_MINUS
+			,INSPECT_ITEM8_ALLWNCE3_PLUS
+			,INSPECT_ITEM8_ALLWNCE3_MINUS
+			,INSPECT_ITEM8_ALLWNCE4_PLUS
+			,INSPECT_ITEM8_ALLWNCE4_MINUS
+			,INSPECT_ITEM8_ALLWNCE5_PLUS
+			,INSPECT_ITEM8_ALLWNCE5_MINUS
+			,INSPECT_ITEM8_ALLWNCE6_PLUS
+			,INSPECT_ITEM8_ALLWNCE6_MINUS
+			,INSPECT_ITEM8_ALLWNCE7_PLUS
+			,INSPECT_ITEM8_ALLWNCE7_MINUS
+			,INSPECT_ITEM8_ALLWNCE8_PLUS
+			,INSPECT_ITEM8_ALLWNCE8_MINUS
+			,INSPECT_ITEM8_ALLWNCE9_PLUS
+			,INSPECT_ITEM8_ALLWNCE9_MINUS
+			,INSPECT_ITEM8_ALLWNCE10_PLUS
+			,INSPECT_ITEM8_ALLWNCE10_MINUS
+		FROM TB_MATRL_CODE_ADM A
+		WHERE A.MATRL_SEQ = #{matrlSeq} OR A.MATRL_CD = #{matrlCd}
+			
+	</select>
+
+	<select id="selectMatrlSeqCd" resultType="String">
+		SELECT ISNULL(RIGHT('0000' + CAST(MAX(MATRL_SEQ)+1 AS NVARCHAR),4), '0001') FROM TB_MATRL_CODE_ADM
+	</select>
+<!-- 	원본백업
+	<select id="selectMatrlSeqCd" resultType="String">
+		SELECT ISNULL(RIGHT('00000' + CAST(MAX(SUBSTRING(MATRL_CD,2,6))+1 AS NVARCHAR),5), '00001') FROM TB_MATRL_CODE_ADM
+	</select>	
+			 -->
+	<insert id="create">
+		INSERT INTO TB_MATRL_CODE_ADM(
+			MATRL_SEQ,
+			MATRL_CD,
+			MATRL_NM,
+			MATRL_CTGRY,
+			MATRL_GUBUN,
+			MATRL_MODEL,
+			MATRL_THICKNESS,
+			MATRL_WIDTH,
+			PRODUCT_UNIT,
+			TM_UNIT,
+			INWHS_CORP_CD,
+			MATRL_GRAVITY,
+			ETC1,
+			ETC2,
+			USE_YN,
+			MATRL_DESC,
+			INSPECT_ITEM1,
+			INSPECT_ITEM1_MODEL,
+			INSPECT_ITEM1_ALLWNCE_PLUS,
+			INSPECT_ITEM1_ALLWNCE_MINUS,
+			INSPECT_ITEM2,
+			INSPECT_ITEM2_MODEL,
+			INSPECT_ITEM2_ALLWNCE_PLUS,
+			INSPECT_ITEM2_ALLWNCE_MINUS,
+			INSPECT_ITEM3,
+			INSPECT_ITEM3_MODEL,
+			INSPECT_ITEM3_ALLWNCE_PLUS,
+			INSPECT_ITEM3_ALLWNCE_MINUS,
+			INSPECT_ITEM4,
+			INSPECT_ITEM4_MODEL,
+			INSPECT_ITEM4_ALLWNCE_THICK_PLUS,
+			INSPECT_ITEM4_ALLWNCE_THICK_MINUS,
+			INSPECT_ITEM4_ALLWNCE_WIDTH_PLUS,
+			INSPECT_ITEM4_ALLWNCE_WIDTH_MINUS,
+			INSPECT_ITEM5,
+			INSPECT_ITEM5_MODEL1,
+			INSPECT_ITEM5_MODEL2,
+			INSPECT_ITEM5_MODEL3,
+			INSPECT_ITEM5_MODEL4,
+			INSPECT_ITEM5_MODEL5,
+			INSPECT_ITEM5_MODEL6,
+			INSPECT_ITEM5_MODEL7,
+			INSPECT_ITEM5_MODEL8,
+			INSPECT_ITEM5_ALLWNCE1_PLUS,
+			INSPECT_ITEM5_ALLWNCE1_MINUS,
+			INSPECT_ITEM5_ALLWNCE2_PLUS,
+			INSPECT_ITEM5_ALLWNCE2_MINUS,
+			INSPECT_ITEM5_ALLWNCE3_PLUS,
+			INSPECT_ITEM5_ALLWNCE3_MINUS,
+			INSPECT_ITEM5_ALLWNCE4_PLUS,
+			INSPECT_ITEM5_ALLWNCE4_MINUS,
+			INSPECT_ITEM5_ALLWNCE5_PLUS,
+			INSPECT_ITEM5_ALLWNCE5_MINUS,
+			INSPECT_ITEM5_ALLWNCE6_PLUS,
+			INSPECT_ITEM5_ALLWNCE6_MINUS,
+			INSPECT_ITEM5_ALLWNCE7_PLUS,
+			INSPECT_ITEM5_ALLWNCE7_MINUS,
+			INSPECT_ITEM5_ALLWNCE8_PLUS,
+			INSPECT_ITEM5_ALLWNCE8_MINUS,
+			INSPECT_ITEM6,
+			INSPECT_ITEM6_MODEL1,
+			INSPECT_ITEM6_MODEL2,
+			INSPECT_ITEM6_MODEL3,
+			INSPECT_ITEM6_MODEL4,
+			INSPECT_ITEM6_MODEL5,
+			INSPECT_ITEM6_MODEL6,
+			INSPECT_ITEM6_MODEL7,
+			INSPECT_ITEM6_ALLWNCE1_PLUS,
+			INSPECT_ITEM6_ALLWNCE1_MINUS,
+			INSPECT_ITEM6_ALLWNCE2_PLUS,
+			INSPECT_ITEM6_ALLWNCE2_MINUS,
+			INSPECT_ITEM6_ALLWNCE3_PLUS,
+			INSPECT_ITEM6_ALLWNCE3_MINUS,
+			INSPECT_ITEM6_ALLWNCE4_PLUS,
+			INSPECT_ITEM6_ALLWNCE4_MINUS,
+			INSPECT_ITEM6_ALLWNCE5_PLUS,
+			INSPECT_ITEM6_ALLWNCE5_MINUS,
+			INSPECT_ITEM6_ALLWNCE6_PLUS,
+			INSPECT_ITEM6_ALLWNCE6_MINUS,
+			INSPECT_ITEM6_ALLWNCE7_PLUS,
+			INSPECT_ITEM6_ALLWNCE7_MINUS,
+			INSPECT_ITEM7,
+			INSPECT_ITEM7_MODEL1,
+			INSPECT_ITEM7_MODEL2,
+			INSPECT_ITEM7_ALLWNCE1_PLUS,
+			INSPECT_ITEM7_ALLWNCE1_MINUS,
+			INSPECT_ITEM7_ALLWNCE2_PLUS,
+			INSPECT_ITEM7_ALLWNCE2_MINUS,
+			INSPECT_ITEM8,
+			INSPECT_ITEM8_MODEL1,
+			INSPECT_ITEM8_MODEL2,
+			INSPECT_ITEM8_MODEL3,
+			INSPECT_ITEM8_MODEL4,
+			INSPECT_ITEM8_MODEL5,
+			INSPECT_ITEM8_MODEL6,
+			INSPECT_ITEM8_MODEL7,
+			INSPECT_ITEM8_MODEL8,
+			INSPECT_ITEM8_MODEL9,
+			INSPECT_ITEM8_MODEL10,
+			INSPECT_ITEM8_ALLWNCE1_PLUS,
+			INSPECT_ITEM8_ALLWNCE1_MINUS,
+			INSPECT_ITEM8_ALLWNCE2_PLUS,
+			INSPECT_ITEM8_ALLWNCE2_MINUS,
+			INSPECT_ITEM8_ALLWNCE3_PLUS,
+			INSPECT_ITEM8_ALLWNCE3_MINUS,
+			INSPECT_ITEM8_ALLWNCE4_PLUS,
+			INSPECT_ITEM8_ALLWNCE4_MINUS,
+			INSPECT_ITEM8_ALLWNCE5_PLUS,
+			INSPECT_ITEM8_ALLWNCE5_MINUS,
+			INSPECT_ITEM8_ALLWNCE6_PLUS,
+			INSPECT_ITEM8_ALLWNCE6_MINUS,
+			INSPECT_ITEM8_ALLWNCE7_PLUS,
+			INSPECT_ITEM8_ALLWNCE7_MINUS,
+			INSPECT_ITEM8_ALLWNCE8_PLUS,
+			INSPECT_ITEM8_ALLWNCE8_MINUS,
+			INSPECT_ITEM8_ALLWNCE9_PLUS,
+			INSPECT_ITEM8_ALLWNCE9_MINUS,
+			INSPECT_ITEM8_ALLWNCE10_PLUS,
+			INSPECT_ITEM8_ALLWNCE10_MINUS,
+			REG_ID,
+			REG_DATE
+		) VALUES (
+			#{matrlSeq},
+			#{matrlCd},
+			#{matrlNm},
+			#{matrlCtgry},
+			#{matrlGubun},
+			#{matrlModel},
+			#{matrlThickness},
+			#{matrlWidth},
+			#{productUnit},
+			#{tmUnit},
+			#{inwhsCorpCd},
+			#{matrlGravity},
+			#{etc1},
+			#{etc2},
+			#{useYn},
+			#{matrlDesc},
+			#{inspectItem1},
+			#{inspectItem1Model},
+			#{inspectItem1AllwncePlus},
+			#{inspectItem1AllwnceMinus},
+			#{inspectItem2},
+			#{inspectItem2Model},
+			#{inspectItem2AllwncePlus},
+			#{inspectItem2AllwnceMinus},
+			#{inspectItem3},
+			#{inspectItem3Model},
+			#{inspectItem3AllwncePlus},
+			#{inspectItem3AllwnceMinus},
+			#{inspectItem4},
+			#{inspectItem4Model},
+			#{inspectItem4AllwnceThickPlus},
+			#{inspectItem4AllwnceThickMinus},
+			#{inspectItem4AllwnceWidthPlus},
+			#{inspectItem4AllwnceWidthMinus},
+			#{inspectItem5},
+			#{inspectItem5Model1},
+			#{inspectItem5Model2},
+			#{inspectItem5Model3},
+			#{inspectItem5Model4},
+			#{inspectItem5Model5},
+			#{inspectItem5Model6},
+			#{inspectItem5Model7},
+			#{inspectItem5Model8},
+			#{inspectItem5Allwnce1Plus},
+			#{inspectItem5Allwnce1Minus},
+			#{inspectItem5Allwnce2Plus},
+			#{inspectItem5Allwnce2Minus},
+			#{inspectItem5Allwnce3Plus},
+			#{inspectItem5Allwnce3Minus},
+			#{inspectItem5Allwnce4Plus},
+			#{inspectItem5Allwnce4Minus},
+			#{inspectItem5Allwnce5Plus},
+			#{inspectItem5Allwnce5Minus},
+			#{inspectItem5Allwnce6Plus},
+			#{inspectItem5Allwnce6Minus},
+			#{inspectItem5Allwnce7Plus},
+			#{inspectItem5Allwnce7Minus},
+			#{inspectItem5Allwnce8Plus},
+			#{inspectItem5Allwnce8Minus},
+			#{inspectItem6},
+			#{inspectItem6Model1},
+			#{inspectItem6Model2},
+			#{inspectItem6Model3},
+			#{inspectItem6Model4},
+			#{inspectItem6Model5},
+			#{inspectItem6Model6},
+			#{inspectItem6Model7},
+			#{inspectItem6Allwnce1Plus},
+			#{inspectItem6Allwnce1Minus},
+			#{inspectItem6Allwnce2Plus},
+			#{inspectItem6Allwnce2Minus},
+			#{inspectItem6Allwnce3Plus},
+			#{inspectItem6Allwnce3Minus},
+			#{inspectItem6Allwnce4Plus},
+			#{inspectItem6Allwnce4Minus},
+			#{inspectItem6Allwnce5Plus},
+			#{inspectItem6Allwnce5Minus},
+			#{inspectItem6Allwnce6Plus},
+			#{inspectItem6Allwnce6Minus},
+			#{inspectItem6Allwnce7Plus},
+			#{inspectItem6Allwnce7Minus},
+			#{inspectItem7},
+			#{inspectItem7Model1},
+			#{inspectItem7Model2},
+			#{inspectItem7Allwnce1Plus},
+			#{inspectItem7Allwnce1Minus},
+			#{inspectItem7Allwnce2Plus},
+			#{inspectItem7Allwnce2Minus},
+			#{inspectItem8},
+			#{inspectItem8Model1},
+			#{inspectItem8Model2},
+			#{inspectItem8Model3},
+			#{inspectItem8Model4},
+			#{inspectItem8Model5},
+			#{inspectItem8Model6},
+			#{inspectItem8Model7},
+			#{inspectItem8Model8},
+			#{inspectItem8Model9},
+			#{inspectItem8Model10},
+			#{inspectItem8Allwnce1Plus},
+			#{inspectItem8Allwnce1Minus},
+			#{inspectItem8Allwnce2Plus},
+			#{inspectItem8Allwnce2Minus},
+			#{inspectItem8Allwnce3Plus},
+			#{inspectItem8Allwnce3Minus},
+			#{inspectItem8Allwnce4Plus},
+			#{inspectItem8Allwnce4Minus},
+			#{inspectItem8Allwnce5Plus},
+			#{inspectItem8Allwnce5Minus},
+			#{inspectItem8Allwnce6Plus},
+			#{inspectItem8Allwnce6Minus},
+			#{inspectItem8Allwnce7Plus},
+			#{inspectItem8Allwnce7Minus},
+			#{inspectItem8Allwnce8Plus},
+			#{inspectItem8Allwnce8Minus},
+			#{inspectItem8Allwnce9Plus},
+			#{inspectItem8Allwnce9Minus},
+			#{inspectItem8Allwnce10Plus},
+			#{inspectItem8Allwnce10Minus},
+			#{regId},
+			getDate()
+		)		
+		
+	</insert>
+	
+		
+	<select id="update">
+		UPDATE	TB_MATRL_CODE_ADM 
+		SET	
+			MATRL_SEQ = #{matrlSeq},
+			MATRL_CD = #{matrlCd},
+			MATRL_NM = #{matrlNm},
+			MATRL_CTGRY = #{matrlCtgry},
+			MATRL_GUBUN = #{matrlGubun},
+			MATRL_MODEL = #{matrlModel},
+			MATRL_THICKNESS = #{matrlThickness},
+			MATRL_WIDTH = #{matrlWidth},
+			PRODUCT_UNIT = #{productUnit},
+			TM_UNIT = #{tmUnit},
+			INWHS_CORP_CD = #{inwhsCorpCd},
+			MATRL_GRAVITY = #{matrlGravity},
+			ETC1 = #{etc1},
+			ETC2 = #{etc2},
+			USE_YN = #{useYn},
+			MATRL_DESC = #{matrlDesc},
+			INSPECT_ITEM1 = #{inspectItem1},
+			INSPECT_ITEM1_MODEL = #{inspectItem1Model},
+			INSPECT_ITEM1_ALLWNCE_PLUS = #{inspectItem1AllwncePlus},
+			INSPECT_ITEM1_ALLWNCE_MINUS = #{inspectItem1AllwnceMinus},
+			INSPECT_ITEM2 = #{inspectItem2},
+			INSPECT_ITEM2_MODEL = #{inspectItem2Model},
+			INSPECT_ITEM2_ALLWNCE_PLUS = #{inspectItem2AllwncePlus},
+			INSPECT_ITEM2_ALLWNCE_MINUS = #{inspectItem2AllwnceMinus},
+			INSPECT_ITEM3 = #{inspectItem3},
+			INSPECT_ITEM3_MODEL = #{inspectItem3Model},
+			INSPECT_ITEM3_ALLWNCE_PLUS = #{inspectItem3AllwncePlus},
+			INSPECT_ITEM3_ALLWNCE_MINUS = #{inspectItem3AllwnceMinus},
+			INSPECT_ITEM4 = #{inspectItem4},
+			INSPECT_ITEM4_MODEL = #{inspectItem4Model},
+			INSPECT_ITEM4_ALLWNCE_THICK_PLUS = #{inspectItem4AllwnceThickPlus},
+			INSPECT_ITEM4_ALLWNCE_THICK_MINUS = #{inspectItem4AllwnceThickMinus},
+			INSPECT_ITEM4_ALLWNCE_WIDTH_PLUS = #{inspectItem4AllwnceWidthPlus},
+			INSPECT_ITEM4_ALLWNCE_WIDTH_MINUS = #{inspectItem4AllwnceWidthMinus},
+			INSPECT_ITEM5 = #{inspectItem5},
+			INSPECT_ITEM5_MODEL1 = #{inspectItem5Model1},
+			INSPECT_ITEM5_MODEL2 = #{inspectItem5Model2},
+			INSPECT_ITEM5_MODEL3 = #{inspectItem5Model3},
+			INSPECT_ITEM5_MODEL4 = #{inspectItem5Model4},
+			INSPECT_ITEM5_MODEL5 = #{inspectItem5Model5},
+			INSPECT_ITEM5_MODEL6 = #{inspectItem5Model6},
+			INSPECT_ITEM5_MODEL7 = #{inspectItem5Model7},
+			INSPECT_ITEM5_MODEL8 = #{inspectItem5Model8},
+			INSPECT_ITEM5_ALLWNCE1_PLUS = #{inspectItem5Allwnce1Plus},
+			INSPECT_ITEM5_ALLWNCE1_MINUS = #{inspectItem5Allwnce1Minus},
+			INSPECT_ITEM5_ALLWNCE2_PLUS = #{inspectItem5Allwnce2Plus},
+			INSPECT_ITEM5_ALLWNCE2_MINUS = #{inspectItem5Allwnce2Minus},
+			INSPECT_ITEM5_ALLWNCE3_PLUS = #{inspectItem5Allwnce3Plus},
+			INSPECT_ITEM5_ALLWNCE3_MINUS = #{inspectItem5Allwnce3Minus},
+			INSPECT_ITEM5_ALLWNCE4_PLUS = #{inspectItem5Allwnce4Plus},
+			INSPECT_ITEM5_ALLWNCE4_MINUS = #{inspectItem5Allwnce4Minus},
+			INSPECT_ITEM5_ALLWNCE5_PLUS = #{inspectItem5Allwnce5Plus},
+			INSPECT_ITEM5_ALLWNCE5_MINUS = #{inspectItem5Allwnce5Minus},
+			INSPECT_ITEM5_ALLWNCE6_PLUS = #{inspectItem5Allwnce6Plus},
+			INSPECT_ITEM5_ALLWNCE6_MINUS = #{inspectItem5Allwnce6Minus},
+			INSPECT_ITEM5_ALLWNCE7_PLUS = #{inspectItem5Allwnce7Plus},
+			INSPECT_ITEM5_ALLWNCE7_MINUS = #{inspectItem5Allwnce7Minus},
+			INSPECT_ITEM5_ALLWNCE8_PLUS = #{inspectItem5Allwnce8Plus},
+			INSPECT_ITEM5_ALLWNCE8_MINUS = #{inspectItem5Allwnce8Minus},
+			INSPECT_ITEM6 = #{inspectItem6},
+			INSPECT_ITEM6_MODEL1 = #{inspectItem6Model1},
+			INSPECT_ITEM6_MODEL2 = #{inspectItem6Model2},
+			INSPECT_ITEM6_MODEL3 = #{inspectItem6Model3},
+			INSPECT_ITEM6_MODEL4 = #{inspectItem6Model4},
+			INSPECT_ITEM6_MODEL5 = #{inspectItem6Model5},
+			INSPECT_ITEM6_MODEL6 = #{inspectItem6Model6},
+			INSPECT_ITEM6_MODEL7 = #{inspectItem6Model7},
+			INSPECT_ITEM6_ALLWNCE1_PLUS = #{inspectItem6Allwnce1Plus},
+			INSPECT_ITEM6_ALLWNCE1_MINUS = #{inspectItem6Allwnce1Minus},
+			INSPECT_ITEM6_ALLWNCE2_PLUS = #{inspectItem6Allwnce2Plus},
+			INSPECT_ITEM6_ALLWNCE2_MINUS = #{inspectItem6Allwnce2Minus},
+			INSPECT_ITEM6_ALLWNCE3_PLUS = #{inspectItem6Allwnce3Plus},
+			INSPECT_ITEM6_ALLWNCE3_MINUS = #{inspectItem6Allwnce3Minus},
+			INSPECT_ITEM6_ALLWNCE4_PLUS = #{inspectItem6Allwnce4Plus},
+			INSPECT_ITEM6_ALLWNCE4_MINUS = #{inspectItem6Allwnce4Minus},
+			INSPECT_ITEM6_ALLWNCE5_PLUS = #{inspectItem6Allwnce5Plus},
+			INSPECT_ITEM6_ALLWNCE5_MINUS = #{inspectItem6Allwnce5Minus},
+			INSPECT_ITEM6_ALLWNCE6_PLUS = #{inspectItem6Allwnce6Plus},
+			INSPECT_ITEM6_ALLWNCE6_MINUS = #{inspectItem6Allwnce6Minus},
+			INSPECT_ITEM6_ALLWNCE7_PLUS = #{inspectItem6Allwnce7Plus},
+			INSPECT_ITEM6_ALLWNCE7_MINUS = #{inspectItem6Allwnce7Minus},
+			INSPECT_ITEM7 = #{inspectItem7},
+			INSPECT_ITEM7_MODEL1 = #{inspectItem7Model1},
+			INSPECT_ITEM7_MODEL2 = #{inspectItem7Model2},
+			INSPECT_ITEM7_ALLWNCE1_PLUS = #{inspectItem7Allwnce1Plus},
+			INSPECT_ITEM7_ALLWNCE1_MINUS = #{inspectItem7Allwnce1Minus},
+			INSPECT_ITEM7_ALLWNCE2_PLUS = #{inspectItem7Allwnce2Plus},
+			INSPECT_ITEM7_ALLWNCE2_MINUS = #{inspectItem7Allwnce2Minus},
+			INSPECT_ITEM8 = #{inspectItem8},
+			INSPECT_ITEM8_MODEL1 = #{inspectItem8Model1},
+			INSPECT_ITEM8_MODEL2 = #{inspectItem8Model2},
+			INSPECT_ITEM8_MODEL3 = #{inspectItem8Model3},
+			INSPECT_ITEM8_MODEL4 = #{inspectItem8Model4},
+			INSPECT_ITEM8_MODEL5 = #{inspectItem8Model5},
+			INSPECT_ITEM8_MODEL6 = #{inspectItem8Model6},
+			INSPECT_ITEM8_MODEL7 = #{inspectItem8Model7},
+			INSPECT_ITEM8_MODEL8 = #{inspectItem8Model8},
+			INSPECT_ITEM8_MODEL9 = #{inspectItem8Model9},
+			INSPECT_ITEM8_MODEL10 = #{inspectItem8Model10},
+			INSPECT_ITEM8_ALLWNCE1_PLUS = #{inspectItem8Allwnce1Plus},
+			INSPECT_ITEM8_ALLWNCE1_MINUS = #{inspectItem8Allwnce1Minus},
+			INSPECT_ITEM8_ALLWNCE2_PLUS = #{inspectItem8Allwnce2Plus},
+			INSPECT_ITEM8_ALLWNCE2_MINUS = #{inspectItem8Allwnce2Minus},
+			INSPECT_ITEM8_ALLWNCE3_PLUS = #{inspectItem8Allwnce3Plus},
+			INSPECT_ITEM8_ALLWNCE3_MINUS = #{inspectItem8Allwnce3Minus},
+			INSPECT_ITEM8_ALLWNCE4_PLUS = #{inspectItem8Allwnce4Plus},
+			INSPECT_ITEM8_ALLWNCE4_MINUS = #{inspectItem8Allwnce4Minus},
+			INSPECT_ITEM8_ALLWNCE5_PLUS = #{inspectItem8Allwnce5Plus},
+			INSPECT_ITEM8_ALLWNCE5_MINUS = #{inspectItem8Allwnce5Minus},
+			INSPECT_ITEM8_ALLWNCE6_PLUS = #{inspectItem8Allwnce6Plus},
+			INSPECT_ITEM8_ALLWNCE6_MINUS = #{inspectItem8Allwnce6Minus},
+			INSPECT_ITEM8_ALLWNCE7_PLUS = #{inspectItem8Allwnce7Plus},
+			INSPECT_ITEM8_ALLWNCE7_MINUS = #{inspectItem8Allwnce7Minus},
+			INSPECT_ITEM8_ALLWNCE8_PLUS = #{inspectItem8Allwnce8Plus},
+			INSPECT_ITEM8_ALLWNCE8_MINUS = #{inspectItem8Allwnce8Minus},
+			INSPECT_ITEM8_ALLWNCE9_PLUS = #{inspectItem8Allwnce9Plus},
+			INSPECT_ITEM8_ALLWNCE9_MINUS = #{inspectItem8Allwnce9Minus},
+			INSPECT_ITEM8_ALLWNCE10_PLUS = #{inspectItem8Allwnce10Plus},
+			INSPECT_ITEM8_ALLWNCE10_MINUS = #{inspectItem8Allwnce10Minus},
+			UPD_ID = #{updId},
+			UPD_DATE = getDate()
+		WHERE
+			MATRL_CD = #{matrlCd}
+	</select>
+	
+	<select id="overlapChack" resultType="int">
+		SELECT
+			COUNT(MATRL_MODEL)
+		FROM TB_MATRL_CODE_ADM
+		WHERE MATRL_CD != #{matrlCd} AND MATRL_NM = #{matrlNm} AND MATRL_MODEL = #{matrlModel}
+	</select>
+	
+	
+</mapper>
