@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.em.manufacturerMapper">
+
+	<resultMap id="ManufacturerVo" type="mes.domain.em.ManufacturerVo">
+		<result property="goodsCd"				column="GOODS_CD"		/>
+		<result property="goodsNm"				column="GOODS_NM"		/>
+		<result property="alnicuMatrlCd"		column="ALNICU_MATRL_CD"/>
+		<result property="filmMatrlCd"			column="FILM_MATRL_CD"/>				
+		<result property="model"				column="MODEL"			/>
+		<result property="qutyCd"				column="QUTY_CD"		/>
+		<result property="qutyNm"				column="QUTY_NM"		/>		
+		<result property="alniQutyNm"			column="ALNI_QUTY_NM"	/>
+		<result property="alniThickness"		column="ALNI_THICKNESS"	/>
+		<result property="alniWidth"			column="ALNI_WIDTH"		/>
+		<result property="alniLength"			column="ALNI_LENGTH"	/>
+		<result property="alniPich"				column="ALNI_PICH"		/>
+		<result property="filmQutyNm"			column="FILM_QUTY_NM"	/>				
+		<result property="filmThickness"		column="FILM_THICKNESS"	/>
+		<result property="filmDepth"			column="FILM_DEPTH"		/>
+		<result property="surfaceTrtmtCd"		column="SURFACE_TRTMT_CD"/>
+		<result property="surfaceTrtmtNm"		column="SURFACE_TRTMT_NM"/>
+	</resultMap>
+	
+	<resultMap id="EquipCondCommonAdmVo" type="mes.domain.em.EquipCondCommonAdmVo">
+		<result property="equipCondSeq"		column="EQUIP_COND_SEQ"		/>
+		<result property="equipCd"			column="EQUIP_CD"			/>
+		<result property="goodsCd"			column="GOODS_CD"			/>
+		<result property="goodsNm"			column="GOODS_NM"			/>		
+		<result property="condRegDate"		column="COND_REG_DATE"		/>
+		<result property="useYnCd"			column="USE_YN_CD"			/>
+		<result property="regId"			column="REG_ID"				/>
+		<result property="regDate"			column="REG_DATE"			/>
+		<result property="updId"			column="UPD_ID"				/>
+		<result property="updDate"			column="UPD_DATE"			/>
+		
+		<result property="goodsNm"			column="GOODS_NM"			/>
+		<result property="model"			column="MODEL"				/>
+		<result property="modelNo"			column="MODEL_NO"			/>
+		<result property="alnicuMatrlCd"	column="ALNICU_MATRL_CD"	/>
+		<result property="filmMatrlCd"		column="FILM_MATRL_CD"		/>
+		<result property="gravity"			column="GRAVITY"			/>
+		<result property="qutyCd"				column="QUTY_CD"		/>
+		<result property="qutyNm"				column="QUTY_NM"		/>			
+		<result property="dealCorpCd"		column="DEAL_CORP_CD"		/>
+		<result property="tmUnitCd"			column="TM_UNIT_CD"			/>
+		<result property="packUnitCd"		column="PACK_UNIT_CD"		/>
+		<result property="etc1"				column="ETC1"				/>
+		<result property="goodsDesc"		column="GOODS_DESC"			/>
+		<result property="equipNm"			column="EQUIP_NM"			/>
+		<result property="surfaceTrtmtCd"	column="SURFACE_TRTMT_CD"	/>
+		<result property="surfaceTrtmtNm"	column="SURFACE_TRTMT_NM"	/>		
+	</resultMap>
+	
+	 
+	<!-- 제조조건관리 설비 클릭시 계획 목록 조회 -->
+	<select id="listAll" resultMap="ManufacturerVo">
+		<![CDATA[
+			SELECT 
+				 A.GOODS_CD
+				 ,A.GOODS_NM
+				 ,A.ALNICU_MATRL_CD
+				 ,A.FILM_MATRL_CD				 
+				 ,A.MODEL
+				 ,B.QUTY_CD
+				,(SELECT BASE_CD_NM FROM TB_SYSTEM_COMMON_CODE D WHERE D.BASE_GROUP_CD='007' AND D.BASE_CD = B.QUTY_CD) ALNI_QUTY_NM
+				 ,B.THICKNESS ALNI_THICKNESS
+				 ,B.DEPTH ALNI_THICKNESS
+				 ,B.WIDTH ALNI_WIDTH
+				 ,B.LENGTH ALNI_LENGTH
+				 ,B.PITCH  ALNI_PICH
+				 ,(SELECT BASE_CD_NM FROM TB_SYSTEM_COMMON_CODE D WHERE D.BASE_GROUP_CD='007' AND D.BASE_CD = C.QUTY_CD) FILM_QUTY_NM
+				 ,C.THICKNESS FILM_THICKNESS
+				 ,C.DEPTH FILM_DEPTH
+				
+			FROM TB_GOODS_CODE_ADM A,
+				TB_MATRL_CODE_ADM B,
+				TB_MATRL_CODE_ADM C
+			WHERE A.GOODS_CD = #{goodsCd}
+				AND A.ALNICU_MATRL_CD = B.MATRL_CD
+				AND A.FILM_MATRL_CD = C.MATRL_CD
+		]]>
+	</select>
+	
+	<select id="selectEquipCondSeq" resultType="String">
+		SELECT ISNULL(RIGHT('00000' + CAST(MAX(SUBSTRING(EQUIP_COND_SEQ,2,6))+1 AS NVARCHAR),5), '00001') FROM TB_EQUIP_COND_COMMON_ADM
+	</select>
+	
+	<!-- 특정 설비 계획 목록 조회 -->
+	<select id="listRead" resultMap="EquipCondCommonAdmVo">
+		<![CDATA[
+			SELECT
+				A.EQUIP_COND_SEQ
+				, A.EQUIP_CD
+				, A.GOODS_CD
+				, A.COND_REG_DATE
+				, B.GOODS_NM
+				, B.MODEL
+				, B.MODEL_NO
+				, B.ALNICU_MATRL_CD
+				, B.FILM_MATRL_CD
+				, B.GRAVITY
+				, B.DEAL_CORP_CD
+				, B.TM_UNIT_CD
+				, B.PACK_UNIT_CD
+				, B.ETC1
+				, B.GOODS_DESC
+				, B.USE_YN_CD
+				, C.QUTY_CD
+				, (SELECT BASE_CD_NM FROM TB_SYSTEM_COMMON_CODE B WHERE B.BASE_GROUP_CD='007' AND B.BASE_CD = C.QUTY_CD) QUTY_NM
+				, C.SURFACE_TRTMT_CD
+				, (SELECT BASE_CD_NM FROM TB_SYSTEM_COMMON_CODE B WHERE B.BASE_GROUP_CD='021' AND B.BASE_CD = C.SURFACE_TRTMT_CD) SURFACE_TRTMT_NM
+				, (SELECT EQUIP_NM FROM TB_EQUIP_CODE_ADM B WHERE B.EQUIP_CD = A.EQUIP_CD) EQUIP_NM
+			FROM TB_EQUIP_COND_COMMON_ADM A, 
+				TB_GOODS_CODE_ADM B,
+				TB_MATRL_CODE_ADM C
+			WHERE A.EQUIP_CD = #{equipCd}
+				AND A.GOODS_CD = B.GOODS_CD
+				AND B.ALNICU_MATRL_CD = C.MATRL_CD
+		]]>
+	</select>
+
+	<!-- 제품코드 조회 팝업의 목록에서 특정 제품 클릭 시 제품코드에 대한 재질,규격,두께등을 가져옴 -->
+	<select id="read" resultMap="ManufacturerVo">
+		<![CDATA[
+			SELECT 
+				 A.GOODS_CD
+		 		 ,A.GOODS_NM
+				 ,A.MODEL
+				 ,B.QUTY_CD
+				 ,(SELECT BASE_CD_NM FROM TB_SYSTEM_COMMON_CODE D WHERE D.BASE_GROUP_CD='007' AND D.BASE_CD = B.QUTY_CD) ALNI_QUTY_NM
+				 ,B.THICKNESS ALNI_THICKNESS
+				 ,B.DEPTH ALNI_THICKNESS
+				 ,B.WIDTH ALNI_WIDTH
+				 ,B.LENGTH ALNI_LENGTH
+				 ,B.PITCH  ALNI_PICH
+				 ,B.SURFACE_TRTMT_CD
+				 ,(SELECT BASE_CD_NM FROM TB_SYSTEM_COMMON_CODE D WHERE D.BASE_GROUP_CD='021' AND D.BASE_CD = B.SURFACE_TRTMT_CD) SURFACE_TRTMT_NM
+				 ,(SELECT BASE_CD_NM FROM TB_SYSTEM_COMMON_CODE D WHERE D.BASE_GROUP_CD='007' AND D.BASE_CD = C.QUTY_CD) FILM_QUTY_NM
+				 ,C.THICKNESS FILM_THICKNESS
+				 ,C.DEPTH FILM_DEPTH
+			FROM
+				TB_GOODS_CODE_ADM A,
+				TB_MATRL_CODE_ADM B,
+				TB_MATRL_CODE_ADM C
+			WHERE
+				A.GOODS_CD = #{goodsCd}
+			AND A.ALNICU_MATRL_CD = B.MATRL_CD
+			AND A.FILM_MATRL_CD = C.MATRL_CD
+		]]>
+	</select>
+
+ 	
+	<insert id="equipCondCommonAdmcreate">
+		<![CDATA[
+			INSERT INTO TB_EQUIP_COND_COMMON_ADM	(
+				EQUIP_COND_SEQ
+				, EQUIP_CD
+				, GOODS_CD
+				, COND_REG_DATE
+				, USE_YN_CD
+				, REG_ID
+				, REG_DATE
+			) 
+			VALUES(
+				#{equipCondSeq}
+				, #{equipCd}
+				, #{goodsCd}
+				, CONVERT(CHAR(8),getDate(),112)
+				, #{useYnCd}
+				, #{regId}
+				, getDate()
+			)
+		]]>
+	</insert>
+
+</mapper>

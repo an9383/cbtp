@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.io.outsourcingAdmMapper">
+	
+	<resultMap id="OutsourcingAdmVo" type="mes.domain.io.OutsourcingAdmVo">
+		<result property="outsrcNo"      column="OUTSRC_NO"			/>
+		<result property="workOrdNo"     column="WORK_ORD_NO"		/>
+		<result property="minorPrcssCd"  column="MINOR_PRCSS_CD"	/>
+		<result property="minorPrcssNm"  column="MINOR_PRCSS_NM"	/>
+		<result property="middlePrcssCd" column="MIDDLE_PRCSS_CD"	/>
+		<result property="itemCd"        column="ITEM_CD"			/>
+		<result property="itemRev"       column="ITEM_REV"			/>
+		<result property="itemNm"        column="ITEM_NM"			/>
+		<result property="itemGubun"     column="ITEM_GUBUN"		/>
+		<result property="itemGubunNm"   column="ITEM_GUBUN_NM"		/>
+		<result property="outCorpCd"  	 column="OUT_CORP_CD"		/>
+		<result property="outCorpNm"  	 column="OUT_CORP_NM"	    />
+		<result property="outsrcGubun"   column="OUTSRC_GUBUN"		/>
+		<result property="outsrcQty"     column="OUTSRC_QTY"		/>
+		<result property="outQty"        column="OUT_QTY"			/>
+		<result property="outRemainQty"  column="OUT_REMAIN_QTY"	/>
+		<result property="inQty"         column="IN_QTY"			/>
+		<result property="inRemainQty"   column="IN_REMAIN_QTY"		/>
+		<result property="outsrcDate"    column="OUTSRC_DATE"		/>
+		<result property="reqDate"       column="REQ_DATE"			/>
+		<result property="dlvDate"       column="DLV_DATE"			/>
+		<result property="outChargr"  	 column="OUT_CHARGR"		/>
+		<result property="outChargrNm"   column="OUT_CHARGR_NM"     />
+		<result property="outsrcStatus"  column="OUTSRC_STATUS"		/>
+		<result property="outsrcStatusNm"  column="OUTSRC_STATUS_NM"	/>
+		<result property="outDesc"       column="OUT_DESC"		    />
+		<result property="reportFn"      column="REPORT_FN"			/>
+		<result property="regId"		 column="REG_ID"			/>
+		<result property="regDate"		 column="REG_DATE"			/>
+		<result property="updId"		 column="UPD_ID"			/>
+		<result property="updDate"		 column="UPD_DATE"			/>
+		
+		<result property="startDate"	 column="START_DATE"		/>
+		<result property="endDate"		 column="END_DATE"			/>
+		<result property="today"		 column="TODAY"				/>
+		<result property="value"		 column="VALUE"				/>
+		
+		<result property="outsrcDtlDate"    column="OUTSRC_DTL_DATE"	/>
+		<result property="outsrcCorpCd"  	column="OUTSRC_CORP_CD"		/>
+		<result property="outsrcCorpNm"  	column="OUTSRC_CORP_NM"		/>
+		<result property="outsrcChargr"  	 column="OUTSRC_CHARGR"		/>
+		<result property="outsrcChargrNm"   column="OUTSRC_CHARGR_NM"     />
+		<result property="outsrcSeq"    	column="OUTSRC_SEQ"			/>
+		<result property="outsrcDtlQty"  	column="OUTSRC_DTL_QTY"		/>
+		<result property="outsrcRemainQty"  column="OUTSRC_REMAIN_QTY"	/>
+		<result property="outsrcDesc"    	column="OUTSRC_DESC"			/>
+		
+		
+		<result property="insrcDtlDate"    	column="INSRC_DTL_DATE"		/>
+		<result property="insrcCorpCd"  	column="INSRC_CORP_CD"		/>
+		<result property="insrcCorpNm"  	column="INSRC_CORP_NM"		/>
+		<result property="insrcChargr"  	column="INSRC_CHARGR"		/>
+		<result property="insrcChargrNm"  	column="INSRC_CHARGR_NM"	/>
+		<result property="insrcSeq"    		column="INSRC_SEQ"			/>
+		<result property="insrcDtlQty"  	column="INSRC_DTL_QTY"		/>
+		<result property="insrcRemainQty" 	column="INSRC_REMAIN_QTY"	/>
+		<result property="insrcDesc"    	column="INSRC_DESC"			/>
+	</resultMap>             
+                    
+    <!-- 외주발주등록 목록조회 -->
+    <select id="outsourcingAdmList" resultMap="OutsourcingAdmVo">
+    	SELECT	A.OUTSRC_NO 
+				, A.WORK_ORD_NO 
+				, A.MINOR_PRCSS_CD
+				, (SELECT PRCSS_NM FROM TB_PRCSS_CODE_ADM X WHERE X.PRCSS_CD=A.MINOR_PRCSS_CD)MINOR_PRCSS_NM
+				, A.MIDDLE_PRCSS_CD 
+				, A.ITEM_CD 
+				, (SELECT ITEM_NM FROM TB_ITEM_INFO_ADM X WHERE X.ITEM_CD=A.ITEM_CD) ITEM_NM
+				, A.ITEM_REV 	
+				, (SELECT ITEM_GUBUN FROM TB_ITEM_INFO_ADM X WHERE X.ITEM_CD=A.ITEM_CD) ITEM_GUBUN
+				, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=(
+						SELECT ITEM_GUBUN FROM TB_ITEM_INFO_ADM X WHERE X.ITEM_CD=A.ITEM_CD) AND X.BASE_GROUP_CD='079')ITEM_GUBUN_NM
+				, A.OUT_CORP_CD
+				, (SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD=A.OUT_CORP_CD)OUT_CORP_NM
+				, A.OUTSRC_GUBUN 
+				, A.OUTSRC_QTY 
+				, A.OUT_QTY
+				, A.OUT_REMAIN_QTY 
+				, A.IN_QTY 
+				, A.IN_REMAIN_QTY 
+				, A.OUTSRC_DATE
+				, A.REQ_DATE
+				, A.DLV_DATE 
+				, A.OUT_CHARGR 
+				, (SELECT USER_NM FROM TB_USER X WHERE X.USER_NUMBER=A.OUT_CHARGR)OUT_CHARGR_NM
+				, A.OUTSRC_STATUS 
+				, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=A.OUTSRC_STATUS AND X.BASE_GROUP_CD='055')OUTSRC_STATUS_NM
+				, A.OUT_DESC 
+				, A.REPORT_FN 
+				, (SELECT DISTINCT(X.OUTSRC_CHARGR) FROM TB_OUTSOURCING_DTL X WHERE X.OUTSRC_NO=A.OUTSRC_NO) OUTSRC_CHARGR
+				, (SELECT USER_NM FROM TB_USER X WHERE X.USER_NUMBER=(SELECT DISTINCT(X.OUTSRC_CHARGR) FROM TB_OUTSOURCING_DTL X WHERE X.OUTSRC_NO=A.OUTSRC_NO))OUTSRC_CHARGR_NM
+				, (SELECT DISTINCT(X.OUTSRC_CORP_CD) FROM TB_OUTSOURCING_DTL X WHERE X.OUTSRC_NO=A.OUTSRC_NO) OUTSRC_CORP_CD
+				, (SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD=(SELECT DISTINCT(X.OUTSRC_CORP_CD) FROM TB_OUTSOURCING_DTL X WHERE X.OUTSRC_NO=A.OUTSRC_NO))OUTSRC_CORP_NM
+				, (SELECT DISTINCT(X.INSRC_CHARGR) FROM TB_INSOURCING_DTL X WHERE X.OUTSRC_NO=A.OUTSRC_NO) INSRC_CHARGR
+				, (SELECT USER_NM FROM TB_USER X WHERE X.USER_NUMBER=(SELECT DISTINCT(X.INSRC_CHARGR) FROM TB_INSOURCING_DTL X WHERE X.OUTSRC_NO=A.OUTSRC_NO))INSRC_CHARGR_NM
+				, (SELECT DISTINCT(X.INSRC_CORP_CD) FROM TB_INSOURCING_DTL X WHERE X.OUTSRC_NO=A.OUTSRC_NO) INSRC_CORP_CD
+				, (SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD=(SELECT DISTINCT(X.INSRC_CORP_CD) FROM TB_INSOURCING_DTL X WHERE X.OUTSRC_NO=A.OUTSRC_NO))INSRC_CORP_NM
+		FROM	TB_OUTSOURCING_ADM A 
+		WHERE 1=1
+		<if test="value!=null and value.equals('out')">
+		AND REQ_DATE BETWEEN #{startDate} AND #{endDate}
+		</if>
+   		<if test="value!=null and value.equals('in')">
+		AND DLV_DATE BETWEEN #{startDate} AND #{endDate}
+		</if>
+		<if test="value==null">
+		AND OUTSRC_DATE BETWEEN #{startDate} AND #{endDate}
+		</if>
+    </select>     
+    
+    <!-- 외주발주등록 상세조회 -->
+    <select id="outsourcingAdmRead" resultMap="OutsourcingAdmVo">
+   		SELECT	A.OUTSRC_NO 
+			, A.WORK_ORD_NO 
+			, A.MINOR_PRCSS_CD
+			, (SELECT PRCSS_NM FROM TB_PRCSS_CODE_ADM X WHERE X.PRCSS_CD=A.MINOR_PRCSS_CD)MINOR_PRCSS_NM
+			, A.MIDDLE_PRCSS_CD 
+			, A.ITEM_CD 
+			, (SELECT ITEM_NM FROM TB_ITEM_INFO_ADM X WHERE X.ITEM_CD=A.ITEM_CD) ITEM_NM
+			, A.ITEM_REV 	
+			, (SELECT ITEM_GUBUN FROM TB_ITEM_INFO_ADM X WHERE X.ITEM_CD=A.ITEM_CD) ITEM_GUBUN
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=(
+					SELECT ITEM_GUBUN FROM TB_ITEM_INFO_ADM X WHERE X.ITEM_CD=A.ITEM_CD) AND X.BASE_GROUP_CD='079')ITEM_GUBUN_NM
+			, A.OUT_CORP_CD
+			, (SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD=A.OUT_CORP_CD)OUT_CORP_NM
+			, A.OUTSRC_GUBUN 
+			, A.OUTSRC_QTY 
+			, A.OUT_QTY
+			, A.OUT_REMAIN_QTY 
+			, A.IN_QTY 
+			, A.IN_REMAIN_QTY 
+			, A.OUTSRC_DATE
+			, A.REQ_DATE
+			, A.DLV_DATE 
+			, A.OUT_CHARGR 
+			, (SELECT USER_NM FROM TB_USER X WHERE X.USER_NUMBER=A.OUT_CHARGR)OUT_CHARGR_NM
+			, A.OUTSRC_STATUS 
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=A.OUTSRC_STATUS AND X.BASE_GROUP_CD='055')OUTSRC_STATUS_NM
+			, A.OUT_DESC 
+			, A.REPORT_FN 
+		FROM	TB_OUTSOURCING_ADM A
+		WHERE A.OUTSRC_NO = #{outsrcNo}
+    </select>    
+    
+    <!-- 외주발주등록 등록 -->
+    <insert id="outsourcingAdmCreate">
+    	<![CDATA[
+	    	INSERT INTO TB_OUTSOURCING_ADM		(
+				OUTSRC_NO,
+				WORK_ORD_NO,
+				MINOR_PRCSS_CD,
+				MIDDLE_PRCSS_CD,
+				ITEM_CD,
+				ITEM_REV,
+				OUT_CORP_CD,
+				OUTSRC_GUBUN,
+				OUTSRC_QTY,
+				OUT_QTY,
+				OUT_REMAIN_QTY,
+				IN_QTY,
+				IN_REMAIN_QTY,
+				OUTSRC_DATE,
+				REQ_DATE,
+				DLV_DATE,
+				OUT_CHARGR,
+				OUTSRC_STATUS,
+				OUT_DESC,
+				REPORT_FN,
+				REG_ID,
+				REG_DATE
+			) 
+			VALUES(
+				#{outsrcNo},
+				#{workOrdNo},
+				#{minorPrcssCd},
+				#{middlePrcssCd},
+				#{itemCd},
+				#{itemRev},
+				#{outCorpCd},
+				#{outsrcGubun},
+				#{outsrcQty},
+				0,
+				#{outsrcQty},
+				0,
+				#{outsrcQty},
+				#{outsrcDate},
+				#{reqDate},
+				#{dlvDate},
+				#{outChargr},
+				#{outsrcStatus},
+				#{outDesc},
+				#{reportFn},
+				#{regId},
+				getDate()
+			)
+    	]]>
+    </insert>  
+    
+    <!-- 외주발주등록 수정 -->
+    <update id="outsourcingAdmUpdate">
+    	<![CDATA[
+    		UPDATE	TB_OUTSOURCING_ADM		 
+			SET
+				MINOR_PRCSS_CD = #{minorPrcssCd},
+				MIDDLE_PRCSS_CD = #{middlePrcssCd},
+				OUT_CORP_CD = #{outCorpCd},
+				OUTSRC_GUBUN = #{outsrcGubun},
+				OUTSRC_QTY = #{outsrcQty},
+				OUTSRC_DATE = #{outsrcDate},
+				REQ_DATE = #{reqDate},
+				DLV_DATE = #{dlvDate},
+				OUT_CHARGR = #{outChargr},
+				OUT_DESC = #{outDesc},
+				UPD_ID = #{updId},
+				UPD_DATE = getDate()
+			WHERE	OUTSRC_NO = #{outsrcNo}
+    	]]>
+    </update> 
+    
+     <!-- 외주발주등록 삭제 -->
+    <delete id="outsourcingAdmDelete">
+    	<![CDATA[
+    		DELETE FROM TB_OUTSOURCING_ADM		 
+			WHERE	OUTSRC_NO = #{outsrcNo}
+    	]]>
+    </delete>  
+    
+    <!--외주발주번호 생성 -->
+	<select id="getOutsrcNo" resultType="String">
+		SELECT ISNULL(RIGHT('000' + CAST(MAX(RIGHT(OUTSRC_NO,3))+1 AS NVARCHAR),3), '001') FROM TB_OUTSOURCING_ADM WHERE SUBSTRING(OUTSRC_NO,2,6) = #{today}
+	</select>
+	
+	
+	<!-- 외주발주미입고현황 -->
+    <select id="outsourcingStatusList" resultMap="OutsourcingAdmVo">
+    	SELECT	OUTSRC_NO 
+			, WORK_ORD_NO 
+			, MINOR_PRCSS_CD
+			, (SELECT PRCSS_NM FROM TB_PRCSS_CODE_ADM X WHERE X.PRCSS_CD=A.MINOR_PRCSS_CD)MINOR_PRCSS_NM
+			, MIDDLE_PRCSS_CD 
+			, A.ITEM_CD 
+			, ITEM_NM
+			, A.ITEM_REV 	
+			, ITEM_GUBUN
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=ITEM_GUBUN AND X.BASE_GROUP_CD='079' )ITEM_GUBUN_NM
+			, OUT_CORP_CD
+			, (SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD=A.OUT_CORP_CD)OUT_CORP_NM
+			, OUTSRC_GUBUN 
+			, OUTSRC_QTY 
+			, OUT_QTY
+			, OUT_REMAIN_QTY 
+			, IN_QTY 
+			, IN_REMAIN_QTY 
+			, OUTSRC_DATE
+			, REQ_DATE
+			, DLV_DATE 
+			, OUT_CHARGR 
+			, OUTSRC_STATUS 
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=A.OUTSRC_STATUS AND X.BASE_GROUP_CD='055')OUTSRC_STATUS_NM
+			, OUT_DESC 
+			, REPORT_FN 
+		FROM	TB_OUTSOURCING_ADM A, TB_ITEM_INFO_ADM B
+		WHERE A.ITEM_CD=B.ITEM_CD
+		AND OUTSRC_STATUS IN('006')
+		AND IN_REMAIN_QTY != 0
+		AND	OUTSRC_DATE BETWEEN #{startDate} AND #{endDate}
+    </select>   
+    
+    <!-- 외주발주 마감상태 수정 -->  
+    <update id="updateOutsrcStatus">
+    	<![CDATA[
+    		UPDATE TB_OUTSOURCING_ADM SET OUTSRC_STATUS=#{outsrcStatus} WHERE OUTSRC_NO = #{outsrcNo}
+    	]]>
+    </update>
+    
+    <!-- 외주 출고 상세조회 -->
+    <select id="outsourcingDtlRead" resultMap="OutsourcingAdmVo">
+    	<![CDATA[
+		    SELECT	A.OUTSRC_NO 
+				, A.WORK_ORD_NO 
+				, A.MINOR_PRCSS_CD
+				, (SELECT PRCSS_NM FROM TB_PRCSS_CODE_ADM X WHERE X.PRCSS_CD=A.MINOR_PRCSS_CD)MINOR_PRCSS_NM
+				, A.MIDDLE_PRCSS_CD 
+				, A.ITEM_CD 
+				, (SELECT ITEM_NM FROM TB_ITEM_MOTOR_ADM X WHERE X.ITEM_CD=A.ITEM_CD AND X.ITEM_REV=A.ITEM_REV) ITEM_NM
+				, A.ITEM_REV 	
+				, B.OUTSRC_DTL_DATE
+				, B.OUTSRC_CORP_CD
+				, B.OUTSRC_CHARGR
+				, B.OUTSRC_DTL_QTY
+				, B.OUTSRC_REMAIN_QTY
+				, B.OUTSRC_DESC
+				, B.OUTSRC_SEQ
+			FROM	TB_OUTSOURCING_ADM A, TB_OUTSOURCING_DTL B
+			WHERE  A.OUTSRC_NO=B.OUTSRC_NO
+			AND A.OUTSRC_NO = #{outsrcNo}
+    	]]>
+    </select>    
+    
+    <!-- 외주 입고 상세조회 -->
+    <select id="insourcingDtlRead" resultMap="OutsourcingAdmVo">
+    	<![CDATA[
+    			SELECT	A.OUTSRC_NO 
+				, A.WORK_ORD_NO 
+				, A.MINOR_PRCSS_CD
+				, (SELECT PRCSS_NM FROM TB_PRCSS_CODE_ADM X WHERE X.PRCSS_CD=A.MINOR_PRCSS_CD)MINOR_PRCSS_NM
+				, A.MIDDLE_PRCSS_CD 
+				, A.ITEM_CD 
+				, (SELECT ITEM_NM FROM TB_ITEM_MOTOR_ADM X WHERE X.ITEM_CD=A.ITEM_CD AND X.ITEM_REV=A.ITEM_REV) ITEM_NM
+				, A.ITEM_REV 	
+				, A.REPORT_FN 
+				, C.INSRC_DTL_DATE
+				, C.INSRC_CORP_CD
+				, C.INSRC_CHARGR
+				, C.INSRC_DTL_QTY
+				, C.INSRC_REMAIN_QTY
+				, C.INSRC_DESC
+				, C.INSRC_SEQ
+			FROM	TB_OUTSOURCING_ADM A, TB_INSOURCING_DTL C
+			WHERE A.OUTSRC_NO=C.OUTSRC_NO
+			AND A.OUTSRC_NO = #{outsrcNo}
+    	]]>
+    </select>    
+    
+    <!-- 외주출고 등록 -->
+    <insert id="outsourcingDtlCreate">
+    	<![CDATA[
+	    	INSERT INTO TB_OUTSOURCING_DTL(
+	    		 OUTSRC_NO,
+	             OUTSRC_SEQ,
+	             OUTSRC_DTL_QTY,
+	             OUTSRC_REMAIN_QTY,
+	             OUTSRC_DTL_DATE,
+	             OUTSRC_CORP_CD,
+	             OUTSRC_CHARGR,
+	             OUTSRC_DESC,
+	             REG_ID,
+	             REG_DATE
+	        )
+			VALUES(
+	            #{outsrcNo},
+	            #{outsrcSeq},
+	            #{outsrcDtlQty},
+	            #{outsrcRemainQty},
+	            #{outsrcDtlDate},
+	            #{outsrcCorpCd},
+	            #{outsrcChargr},
+	            #{outsrcDesc},
+	            #{regId},
+	            getDate()
+	           ) 
+    	]]>
+    </insert>
+    
+     <!-- 외주입고 등록 -->
+    <insert id="insourcingDtlCreate">
+    	<![CDATA[
+	    	INSERT INTO TB_INSOURCING_DTL(
+	    		 OUTSRC_NO,
+	             INSRC_SEQ,
+	             INSRC_DTL_QTY,
+	             INSRC_REMAIN_QTY,
+	             INSRC_DTL_DATE,
+	             INSRC_CORP_CD,
+	             INSRC_CHARGR,
+	             INSRC_DESC,
+	             REG_ID,
+	             REG_DATE
+	        )
+			VALUES(
+	            #{outsrcNo},
+	            #{insrcSeq},
+	            #{insrcDtlQty},
+	            #{insrcRemainQty},
+	            #{insrcDtlDate},
+	            #{insrcCorpCd},
+	            #{insrcChargr},
+	            #{insrcDesc},
+	            #{regId},
+	            getDate()
+	           ) 
+    	]]>
+    </insert>
+    
+    <!-- 외주출고 수정 -->
+    <update id="outsourcingDtlUpdate">
+    	UPDATE TB_OUTSOURCING_DTL
+		SET    
+	       OUTSRC_DTL_QTY = #{outsrcDtlQty},
+	       OUTSRC_REMAIN_QTY = #{outsrcRemainQty},
+	       OUTSRC_DTL_DATE = #{outsrcDtlDate},
+	       OUTSRC_CORP_CD = #{outsrcCorpCd},
+	       OUTSRC_CHARGR = #{outsrcChargr},
+	       OUTSRC_DESC = #{outsrcDesc},
+	       UPD_ID = #{updId},
+	       UPD_DATE = GETDATE()
+		WHERE  OUTSRC_NO = #{outsrcNo}
+		AND OUTSRC_SEQ = #{outsrcSeq}
+    </update>
+    
+     <!-- 외주입고 수정 -->
+    <update id="insourcingDtlUpdate">
+    	UPDATE TB_INSOURCING_DTL		
+		SET   
+	       INSRC_DTL_QTY = #{insrcDtlQty},
+	       INSRC_REMAIN_QTY = #{insrcRemainQty},
+	       INSRC_DTL_DATE = #{insrcDtlDate},
+	       INSRC_CORP_CD = #{insrcCorpCd},
+	       INSRC_CHARGR = #{insrcChargr},
+	       INSRC_DESC = #{insrcDesc},
+	       UPD_ID = #{updId},
+	       UPD_DATE = GETDATE()
+		WHERE  OUTSRC_NO = #{outsrcNo}
+		AND INSRC_SEQ = #{insrcSeq}
+    </update>
+     
+    <update id="uploadFile">
+     	UPDATE TB_OUTSOURCING_ADM		
+		<set>
+			OUTSRC_NO=OUTSRC_NO
+			<if test="reportFn!=null and !reportFn.equals('')">
+			, REPORT_FN = #{reportFn}
+			</if>
+		</set>   
+		WHERE  OUTSRC_NO = #{outsrcNo}
+    </update>
+     
+         
+    <!-- 수입검사 성적서 파일명 가져오기 -->
+	<select id="getReportFn" resultType="String">
+		SELECT REPORT_FN FROM TB_OUTSOURCING_ADM WHERE OUTSRC_NO = #{outsrcNo}
+	</select>
+   
+    <!--외주발주 시퀀스 생성  -->
+    <select id="getOutsrcSeq" resultType="Integer">
+   		SELECT ISNULL(MAX(OUTSRC_SEQ)+1,0) FROM TB_OUTSOURCING_DTL 
+    </select>
+    
+    <!--외주입고 시퀀스 생성  -->
+    <select id="getInsrcSeq" resultType="Integer">
+   		SELECT ISNULL(MAX(INSRC_SEQ)+1,0) FROM TB_INSOURCING_DTL 
+    </select>
+     
+    <delete id="insourcingDtlDelete">
+    	DELETE FROM TB_INSOURCING_DTL WHERE OUTSRC_NO = #{outsrcNo}
+    </delete>
+    
+    <delete id="outsourcingDtlDelete">
+    	DELETE FROM TB_OUTSOURCING_DTL WHERE OUTSRC_NO = #{outsrcNo}
+    </delete>
+    
+   
+    
+    <!--외주출고 수정 -->
+    <update id="updateOutInQty">
+    	
+   		UPDATE	TB_OUTSOURCING_ADM		 
+		<set>
+			<if test="value.equals('out')">
+				OUT_QTY = #{outsrcDtlQty},
+				OUT_REMAIN_QTY = OUTSRC_QTY-#{outsrcDtlQty}
+			</if>
+			<if test="value.equals('in')">
+				IN_QTY = #{insrcDtlQty},
+				IN_REMAIN_QTY = OUTSRC_QTY-#{insrcDtlQty}
+			</if>
+		</set>
+		WHERE	OUTSRC_NO = #{outsrcNo}
+   
+    </update> 
+
+	
+</mapper>                
+                          

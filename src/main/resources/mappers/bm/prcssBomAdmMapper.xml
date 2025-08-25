@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.bm.prcssBomAdmMapper">
+	<resultMap id="PrcssBomAdmVo" type="mes.domain.bm.PrcssBomAdmVo">
+	
+		<result property="bomCd"				column="BOM_CD"				/>
+		<result property="itemSeq"				column="ITEM_SEQ"			/>
+		<result property="itemNm"				column="ITEM_NM"			/>
+		<result property="ecoCd"				column="ECO_CD"				/>
+		<result property="itemMaker"			column="ITEM_MAKER"			/>
+		<result property="itemCus"				column="ITEM_CUS"			/>
+		
+		<result property="devCost"				column="DEV_COST"			/>
+		<result property="confirCost"			column="CONFIR_COST"		/>
+		<result property="startDate"			column="START_DATE"			/>
+		<result property="complDate"			column="COMPL_DATE"			/>
+		<result property="devStep"				column="DEV_STEP"			/>
+		<result property="devStepNm"			column="DEV_STEP_NM"		/>
+		<result property="bomDesc"				column="BOM_DESC"			/>
+		
+		<result property="etc1"					column="ETC1"				/>
+		<result property="etc2"					column="ETC2"				/>
+		<result property="useYn"				column="USE_YN"				/>
+		
+		<result property="regId"				column="REG_ID"				/>
+		<result property="regDate"				column="REG_DATE"			/>
+		<result property="updId"				column="UPD_ID"				/>
+		<result property="updDate"				column="UPD_DATE"			/>
+		
+<!-- 		추가사항 -->
+		<result property="masterPrcssCd"		column="MASTER_PRCSS_CD"	/>
+		<result property="subPrcssCd"			column="SUB_PRCSS_CD"		/>
+		<result property="bomSeq"				column="BOM_SEQ"			/>
+		<result property="itemConsumpt"			column="ITEM_CONSUMPT"		/>
+		<result property="itemCd"				column="ITEM_CD"			/>
+		<result property="itemModelNm"			column="ITEM_MODEL_NM"		/>
+		<result property="itemGubunNm"			column="ITEM_GUBUN_NM"		/>
+		<result property="itemUnit"				column="ITEM_UNIT"			/>
+		<result property="masterPrcssCdNm"		column="MASTER_PRCSS_CD_NM"	/>
+		<result property="subPrcssCdNm"			column="SUB_PRCSS_CD_NM"	/>
+	</resultMap>
+	
+	<!-- BOM 전체조회 -->
+	<select id="prcssBomAdmList" resultMap="PrcssBomAdmVo">
+		SELECT	
+			BOM_CD,
+			ECO_CD, 
+			A.ITEM_SEQ,
+			B.ITEM_CD,
+			B.ITEM_NM,
+			B.ITEM_MAKER,
+			B.ITEM_CUS,
+			DEV_COST,
+			CONFIR_COST,
+			START_DATE,
+			COMPL_DATE,
+			DEV_STEP,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE B.BASE_GROUP_CD = '108' AND B.BASE_CD = A.DEV_STEP) DEV_STEP_NM,
+			BOM_DESC
+		FROM	TB_PRCSS_BOM_ADM A
+		INNER JOIN TB_ITEM_INFO_ADM B
+		ON A.ITEM_SEQ = B.ITEM_SEQ
+		WHERE	1=1
+	</select>
+	
+	
+	<!-- BOM 상세 조회 -->
+	<select id="prcssBomAdmRead" resultMap="PrcssBomAdmVo">
+		SELECT	BOM_CD,
+			ECO_CD, 
+			B.ITEM_SEQ,
+			B.ITEM_CD,
+			B.ITEM_NM,
+			B.ITEM_MAKER,
+			B.ITEM_CUS,
+			DEV_COST,
+			CONFIR_COST,
+			START_DATE,
+			COMPL_DATE,
+			DEV_STEP,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE B.BASE_GROUP_CD = '108' AND B.BASE_CD = A.DEV_STEP) DEV_STEP_NM,
+			BOM_DESC
+		FROM	TB_PRCSS_BOM_ADM A
+		INNER JOIN TB_ITEM_INFO_ADM B
+		ON A.ITEM_SEQ=B.ITEM_SEQ
+		WHERE	1=1
+		AND A.BOM_CD=#{bomCd}
+	</select>
+	
+	
+	<!-- BOM 생성 -->
+	<insert id="prcssBomAdmCreate">
+		INSERT INTO TB_PRCSS_BOM_ADM(
+			BOM_CD,
+			ITEM_SEQ,
+			ECO_CD,
+			DEV_COST,
+			CONFIR_COST,
+			START_DATE,
+			COMPL_DATE,
+			DEV_STEP,
+			BOM_DESC,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{bomCd},
+			#{itemSeq},
+			#{ecoCd},
+			#{devCost},
+			#{confirCost},
+			#{startDate},
+			#{complDate},
+			#{devStep},
+			#{bomDesc},
+			#{regId},
+			GETDATE()
+		)
+	</insert>
+	
+	
+	<!-- BOM 수정 -->
+	<update id="prcssBomAdmUpdate">
+		UPDATE	TB_PRCSS_BOM_ADM 
+		SET	
+			ITEM_SEQ = #{itemSeq},
+			ECO_CD = #{ecoCd},
+			DEV_COST = #{devCost},
+			CONFIR_COST = #{confirCost},
+			START_DATE = #{startDate},
+			COMPL_DATE = #{complDate},
+			DEV_STEP = #{devStep},
+			BOM_DESC = #{bomDesc},
+			UPD_ID = #{updId},
+			UPD_DATE = GETDATE()
+		WHERE	BOM_CD = #{bomCd}
+	</update>
+	
+	
+	<!-- BOM 시퀀스 값 조회 -->
+	<select id="prcssBomCd" resultType="String">
+		SELECT ISNULL(STUFF(100001+MAX(RIGHT(BOM_CD, 4)), 1, 1, 'B') ,'B00001')
+		FROM TB_PRCSS_BOM_ADM 
+		WHERE LEFT(BOM_CD,1) = 'B'
+	</select>
+	
+	
+	<!-- 기본정보 삭제 -->
+	<delete id="prcssBomDelete">
+		DELETE 
+		FROM TB_PRCSS_BOM_ADM
+		WHERE BOM_CD = #{bomCd}
+	</delete>
+	
+	<!-- 공정매칭 삭제 -->
+	<delete id="prcssMbomDtlDelete">
+		DELETE 
+		FROM TB_PRCSS_MBOM_ADM
+		WHERE BOM_CD = #{bomCd}
+		AND MASTER_PRCSS_CD = #{masterPrcssCd}
+		AND SUB_PRCSS_CD = #{subPrcssCd}
+	</delete>
+	
+	<!-- BOM 삭제 -->
+	<delete id="prcssEbomDtlDelete">
+		DELETE 
+		FROM TB_PRCSS_EBOM_ADM
+		WHERE BOM_CD = #{bomCd}
+		AND SUB_PRCSS_CD = #{subPrcssCd}
+		AND ITEM_SEQ = #{itemSeq}
+	</delete>
+	
+	<!-- 개발관리 공정매칭 조회 -->
+	<select id="prcssCodeMbomList" resultMap="PrcssBomAdmVo">
+		SELECT	
+			BOM_CD,
+			MASTER_PRCSS_CD,
+			SUB_PRCSS_CD,
+			BOM_SEQ,
+			BOM_DESC,
+			REG_ID,
+			REG_DATE,
+			UPD_ID,
+			UPD_DATE,
+			(SELECT X.PRCSS_NM FROM TB_PRCSS_CODE_ADM X WHERE X.PRCSS_CD = A.MASTER_PRCSS_CD AND X.PRCSS_CD = X.LOWER_PRCSS_CD AND X.PRCSS_TYPE = '001') MASTER_PRCSS_CD_NM,
+			(SELECT X.PRCSS_NM FROM TB_PRCSS_CODE_ADM X WHERE X.PRCSS_CD = A.SUB_PRCSS_CD AND X.PRCSS_TYPE = '002') SUB_PRCSS_CD_NM
+		FROM	TB_PRCSS_MBOM_ADM A 
+		WHERE	BOM_CD = #{bomCd}
+	</select>
+	
+	<!-- 개발관리 BOM 조회 -->
+	<select id="prcssCodeEbomList" resultMap="PrcssBomAdmVo">
+		SELECT	
+			BOM_CD,
+			MASTER_PRCSS_CD,
+			SUB_PRCSS_CD,
+			ITEM_SEQ,
+			ITEM_CONSUMPT,
+			BOM_DESC,
+			REG_ID,
+			REG_DATE,
+			UPD_ID,
+			UPD_DATE,
+			(SELECT ITEM_CD FROM TB_ITEM_INFO_ADM B WHERE B.ITEM_SEQ = A.ITEM_SEQ) ITEM_CD,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_GROUP_CD='099' AND X.BASE_CD = (SELECT ITEM_MODEL FROM TB_ITEM_INFO_ADM B WHERE B.ITEM_SEQ = A.ITEM_SEQ)) ITEM_MODEL_NM,
+			(SELECT ITEM_NM FROM TB_ITEM_INFO_ADM B WHERE B.ITEM_SEQ = A.ITEM_SEQ) ITEM_NM,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_GROUP_CD='110' AND X.BASE_CD = (SELECT ITEM_GUBUN FROM TB_ITEM_INFO_ADM B WHERE B.ITEM_SEQ = A.ITEM_SEQ)) ITEM_GUBUN_NM,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_GROUP_CD='036' AND X.BASE_CD = (SELECT ITEM_UNIT FROM TB_ITEM_INFO_ADM B WHERE B.ITEM_SEQ = A.ITEM_SEQ)) ITEM_UNIT
+		FROM	TB_PRCSS_EBOM_ADM A	 
+		WHERE	BOM_CD = #{bomCd}
+	</select>
+	
+	<!-- 개발관리 공정매칭 삭제 -->
+	<delete id="prcssMbomDelete">
+		DELETE 
+		FROM TB_PRCSS_MBOM_ADM
+		WHERE BOM_CD = #{bomCd}
+	</delete>
+	
+	<!-- 개발관리 BOM 삭제 -->
+	<delete id="prcssEbomDelete">
+		DELETE 
+		FROM TB_PRCSS_EBOM_ADM
+		WHERE BOM_CD = #{bomCd}
+	</delete>
+	
+	<!-- 개발관리 공정매칭 생성 -->
+	<insert id="prcssMbomCreate">
+		INSERT INTO TB_PRCSS_MBOM_ADM		(
+			BOM_CD,
+			MASTER_PRCSS_CD,
+			SUB_PRCSS_CD,
+			BOM_SEQ,
+			BOM_DESC,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{bomCd},
+			#{masterPrcssCd},
+			#{subPrcssCd},
+			#{bomSeq},
+			#{bomDesc},
+			#{regId},
+			getDate()
+		)
+	</insert>
+	
+	<!-- 개발관리 BOM 생성 -->
+	<insert id="prcssEbomCreate">
+		INSERT INTO TB_PRCSS_EBOM_ADM		(
+			BOM_CD,
+			MASTER_PRCSS_CD,
+			SUB_PRCSS_CD,
+			ITEM_SEQ,
+			ITEM_CONSUMPT,
+			BOM_DESC,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{bomCd},
+			#{masterPrcssCd},
+			#{subPrcssCd},
+			#{itemSeq},
+			#{itemConsumpt},
+			#{bomDesc},
+			#{regId},
+			getDate()
+		)
+	</insert>
+	
+	
+</mapper>

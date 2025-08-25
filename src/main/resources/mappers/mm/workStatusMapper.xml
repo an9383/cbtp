@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.mm.workStatusMapper">
+
+	<resultMap id="WorkStatusVo" type="mes.domain.mm.WorkStatusVo">
+		<result property="startDate"			column="START_DATE"				/>
+		<result property="endDate"				column="END_DATE"				/>
+		
+		<result property="workDate"				column="WORK_DATE"				/>
+		<result property="workTimeBtime"		column="WORK_TIME_BTIME"		/>
+		<result property="workTimeLtime"		column="WORK_TIME_LTIME"		/>
+		<result property="workTimeDesc"			column="WORK_TIME_DESC"			/>
+		<result property="workPerBtime"			column="WORK_PER_BTIME"			/>
+		<result property="workPerLtime"			column="WORK_PER_LTIME"			/>
+		<result property="workPerDesc"			column="WORK_PER_DESC"			/>
+		<result property="workFairBtime"		column="WORK_FAIR_BTIME"		/>
+		<result property="workFairLtime"		column="WORK_FAIR_LTIME"		/>
+		<result property="workFairDesc"			column="WORK_FAIR_DESC"			/>
+	</resultMap>
+	
+	<!-- 조회 -->
+	<select id="read" resultMap="WorkStatusVo" parameterType="mes.domain.mm.WorkStatusVo">
+		<![CDATA[
+			SELECT
+				WORK_DATE,
+				WORK_TIME_BTIME,
+				WORK_TIME_LTIME,
+				WORK_TIME_DESC,
+				WORK_PER_BTIME,
+				WORK_PER_LTIME,
+				WORK_PER_DESC,
+				WORK_FAIR_BTIME,
+				WORK_FAIR_LTIME,
+				WORK_FAIR_DESC
+			FROM TB_WORK_STATUS
+			WHERE WORK_DATE = #{workDate}
+		]]>
+	</select>
+	
+	<!-- 등록 -->
+	<insert id="add" parameterType="mes.domain.mm.WorkStatusVo">
+		<![CDATA[
+			INSERT INTO TB_WORK_STATUS (
+				WORK_DATE,
+				WORK_TIME_BTIME,
+				WORK_TIME_LTIME,
+				WORK_TIME_DESC,
+				WORK_PER_BTIME,
+				WORK_PER_LTIME,
+				WORK_PER_DESC,
+				WORK_FAIR_BTIME,
+				WORK_FAIR_LTIME,
+				WORK_FAIR_DESC
+			) VALUES (
+				#{workDate},
+				#{workTimeBtime},
+				#{workTimeLtime},
+				#{workTimeDesc},
+				#{workPerBtime},
+				#{workPerLtime},
+				#{workPerDesc},
+				#{workFairBtime},
+				#{workFairLtime},
+				#{workFairDesc}
+			)
+		]]>
+	</insert>
+	
+	<!-- 수정 -->
+	<update id="edit" parameterType="mes.domain.mm.WorkStatusVo">
+		<![CDATA[
+			UPDATE TB_WORK_STATUS
+			SET
+				WORK_TIME_BTIME = #{workTimeBtime},
+				WORK_TIME_LTIME = #{workTimeLtime},
+				WORK_TIME_DESC = #{workTimeDesc},
+				WORK_PER_BTIME = #{workPerBtime},
+				WORK_PER_LTIME = #{workPerLtime},
+				WORK_PER_DESC = #{workPerDesc},
+				WORK_FAIR_BTIME = #{workFairBtime},
+				WORK_FAIR_LTIME = #{workFairLtime},
+				WORK_FAIR_DESC = #{workFairDesc}
+			WHERE WORK_DATE = #{workDate}
+		]]>
+	</update>
+</mapper>

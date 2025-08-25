@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.mt.laserOperInfoMapper">
+
+	<resultMap id="LaserOperInfoVo" type="mes.domain.mt.LaserOperInfoVo">
+		<result property="idx"				column="IDX"				/>
+		<result property="contDtlNo"		column="CONT_DTL_NO"		/>
+		<result property="itemNm"			column="ITEM_NM"			/>
+		<result property="equipNm"			column="EQUIP_NM"			/>
+		<result property="outputQty"		column="OUTPUT_QTY"			/>
+		<result property="itemPowerMax"		column="ITEM_POWER_MAX"		/>
+		<result property="itemPowerMin"		column="ITEM_POWER_MIN"		/>
+		<result property="itemTempMax"		column="ITEM_TEMP_MAX"		/>
+		<result property="itemTempMin"		column="ITEM_TEMP_MIN"		/>
+		
+		<result property="workOrdNo"		column="WorkOrdNo"			/>
+		<result property="regDate"			column="RegDate"			/>
+		<result property="laserRa"			column="LaserRa"			/>
+		<result property="laserTemperature"	column="LaserTemperature"	/>
+		
+		<result property="regId"			column="REG_ID"				/>
+		<result property="regDate"			column="REG_DATE"			/>
+		<result property="updId"			column="UPD_ID"				/>
+		<result property="updDate"			column="UPD_DATE"			/>
+	</resultMap>
+	
+	<!-- 제조조건 모니터링 리스트 -->
+	<select id="laserOperInfoList" resultMap="LaserOperInfoVo">
+		<![CDATA[
+			SELECT 
+				WOA.CONT_DTL_NO,
+				(SELECT X.ITEM_NM FROM TB_ITEM_INFO_ADM X WHERE X.ITEM_SEQ = WOA.ITEM_SEQ) ITEM_NM,
+				(SELECT X.ITEM_POWER_MAX FROM TB_ITEM_INFO_ADM X WHERE X.ITEM_SEQ = WOA.ITEM_SEQ) ITEM_POWER_MAX,
+				(SELECT X.ITEM_POWER_MIN FROM TB_ITEM_INFO_ADM X WHERE X.ITEM_SEQ = WOA.ITEM_SEQ) ITEM_POWER_MIN,
+				(SELECT X.ITEM_TEMP_MAX FROM TB_ITEM_INFO_ADM X WHERE X.ITEM_SEQ = WOA.ITEM_SEQ) ITEM_TEMP_MAX,
+				(SELECT X.ITEM_TEMP_MIN FROM TB_ITEM_INFO_ADM X WHERE X.ITEM_SEQ = WOA.ITEM_SEQ) ITEM_TEMP_MIN,
+				(SELECT X.EQUIP_NM FROM TB_EQUIP_CODE_ADM X WHERE X.EQUIP_CD = WOA.EQUIP_CD) EQUIP_NM,
+				B.OUTPUT_QTY,
+				WOA.REG_DATE
+			FROM TB_WORK_ORDER_ADM WOA,  (
+					SELECT CONT_DTL_NO, COUNT(CONT_DTL_NO)OUTPUT_QTY FROM TB_WORK_ORDER_ADM GROUP BY CONT_DTL_NO
+				) B
+			WHERE
+				WOA.CONT_DTL_NO = B.CONT_DTL_NO
+				AND REPLACE(CONVERT(VARCHAR(10), WOA.WORK_START_DATE, 112), '-', '') = #{regDate}
+			GROUP BY
+				WOA.CONT_DTL_NO, WOA.ITEM_SEQ, WOA.EQUIP_CD, B.OUTPUT_QTY, WOA.REG_DATE
+		]]>
+	</select>
+	
+	<!-- 제조조건 모니터링 상세 리스트 -->
+	<select id="laserOperInfoDtlList" resultMap="LaserOperInfoVo">
+		<![CDATA[
+			SELECT 
+				MES_WorkOrdNo,
+				WorkRecipeNo,
+				WorkStageNo,
+				MAX(WorkScanNo) WorkScanNo,
+	 			MAX(RegDate) RegDate,
+			 	ROUND(AVG(CONVERT(FLOAT, LaserRa)), 3) LaserRa,
+			 	ROUND(AVG(CONVERT(FLOAT, LaserTemperature)), 2) LaserTemperature 
+			FROM 
+				TB_LASER_OPER_INFO 
+			WHERE 1=1
+			]]>
+			<if test="contDtlNo != null and contDtlNo != ''">
+				AND MES_WorkOrdNo IN (SELECT WORK_ORD_NO FROM TB_WORK_ORDER_ADM WHERE CONT_DTL_NO = #{contDtlNo})
+			</if>
+			<if test="workOrdNo != null and workOrdNo != ''">
+				AND WorkOrdNo = #{workOrdNo}
+				AND MES_WorkOrdNo = 'S'
+			</if>
+			<![CDATA[
+			GROUP BY MES_WorkOrdNo, WorkRecipeNo, WorkStageNo
+			ORDER BY
+				MES_WorkOrdNo ASC, 
+				WorkRecipeNo ASC,
+				WorkStageNo ASC,
+				WorkScanNo ASC,
+				RegDate ASC
+		]]>
+	</select>
+	
+	<!-- 제조조건 모니터링 리스트 단계 개수 구하기 -->
+	<select id="laserOperInfoStageCount" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM TB_LASER_STAGE WHERE WORK_ORD_NO = #{workOrdNo}
+		]]>
+	</select>
+</mapper>

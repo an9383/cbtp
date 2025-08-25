@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.bm.calendarMapper">
+
+	<resultMap id="CalendarVo" type="mes.domain.bm.CalendarVo">
+		<result property="wk" 				column="wk"				/>
+		<result property="su" 				column="su"				/>
+		<result property="mo" 				column="mo"				/>
+		<result property="tu" 				column="tu"				/>
+		<result property="we" 				column="we"				/>
+		<result property="th" 				column="th"				/>
+		<result property="fr" 				column="fr"				/>
+		<result property="sa" 				column="sa"				/>
+		
+		<result property="searchMonth" 		column="searchMonth"	/>
+	</resultMap>
+
+	<!-- 월별 날짜조회 -->
+	<select id="calendarListToMonth" resultMap="CalendarVo">
+		<![CDATA[
+			DECLARE @date NVARCHAR(10)
+			DECLARE @monthFirstDate NVARCHAR(10)
+			DECLARE @monthLastDate NVARCHAR(10)
+			
+			SET @date = #{searchMonth}
+			SET @monthFirstDate = CONCAT(@date,'01')
+			SELECT @monthLastDate = CONVERT(CHAR(8), DATEADD(D,-1,DATEADD(M,1,@monthFirstDate)), 112)
+			
+			SELECT
+				B.WEEK wk
+				,MAX(CASE WHEN B.WEEKDAY = '1' THEN B.DATE END) su
+				,MAX(CASE WHEN B.WEEKDAY = '2' THEN B.DATE END) mo
+				,MAX(CASE WHEN B.WEEKDAY = '3' THEN B.DATE END) tu
+				,MAX(CASE WHEN B.WEEKDAY = '4' THEN B.DATE END) we
+				,MAX(CASE WHEN B.WEEKDAY = '5' THEN B.DATE END) th
+				,MAX(CASE WHEN B.WEEKDAY = '6' THEN B.DATE END) fr
+				,MAX(CASE WHEN B.WEEKDAY = '7' THEN B.DATE END) sa
+			FROM (
+				SELECT
+					A.DATE,
+					DATEPART(YEAR,A.DATE) YEAR,
+					DATEPART(MONTH,A.DATE) MONTH,
+					DATEPART(DAY,A.DATE) DAY,
+					DATEPART(WEEK,A.DATE) WEEK,
+					DATEPART(WEEKDAY,A.DATE) WEEKDAY
+				FROM (
+					SELECT
+						CONVERT(VARCHAR, DATEADD(D, NUMBER, @monthFirstDate), 112) AS 'DATE'
+					FROM MASTER..SPT_VALUES
+					WHERE 1=1
+					AND TYPE = 'P'
+					AND NUMBER <= DATEDIFF(D, @monthFirstDate, @monthLastDate)
+				) A
+			) B
+			GROUP BY
+				B.WEEK
+		]]>
+	</select>
+</mapper>

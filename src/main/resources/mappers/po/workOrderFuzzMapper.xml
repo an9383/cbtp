@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.po.workOrderFuzzMapper">
+
+	<!-- 작업지시 -->
+	<resultMap id="WorkOrderFuzzVo" type="mes.domain.po.WorkOrderFuzzVo">
+	
+		<result property="workOrdNo"     	column="WORK_ORD_NO"		/>
+		<result property="fuzzNum"          column="FUZZ_NUM"			/>
+		<result property="fuzzGubun"        column="FUZZ_GUBUN"			/>
+		<result property="fuzzStartTime"    column="FUZZ_START_TIME"	/>
+		<result property="fuzzEndTime"      column="FUZZ_END_TIME"		/>
+		<result property="fuzzCnt"          column="FUZZ_CNT"			/>
+		
+		
+		<result property="frHistNo"     	column="FR_HIST_NO"			/>
+		<result property="frHistGb"      	column="FR_HIST_GB"			/>
+		<result property="frHistSq"        column="FR_HIST_SQ"			/>
+		<result property="frHistCnt"    	column="FR_HIST_CNT"		/>
+		<result property="regId"      		column="REG_ID"				/>
+		<result property="regDate"          column="REG_DATE"			/>
+		<result property="updId"      		column="UPD_ID"				/>
+		<result property="updDate"          column="UPD_DATE"			/>
+	</resultMap>
+	
+	<!-- 퍼징기록일지 조회 -->
+	<select id="workOrderFuzzList" resultMap="WorkOrderFuzzVo">
+		SELECT	
+			WORK_ORD_NO,
+			FUZZ_NUM,
+			FUZZ_GUBUN,
+			FUZZ_START_TIME,
+			FUZZ_END_TIME,
+			FUZZ_CNT
+		FROM	TB_WORK_ORDER_FUZZ 
+		WHERE 1=1
+	    AND WORK_ORD_NO = #{workOrdNo}
+	</select>
+	
+	<!-- 퍼징기록일지 조회 -->
+	<select id="workOrderFuzzRead" resultMap="WorkOrderFuzzVo">
+		SELECT	
+			WORK_ORD_NO,
+			FUZZ_NUM,
+			FUZZ_GUBUN,
+			FUZZ_START_TIME,
+			FUZZ_END_TIME,
+			FUZZ_CNT
+		FROM	TB_WORK_ORDER_FUZZ 
+		WHERE 1=1
+	    AND WORK_ORD_NO = #{workOrdNo}
+	    AND FUZZ_NUM = #{fuzzNum}
+	</select>
+	
+	<!-- 퍼징기록일지 등록 -->
+	<insert id="workOrderFuzzCreate">
+		INSERT INTO TB_WORK_ORDER_FUZZ(
+			WORK_ORD_NO,
+			FUZZ_NUM,
+			FUZZ_GUBUN,
+			FUZZ_START_TIME,
+			FUZZ_END_TIME,
+			FUZZ_CNT
+		) 
+		VALUES(
+			#{workOrdNo},
+			#{fuzzNum},
+			#{fuzzGubun},
+			#{fuzzStartTime},
+			#{fuzzEndTime},
+			#{fuzzCnt}
+		)
+	</insert>
+	
+	<!-- 퍼징기록일지 수정 -->
+	<insert id="workOrderFuzzUpdate">
+		UPDATE	TB_WORK_ORDER_FUZZ 
+		SET	
+			FUZZ_GUBUN = #{fuzzGubun},
+			FUZZ_START_TIME = #{fuzzStartTime},
+			FUZZ_END_TIME = #{fuzzEndTime},
+			FUZZ_CNT = #{fuzzCnt}
+		WHERE 1=1
+		AND WORK_ORD_NO = #{workOrdNo}
+		AND	FUZZ_NUM = #{fuzzNum}
+	</insert>
+	
+	<!-- 퍼징기록일지 삭제 -->
+	<delete id="workOrderFuzzDelete">
+		DELETE FROM TB_WORK_ORDER_FUZZ 
+		WHERE	WORK_ORD_NO = #{workOrdNo}
+		AND	FUZZ_NUM = #{fuzzNum}
+		
+	</delete>
+	
+	
+	<!-- 총 퍼징횟수 -->
+	<select id="getTotalFuzzCnt" resultType="String">
+		SELECT 
+			SUM(CONVERT(INT,ISNULL(FUZZ_CNT,0))) FUZZ_CNT
+		FROM TB_WORK_ORDER_FUZZ WOF_TB
+		WHERE 1=1
+		AND WOF_TB.WORK_ORD_NO=#{workOrdNo}
+		GROUP BY WORK_ORD_NO
+	</select>
+	
+	
+	
+	<!-- 퍼징/런너 이력관리 조회 -->
+	<select id="frHistAdmList" resultMap="WorkOrderFuzzVo">
+		SELECT 
+			FR_HIST_NO,
+			WORK_ORD_NO,
+			FR_HIST_GB,
+			FR_HIST_SQ,
+			FR_HIST_CNT,
+			REG_ID,
+			REG_DATE,
+			UPD_ID,
+			UPD_DATE
+		FROM TB_WORK_ORDER_FR_HIST_ADM
+		WHERE 1=1
+		<if test="workOrdNo!=null and !workOrdNo.equals('')">
+		AND WORK_ORD_NO = #{workOrdNo}
+		</if>
+	</select>
+	
+	<!-- 퍼징/런너 이력관리 최근것만 조회 -->
+	<select id="frHistAdmRead" resultMap="WorkOrderFuzzVo">
+		SELECT TOP(1)
+			WORK_ORD_NO,
+			FR_HIST_GB,
+			FR_HIST_SQ,
+			FR_HIST_CNT,
+			REG_ID,
+			REG_DATE,
+			UPD_ID,
+			UPD_DATE
+		FROM TB_WORK_ORDER_FR_HIST_ADM
+		WHERE 1=1
+		<if test="workOrdNo!=null and !workOrdNo.equals('')">
+		AND WORK_ORD_NO = #{workOrdNo}
+		</if>
+		<if test="frHistGb!=null and !frHistGb.equals('')">
+		AND FR_HIST_GB = #{frHistGb}
+		</if>
+		ORDER BY FR_HIST_SQ DESC
+	</select>
+	
+	<!-- 퍼징/런너 이력관리 등록 -->
+	<insert id="frHistAdmCreate">
+		INSERT INTO TB_WORK_ORDER_FR_HIST_ADM(
+			FR_HIST_NO,
+			WORK_ORD_NO,
+			FR_HIST_GB,
+			FR_HIST_SQ,
+			FR_HIST_CNT,
+			REG_ID,
+			REG_DATE
+		)VALUES(
+			#{frHistNo},
+			#{workOrdNo},
+			#{frHistGb},
+			#{frHistSq},
+			#{frHistCnt},
+			#{regId},
+			GETDATE()
+		)
+	</insert>
+	
+	<!-- 퍼징/런너 이력관리 수정 -->
+	<update id="frHistAdmUpdate">
+		UPDATE TB_WORK_ORDER_FR_HIST_ADM
+		SET FR_HIST_CNT = #{frHistCnt}
+		WHERE 1=1
+		AND WORK_ORD_NO = #{workOrdNo},
+		AND FR_HIST_GB  = #{frHistGb}
+		AND FR_HIST_SQ = #{frHistSq},
+
+	</update>
+	
+	<!-- 퍼징/런너 이력관리 삭제 -->
+	<delete id="frHistAdmDelete">
+		DELETE FROM TB_WORK_ORDER_FR_HIST_ADM WHERE FR_HIST_NO = #{frHistNo}
+	</delete>
+	
+	<!-- 퍼징/런너 이력관리번호 생성 -->	
+	<select id="getFrHistNo" resultType="String">
+		SELECT ISNULL(RIGHT('00'+ CAST(MAX(RIGHT(FR_HIST_NO,3))+1 AS nvarchar),3),'001')
+		FROM TB_WORK_ORDER_FR_HIST_ADM
+		WHERE SUBSTRING(FR_HIST_NO,0,9) = #{today}
+	</select>
+	
+	<!-- 퍼징/런너 이력관리 차수 생성 -->
+	<select id="getFrHistSq" resultType="int">
+		SELECT ISNULL(MAX(FR_HIST_SQ)+1,0) FR_HIST_SQ
+		FROM TB_WORK_ORDER_FR_HIST_ADM
+		WHERE 1=1
+		AND WORK_ORD_NO = #{workOrdNo}
+		AND FR_HIST_GB = #{frHistGb}
+	</select>
+	
+	
+</mapper>

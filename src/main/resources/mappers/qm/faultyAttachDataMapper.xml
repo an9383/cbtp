@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.qm.faultyAttachDataMapper">
+
+	<resultMap id="FaultyAttachDataVo" type="mes.domain.qm.FaultyAttachDataVo">
+		<result property="attachGubun"			column="ATTACH_GUBUN"		/>
+		<result property="attachCd"		    	column="ATTACH_CD"			/>
+		<result property="sourceNo"				column="SOURCE_NO"			/>			
+		<result property="attachContent"		column="ATTACH_CONTENT"		/> 
+		<result property="attachFn"				column="ATTACH_FN"			/> 
+		<result property="attachPath"			column="ATTACH_PATH"		/>
+		<result property="attachRegDate"		column="ATTACH_REG_DATE"	/> 
+		<result property="regNm"				column="REG_NM"				/>
+		<result property="regId"				column="REG_ID"				/>
+		<result property="regDate"				column="REG_DATE"			/>
+		<result property="updId"				column="UPD_ID"				/>				
+		<result property="updDate"				column="UPD_DATE"			/>
+
+	</resultMap>
+	
+	<!-- 부적합관리 관련자료 상세조회 -->
+	<select id="faultyAttachDataRead" resultMap="FaultyAttachDataVo">
+		SELECT	
+			ATTACH_GUBUN,
+			ATTACH_CD,
+			SOURCE_NO,
+			ATTACH_CONTENT,
+			ATTACH_FN,
+			ATTACH_PATH,
+			ATTACH_REG_DATE,
+			(SELECT USER_NM FROM TB_USER X WHERE X.USER_ID=REG_ID) REG_NM
+		FROM	TB_FAULTY_ATTACH_DATA 
+		WHERE	1=1
+		AND SOURCE_NO=#{sourceNo}
+		
+	</select>
+	
+	<!-- 부적합관리 관련자료 등록 -->
+	<insert id="faultyAttachDataCreate">
+		INSERT INTO TB_FAULTY_ATTACH_DATA	(
+			ATTACH_GUBUN,
+            ATTACH_CD,
+            SOURCE_NO,
+            ATTACH_CONTENT,
+            ATTACH_FN,
+            ATTACH_PATH,
+            ATTACH_REG_DATE,
+            REG_ID,
+            REG_DATE
+        )
+		VALUES     (
+			#{attachGubun},
+            #{attachCd},
+            #{sourceNo},
+            #{attachContent},
+            #{attachFn},
+            #{attachPath},
+            #{attachRegDate},
+            #{regId},
+            GETDATE()
+        ) 
+	</insert>
+	
+	<!-- 부적합관리 관련자료 수정 -->
+	<update id="faultyAttachDataUpdate">
+		UPDATE	TB_FAULTY_ATTACH_DATA 
+		SET	
+			ATTACH_CONTENT = #{attachContent},
+			ATTACH_FN = #{attachFn},
+			ATTACH_PATH = #{attachPath},
+			ATTACH_REG_DATE = #{attachRegDate},
+			UPD_ID = #{updId},
+			UPD_DATE = GETDATE()
+		WHERE 1=1
+		AND ATTACH_GUBUN = #{attachGubun}
+		AND	ATTACH_CD = #{attachCd}
+	</update>
+	
+	<!-- 부적합관리 관련자료 삭제 -->
+	<delete id="faultyAttachDataDelete">
+		DELETE FROM TB_FAULTY_ATTACH_DATA 
+		WHERE 1=1
+		AND ATTACH_GUBUN = #{attachGubun}
+		AND	ATTACH_CD = #{attachCd}
+	</delete>
+	
+	<!-- 부적합관리 관련자료 시퀀스 -->
+	<select id="getAttachSeq" parameterType="String"  resultType="String">
+		SELECT ISNULL(RIGHT('000' + CAST(MAX(RIGHT(ATTACH_CD,3))+1 AS NVARCHAR),3), '001') FROM TB_FAULTY_ATTACH_DATA  WHERE SUBSTRING(ATTACH_CD,0,9) = #{date}
+	</select>
+	
+	
+	<!-- 부적합관리 관련자료 파일명 가져오기 -->
+	<select id="getAttachFn" resultType="String">
+		SELECT ATTACH_FN
+		FROM TB_FAULTY_ATTACH_DATA
+		WHERE 1=1
+		AND ATTACH_GUBUN = #{attachGubun}
+		AND	ATTACH_CD = #{attachCd}
+	</select>
+</mapper>

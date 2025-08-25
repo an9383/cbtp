@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.qm.itemCompleteFaultyMapper">
+
+	<resultMap id="ItemCompleteAdmVo" type="mes.domain.qm.ItemCompleteAdmVo">
+	
+		<result property="doNo"                       		column="DO_NO"				/> 
+		<result property="doNoSub"                          column="DO_NO_SUB"			/> 
+		<result property="icaSeq"                         	column="ICA_SEQ"			/> 
+		
+		<result property="workOrdNo"                       column="WORK_ORD_NO"			/> 
+		<result property="itemCd"                          column="ITEM_CD"				/> 
+		<result property="itemRev"                         column="ITEM_REV"			/> 
+		<result property="inspectDate"                     column="INSPECT_DATE"		/> 
+		<result property="inspectChargr"                   column="INSPECT_CHARGR"		/> 
+		<result property="inspectChargrNm"                 column="INSPECT_CHARGR_NM"	/> 
+		<result property="inspectQty"                      column="INSPECT_QTY"			/> 
+		<result property="pairQty"                         column="PAIR_QTY"			/> 
+		<result property="faultyQty"                       column="FAULTY_QTY"			/> 
+		<result property="judgment"                        column="JUDGMENT"			/> 
+		<result property="judgmentNm"                      column="JUDGMENT_NM"			/> 
+		<result property="lineRes"                         column="LINE_RES"			/> 
+		<result property="lineInd"                         column="LINE_IND"			/> 
+		<result property="backEmf"                         column="BACK_EMF"			/> 
+		<result property="phaseCurr"                       column="PHASE_CURR"			/> 
+		<result property="completeDesc"                    column="COMPLETE_DESC"		/> 
+		<result property="specialDesc"                     column="SPECIAL_DESC"		/> 
+		<result property="shipReport"                      column="SHIP_REPORT"			/> 
+		<result property="completeStatusCd"                column="COMPLETE_STATUS_CD"	/> 
+		<result property="completeStatusNm"                column="COMPLETE_STATUS_NM"	/> 
+		<result property="regId"                           column="REG_ID"				/> 
+		<result property="regDate"                         column="REG_DATE"			/> 
+		<result property="updId"                           column="UPD_ID"				/> 
+		<result property="updDate"                         column="UPD_DATE"			/> 
+		<result property="contDtlNo"                       column="CONT_DTL_NO"			/> 
+		<result property="middleClass"                     column="MIDDLE_CLASS"		/> 
+		<result property="minorClass"                      column="MINOR_CLASS"			/> 
+		<result property="middleClassNm"                   column="MIDDLE_CLASS_NM"		/> 
+		<result property="minorClassNm"                    column="MINOR_CLASS_NM"		/> 
+		<result property="itemNm"                          column="ITEM_NM"				/> 
+		<result property="itemGubun"                       column="ITEM_GUBUN"			/> 
+		<result property="itemGubunNm"                     column="ITEM_GUBUN_NM"		/> 
+		<result property="itemSeries"                      column="ITEM_SERIES"			/> 
+		<result property="itemEncdr"                       column="ITEM_ENCDR"			/> 
+		<result property="itemCapa"                        column="ITEM_CAPA"			/> 
+		<result property="frameSize"                       column="FRAME_SIZE"			/> 
+		<result property="faultyType"                      column="FAULTY_TYPE"			/> 
+		<result property="faultyTypeNm"                    column="FAULTY_TYPE_NM"		/> 
+		
+		<result property="lineResModal"                    column="LINE_RES_MODAL"		/> 
+		<result property="directVolt"                      column="DIRECT_VOLT"			/> 
+		<result property="concenticity"                    column="CONCENTICITY"		/> 
+		<result property="encoder"                         column="ENCODER"				/> 
+		<result property="phaseCurrModal"                  column="PHASE_CURR_MODAL"	/> 
+		<result property="workFaulty"                      column="WORK_FAULTY"			/> 
+		<result property="exteriorFaulty"                  column="EXTERIOR_FAULTY"		/> 
+		<result property="vibeFaulty"                      column="VIBE_FAULTY"			/> 
+		<result property="specApplyFaulty"                 column="SPEC_APPLY_FAULTY"	/> 
+		<result property="faultyQtyModal"                  column="FAULTY_QTY_MODAL"	/> 
+		<result property="brake"                       	   column="BRAKE"				/> 		
+		
+		<result property="writeDate"                       column="WRITE_DATE"			/>       
+		<result property="admDept"                         column="ADM_DEPT"			/>       
+		<result property="admChargr"                       column="ADM_CHARGR"			/>       
+		<result property="admDeptNm"                       column="ADM_DEPT_NM"			/>       
+		<result property="admChargrNm"                     column="ADM_CHARGR_NM"		/>       
+		<result property="faultyStatus"                    column="FAULTY_STATUS"		/>       
+		<result property="faultyCause"                     column="FAULTY_CAUSE"		/>       
+		<result property="faultyAct"                       column="FAULTY_ACT"			/>       
+		<result property="faultyDept"                      column="FAULTY_DEPT"			/>       
+		<result property="faultyDeptNm"                    column="FAULTY_DEPT_NM"		/>  
+		<result property="faultyImprv"                     column="FAULTY_IMPRV"		/>       
+		<result property="faultyEffect"                    column="FAULTY_EFFECT"		/>      
+		<result property="faultyPcs"                       column="FAULTY_PCS"			/>      
+		<result property="faultyImage1"                    column="FAULTY_IMAGE1"		/>      
+		<result property="faultyImage2"                    column="FAULTY_IMAGE2"		/>      
+		<result property="faultyImage1Nm"                  column="FAULTY_IMAGE1_NM"	/>      
+		<result property="faultyImage2Nm"                  column="FAULTY_IMAGE2_NM"	/>      
+		<result property="faultyFile1Nm"                   column="FAULTY_FILE1_NM"		/>      
+		<result property="faultyFile2Nm"                   column="FAULTY_FILE2_NM"		/>   
+		<result property="baseInfoGubun"                   column="BASE_INFO_GUBUN"		/>      
+		<result property="baseInfoGubunNm"                 column="BASE_INFO_GUBUN_NM"	/>      
+		<result property="faultyPercent"				   column="FAULTY_PERCENT"		/>	
+	
+			
+		<result property="faultyTypeCd"		               column="FAULTY_TYPE_CD"		/>	
+		<result property="faultyTypeNm"		               column="FAULTY_TYPE_NM"		/>		
+		<result property="faultyTypeQty"	               column="FAULTY_TYPE_QTY"		/>	
+		<result property="faultyTypeDate"	               column="FAULTY_TYPE_DATE"	/>	
+		<result property="faultyTypeDesc"	               column="FAULTY_TYPE_DESC"	/>	
+		<result property="etc1"				               column="ETC1"				/>
+		<!-- 추가항목 -->
+		<result property="approvalYn"				       column="APPROVAL_YN"			/>		
+	</resultMap>
+	
+	<!-- 부적합관리(수입검사) master list -->
+	<select id="itemCompleteAdmMasterList" resultMap="ItemCompleteAdmVo">
+		SELECT	A.*				
+				, B.INSPECT_DATE
+				, B.INSPECT_CHARGR
+				, (SELECT USER_NM FROM TB_USER WHERE USER_NUMBER = B.INSPECT_CHARGR) INSPECT_CHARGR_NM
+				, B.INSPECT_QTY
+				, B.PAIR_QTY
+				, B.FAULTY_QTY
+				, B.JUDGMENT
+				, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE B.JUDGMENT = X.BASE_CD AND BASE_GROUP_CD='072') JUDGMENT_NM
+				, B.COMPLETE_DESC
+				, B.SPECIAL_DESC
+				, B.SHIP_REPORT
+				, B.COMPLETE_STATUS_CD
+				,(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE B.COMPLETE_STATUS_CD = X.BASE_CD AND BASE_GROUP_CD='062') COMPLETE_STATUS_NM
+				, CEILING((B.FAULTY_QTY / (B.PAIR_QTY+B.FAULTY_QTY))*100) FAULTY_PERCENT
+				, C.APPROVAL_YN
+			FROM (
+				SELECT	E.WORK_ORD_NO	
+				      ,A.CONT_DTL_NO
+				      ,E.ITEM_CD
+				      ,E.ITEM_REV
+					  ,C.PRCSS_CD MIDDLE_CLASS
+					  ,(SELECT PRCSS_NM FROM TB_PRCSS_CODE_ADM WHERE C.PRCSS_CD = LOWER_PRCSS_CD) MIDDLE_CLASS_NM
+					  ,D.LOWER_PRCSS_CD MINOR_CLASS
+					  ,D.PRCSS_NM MINOR_CLASS_NM
+					  ,F.ITEM_NM
+					  ,F.ITEM_GUBUN	
+					  ,(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE F.ITEM_GUBUN = X.BASE_CD AND BASE_GROUP_CD='037') ITEM_GUBUN_NM
+					  ,F.ITEM_SERIES
+					  ,F.ITEM_ENCDR
+					  ,F.ITEM_CAPA
+					  ,F.FRAME_SIZE			
+				FROM TB_WORK_ORDER A, TB_ITEM_MOTOR_MBOM B, TB_PRCSS_BOM_DTL C, TB_PRCSS_CODE_ADM D, TB_WORK_ORDER_PRCSS E, TB_ITEM_MOTOR_ADM F
+				WHERE A.ITEM_CD = B.ITEM_CD
+					AND A.ITEM_REV = B.ITEM_REV
+					AND B.BOM_CD = C.BOM_CD
+					AND C.PRCSS_SEQ = (SELECT MAX(PRCSS_SEQ) FROM TB_PRCSS_BOM_DTL WHERE BOM_CD = B.BOM_CD)
+					AND C.PRCSS_CD = D.PRCSS_CD
+					AND D.PRCSS_CD != D.LOWER_PRCSS_CD
+					AND D.PRCSS_SEQ = (SELECT MAX(PRCSS_SEQ) FROM TB_PRCSS_CODE_ADM WHERE PRCSS_CD = C.PRCSS_CD)
+					AND A.WORK_ORD_NO = E.WORK_ORD_NO
+					AND D.LOWER_PRCSS_CD = E.MINOR_PRCSS_CD
+					AND D.PRCSS_CD = E.MIDDLE_PRCSS_CD
+					AND E.WORK_STATUS = 'WC'
+					AND F.ITEM_CD = A.ITEM_CD
+					AND F.ITEM_REV = A.ITEM_REV
+			 ) A
+		 , TB_ITEM_COMPLETE_ADM B LEFT OUTER JOIN TB_ITEM_COMPLETE_FAULTY_JDG_ADM C
+		 ON B.WORK_ORD_NO = C.WORK_ORD_NO
+		 WHERE A.ITEM_CD = B.ITEM_CD 
+		 AND A.ITEM_REV = B.ITEM_REV
+		 AND A.WORK_ORD_NO = B.WORK_ORD_NO 
+		 ORDER BY B.INSPECT_DATE DESC		
+	</select>
+	
+	
+	<!-- 부적합관리(수입검사) Detail list -->
+	<select id="itemCompleteAdmDetailList" resultMap="ItemCompleteAdmVo">
+		SELECT	A.*				
+				,B.INSPECT_DATE
+				,B.INSPECT_CHARGR
+				,(SELECT USER_NM FROM TB_USER WHERE USER_NUMBER = B.INSPECT_CHARGR) INSPECT_CHARGR_NM
+				,B.INSPECT_QTY
+				,B.PAIR_QTY
+				,B.FAULTY_QTY
+				,B.JUDGMENT
+				,(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE B.JUDGMENT = X.BASE_CD AND BASE_GROUP_CD='072') JUDGMENT_NM
+				,B.COMPLETE_DESC
+				,B.SPECIAL_DESC
+				,B.SHIP_REPORT
+				,B.COMPLETE_STATUS_CD
+				,(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE B.COMPLETE_STATUS_CD = X.BASE_CD AND BASE_GROUP_CD='062') COMPLETE_STATUS_NM
+				, CEILING((B.FAULTY_QTY / (B.PAIR_QTY+B.FAULTY_QTY))*100) FAULTY_PERCENT
+				,Z.FAULTY_TYPE_CD
+				,(SELECT BASE_INFO_NM FROM TB_BASE_INFO_ADM X WHERE X.BASE_INFO_CD=Z.FAULTY_TYPE_CD AND X.BASE_INFO_TYPE='FT') FAULTY_TYPE_NM
+				,Z.FAULTY_TYPE_QTY
+				,Z.FAULTY_TYPE_DATE
+				,C.WRITE_DATE
+			FROM (
+				SELECT	E.WORK_ORD_NO	
+				      ,A.CONT_DTL_NO
+				      ,E.ITEM_CD
+				      ,E.ITEM_REV
+					  ,C.PRCSS_CD MIDDLE_CLASS
+					  ,(SELECT PRCSS_NM FROM TB_PRCSS_CODE_ADM WHERE C.PRCSS_CD = LOWER_PRCSS_CD) MIDDLE_CLASS_NM
+					  ,D.LOWER_PRCSS_CD MINOR_CLASS
+					  ,D.PRCSS_NM MINOR_CLASS_NM
+					  ,F.ITEM_NM
+					  ,F.ITEM_GUBUN	
+					  ,(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE F.ITEM_GUBUN = X.BASE_CD AND BASE_GROUP_CD='037') ITEM_GUBUN_NM
+					  ,F.ITEM_SERIES
+					  ,F.ITEM_ENCDR
+					  ,F.ITEM_CAPA
+					  ,F.FRAME_SIZE			
+				FROM TB_WORK_ORDER A, TB_ITEM_MOTOR_MBOM B, TB_PRCSS_BOM_DTL C, TB_PRCSS_CODE_ADM D, TB_WORK_ORDER_PRCSS E, TB_ITEM_MOTOR_ADM F
+				WHERE A.ITEM_CD = B.ITEM_CD
+					AND A.ITEM_REV = B.ITEM_REV
+					AND B.BOM_CD = C.BOM_CD
+					AND C.PRCSS_SEQ = (SELECT MAX(PRCSS_SEQ) FROM TB_PRCSS_BOM_DTL WHERE BOM_CD = B.BOM_CD)
+					AND C.PRCSS_CD = D.PRCSS_CD
+					AND D.PRCSS_CD != D.LOWER_PRCSS_CD
+					AND D.PRCSS_SEQ = (SELECT MAX(PRCSS_SEQ) FROM TB_PRCSS_CODE_ADM WHERE PRCSS_CD = C.PRCSS_CD)
+					AND A.WORK_ORD_NO = E.WORK_ORD_NO
+					AND D.LOWER_PRCSS_CD = E.MINOR_PRCSS_CD
+					AND D.PRCSS_CD = E.MIDDLE_PRCSS_CD
+					AND E.WORK_STATUS = 'WC'
+					AND F.ITEM_CD = A.ITEM_CD
+					AND F.ITEM_REV = A.ITEM_REV
+			 ) A
+			 , TB_ITEM_COMPLETE_ADM B	
+			 INNER JOIN TB_ITEM_COMPLETE_FAULTY_TYPE Z
+			 ON B.WORK_ORD_NO=Z.WORK_ORD_NO
+			 AND B.ITEM_CD=Z.ITEM_CD
+			 AND B.ITEM_REV=Z.ITEM_REV
+			 AND Z.FAULTY_TYPE_QTY>0
+			 LEFT OUTER JOIN TB_ITEM_COMPLETE_FAULTY C
+			 ON C.WORK_ORD_NO=Z.WORK_ORD_NO
+			 AND C.ITEM_CD=Z.ITEM_CD
+			 AND C.ITEM_REV=Z.ITEM_REV
+			 AND C.FAULTY_TYPE_CD=Z.FAULTY_TYPE_CD
+			 WHERE A.ITEM_CD = B.ITEM_CD 
+			 AND A.ITEM_REV = B.ITEM_REV
+			 AND A.WORK_ORD_NO = B.WORK_ORD_NO 	
+			 AND A.WORK_ORD_NO=#{workOrdNo}
+	</select>
+	
+	
+	<!--완제품관리 목록조회 -->
+	<select id="listAll" resultMap="ItemCompleteAdmVo">
+		<![CDATA[
+			SELECT	A.*				
+				,B.INSPECT_DATE
+				,B.INSPECT_CHARGR
+				,(SELECT USER_NM FROM TB_USER WHERE USER_NUMBER = B.INSPECT_CHARGR) INSPECT_CHARGR_NM
+				,B.INSPECT_QTY
+				,B.PAIR_QTY
+				,B.FAULTY_QTY
+				,B.JUDGMENT
+				,(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE B.JUDGMENT = X.BASE_CD AND BASE_GROUP_CD='072') JUDGMENT_NM
+				,B.COMPLETE_DESC
+				,B.SPECIAL_DESC
+				,B.SHIP_REPORT
+				,B.COMPLETE_STATUS_CD
+				,(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE B.COMPLETE_STATUS_CD = X.BASE_CD AND BASE_GROUP_CD='062') COMPLETE_STATUS_NM
+				, CEILING((B.FAULTY_QTY / (B.PAIR_QTY+B.FAULTY_QTY))*100) FAULTY_PERCENT
+				,Z.FAULTY_TYPE_CD
+				,(SELECT BASE_INFO_NM FROM TB_BASE_INFO_ADM X WHERE X.BASE_INFO_CD=Z.FAULTY_TYPE_CD AND X.BASE_INFO_TYPE='FT') FAULTY_TYPE_NM
+				,Z.FAULTY_TYPE_QTY
+				,Z.FAULTY_TYPE_DATE
+				,(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE C.FAULTY_PCS = X.BASE_CD AND BASE_GROUP_CD='080') FAULTY_PCS
+			FROM (
+				SELECT	E.WORK_ORD_NO	
+				      ,A.CONT_DTL_NO
+				      ,E.ITEM_CD
+				      ,E.ITEM_REV
+					  ,C.PRCSS_CD MIDDLE_CLASS
+					  ,(SELECT PRCSS_NM FROM TB_PRCSS_CODE_ADM WHERE C.PRCSS_CD = LOWER_PRCSS_CD) MIDDLE_CLASS_NM
+					  ,D.LOWER_PRCSS_CD MINOR_CLASS
+					  ,D.PRCSS_NM MINOR_CLASS_NM
+					  ,F.ITEM_NM
+					  ,F.ITEM_GUBUN	
+					  ,(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE F.ITEM_GUBUN = X.BASE_CD AND BASE_GROUP_CD='037') ITEM_GUBUN_NM
+					  ,F.ITEM_SERIES
+					  ,F.ITEM_ENCDR
+					  ,F.ITEM_CAPA
+					  ,F.FRAME_SIZE			
+				FROM TB_WORK_ORDER A, TB_ITEM_MOTOR_MBOM B, TB_PRCSS_BOM_DTL C, TB_PRCSS_CODE_ADM D, TB_WORK_ORDER_PRCSS E, TB_ITEM_MOTOR_ADM F
+				WHERE A.ITEM_CD = B.ITEM_CD
+					AND A.ITEM_REV = B.ITEM_REV
+					AND B.BOM_CD = C.BOM_CD
+					AND C.PRCSS_SEQ = (SELECT MAX(PRCSS_SEQ) FROM TB_PRCSS_BOM_DTL WHERE BOM_CD = B.BOM_CD)
+					AND C.PRCSS_CD = D.PRCSS_CD
+					AND D.PRCSS_CD != D.LOWER_PRCSS_CD
+					AND D.PRCSS_SEQ = (SELECT MAX(PRCSS_SEQ) FROM TB_PRCSS_CODE_ADM WHERE PRCSS_CD = C.PRCSS_CD)
+					AND A.WORK_ORD_NO = E.WORK_ORD_NO
+					AND D.LOWER_PRCSS_CD = E.MINOR_PRCSS_CD
+					AND D.PRCSS_CD = E.MIDDLE_PRCSS_CD
+					AND E.WORK_STATUS = 'WC'
+					AND F.ITEM_CD = A.ITEM_CD
+					AND F.ITEM_REV = A.ITEM_REV
+			 ) A
+			 , TB_ITEM_COMPLETE_ADM B	
+			 INNER JOIN TB_ITEM_COMPLETE_FAULTY_TYPE Z
+			 ON B.WORK_ORD_NO=Z.WORK_ORD_NO
+			 AND B.ITEM_CD=Z.ITEM_CD
+			 AND B.ITEM_REV=Z.ITEM_REV
+			 AND Z.FAULTY_TYPE_QTY>0
+			 LEFT OUTER JOIN TB_ITEM_COMPLETE_FAULTY C
+			 ON C.WORK_ORD_NO=Z.WORK_ORD_NO
+			 AND C.ITEM_CD=Z.ITEM_CD
+			 AND C.ITEM_REV=Z.ITEM_REV
+			 AND C.FAULTY_TYPE_CD=Z.FAULTY_TYPE_CD
+			 WHERE A.ITEM_CD = B.ITEM_CD 
+			 AND A.ITEM_REV = B.ITEM_REV
+			 AND A.WORK_ORD_NO = B.WORK_ORD_NO 
+			 AND B.JUDGMENT = '002'			
+		]]>
+	</select>
+	
+	<!--완제품관리 상세 목록조회 -->
+	<select id="read" resultMap="ItemCompleteAdmVo">
+		<![CDATA[
+			SELECT A.WORK_ORD_NO
+		      ,A.ITEM_CD
+		      ,B.ITEM_NM
+		      ,A.ITEM_REV
+		      ,A.WRITE_DATE
+		      ,A.ADM_DEPT
+		      ,(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE A.ADM_DEPT = X.BASE_CD AND BASE_GROUP_CD='003') ADM_DEPT_NM
+		      ,A.ADM_CHARGR
+		      ,(SELECT USER_NM FROM TB_USER X WHERE A.ADM_CHARGR = X.USER_NUMBER) ADM_CHARGR_NM
+		      ,A.FAULTY_STATUS
+		      ,A.FAULTY_CAUSE
+		      ,A.FAULTY_ACT
+		      ,A.FAULTY_DEPT
+		      ,(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE A.FAULTY_DEPT = X.BASE_CD AND BASE_GROUP_CD='003') FAULTY_DEPT_NM
+		      ,A.FAULTY_IMPRV
+		      ,A.FAULTY_EFFECT
+		      ,A.FAULTY_PCS
+		      ,A.FAULTY_IMAGE1
+		      ,A.FAULTY_IMAGE2
+		      ,A.FAULTY_IMAGE1_NM
+		      ,A.FAULTY_IMAGE2_NM
+		      ,A.FAULTY_FILE1_NM
+		      ,A.FAULTY_FILE2_NM
+		      ,A.REG_ID
+		      ,A.REG_DATE
+		      ,A.UPD_ID
+		      ,A.UPD_DATE
+		  FROM TB_ITEM_COMPLETE_FAULTY A
+		  INNER JOIN TB_ITEM_MOTOR_ADM B
+		  ON A.ITEM_CD = B.ITEM_CD
+		  AND A.ITEM_REV = B.ITEM_REV
+		  WHERE A.ITEM_CD = #{itemCd}
+		  AND A.ITEM_REV =  #{itemRev}
+		  AND A.WORK_ORD_NO =  #{workOrdNo}
+		  AND A.FAULTY_TYPE_CD = #{faultyTypeCd}			 
+		]]>
+	</select>
+	
+	<!-- 완제품(부적합) 생성 -->
+	<insert id="create">
+	
+		INSERT INTO TB_ITEM_COMPLETE_FAULTY(
+			WORK_ORD_NO
+			,ITEM_CD
+			,ITEM_REV
+			,FAULTY_TYPE_CD
+			,WRITE_DATE
+			,ADM_DEPT
+			,ADM_CHARGR
+			,FAULTY_STATUS 
+			,FAULTY_CAUSE
+			,FAULTY_ACT
+			,FAULTY_DEPT
+			,FAULTY_IMPRV 
+			,FAULTY_EFFECT 
+			,FAULTY_IMAGE1
+			,FAULTY_IMAGE2
+			,FAULTY_IMAGE1_NM
+			,FAULTY_IMAGE2_NM
+			,FAULTY_FILE1_NM
+			,FAULTY_FILE2_NM
+			,REG_ID
+			,REG_DATE
+		)		 
+		VALUES(
+			 #{workOrdNo}
+			,#{itemCd}
+			,#{itemRev}
+			,#{faultyTypeCd}
+			,#{writeDate}
+			,#{admDept}
+			,#{admChargr}
+			,#{faultyStatus}
+			,#{faultyCause}
+			,#{faultyAct}
+			,#{faultyDept}
+			,#{faultyImprv}
+			,#{faultyEffect}
+			,#{faultyImage1}
+			,#{faultyImage2}
+			,#{faultyImage1Nm}
+			,#{faultyImage2Nm}		
+			,#{faultyFile1Nm}
+			,#{faultyFile2Nm}
+			,#{regId}
+			,GETDATE()			
+		)
+	
+	</insert>
+
+	<!-- 부적합관리 수정 -->
+	<update id="update">
+		UPDATE	TB_ITEM_COMPLETE_FAULTY		 
+		SET	
+			WRITE_DATE   = #{writeDate},
+			ADM_DEPT     = #{admDept},
+			ADM_CHARGR   = #{admChargr},
+			FAULTY_STATUS= #{faultyStatus},
+			FAULTY_CAUSE = #{faultyCause},
+			FAULTY_ACT   = #{faultyAct},
+			FAULTY_DEPT  = #{faultyDept},
+			FAULTY_IMPRV = #{faultyImprv},
+			FAULTY_EFFECT= #{faultyEffect},
+			<if test="faultyImage1!=null and !faultyImage1.equals('')">
+			FAULTY_IMAGE1 = #{faultyImage1},
+			FAULTY_IMAGE1_NM = #{faultyImage1Nm},
+			</if>
+			<if test="faultyImage2!=null and !faultyImage2.equals('')">
+			FAULTY_IMAGE2 = #{faultyImage2},
+			FAULTY_IMAGE2_NM = #{faultyImage2Nm},
+			</if>
+			<if test="faultyFile1Nm!=null and !faultyFile1Nm.equals('')">
+			FAULTY_FILE1_NM = #{faultyFile1Nm},
+			</if>
+			<if test="faultyFile2Nm!=null and !faultyFile2Nm.equals('')">
+			FAULTY_FILE2_NM = #{faultyFile2Nm},
+			</if>
+			UPD_ID = #{updId},
+			UPD_DATE = GETDATE()
+		WHERE	ITEM_CD = #{itemCd}
+		 AND ITEM_REV =  #{itemRev}
+		 AND WORK_ORD_NO =  #{workOrdNo}
+		 AND FAULTY_TYPE_CD = #{faultyTypeCd}			
+	</update>
+
+	<!--완제품관리(부적합) 이미지 조회 -->
+	<select id="itemCompleteFaultyImageList" resultMap="ItemCompleteAdmVo">
+		<![CDATA[
+			SELECT WORK_ORD_NO
+				,ITEM_CD
+				,ITEM_REV
+				,FAULTY_IMAGE1
+				,FAULTY_IMAGE2
+				,FAULTY_FILE1_NM
+				,FAULTY_FILE2_NM
+			FROM TB_ITEM_COMPLETE_FAULTY A
+			WHERE	 A.ITEM_CD = #{itemCd}
+			 AND A.ITEM_REV =  #{itemRev}
+			 AND A.WORK_ORD_NO =  #{workOrdNo}
+			 AND A.FAULTY_TYPE_CD = #{faultyTypeCd}			
+			
+		]]>
+	</select>
+	
+	<!--완제품관리(부적합) 이미지 삭제 -->
+	<update id="itemCompleteFaultyImageDelete">
+		UPDATE	TB_ITEM_COMPLETE_FAULTY		 
+		<set>
+			<if test="value==1">
+				FAULTY_IMAGE1 = NULL,
+				FAULTY_IMAGE1_NM = '',
+			</if>
+			<if test="value==2">
+				FAULTY_IMAGE2 = NULL,
+				FAULTY_IMAGE2_NM = '',
+			</if>
+			<if test="value==3">
+				FAULTY_FILE1_NM = '',
+			</if>
+			<if test="value==4">
+				FAULTY_FILE2_NM = '',
+			</if>
+		</set>
+		WHERE ITEM_CD = #{itemCd}
+			 AND ITEM_REV =  #{itemRev}
+			 AND WORK_ORD_NO =  #{workOrdNo}
+			 AND FAULTY_TYPE_CD = #{faultyTypeCd}			
+	</update>
+
+	
+	
+	
+</mapper>

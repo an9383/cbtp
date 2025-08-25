@@ -1,0 +1,929 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.mm.ProdDailyAdmMapper">
+
+	<resultMap id="ProdDailyAdmVo" type="mes.domain.mm.ProdDailyAdmVo">
+		<result property="prodGubun"			column="PROD_GUBUN"			/>
+		<result property="personalGubun"		column="PERSONAL_GUBUN"		/>
+		<result property="prodCd"		    	column="PROD_CD"			/>
+		<result property="prodNm"		    	column="PROD_NM"			/>
+		<result property="userNumber"			column="USER_NUMBER"		/>			
+		<result property="userNm"				column="USER_NM"			/>			
+		<result property="prodData"				column="PROD_DATA"			/>	
+		<result property="prodDate"				column="PROD_DATE"			/>		
+		<result property="prodYear"				column="PROD_YEAR"			/>	
+		<result property="prodMon"				column="PROD_MON"			/>		
+		<result property="preYear"				column="PRE_YEAR"			/>		
+		
+		<!-- 공수관리Table -->
+		<result property="mhCd"					column="MH_CD"				/>	
+		<result property="mhNm"					column="MH_NM"				/>	
+		<result property="mhGubun"				column="MH_GUBUN"			/>	
+		<result property="mhInitial"			column="MH_INITIAL"			/>	
+		
+		<result property="totalUser"			column="TOTAL_USER"			/>				
+		<result property="totalUser2"			column="TOTAL_USER2"			/>				
+		<result property="nowUser"				column="NOW_USER"			/>
+		
+		<!-- 공정관리Table -->
+		<result property="itemCd"				column="ITEM_CD"			/>				
+		<result property="itemRev"				column="ITEM_REV"			/>
+		<result property="itemNm"				column="ITEM_NM"			/>		
+		<result property="prcssCd"				column="PRCSS_CD"			/>				
+		<result property="prcssNm"				column="PRCSS_NM"			/>
+		<result property="workOrdQty"			column="WORK_ORD_QTY"		/>
+		<result property="outputQty"			column="OUTPUT_QTY"			/>
+		<result property="faultyQty"			column="FAULTY_QTY"			/>
+		<result property="sumTime"				column="SUM_TIME"			/>
+		<result property="ppm"					column="PPM"				/>
+		
+		
+		<!-- 생산일보관리 -->
+		<result property="mh01"					column="MH01"				/>
+		<result property="mh02"					column="MH02"				/>
+		<result property="mh03"					column="MH03"				/>
+		<result property="mh04"					column="MH04"				/>
+		<result property="mh05"					column="MH05"				/>
+		<result property="mh06"					column="MH06"				/>
+		<result property="mh07"					column="MH07"				/>
+		<result property="mh08"					column="MH08"				/>
+		<result property="mh09"					column="MH09"				/>
+		<result property="mh10"					column="MH10"				/>
+		<result property="mh11"					column="MH11"				/>
+		<result property="mh12"					column="MH12"				/>
+		<result property="mh13"					column="MH13"				/>
+		<result property="mh14"					column="MH14"				/>
+		<result property="mh15"					column="MH15"				/>
+		<result property="mh16"					column="MH16"				/>
+		<result property="mh17"					column="MH17"				/>
+		<result property="mh18"					column="MH18"				/>
+		<result property="mh19"					column="MH19"				/>
+		<result property="mh20"					column="MH20"				/>
+		<result property="mh21"					column="MH21"				/>
+		<result property="mh22"					column="MH22"				/>
+		<result property="mh23"					column="MH23"				/>
+		<result property="mh24"					column="MH24"				/>
+		<result property="mh25"					column="MH25"				/>
+		<result property="mh26"					column="MH26"				/>
+		<result property="mh27"					column="MH27"				/>
+		<result property="mh28"					column="MH28"				/>
+		<result property="mh29"					column="MH29"				/>
+		<result property="mh30"					column="MH30"				/>
+		
+		<!-- 통계 -->
+		<result property="mhValue1"				column="MH_VALUE1"			/>
+		<result property="mhValue2"				column="MH_VALUE2"			/>
+		<result property="mhValue3"				column="MH_VALUE3"			/>
+		<result property="mhValue4"				column="MH_VALUE4"			/>
+		<result property="mhValue5"				column="MH_VALUE5"			/>
+		<result property="mhValue6"				column="MH_VALUE6"			/>
+		<result property="mhValue7"				column="MH_VALUE7"			/>
+		<result property="mhValue8"				column="MH_VALUE8"			/>
+		<result property="mhValue9"				column="MH_VALUE9"			/>
+		<result property="mhValue10"			column="MH_VALUE10"			/>
+		<result property="mhValue11"			column="MH_VALUE11"			/>
+		<result property="mhValue12"			column="MH_VALUE12"			/>
+		
+		<!-- 공수월별 -->
+		<result property="m01"					column="M01"				/>
+		<result property="m02"					column="M02"				/>
+		<result property="m03"					column="M03"				/>
+		<result property="m04"					column="M04"				/>
+		<result property="m05"					column="M05"				/>
+		<result property="m06"					column="M06"				/>
+		<result property="m07"					column="M07"				/>
+		<result property="m08"					column="M08"				/>
+		<result property="m09"					column="M09"				/>
+		<result property="m10"					column="M10"				/>
+		<result property="m11"					column="M11"				/>
+		<result property="m12"					column="M12"				/>
+		
+		<!-- 공수일별 -->
+		<result property="d01"					column="D01"				/>
+		<result property="d02"					column="D02"				/>
+		<result property="d03"					column="D03"				/>
+		<result property="d04"					column="D04"				/>
+		<result property="d05"					column="D05"				/>
+		<result property="d06"					column="D06"				/>
+		<result property="d07"					column="D07"				/>
+		<result property="d08"					column="D08"				/>
+		<result property="d09"					column="D09"				/>
+		<result property="d10"					column="D10"				/>
+		<result property="d11"					column="D11"				/>
+		<result property="d12"					column="D12"				/>
+		<result property="d13"					column="D13"				/>
+		<result property="d14"					column="D14"				/>
+		<result property="d15"					column="D15"				/>
+		<result property="d16"					column="D16"				/>
+		<result property="d17"					column="D17"				/>
+		<result property="d18"					column="D18"				/>
+		<result property="d19"					column="D19"				/>
+		<result property="d20"					column="D20"				/>
+		<result property="d21"					column="D21"				/>
+		<result property="d22"					column="D22"				/>
+		<result property="d23"					column="D23"				/>
+		<result property="d24"					column="D24"				/>
+		<result property="d25"					column="D25"				/>
+		<result property="d26"					column="D26"				/>
+		<result property="d27"					column="D27"				/>
+		<result property="d28"					column="D28"				/>
+		<result property="d29"					column="D29"				/>
+		<result property="d30"					column="D30"				/>
+		<result property="d31"					column="D31"				/>
+		
+		<!-- 주요 업무 및 이슈 -->
+		<result property="issueDate"			column="ISSUE_DATE"			/>		
+		<result property="issueContents"		column="ISSUE_CONTENTS"		/>	
+		
+		<result property="startDate"			column="START_DATE"			/>				
+		<result property="endDate"				column="END_DATE"			/>
+		<result property="regId"				column="REG_ID"				/>
+		<result property="regDate"				column="REG_DATE"			/>
+		<result property="updId"				column="UPD_ID"				/>				
+		<result property="updDate"				column="UPD_DATE"			/>
+		<!-- 추가항목 -->
+		<result property="itemGubun"			column="ITEM_GUBUN"			/>
+		<result property="doNo"					column="DO_NO"				/>
+	</resultMap>
+	
+	<!-- 생산일보관리 목록조회-->
+	<select id="listAll" resultMap="ProdDailyAdmVo">
+
+		DECLARE @COLUMNS NVARCHAR(MAX)
+		DECLARE @SQL NVARCHAR(MAX)
+		DECLARE @PROD_GUBUN NVARCHAR(MAX)
+		DECLARE @PROD_DATE NVARCHAR(MAX)
+		DECLARE @MH_INITIAL NVARCHAR(MAX)
+
+		SET @COLUMNS = '';
+		SET @PROD_GUBUN = #{prodGubun};
+		SET @PROD_DATE = #{prodDate};
+		SET @MH_INITIAL = #{mhInitial};
+		
+		SELECT @COLUMNS = @COLUMNS + '[MH' + MH_CD + '],'
+		FROM (
+				SELECT SUBSTRING(MH_CD,2,2) MH_CD
+				FROM TB_MAN_HOUR_ADM
+				WHERE 1=1
+				AND MH_GUBUN = #{mhGubun}
+				AND USE_YN='001'
+			) AS prod_cd
+		
+		SET @COLUMNS = LEFT(@COLUMNS, LEN(@COLUMNS)-1)
+		SET @SQL = '
+					SELECT A.USER_NM,
+					       A.USER_NUMBER,
+						   B.*
+					FROM TB_USER A
+					LEFT OUTER JOIN (
+		
+						SELECT *
+						FROM (
+								SELECT USER_NUMBER USER_NUMBER2,
+										CONCAT(''MH'',SUBSTRING(PROD_CD,2,2)) PROD_CD,
+										PROD_DATA
+								FROM TB_PROD_DAILY_ADM
+								WHERE 1=1
+								AND PROD_GUBUN = '+@PROD_GUBUN+'
+								AND PROD_DATE = '+@PROD_DATE+'
+								AND SUBSTRING(PROD_CD,1,1) = '''+@MH_INITIAL+''' 
+							) AS RESULT
+						PIVOT (
+								SUM(PROD_DATA) FOR PROD_CD IN ('+@COLUMNS+')
+							) AS PIVOT_RESULT
+					) B
+					ON A.USER_NUMBER=B.USER_NUMBER2
+					WHERE 1=1
+					AND A.TEAM_CD='+@PROD_GUBUN+'
+				'
+		EXEC(@SQL)
+	</select>
+	
+	
+		
+	<!-- 생산일보관리 통계 목록조회-->
+	<select id="statListAll" resultMap="ProdDailyAdmVo" >
+		SELECT Z.USER_NUMBER,
+		 	   Z.USER_NM,
+			   A.PROD_VALUE MH_VALUE1,
+			   A.PROD_VALUE-B.PROD_VALUE MH_VALUE2,
+			   (A.PROD_VALUE-B.PROD_VALUE)+C.PROD_VALUE MH_VALUE3,
+			   C.PROD_VALUE MH_VALUE4,
+			   B.PROD_VALUE MH_VALUE5,
+			   D.PROD_VALUE MH_VALUE6,
+			   (A.PROD_VALUE-B.PROD_VALUE)+C.PROD_VALUE+D.PROD_VALUE MH_VALUE7,
+			   E.PROD_VALUE MH_VALUE8
+		FROM
+		TB_USER Z
+		LEFT OUTER JOIN (
+		
+			SELECT USER_NUMBER,
+					ISNULL(480 - (SELECT MH_MIN FROM TB_MAN_HOUR_ADM WHERE 1=1 AND MH_GUBUN='007')*1,0) PROD_VALUE
+			FROM TB_PROD_DAILY_ADM 
+			WHERE 1=1
+			AND PROD_DATE=#{prodDate}
+			GROUP BY USER_NUMBER
+		) A
+		ON Z.USER_NUMBER=A.USER_NUMBER
+		
+		LEFT OUTER JOIN (
+		
+			SELECT USER_NUMBER,
+				   ISNULL(SUM(PROD_DATA),0) PROD_VALUE
+			FROM TB_PROD_DAILY_ADM A, TB_MAN_HOUR_ADM B
+			WHERE 1=1
+			AND PROD_DATE=#{prodDate}
+			AND A.PROD_CD=B.MH_CD
+			AND B.AIRLIFT_GUBUN='002'
+			GROUP BY USER_NUMBER
+		) B 
+		ON Z.USER_NUMBER=B.USER_NUMBER
+		
+		
+		LEFT OUTER JOIN (
+		
+			SELECT USER_NUMBER,
+				   ISNULL(SUM(PROD_DATA),0) PROD_VALUE
+			FROM TB_PROD_DAILY_ADM A, TB_MAN_HOUR_ADM B
+			WHERE 1=1
+			AND PROD_DATE=#{prodDate}
+			AND A.PROD_CD=B.MH_CD
+			AND B.AIRLIFT_GUBUN='001'
+			GROUP BY USER_NUMBER
+		) C
+		ON Z.USER_NUMBER=C.USER_NUMBER
+		
+		LEFT OUTER JOIN (
+		
+			SELECT USER_NUMBER,
+				   ISNULL(SUM(PROD_DATA),0) PROD_VALUE
+			FROM TB_PROD_DAILY_ADM A, TB_MAN_HOUR_ADM B
+			WHERE 1=1
+			AND PROD_DATE=#{prodDate}
+			AND A.PROD_CD=B.MH_CD
+			AND B.AIRLIFT_GUBUN='003'
+			GROUP BY USER_NUMBER
+		) D
+		ON Z.USER_NUMBER=D.USER_NUMBER
+		
+		LEFT OUTER JOIN (
+		
+			SELECT USER_NUMBER,
+				   ISNULL(SUM(PROD_DATA),0) PROD_VALUE
+			FROM TB_PROD_DAILY_ADM A, TB_MAN_HOUR_ADM B
+			WHERE 1=1
+			AND PROD_DATE=#{prodDate}
+			AND A.PROD_CD=B.MH_CD
+			AND B.AIRLIFT_GUBUN='004'
+			GROUP BY USER_NUMBER
+		) E
+		ON Z.USER_NUMBER=E.USER_NUMBER
+		WHERE Z.TEAM_CD=#{prodGubun}
+	</select>
+	
+	
+	<!-- 생산일보관리 상세조회-->
+	<select id="read" resultMap="ProdDailyAdmVo">
+		SELECT 
+			   X.MH_CD PROD_CD,
+			   X.MH_NM PROD_NM,
+			   ISNULL(Y.PROD_DATA,0) PROD_DATA
+		FROM TB_MAN_HOUR_ADM X
+		LEFT OUTER JOIN
+		(
+			SELECT USER_NUMBER,
+					PROD_CD,
+					PROD_DATA
+			FROM
+			TB_PROD_DAILY_ADM
+			WHERE 1=1
+			AND PROD_GUBUN=#{prodGubun}
+			AND PROD_DATE=#{prodDate}
+			AND USER_NUMBER=#{userNumber}
+		) Y
+		ON X.MH_CD=PROD_CD
+		WHERE 1=1
+		AND X.MH_GUBUN=#{mhGubun}
+	</select>
+	
+	<!-- 생산일보관리 등록-->
+	<insert id="create">
+		INSERT INTO TB_PROD_DAILY_ADM(
+			PROD_GUBUN,
+			PROD_DATE,
+			USER_NUMBER,
+			PROD_CD,
+			PROD_DATA,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{prodGubun},
+			#{prodDate},
+			#{userNumber},
+			#{prodCd},
+			#{prodData},
+			#{regId},
+			GETDATE()
+		)
+	</insert>
+	
+	<delete id="delete">
+		DELETE FROM TB_PROD_DAILY_ADM 
+		WHERE 1=1
+		AND PROD_GUBUN = #{prodGubun}
+		AND PROD_DATE = #{prodDate}
+		AND USER_NUMBER = #{userNumber}
+		AND SUBSTRING(PROD_CD,1,1) = #{mhInitial}
+	</delete>
+	
+	
+	<!-- 생산일보관리 합계데이터 가져오기-->
+	<select id="getSumProdData" resultMap="ProdDailyAdmVo" >
+		SELECT 	MH_CD,
+		   		B.PROD_DATA
+		FROM TB_MAN_HOUR_ADM A LEFT OUTER JOIN
+		(
+			SELECT
+				PROD_CD,
+				SUM(PROD_DATA) PROD_DATA 
+			FROM TB_PROD_DAILY_ADM 
+			WHERE 1=1 
+			AND PROD_GUBUN = #{prodGubun}
+			AND PROD_DATE = #{prodDate}
+			AND SUBSTRING(PROD_CD,1,1) = #{mhInitial}
+			GROUP BY PROD_CD 
+		) B
+		ON A.MH_CD=B.PROD_CD
+		WHERE 1=1 
+		AND MH_GUBUN=#{mhGubun}
+	</select>
+	
+	
+	<!-- ********************************************* -->
+	<!-- 공수월별 목록조회-->
+	<select id="monthList" resultMap="ProdDailyAdmVo" >
+		
+		SELECT *
+		FROM (
+				SELECT A.MH_CD,
+						A.MH_NM,
+						A.MH_GUBUN,
+						B.PROD_DATA PROD_DATA,
+						B.PROD_DATE
+				FROM 
+				TB_MAN_HOUR_ADM A LEFT OUTER JOIN
+				(
+					SELECT 
+							PROD_CD,
+							PROD_DATA,
+							CONCAT('M',SUBSTRING(PROD_DATE,5,2)) PROD_DATE
+					FROM TB_PROD_DAILY_ADM
+					WHERE 1=1
+					AND PROD_GUBUN = #{prodGubun}
+					AND SUBSTRING(PROD_DATE,0,5) = #{prodYear}
+				)B
+				ON A.MH_CD=B.PROD_CD
+				WHERE 1=1
+				AND A.MH_GUBUN=#{mhGubun}
+
+			) AS RESULT
+		PIVOT (
+				SUM(PROD_DATA) FOR PROD_DATE IN ([M01],[M02],[M03],[M04],[M05],[M06],[M07],[M08],[M09],[M10],[M11],[M12])
+			) AS PIVOT_RESULT
+
+		ORDER BY MH_CD ASC
+
+	</select>
+	
+	
+	<!-- 공정월별 합계데이터 가져오기-->
+	<select id="getSumProdData2" resultMap="ProdDailyAdmVo" >
+	  	SELECT 
+			SUM(PROD_DATA) PROD_DATA
+		FROM TB_PROD_DAILY_ADM
+		WHERE 1=1
+		AND PROD_GUBUN=#{prodGubun}
+		AND SUBSTRING(PROD_DATE,0,5) = #{prodYear}
+		GROUP BY PROD_CD
+	</select>
+	
+	
+	<!-- ********************************************* -->
+	<!-- 공수일별 목록조회-->
+	<select id="dateList" resultMap="ProdDailyAdmVo" >
+		
+		SELECT *
+		FROM (
+				SELECT A.MH_CD,
+						A.MH_NM,
+						B.PROD_DATA PROD_DATA,
+						B.PROD_DATE
+				FROM 
+				TB_MAN_HOUR_ADM A LEFT OUTER JOIN
+				(
+					SELECT 
+							PROD_CD,
+							PROD_DATA,
+							CONCAT('D',SUBSTRING(PROD_DATE,7,2)) PROD_DATE
+					FROM TB_PROD_DAILY_ADM
+					WHERE 1=1
+					AND PROD_GUBUN = #{prodGubun}
+					AND SUBSTRING(PROD_DATE,0,7) = #{prodDate}
+					
+				)B
+				ON A.MH_CD=B.PROD_CD
+				WHERE 1=1
+				AND A.MH_GUBUN=#{mhGubun}
+
+			) AS RESULT
+		PIVOT (
+				SUM(PROD_DATA) FOR PROD_DATE IN ([D01],[D02],[D03],[D04],[D05],[D06],[D07],[D08],[D09],[D10],
+												 [D11],[D12],[D13],[D14],[D15],[D16],[D17],[D18],[D19],[D20],
+												 [D21],[D22],[D23],[D24],[D25],[D26],[D27],[D28],[D29],[D30],
+												 [D31])
+			) AS PIVOT_RESULT
+	
+		ORDER BY MH_CD ASC
+
+	</select>
+	
+	<!-- 공정일별 합계데이터 가져오기-->
+	<select id="getSumProdData3" resultMap="ProdDailyAdmVo" >
+	  	SELECT 
+			SUM(PROD_DATA) PROD_DATA
+		FROM TB_PROD_DAILY_ADM
+		WHERE 1=1
+		AND PROD_GUBUN=#{prodGubun}
+		AND SUBSTRING(PROD_DATE,0,7)=#{prodDate}
+		GROUP BY PROD_CD,SUBSTRING(PROD_DATE,0,7)
+	</select>
+	
+	
+	<!-- header list-->
+	<select id="headerList" resultMap="ProdDailyAdmVo" >
+		SELECT MH_NM
+		FROM TB_MAN_HOUR_ADM
+		WHERE 1=1
+		AND MH_GUBUN = #{mhGubun}
+	</select>
+	
+	
+	<!-- ************************************* -->
+	<!-- 생산일보관리(구분) - 인원현황 탭 -->
+	<!-- 유실공수 현황(TOP3) -->
+	<select id="manHourTop3List" resultMap="ProdDailyAdmVo">
+		SELECT TOP(3)
+			   PROD_CD,
+			   B.MH_NM,
+			   SUM(PROD_DATA) PROD_DATA
+		FROM TB_PROD_DAILY_ADM A, TB_MAN_HOUR_ADM B
+		WHERE 1=1
+		AND A.PROD_CD=B.MH_CD
+		AND PROD_DATE = #{prodDate}
+		AND PROD_GUBUN = #{prodGubun}
+		AND B.AIRLIFT_GUBUN='003'
+		GROUP BY PROD_CD, MH_NM
+		ORDER BY PROD_DATA DESC
+	</select>
+	
+	
+	
+	<!-- 생산가동율 -->
+	<select id="prodUtilList" resultMap="ProdDailyAdmVo">
+		SELECT 
+			   A.PROD_VALUE MH_VALUE1,
+			   A.PROD_VALUE-B.PROD_VALUE MH_VALUE2,
+			   (A.PROD_VALUE-B.PROD_VALUE)+C.PROD_VALUE MH_VALUE3,
+			   C.PROD_VALUE MH_VALUE4,
+			   B.PROD_VALUE MH_VALUE5,
+			   D.PROD_VALUE MH_VALUE6,
+			   (A.PROD_VALUE-B.PROD_VALUE)+C.PROD_VALUE+D.PROD_VALUE MH_VALUE7,
+			   E.PROD_VALUE MH_VALUE8,
+			   ROUND(((A.PROD_VALUE-B.PROD_VALUE)+C.PROD_VALUE+D.PROD_VALUE)/((A.PROD_VALUE-B.PROD_VALUE)+C.PROD_VALUE) * 100,1) MH_VALUE9,
+			   ROUND((1788 / ((A.PROD_VALUE-B.PROD_VALUE)+C.PROD_VALUE+D.PROD_VALUE))*100,1)  MH_VALUE10,
+			   ROUND((1788 / ((A.PROD_VALUE-B.PROD_VALUE)+C.PROD_VALUE))*100,1)  MH_VALUE11,
+			   1788 MH_VALUE12
+		FROM
+		(
+			SELECT DISTINCT(ISNULL(480 - (SELECT MH_MIN FROM TB_MAN_HOUR_ADM WHERE 1=1 AND MH_GUBUN='007')*1,0)) PROD_VALUE
+			FROM TB_PROD_DAILY_ADM 
+			WHERE 1=1
+			AND PROD_GUBUN = #{prodGubun}
+			<if test="preYear != null and !preYear.equals('')">
+			AND SUBSTRING(PROD_DATE,0,5) = #{preYear}
+			</if>
+			<if test="preYear == null or preYear.equals('')">
+			AND PROD_DATE = #{prodDate}
+			</if>
+		) A
+		, (
+			SELECT ISNULL(SUM(PROD_DATA),0) PROD_VALUE
+			FROM TB_PROD_DAILY_ADM A, TB_MAN_HOUR_ADM B
+			WHERE 1=1
+			AND PROD_GUBUN = #{prodGubun}
+			<if test="preYear != null and !preYear.equals('')">
+			AND SUBSTRING(PROD_DATE,0,5) = #{preYear}
+			</if>
+			<if test="preYear == null or preYear.equals('')">
+			AND PROD_DATE = #{prodDate}
+			</if>
+			AND A.PROD_CD=B.MH_CD
+			AND B.AIRLIFT_GUBUN='002'
+		) B 
+		, (
+			SELECT ISNULL(SUM(PROD_DATA),0) PROD_VALUE
+			FROM TB_PROD_DAILY_ADM A, TB_MAN_HOUR_ADM B
+			WHERE 1=1
+			AND PROD_GUBUN = #{prodGubun}
+			<if test="preYear != null and !preYear.equals('')">
+			AND SUBSTRING(PROD_DATE,0,5) = #{preYear}
+			</if>
+			<if test="preYear == null or preYear.equals('')">
+			AND PROD_DATE = #{prodDate}
+			</if>
+			AND A.PROD_CD=B.MH_CD
+			AND B.AIRLIFT_GUBUN='001'
+		) C
+		
+		, (
+			SELECT ISNULL(SUM(PROD_DATA),0) PROD_VALUE
+			FROM TB_PROD_DAILY_ADM A, TB_MAN_HOUR_ADM B
+			WHERE 1=1
+			AND PROD_GUBUN = #{prodGubun}
+			<if test="preYear != null and !preYear.equals('')">
+			AND SUBSTRING(PROD_DATE,0,5) = #{preYear}
+			</if>
+			<if test="preYear == null or preYear.equals('')">
+			AND PROD_DATE = #{prodDate}
+			</if>
+			AND A.PROD_CD=B.MH_CD
+			AND B.AIRLIFT_GUBUN='003'
+		) D
+		, (
+			SELECT ISNULL(SUM(PROD_DATA),0) PROD_VALUE
+			FROM TB_PROD_DAILY_ADM A, TB_MAN_HOUR_ADM B
+			WHERE 1=1
+			AND PROD_GUBUN = #{prodGubun}
+			<if test="preYear != null and !preYear.equals('')">
+			AND SUBSTRING(PROD_DATE,0,5) = #{preYear}
+			</if>
+			<if test="preYear == null or preYear.equals('')">
+			AND PROD_DATE = #{prodDate}
+			</if>
+			AND A.PROD_CD=B.MH_CD
+			AND B.AIRLIFT_GUBUN='004'
+		) E
+		
+		
+	</select>
+	
+	
+	<!--인원현황 -->
+	<select id="personStatList" resultMap="ProdDailyAdmVo">
+		SELECT A.TOTAL_USER,
+			   A.TOTAL_USER - (B.MH_VALUE1+C.MH_VALUE2+D.MH_VALUE3) NOW_USER,
+			   B.MH_VALUE1,
+			   C.MH_VALUE2,
+			   D.MH_VALUE3
+		FROM
+		(
+			SELECT COUNT(*) TOTAL_USER
+			FROM TB_USER
+			WHERE 1=1
+			AND TEAM_CD=#{prodGubun}
+			
+			AND PERSONAL_GUBUN=#{personalGubun}
+		) A ,
+		(
+			SELECT COUNT(DISTINCT(USER_NUMBER)) MH_VALUE1
+			FROM TB_PROD_DAILY_ADM
+			WHERE 1=1
+			AND PROD_GUBUN = #{prodGubun}
+			AND PROD_DATE = #{prodDate}
+			AND PROD_CD IN ( 'C03' )
+		) B ,
+		(
+			SELECT COUNT(DISTINCT(USER_NUMBER)) MH_VALUE2
+			FROM TB_PROD_DAILY_ADM
+			WHERE 1=1
+			AND PROD_GUBUN = #{prodGubun}
+			AND PROD_DATE = #{prodDate}
+			AND PROD_CD IN ('C02')
+		) C ,
+		(
+			SELECT COUNT(DISTINCT(USER_NUMBER)) MH_VALUE3
+			FROM TB_PROD_DAILY_ADM
+			WHERE 1=1
+			AND PROD_GUBUN = #{prodGubun}
+			AND PROD_DATE = #{prodDate}
+			AND PROD_CD IN ('C01' ,'C04')
+		) D
+	</select>
+	
+	
+	<!-- 생산일보관리(구분) - 공정현황 탭 -->
+	<!-- 생산 실적현황 목록조회 -->
+	<select id="prodResultStatList" resultMap="ProdDailyAdmVo">
+		SELECT	
+		      E.ITEM_CD
+		      , E.ITEM_REV
+		      , (SELECT ITEM_NM FROM TB_ITEM_MOTOR_ADM WHERE ITEM_CD=E.ITEM_CD AND ITEM_REV=E.ITEM_REV) ITEM_NM
+			  , E.OUTPUT_QTY
+			  , A.WORK_ORD_QTY
+		FROM TB_WORK_ORDER A, TB_ITEM_MOTOR_MBOM B, TB_PRCSS_BOM_DTL C, TB_PRCSS_CODE_ADM D, TB_WORK_ORDER_PRCSS E
+		WHERE A.ITEM_CD = B.ITEM_CD
+			AND A.ITEM_REV = B.ITEM_REV
+			AND A.ITEM_GUBUN=#{prodGubun}
+			AND B.BOM_CD = C.BOM_CD
+			AND C.PRCSS_SEQ = (SELECT MAX(PRCSS_SEQ) FROM TB_PRCSS_BOM_DTL WHERE BOM_CD = B.BOM_CD)
+			AND C.PRCSS_CD = D.PRCSS_CD
+			AND D.PRCSS_CD != D.LOWER_PRCSS_CD
+			AND D.PRCSS_SEQ = (SELECT MAX(PRCSS_SEQ) FROM TB_PRCSS_CODE_ADM WHERE PRCSS_CD = C.PRCSS_CD)
+			AND A.WORK_ORD_NO = E.WORK_ORD_NO
+			AND D.LOWER_PRCSS_CD = E.MINOR_PRCSS_CD
+			AND D.PRCSS_CD = E.MIDDLE_PRCSS_CD
+			AND E.WORK_STATUS = 'WC'
+			AND SUBSTRING(E.WORK_END_TIME,0,9) = #{prodDate}
+	</select>
+	
+
+	
+	<!-- 생산 공정현황 목록조회 -->
+	<select id="prodProcStatList" resultMap="ProdDailyAdmVo">
+		SELECT MINOR_PRCSS_CD PRCSS_CD,
+			   C.PRCSS_NM,
+			   SUM(A.OUTPUT_QTY) OUTPUT_QTY,
+			   SUM(DATEDIFF(MI,
+					CAST(LEFT(WORK_START_TIME,4)+'-'+SUBSTRING(WORK_START_TIME,5,2)+'-'+SUBSTRING(WORK_START_TIME,7,2)+' '+SUBSTRING(WORK_START_TIME,9,2)+':'+SUBSTRING(WORK_START_TIME,11,2)+':'+RIGHT(WORK_START_TIME,2) AS datetime),
+					CAST(LEFT(WORK_END_TIME,4)+'-'+SUBSTRING(WORK_END_TIME,5,2)+'-'+SUBSTRING(WORK_END_TIME,7,2)+' '+SUBSTRING(WORK_END_TIME,9,2)+':'+SUBSTRING(WORK_END_TIME,11,2)+':'+RIGHT(WORK_END_TIME,2) AS datetime))) SUM_TIME
+		FROM TB_WORK_ORDER_PRCSS A, TB_ITEM_MOTOR_ADM B, TB_PRCSS_CODE_ADM C
+		WHERE 1=1
+		AND A.ITEM_CD=B.ITEM_CD
+		AND A.ITEM_REV=B.ITEM_REV
+		AND A.MINOR_PRCSS_CD=C.PRCSS_CD
+		AND C.PRCSS_TYPE='001'
+		AND WORK_END_TIME != ''
+		AND WORK_START_TIME != ''
+		AND ORD_DATE = #{prodDate}
+		AND B.ITEM_GUBUN= #{prodGubun}
+		GROUP BY MINOR_PRCSS_CD,C.PRCSS_NM,A.ITEM_CD
+		ORDER BY A.MINOR_PRCSS_CD ASC
+	</select>
+	
+	<!-- 생산목표 수량-->
+	<select id="getWorkOrdQty" resultType="String">
+		SELECT SUM(WORK_ORD_QTY) WORK_ORD_QTY
+		FROM TB_WORK_ORDER
+		WHERE 1=1
+		AND WORK_ORD_DATE = #{prodDate}
+		AND ITEM_GUBUN = #{prodGubun}
+		GROUP BY WORK_ORD_DATE
+	</select>
+	
+	
+	
+	
+	
+	<!-- 생산일보관리(전체) -인원현황탭 -->
+	<!-- 인원현황 -->
+	<select id="personStatListAll" resultMap="ProdDailyAdmVo">
+		SELECT 
+				A.TOTAL_USER TOTAL_USER,
+				AA.TOTAL_USER TOTAL_USER2,
+			    (A.TOTAL_USER+AA.TOTAL_USER) - (B.MH_VALUE1+C.MH_VALUE2+D.MH_VALUE3) NOW_USER,
+			    B.MH_VALUE1,
+			    C.MH_VALUE2,
+			    D.MH_VALUE3
+		FROM
+		(
+			SELECT COUNT(*) TOTAL_USER FROM TB_USER
+			WHERE 1=1
+			AND TEAM_CD='001'
+			AND PERSONAL_GUBUN=#{personalGubun}
+		) A ,
+		(
+			SELECT COUNT(*) TOTAL_USER
+			FROM TB_USER
+			WHERE 1=1
+			AND TEAM_CD='002'
+			AND PERSONAL_GUBUN=#{personalGubun}
+		) AA ,
+		(
+			SELECT COUNT(DISTINCT(USER_NUMBER)) MH_VALUE1
+			FROM TB_PROD_DAILY_ADM
+			WHERE 1=1
+			AND PROD_DATE = #{prodDate}
+			AND PROD_CD IN ( 'C03' )
+		) B ,
+		(
+			SELECT COUNT(DISTINCT(USER_NUMBER)) MH_VALUE2
+			FROM TB_PROD_DAILY_ADM
+			WHERE 1=1
+			AND PROD_DATE = #{prodDate}
+			AND PROD_CD IN ('C02')
+		) C ,
+		(
+			SELECT COUNT(DISTINCT(USER_NUMBER)) MH_VALUE3
+			FROM TB_PROD_DAILY_ADM
+			WHERE 1=1
+			AND PROD_DATE = #{prodDate}
+			AND PROD_CD IN ('C01' ,'C04')
+		) D
+	</select>
+	
+	
+		
+	<!-- 월 누적생산량 -->
+	<select id="getMonCumProdQty" resultType="int">
+		SELECT ISNULL ( 
+			(
+				SELECT	SUM(E.OUTPUT_QTY)
+				FROM TB_WORK_ORDER A, TB_ITEM_MOTOR_MBOM B, TB_PRCSS_BOM_DTL C, TB_PRCSS_CODE_ADM D, TB_WORK_ORDER_PRCSS E
+				WHERE A.ITEM_CD = B.ITEM_CD
+					AND A.ITEM_REV = B.ITEM_REV
+					AND A.ITEM_GUBUN=#{prodGubun}
+					AND B.BOM_CD = C.BOM_CD
+					AND C.PRCSS_SEQ = (SELECT MAX(PRCSS_SEQ) FROM TB_PRCSS_BOM_DTL WHERE BOM_CD = B.BOM_CD)
+					AND C.PRCSS_CD = D.PRCSS_CD
+					AND D.PRCSS_CD != D.LOWER_PRCSS_CD
+					AND D.PRCSS_SEQ = (SELECT MAX(PRCSS_SEQ) FROM TB_PRCSS_CODE_ADM WHERE PRCSS_CD = C.PRCSS_CD)
+					AND A.WORK_ORD_NO = E.WORK_ORD_NO
+					AND D.LOWER_PRCSS_CD = E.MINOR_PRCSS_CD
+					AND D.PRCSS_CD = E.MIDDLE_PRCSS_CD
+					AND E.WORK_STATUS = 'WC'
+					AND SUBSTRING(E.WORK_END_TIME,0,7) = #{prodDate}
+					GROUP BY SUBSTRING(E.WORK_END_TIME,0,7) 
+			), 0)
+	</select>
+	
+	<!--일일 공정작업수-->
+	<select id="getDayProcWorkQty" resultType="int">
+		SELECT ISNULL ( 
+			(
+				SELECT COUNT(*)
+				FROM TB_WORK_ORDER_PRCSS A, TB_WORK_ORDER B
+				WHERE 1=1
+				AND A.WORK_ORD_NO=B.WORK_ORD_NO
+				AND B.ITEM_GUBUN=#{prodGubun}
+				AND A.ORD_DATE =#{prodDate}
+			), 0)
+	</select>
+	
+		
+	<!--불량수량 -->
+	<select id="getDayFaultyQty" resultType="int">
+		SELECT ISNULL ( 
+			(
+				SELECT SUM(FAULTY_TYPE_QTY)
+				FROM TB_WORK_ORDER_FAULTY_TYPE A, TB_WORK_ORDER B
+				WHERE 1=1
+				AND A.WORK_ORD_NO=B.WORK_ORD_NO
+				AND B.ITEM_GUBUN = #{prodGubun}
+				AND A.FAULTY_TYPE_DATE = #{prodDate}
+				GROUP BY B.ITEM_GUBUN,FAULTY_TYPE_DATE
+			), 0)
+	</select>
+	
+	
+	<!-- 주요업무 및 이슈 -->
+	<!-- 조회 -->
+	<select id="mainIssueAdmList" resultMap="ProdDailyAdmVo">
+		SELECT	
+			ISSUE_DATE,
+			ISSUE_CONTENTS,
+			REG_ID,
+			REG_DATE,
+			UPD_ID,
+			UPD_DATE
+		FROM	TB_MAIN_ISSUE_ADM 
+		WHERE 1=1
+		AND ISSUE_DATE = #{issueDate}
+	</select>
+	
+	<!-- ServoMotor 조회 -->
+	<select id="mainIssueAdmServoMotor" resultMap="ProdDailyAdmVo">
+		SELECT 
+				A.DO_NO
+		FROM (
+			SELECT COUNT(*) DO_NO FROM TB_DELIVERY_ORDER_DTL A, TB_ITEM_MOTOR_ADM B  
+			WHERE 1=1
+			AND A.ITEM_CD = B.ITEM_CD
+			AND A.ITEM_REV = B.ITEM_REV
+			AND A.DLV_DATE = '20210824'
+			AND B.ITEM_GUBUN =#{itemGubun}
+		) A
+	</select>
+	
+	<!-- 등록 -->
+	<insert id="mainIssueAdmCreate">
+		INSERT INTO TB_MAIN_ISSUE_ADM(
+			ISSUE_DATE,
+			ISSUE_CONTENTS,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{issueDate},
+			#{issueContents},
+			#{regId},
+			GETDATE()
+		)
+	</insert>
+	
+	<!-- 수정 -->
+	<update id="mainIssueAdmUpdate">
+		UPDATE	TB_MAIN_ISSUE_ADM 
+		SET	ISSUE_DATE = #{issueDate},
+			ISSUE_CONTENTS = #{issueContents},
+			UPD_ID = #{updId},
+			UPD_DATE = GETDATE()
+		WHERE 1=1
+		AND	ISSUE_DATE = #{issueDate}
+	</update>
+	
+	
+	<!-- ************모니터링************** -->
+	<!-- 생선성 지표 -->
+	<select id="prodIndicaList" resultMap="ProdDailyAdmVo">
+		SELECT 
+			   A.PROD_YEAR,
+			   A.PROD_MON,
+			   ROUND(((A.PROD_VALUE-B.PROD_VALUE)+C.PROD_VALUE+D.PROD_VALUE)/((A.PROD_VALUE-B.PROD_VALUE)+C.PROD_VALUE) * 100,1) MH_VALUE1,
+			   ROUND((1788 / ((A.PROD_VALUE-B.PROD_VALUE)+C.PROD_VALUE+D.PROD_VALUE))*100,1)  MH_VALUE2,
+			   ROUND((1788 / ((A.PROD_VALUE-B.PROD_VALUE)+C.PROD_VALUE))*100,1)  MH_VALUE3
+		FROM
+		(
+			SELECT	
+				 SUBSTRING(PROD_DATE,0,5) PROD_YEAR,
+				 SUBSTRING(PROD_DATE,5,2) PROD_MON,
+				 ISNULL(480 - (SELECT MH_MIN FROM TB_MAN_HOUR_ADM WHERE 1=1 AND MH_GUBUN='007')*1,0) PROD_VALUE
+			FROM TB_PROD_DAILY_ADM 
+			WHERE 1=1
+			AND PROD_GUBUN = #{prodGubun}
+			AND SUBSTRING(PROD_DATE,0,5) = #{prodYear}
+			GROUP BY SUBSTRING(PROD_DATE,0,5), SUBSTRING(PROD_DATE,5,2)
+			
+		) A LEFT OUTER JOIN 
+		(
+			SELECT  SUBSTRING(PROD_DATE,5,2) PROD_MON,
+				ISNULL(SUM(PROD_DATA),0) PROD_VALUE
+			FROM TB_PROD_DAILY_ADM A, TB_MAN_HOUR_ADM B
+			WHERE 1=1
+			AND PROD_GUBUN = #{prodGubun}
+			AND SUBSTRING(PROD_DATE,0,5) = #{prodYear}
+			AND A.PROD_CD=B.MH_CD
+			AND B.AIRLIFT_GUBUN='002'
+			GROUP BY SUBSTRING(PROD_DATE,5,2)
+		) B 
+		ON A.PROD_MON=B.PROD_MON
+		LEFT OUTER JOIN
+		(
+			SELECT 
+				 SUBSTRING(PROD_DATE,5,2) PROD_MON,
+				ISNULL(SUM(PROD_DATA),0) PROD_VALUE
+			FROM TB_PROD_DAILY_ADM A, TB_MAN_HOUR_ADM B
+			WHERE 1=1
+			AND PROD_GUBUN = #{prodGubun}
+			AND SUBSTRING(PROD_DATE,0,5) = #{prodYear}
+			AND A.PROD_CD=B.MH_CD
+			AND B.AIRLIFT_GUBUN='001'
+			GROUP BY SUBSTRING(PROD_DATE,5,2)
+		) C
+		ON B.PROD_MON=C.PROD_MON
+		LEFT OUTER JOIN 
+		(
+			
+			SELECT
+		    SUBSTRING(PROD_DATE,5,2) PROD_MON,
+			ISNULL(SUM(PROD_DATA),0) PROD_VALUE
+			FROM TB_PROD_DAILY_ADM A, TB_MAN_HOUR_ADM B
+			WHERE 1=1
+			AND PROD_GUBUN = #{prodGubun}
+			AND SUBSTRING(PROD_DATE,0,5) = #{prodYear}
+			AND A.PROD_CD=B.MH_CD
+			AND B.AIRLIFT_GUBUN='003'
+			GROUP BY SUBSTRING(PROD_DATE,5,2)
+
+		) D
+		ON C.PROD_MON=D.PROD_MON
+	</select>
+	
+	
+	<!-- 공정불량 그래프 -->
+	<select id="procFaultyRateList" resultMap="ProdDailyAdmVo">
+		SELECT SUBSTRING(A.ORD_DATE,0,5) PROD_YEAR,
+			    SUBSTRING(A.ORD_DATE,5,2) PROD_MON,
+				ISNULL(SUM(A.OUTPUT_QTY),0) OUTPUT_QTY,
+				ISNULL(SUM(A.FAULTY_QTY),0) FAULTY_QTY,
+				((ISNULL(SUM(A.FAULTY_QTY),0) / ISNULL(SUM(A.OUTPUT_QTY),1) ) ) * 1000000 PPM
+		FROM TB_WORK_ORDER_PRCSS A , TB_WORK_ORDER B
+		WHERE 1=1
+		AND A.WORK_ORD_NO=B.WORK_ORD_NO
+		AND SUBSTRING(A.ORD_DATE,0,5) = #{prodYear}
+		AND B.ITEM_GUBUN = #{prodGubun}
+		GROUP BY SUBSTRING(A.ORD_DATE,0,5), SUBSTRING(A.ORD_DATE,5,2)
+	</select>
+	
+</mapper>

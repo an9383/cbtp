@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.bm.locationAdmMapper">
+	
+	<resultMap id="LocationAdmVo" type="mes.domain.bm.LocationAdmVo">
+		<result property="locNo"		column="LOC_NO"				/>
+		<result property="mainGubun"	column="MAIN_GUBUN"			/>
+		<result property="mainGubunNm"	column="MAIN_GUBUN_NM"		/>
+		<result property="locCd"		column="LOC_CD"				/>
+		<result property="locNm"		column="LOC_NM"				/>
+		<result property="areaCd"		column="AREA_CD"			/>
+		<result property="areaNm"		column="AREA_NM"			/>
+		<result property="floorCd"		column="FLOOR_CD"			/>
+		<result property="floorNm"		column="FLOOR_NM"			/>
+		<result property="locDesc"		column="LOC_DESC"			/>
+		<result property="useYn"		column="USE_YN"				/>
+		<result property="useYnNm"		column="USE_YN_NM"			/>
+		<result property="regId"		column="REG_ID"				/>
+		<result property="regDate"		column="REG_DATE"			/>
+		<result property="updId"		column="UPD_ID"				/>
+		<result property="updDate"		column="UPD_DATE"			/>
+		
+	</resultMap>
+	
+	<!-- 창고정보관리 전체 목록 -->
+	<select id="locationAdmList" resultMap="LocationAdmVo">
+		SELECT 
+			LOC_NO
+			, MAIN_GUBUN
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=TB_LOCATION_ADM.MAIN_GUBUN AND X.BASE_GROUP_CD='112') MAIN_GUBUN_NM
+			, LOC_CD
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=TB_LOCATION_ADM.LOC_CD AND X.BASE_GROUP_CD='073') LOC_NM
+			, AREA_CD
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=TB_LOCATION_ADM.AREA_CD AND X.BASE_GROUP_CD='067') AREA_NM
+			, FLOOR_CD
+			, FLOOR_NM
+			, LOC_DESC
+			, USE_YN
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=TB_LOCATION_ADM.USE_YN AND X.BASE_GROUP_CD='001') USE_YN_NM
+		FROM TB_LOCATION_ADM
+		WHERE 1=1
+		<if test="locCd != null and !locCd.equals('')">
+		AND LOC_CD = #{locCd}
+		</if>
+		<if test="useYn != null and !useYn.equals('')">
+		AND USE_YN = #{useYn}
+		</if>
+		<if test="locCdList != null and !locCdList.equals('')">
+		AND LOC_CD IN
+		 <foreach collection="locCdList" item="arr"  open="(" close=")" separator=",">
+          	#{arr}
+    	 </foreach>	
+		</if>
+		<if test="mainGubun != null and !mainGubun.equals('')">
+		AND MAIN_GUBUN = #{mainGubun}
+		</if>
+		<if test="areaCd != null and !areaCd.equals('')">
+		AND AREA_CD = #{areaCd}
+		</if>
+		ORDER BY REG_DATE
+	</select>
+	
+	<!-- 창고정보관리 상세 목록 -->
+	<select id="locationAdmRead" resultMap="LocationAdmVo">
+		SELECT LOC_NO
+			, LOC_CD
+			, MAIN_GUBUN
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=LOC_CD AND X.BASE_GROUP_CD='073') LOC_NM
+			, AREA_CD
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=AREA_CD AND X.BASE_GROUP_CD='067') AREA_NM
+			, FLOOR_CD
+			, FLOOR_NM
+			, LOC_DESC
+			, USE_YN
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=USE_YN AND X.BASE_GROUP_CD='001') USE_YN_NM
+		FROM
+		TB_LOCATION_ADM
+		WHERE 1=1
+		<if test="mainGubun!=null and !mainGubun.equals('')">
+		AND MAIN_GUBUN=#{mainGubun}
+		</if>
+		<if test="locCd!=null and !locCd.equals('')">
+		AND LOC_CD=#{locCd}
+		</if>
+		<if test="areaCd!=null and !areaCd.equals('')">
+		AND AREA_CD=#{areaCd}
+		</if>
+	</select>
+
+	<!-- 창고정보관리 등록 -->
+	<insert id="locationAdmCreate" >
+			INSERT INTO TB_LOCATION_ADM (
+				LOC_NO
+				, MAIN_GUBUN
+				, LOC_CD
+				, AREA_CD
+				, FLOOR_NM
+				, LOC_DESC
+				, USE_YN
+				, REG_ID
+				, REG_DATE
+			) 
+			VALUES(
+				#{locNo}
+				, #{mainGubun}
+				, #{locCd}
+				, #{areaCd}
+				, #{floorNm}
+				, #{locDesc}
+				, #{useYn}
+				, #{regId}
+				, getdate()			
+			)
+	</insert>
+
+	<!-- 창고정보관리 수정 -->
+	<update id="locationAdmUpdate" >
+			UPDATE TB_LOCATION_ADM
+			SET	
+			 	LOC_CD = #{locCd}
+				, MAIN_GUBUN = #{mainGubun}
+				, AREA_CD = #{areaCd}
+				, FLOOR_NM = #{floorNm}
+				, LOC_DESC = #{locDesc}
+				, USE_YN = #{useYn}
+				, UPD_ID = #{updId}
+				, UPD_DATE = getdate()
+			WHERE 1=1
+			AND LOC_NO = #{locNo}
+	</update>
+	
+	<!-- 위치코드 시퀀스 값 조회 -->
+	<select id="baseInfoArSeq" resultType="String">
+			SELECT TOP 1 CASE WHEN EXISTS(SELECT * FROM TB_BASE_INFO_ADM WHERE LEFT(BASE_INFO_CD,1)='S')
+				THEN (SELECT STUFF(10001+MAX(RIGHT(BASE_INFO_CD, 4)), 1, 1, 'S') FROM TB_BASE_INFO_ADM WHERE LEFT(BASE_INFO_CD,1)='S')
+				ELSE 'S0001'
+				END
+			FROM TB_BASE_INFO_ADM
+	</select>
+
+	
+	<!-- 창고바코드 시퀀스 조회 -->
+	<select id="locNoSeq" parameterType="String" resultType="String">
+		SELECT ISNULL(RIGHT('000' + CAST(MAX(RIGHT(LOC_NO,3))+1 AS NVARCHAR),3), '001') FROM TB_LOCATION_ADM  WHERE SUBSTRING(LOC_NO,0,9) = #{date}
+	</select>
+	
+	<!-- 삭제 -->
+	<delete id="locationAdmDelete">
+		DELETE 
+		FROM TB_LOCATION_ADM
+		WHERE LOC_NO = #{locNo}
+	</delete>
+	
+	<!-- 창고정보관리  목록조회-->
+	<select id="locationAdmList2" resultMap="LocationAdmVo">
+		SELECT 
+			MAIN_GUBUN
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=TB_LOCATION_ADM.MAIN_GUBUN AND X.BASE_GROUP_CD='112') MAIN_GUBUN_NM
+			, LOC_CD
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=TB_LOCATION_ADM.LOC_CD AND X.BASE_GROUP_CD='073') LOC_NM
+			, AREA_CD
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=TB_LOCATION_ADM.AREA_CD AND X.BASE_GROUP_CD='067') AREA_NM
+		FROM TB_LOCATION_ADM
+		WHERE 1=1
+		<if test="mainGubun != null and !mainGubun.equals('')">
+		AND MAIN_GUBUN = #{mainGubun}
+		</if>
+		<if test="locCd != null and !locCd.equals('')">
+		AND LOC_CD = #{locCd}
+		</if>
+		<if test="locCdList != null and !locCdList.equals('')">
+		AND LOC_CD IN
+		 <foreach collection="locCdList" item="arr"  open="(" close=")" separator=",">
+          	#{arr}
+    	 </foreach>	
+		</if>
+		<if test="areaCd != null and !areaCd.equals('')">
+		AND AREA_CD = #{areaCd}
+		</if>
+		GROUP BY MAIN_GUBUN,LOC_CD,AREA_CD
+	</select>
+	
+	
+</mapper>

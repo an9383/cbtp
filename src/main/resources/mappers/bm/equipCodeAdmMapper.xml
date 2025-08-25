@@ -1,0 +1,2088 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.bm.equipCodeAdmMapper">
+
+	<resultMap id="EquipCodeAdmVo" type="mes.domain.bm.EquipCodeAdmVo">
+		<result property="idx"				column="IDX"			/>
+		<result property="mainGubun"		column="MAIN_GUBUN"		/>
+		<result property="equipCd"			column="EQUIP_CD"		/>
+		<result property="equipNo"			column="EQUIP_NO"		/>
+		<result property="equipNm"			column="EQUIP_NM"		/>
+		<result property="equipInitial"		column="EQUIP_INITIAL"	/>
+		<result property="prcNm"			column="PRC_NM"			/>
+		<result property="equipType"		column="EQUIP_TYPE"		/>
+		<result property="moldLocation"		column="MOLD_LOCATION"	/>
+		<result property="equipCavity"		column="EQUIP_CAVITY"	/>
+		<result property="mfcCorpCd"		column="MFC_CORP_CD"	/>
+		<result property="mfcDate"			column="MFC_DATE"		/>
+		<result property="endDate"			column="END_DATE"		/>
+		<result property="assetCd"			column="ASSET_CD"		/>
+		<result property="assetGubun"		column="ASSET_GUBUN"	/>
+		<result property="buyAmt"			column="BUY_AMT"		/>
+		<result property="equipCond"		column="EQUIP_COND"		/>
+		<result property="upperAmt"			column="UPPER_AMT"		/>
+		<result property="lowerAmt"			column="LOWER_AMT"		/>
+		<result property="ancEquipNm"		column="ANC_EQUIP_NM"	/>
+		<result property="ancDate"			column="ANC_DATE"		/>
+		<result property="ancCorpCd"		column="ANC_CORP_CD"	/>
+		<result property="expNm"			column="EXP_NM"			/>
+		<result property="ancEquipType"		column="ANC_EQUIP_TYPE"	/>
+		<result property="buyCorpNm"		column="BUY_CORP_NM"	/>
+		<result property="disposeDate"		column="DISPOSE_DATE"	/>
+		<result property="moldGrade"		column="MOLD_GRADE"		/>
+		<result property="warrantyLife"		column="WARRANTY_LIFE"	/>
+		<result property="earlyPunchNum"	column="EARLYPUNCH_NUM"	/>
+		<result property="effectiveDate"	column="EFFECTIVE_DATE"	/>
+		<result property="useYn"			column="USE_YN"			/>
+		<result property="equipmanageNo"	column="EQUIPMANAGE_NO"	/>
+		<result property="equipModel"		column="EQUIP_MODEL"	/>
+		<result property="purchaseDate"		column="PURCHASE_DATE"	/>
+		<result property="purchasePrice"	column="PURCHASE_PRICE"	/>
+		<result property="imageFile1"		column="IMAGE_FILE1"	/>
+		<result property="imageFile2"		column="IMAGE_FILE2"	/>
+		<result property="imageFile3"		column="IMAGE_FILE3"	/>
+		<result property="imageFile4"		column="IMAGE_FILE4"	/>
+		<result property="imageFile1Nm"		column="IMAGE_FILE1_NM"	/>
+		<result property="imageFile2Nm"		column="IMAGE_FILE2_NM"	/>
+		<result property="imageFile3Nm"		column="IMAGE_FILE3_NM"	/>
+		<result property="imageFile4Nm"		column="IMAGE_FILE4_NM"	/>
+		<result property="imageFile1Con"	column="IMAGE_FILE1_CON"/>
+		<result property="imageFile2Con"	column="IMAGE_FILE2_CON"/>
+		<result property="imageFile3Con"	column="IMAGE_FILE3_CON"/>
+		<result property="imageFile4Con"	column="IMAGE_FILE4_CON"/>
+		<result property="equipDesc"		column="EQUIP_DESC"		/>
+		<result property="equipCapa"		column="EQUIP_CAPA"		/>
+		<result property="regId"			column="REG_ID"			/>
+		<result property="regDate"			column="REG_DATE"		/>
+		<result property="updId"			column="UPD_ID"			/>
+		<result property="updDate"			column="UPD_DATE"		/>
+		
+		<result property="corrRegDate"		column="CORR_REG_DATE"	/>
+		<result property="corrCont"			column="CORR_CONT"		/>
+		<result property="corrActOrgan"		column="CORR_ACT_ORGAN"	/>
+		<result property="corrDesc"			column="CORR_DESC"		/>
+		<result property="etcSeq"			column="ETC_SEQ"		/>
+		<result property="etcGubun"			column="ETC_GUBUN"		/>
+		<result property="etcCont"			column="ETC_CONT"		/>
+		
+		<result property="equipStatus"		column="EQUIP_STATUS"	/>
+		<result property="pd"				column="PD"				/>
+		<result property="wi"				column="WI"				/>
+		<result property="wc"				column="WC"				/>
+		
+		<result property="timeStamp"		column="TIME_STAMP"		/>
+		<result property="nzTemperature"	column="NZ_TEMPERATURE"	/>
+		<result property="h1Temperature"	column="H1_TEMPERATURE"	/>
+		<result property="h2Temperature"	column="H2_TEMPERATURE"	/>
+		<result property="h3Temperature"	column="H3_TEMPERATURE"	/>
+		<result property="h4Temperature"	column="H4_TEMPERATURE"	/>
+		<result property="chgPosition1"		column="CHG_POSITION_1"	/>
+		<result property="chgPosition2"		column="CHG_POSITION_2"	/>
+		<result property="chgPosition3"		column="CHG_POSITION_3"	/>
+		<result property="chgPosition4"		column="CHG_POSITION_4"	/>
+		<result property="suckBack"			column="SUCK_BACK"		/>
+		<result property="injPressure1"		column="INJ_PRESSURE_1"	/>
+		<result property="injPressure2"		column="INJ_PRESSURE_2"	/>
+		<result property="injPressure3"		column="INJ_PRESSURE_3"	/>
+		<result property="injVelocity1"		column="INJ_VELOCITY_1"	/>
+		<result property="injVelocity2"		column="INJ_VELOCITY_2"	/>
+		<result property="injVelocity3"		column="INJ_VELOCITY_3"	/>
+		<result property="injPosition1"		column="INJ_POSITION_1"	/>
+		<result property="injPosition2"		column="INJ_POSITION_2"	/>
+		<result property="injPosition3"		column="INJ_POSITION_3"	/>
+		<result property="backPressure1"	column="BACK_PRESSURE_1"/>
+		<result property="backPressure2"	column="BACK_PRESSURE_2"/>
+		<result property="backPressure3"	column="BACK_PRESSURE_3"/>
+		<result property="backPressure4"	column="BACK_PRESSURE_4"/>
+		<result property="hldPressure1"		column="HLD_PRESSURE_1"	/>
+		<result property="hldPressure2"		column="HLD_PRESSURE_2"	/>
+		<result property="hldPressure3"		column="HLD_PRESSURE_3"	/>
+		<result property="hldVel1"			column="HLD_VEL_1"		/>
+		<result property="hldVel2"			column="HLD_VEL_2"		/>
+		<result property="hldVel3"			column="HLD_VEL_3"		/>
+		<result property="thermostat"		column="THERMOSTAT"		/>
+		<result property="hydraulicOil"		column="HYDRAULIC_OIL"	/>
+		<result property="coolwaterIn"		column="COOLWATER_IN"	/>
+		<result property="coolwaterOut"		column="COOLWATER_OUT"	/>
+		<result property="moldFixed"		column="MOLD_FIXED"		/>
+		<result property="moldMoving"		column="MOLD_MOVING"	/>
+		
+<!-- 		추가사항 -->
+		<result property="prcRealNm"		column="PRC_REAL_NM"	/>
+		<result property="itemSeq"			column="ITEM_SEQ"		/>
+		<result property="equipGubun"		column="EQUIP_GUBUN"	/>
+		<result property="equipGubunNm"		column="EQUIP_GUBUN_NM"	/>
+		<result property="mainEquipCd"		column="MAIN_EQUIP_CD"	/>
+		<result property="equipWidth"		column="EQUIP_WIDTH"	/>
+		<result property="equipLength"		column="EQUIP_LENGTH"	/>
+		<result property="equipHeight"		column="EQUIP_HEIGHT"	/>
+		<result property="moldGradeNm"		column="MOLD_GRADE_NM"	/>
+		<result property="useYnNm"			column="USE_YN_NM"		/>
+		<result property="userNm"			column="USER_NM"		/>
+
+		<result property="noStartDate"		column="NO_START_DATE"	/>
+		<result property="noStartTime"		column="NO_START_TIME"	/>
+		<result property="noEndDate"		column="NO_END_DATE"	/>
+		<result property="noEndTime"		column="NO_END_TIME"	/>
+		<result property="workOrdNo"		column="WORK_ORD_NO"	/>
+		<result property="noGubun"			column="NO_GUBUN"		/>
+		<result property="noGubunNm"		column="NO_GUBUN_NM"	/>
+		<result property="noReason"			column="NO_REASON"		/>
+		<result property="noTime"			column="NO_TIME"		/>
+		<result property="workChargr"		column="WORK_CHARGR"	/>
+		<result property="noSeq"			column="NO_SEQ"			/>
+		<result property="attachCheck"		column="ATTACH_CHECK"	/>
+		
+<!-- 		부속품 -->
+		<result property="partSeq"			column="PART_SEQ"		/>
+		<result property="partArticle"		column="PART_ARTICLE"	/>
+		<result property="exchangeCycle"	column="EXCHANGE_CYCLE"	/>
+		
+		<!-- 금형수명관리 -->	
+		<result property="remainPunch"		column="REMAIN_PUNCH"	/>
+		<result property="accPunch"         column="ACC_PUNCH"		/>
+		<result property="lastMonth"        column="LAST_MONTH"		/>
+		<result property="thisMonth"	    column="THIS_MONTH"		/>
+		<result property="punch1"           column="PUNCH1"			/>
+		<result property="punch2"           column="PUNCH2"			/>
+		<result property="punch3"           column="PUNCH3"			/>
+		<result property="punch4"           column="PUNCH4"			/>
+		<result property="punch5"           column="PUNCH5"			/>
+		<result property="punch6"           column="PUNCH6"			/>
+		<result property="punch7"           column="PUNCH7"			/>
+		<result property="punch8"           column="PUNCH8"			/>
+		<result property="punch9"           column="PUNCH9"			/>
+		<result property="punch10"          column="PUNCH10"		/>
+		<result property="punch11"          column="PUNCH11"		/>
+		<result property="punch12"          column="PUNCH12"		/>
+		<result property="punch13"          column="PUNCH13"		/>
+		<result property="punch14"          column="PUNCH14"		/>
+		<result property="punch15"          column="PUNCH15"		/>
+		<result property="punch16"          column="PUNCH16"		/>
+		<result property="punch17"          column="PUNCH17"		/>
+		<result property="punch18"          column="PUNCH18"		/>
+		<result property="punch19"          column="PUNCH19"		/>
+		<result property="punch20"          column="PUNCH20"		/>
+		<result property="punch21"          column="PUNCH21"		/>
+		<result property="punch22"          column="PUNCH22"		/>
+		<result property="punch23"          column="PUNCH23"		/>
+		<result property="punch24"          column="PUNCH24"		/>
+		<result property="punch25"          column="PUNCH25"		/>
+		<result property="punch26"          column="PUNCH26"		/>
+		<result property="punch27"          column="PUNCH27"		/>
+		<result property="punch28"          column="PUNCH28"		/>
+		<result property="punch29"          column="PUNCH29"		/>
+		<result property="punch30"          column="PUNCH30"		/>
+		<result property="punch31"          column="PUNCH31"		/>
+		
+		<result property="itemCd"			column="ITEM_CD"		/>
+		<result property="itemModel"		column="ITEM_MODEL"		/>
+		<result property="itemModelNm"		column="ITEM_MODEL_NM"	/>
+		<result property="itemNm"			column="ITEM_NM"		/>
+		<!-- a/s -->
+		<result property="asChargr"			column="AS_CHARGR"		/>
+		<result property="asPhoneNumber"	column="AS_PHONE_NUMBER"/>
+		
+<!-- 		추가사항 -->
+		<result property="equipStandard"		column="EQUIP_STANDARD"	/>
+		<result property="equipWeight"			column="EQUIP_WEIGHT"	/>
+		<result property="equipCompany"			column="EQUIP_COMPANY"	/>
+		<result property="equipStorage"			column="EQUIP_STORAGE"	/>
+		<result property="equipYangsan"			column="EQUIP_YANGSAN"	/>
+		<result property="equipUsed"			column="EQUIP_USED"		/>
+		<result property="equipCore"			column="EQUIP_CORE"		/>
+		
+		<!-- 설비 제원 -->
+		<result property="equipPart"			column="EQUIP_PART"		/>
+		<result property="equipUnit"			column="EQUIP_UNIT"		/>
+		<result property="equipDc"				column="EQUIP_DC"		/>
+		<result property="equipSeq"				column="EQUIP_SEQ"		/>
+		
+		<result property="checkSeq"				column="CHECK_SEQ"		/>
+		<result property="checkState"			column="CHECK_STATE"	/>
+		<result property="checkMethod"			column="CHECK_METHOD"	/>
+		<result property="checkStandard"		column="CHECK_STANDARD"	/>
+		<result property="checkDesc"			column="CHECK_DESC"		/>
+		<result property="equipCompanyNm"		column="EQUIP_COMPANY_NM"/>
+		<result property="equipUsedNm"			column="EQUIP_USED_NM"	/>
+		<result property="mainEquipNm"			column="MAIN_EQUIP_NM"	/>
+		<result property="workerJung"			column="WORKER_JUNG"	/>
+		
+		<result property="moldCd"				column="MOLD_CD"		/>
+		<result property="workYear"				column="WORK_YEAR"		/>
+		<result property="outputQty"			column="OUTPUT_QTY"		/>
+		<result property="shotCount"			column="SHOT_COUNT"		/>
+		<result property="shotCountAll"			column="SHOT_COUNT_ALL"	/>
+		<result property="locNo"				column="LOC_NO"			/>
+		<result property="locCd"				column="LOC_CD"			/>
+		<result property="locCdNm"				column="LOC_CD_NM"		/>
+		<result property="areaCd"				column="AREA_CD"			/>
+		<result property="floorNm"				column="FLOOR_NM"			/>
+		<result property="inFixedOne"			column="IN_FIXED_ONE"		/>
+		<result property="inFixedTwo"			column="IN_FIXED_TWO"		/>
+		<result property="inFixedThree"			column="IN_FIXED_THREE"		/>
+		<result property="inMovingOne"			column="IN_MOVING_ONE"		/>
+		<result property="inMovingTwo"			column="IN_MOVING_TWO"		/>
+		<result property="inMovingThree"		column="IN_MOVING_THREE"	/>
+
+		<result property="corrDate"				column="CORR_DATE"			/>
+		<result property="corrWillDate"			column="CORR_WILL_DATE"		/>
+		<result property="corrCheck"			column="CORR_CHECK"			/>
+		<result property="monthOne"				column="MONTH_ONE"			/>
+		<result property="monthTwo"				column="MONTH_TWO"			/>
+		<result property="monthThree"			column="MONTH_THREE"		/>
+		<result property="monthFour"			column="MONTH_FOUR"			/>
+		<result property="monthFive"			column="MONTH_FIVE"			/>
+		<result property="monthSix"				column="MONTH_SIX"			/>
+		<result property="monthSeven"			column="MONTH_SEVEN"		/>
+		<result property="monthEight"			column="MONTH_EIGHT"		/>
+		<result property="monthNine"			column="MONTH_NINE"			/>
+		<result property="monthTen"				column="MONTH_TEN"			/>
+		<result property="monthEleven"			column="MONTH_ELEVEN"		/>
+		<result property="monthTwelve"			column="MONTH_TWELVE"		/>
+		<result property="corrGubun"			column="CORR_GUBUN"			/>
+		<result property="corrGubunNm"			column="CORR_GUBUN_NM"		/>
+		<result property="mitCd"				column="MIT_CD"				/>
+		<result property="checkCycle"			column="CHECK_CYCLE"		/>
+		<result property="checkCycleNm"			column="CHECK_CYCLE_NM"		/>
+		<result property="checkCount"			column="CHECK_COUNT"		/>
+		<result property="prcNmNm"				column="PRC_NM_NM"			/>
+		<result property="checkList"			column="CHECK_LIST"			/>
+		<result property="checkSpec"			column="CHECK_SPEC"			/>
+		<result property="inspInputMethod"		column="INSP_INPUT_METHOD"	/>
+		<result property="carType"				column="CAR_TYPE"			/>
+		<result property="ironDesc"				column="IRON_DESC"			/>
+		<result property="etc1"					column="ETC1"				/>
+		<result property="etc2"					column="ETC2"				/>
+		<result property="etc3"					column="ETC3"				/>
+		
+	</resultMap>
+
+	<!-- 설비관리 전체조회 -->
+	<select id="equipCodeAdmList" resultMap="EquipCodeAdmVo">
+		SELECT 
+			E.EQUIP_CD
+			, E.EQUIP_GUBUN
+			, E.MAIN_GUBUN
+			, E.EQUIP_NO
+			, E.EQUIP_NM
+			, E.MAIN_EQUIP_CD
+			, (SELECT X.EQUIP_NM FROM TB_EQUIP_CODE_ADM X WHERE X.EQUIP_CD = E.MAIN_EQUIP_CD) MAIN_EQUIP_NM
+			, E.EQUIP_INITIAL
+			, E.PRC_NM
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = E.PRC_NM AND X.BASE_GROUP_CD = '039') PRC_NM_NM
+			, E.EQUIP_TYPE
+			, E.MOLD_LOCATION
+			, E.EQUIP_CAVITY
+			, E.MFC_CORP_CD
+			, E.MFC_DATE
+			, E.END_DATE
+			, E.ASSET_CD
+			, E.ASSET_GUBUN
+			, E.BUY_AMT
+			, E.EQUIP_COND
+			, E.WORKER_JUNG
+			, E.UPPER_AMT
+			, E.LOWER_AMT
+			, E.ANC_EQUIP_NM
+			, E.ANC_DATE
+			, E.ANC_CORP_CD
+			, E.EXP_NM
+			, E.ANC_EQUIP_TYPE
+			, E.BUY_CORP_NM
+			, E.EQUIP_WIDTH
+			, E.EQUIP_LENGTH
+			, E.EQUIP_HEIGHT
+			, E.DISPOSE_DATE
+			, E.MOLD_GRADE
+			, E.WARRANTY_LIFE
+			, E.EARLYPUNCH_NUM
+			, E.EFFECTIVE_DATE
+			, E.USE_YN
+			, E.EQUIPMANAGE_NO
+			, E.EQUIP_MODEL
+			, E.PURCHASE_DATE
+			, E.LOC_NO
+			, L.LOC_CD
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = L.LOC_CD AND X.BASE_GROUP_CD = '073') LOC_CD_NM
+			, L.AREA_CD
+			, L.FLOOR_NM
+			, E.PURCHASE_PRICE
+			, E.EQUIP_DESC
+			, E.REG_ID
+			, E.REG_DATE
+			, E.UPD_ID
+			, E.UPD_DATE
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = E.PRC_NM AND X.BASE_GROUP_CD = '039') PRC_REAL_NM
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = E.EQUIP_GUBUN AND X.BASE_GROUP_CD = '124') EQUIP_GUBUN_NM
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = E.MOLD_GRADE AND X.BASE_GROUP_CD = '122') MOLD_GRADE_NM
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = E.USE_YN AND X.BASE_GROUP_CD = '125') USE_YN_NM
+ 			, COUNT(B.ITEM_SEQ) ITEM_CHECK
+			, B.ITEM_CD
+			, B.ITEM_NM
+			, B.ITEM_MODEL
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = B.ITEM_MODEL AND X.BASE_GROUP_CD = '099') ITEM_MODEL_NM
+			, E.EQUIP_STANDARD
+			, E.EQUIP_WEIGHT
+			, E.EQUIP_COMPANY
+			, E.EQUIP_STORAGE
+			, E.EQUIP_YANGSAN
+			, E.EQUIP_USED
+			, E.EQUIP_CORE
+			, (SELECT EQUIP_NM FROM TB_EQUIP_CODE_ADM EE WHERE EE.EQUIP_CD = E.EQUIP_USED) EQUIP_USED_NM
+			, (SELECT EQUIP_NM FROM TB_EQUIP_CODE_ADM EE WHERE EE.EQUIP_CD = E.EQUIP_USED) EQUIP_USED_NM
+			, E.CHECK_CYCLE
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = E.CHECK_CYCLE AND X.BASE_GROUP_CD = '056') CHECK_CYCLE_NM
+			, E.CHECK_COUNT
+			<if test="corrGubun != null and !corrGubun.equals('')">
+	 		, D.MIT_CD
+			, D.CORR_GUBUN
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_GROUP_CD = '133' AND D.CORR_GUBUN = X.BASE_CD) CORR_GUBUN_NM
+			</if>
+			<if test="(corrYear != null and corrYear != '') and (corrGubun != null and corrGubun != '')">
+			, (SELECT TOP(1) B.CORR_DATE FROM TB_CORR_DATA_LIST B WHERE B.MIT_CD = E.EQUIP_CD AND B.CORR_WILL_DATE != '' AND B.CORR_GUBUN = #{corrGubun} ORDER BY B.CORR_DATE DESC) CORR_DATE
+			, (SELECT TOP(1) B.CORR_DATE FROM TB_CORR_DATA_LIST B WHERE B.MIT_CD = E.EQUIP_CD AND B.CORR_WILL_DATE = '' AND B.CORR_GUBUN = #{corrGubun} ORDER BY B.CORR_DATE) CORR_WILL_DATE
+			, (SELECT TOP(1) CASE WHEN B.CORR_WILL_DATE != '' THEN '실적' ELSE '계획' END FROM TB_CORR_DATA_LIST B WHERE B.MIT_CD = E.EQUIP_CD AND B.CORR_GUBUN = #{corrGubun} AND B.CORR_WILL_DATE = '') CORR_CHECK
+			, (SELECT CASE WHEN AA.CORR_WILL_DATE != '' THEN 'result' ELSE AA.CORR_DATE END FROM TB_CORR_DATA_LIST AA WHERE AA.MIT_CD = E.EQUIP_CD AND SUBSTRING(AA.CORR_DATE,1,6) = #{corrYear} + '01' AND AA.CORR_GUBUN = #{corrGubun}) MONTH_ONE
+			, (SELECT CASE WHEN AA.CORR_WILL_DATE != '' THEN 'result' ELSE AA.CORR_DATE END FROM TB_CORR_DATA_LIST AA WHERE AA.MIT_CD = E.EQUIP_CD AND SUBSTRING(AA.CORR_DATE,1,6) = #{corrYear} + '02' AND AA.CORR_GUBUN = #{corrGubun}) MONTH_TWO
+			, (SELECT CASE WHEN AA.CORR_WILL_DATE != '' THEN 'result' ELSE AA.CORR_DATE END FROM TB_CORR_DATA_LIST AA WHERE AA.MIT_CD = E.EQUIP_CD AND SUBSTRING(AA.CORR_DATE,1,6) = #{corrYear} + '03' AND AA.CORR_GUBUN = #{corrGubun}) MONTH_THREE
+			, (SELECT CASE WHEN AA.CORR_WILL_DATE != '' THEN 'result' ELSE AA.CORR_DATE END FROM TB_CORR_DATA_LIST AA WHERE AA.MIT_CD = E.EQUIP_CD AND SUBSTRING(AA.CORR_DATE,1,6) = #{corrYear} + '04' AND AA.CORR_GUBUN = #{corrGubun}) MONTH_FOUR
+			, (SELECT CASE WHEN AA.CORR_WILL_DATE != '' THEN 'result' ELSE AA.CORR_DATE END FROM TB_CORR_DATA_LIST AA WHERE AA.MIT_CD = E.EQUIP_CD AND SUBSTRING(AA.CORR_DATE,1,6) = #{corrYear} + '05' AND AA.CORR_GUBUN = #{corrGubun}) MONTH_FIVE
+			, (SELECT CASE WHEN AA.CORR_WILL_DATE != '' THEN 'result' ELSE AA.CORR_DATE END FROM TB_CORR_DATA_LIST AA WHERE AA.MIT_CD = E.EQUIP_CD AND SUBSTRING(AA.CORR_DATE,1,6) = #{corrYear} + '06' AND AA.CORR_GUBUN = #{corrGubun}) MONTH_SIX
+			, (SELECT CASE WHEN AA.CORR_WILL_DATE != '' THEN 'result' ELSE AA.CORR_DATE END FROM TB_CORR_DATA_LIST AA WHERE AA.MIT_CD = E.EQUIP_CD AND SUBSTRING(AA.CORR_DATE,1,6) = #{corrYear} + '07' AND AA.CORR_GUBUN = #{corrGubun}) MONTH_SEVEN
+			, (SELECT CASE WHEN AA.CORR_WILL_DATE != '' THEN 'result' ELSE AA.CORR_DATE END FROM TB_CORR_DATA_LIST AA WHERE AA.MIT_CD = E.EQUIP_CD AND SUBSTRING(AA.CORR_DATE,1,6) = #{corrYear} + '08' AND AA.CORR_GUBUN = #{corrGubun}) MONTH_EIGHT
+			, (SELECT CASE WHEN AA.CORR_WILL_DATE != '' THEN 'result' ELSE AA.CORR_DATE END FROM TB_CORR_DATA_LIST AA WHERE AA.MIT_CD = E.EQUIP_CD AND SUBSTRING(AA.CORR_DATE,1,6) = #{corrYear} + '09' AND AA.CORR_GUBUN = #{corrGubun}) MONTH_NINE
+			, (SELECT CASE WHEN AA.CORR_WILL_DATE != '' THEN 'result' ELSE AA.CORR_DATE END FROM TB_CORR_DATA_LIST AA WHERE AA.MIT_CD = E.EQUIP_CD AND SUBSTRING(AA.CORR_DATE,1,6) = #{corrYear} + '10' AND AA.CORR_GUBUN = #{corrGubun}) MONTH_TEN
+			, (SELECT CASE WHEN AA.CORR_WILL_DATE != '' THEN 'result' ELSE AA.CORR_DATE END FROM TB_CORR_DATA_LIST AA WHERE AA.MIT_CD = E.EQUIP_CD AND SUBSTRING(AA.CORR_DATE,1,6) = #{corrYear} + '11' AND AA.CORR_GUBUN = #{corrGubun}) MONTH_ELEVEN
+			, (SELECT CASE WHEN AA.CORR_WILL_DATE != '' THEN 'result' ELSE AA.CORR_DATE END FROM TB_CORR_DATA_LIST AA WHERE AA.MIT_CD = E.EQUIP_CD AND SUBSTRING(AA.CORR_DATE,1,6) = #{corrYear} + '12' AND AA.CORR_GUBUN = #{corrGubun}) MONTH_TWELVE	
+			</if>
+		FROM TB_EQUIP_CODE_ADM E
+ 		LEFT JOIN TB_ITEM_INFO_ADM B
+ 		<choose>
+ 		<when test="mainGubun != null and mainGubun.equals('003')">
+ 		ON (SELECT TOP(1) I.ITEM_SEQ FROM TB_IRON_ITEM_ADM I WHERE E.EQUIP_CD = I.EQUIP_CD) = B.ITEM_SEQ
+ 		</when>
+ 		<otherwise>
+ 		ON E.EQUIP_CD = B.MOLD_CD 
+ 		</otherwise>
+ 		</choose>
+ 		LEFT JOIN TB_LOCATION_ADM L
+ 		ON E.LOC_NO = L.LOC_NO 
+		<if test="corrGubun != null and !corrGubun.equals('')">
+ 		LEFT JOIN TB_CORR_DATA_LIST D
+		ON E.EQUIP_CD = D.MIT_CD
+		AND D.CORR_GUBUN = #{corrGubun}
+		</if>
+		WHERE 1=1
+		<if test="mainGubun != null and !mainGubun.equals('')">
+		AND E.MAIN_GUBUN = #{mainGubun}
+		</if>
+		<if test="prcNm != null and !prcNm.equals('')">
+		AND E.PRC_NM = #{prcNm}
+		</if>
+		<if test="equipGubun != null and !equipGubun.equals('')">
+		AND E.EQUIP_GUBUN = #{equipGubun}
+		</if>
+		<if test="equipArr != null">
+		AND E.EQUIP_GUBUN IN 
+			<foreach collection="equipArr" item="arr"  open="(" close=")" separator=",">
+		    	#{arr}
+		   	</foreach>	
+		</if>
+		<if test="mainEquipCd != null and !mainEquipCd.equals('')">
+		AND E.MAIN_EQUIP_CD = #{mainEquipCd}
+		</if>
+		<if test="popUpCheck != null and !popUpCheck.equals('')">
+		AND E.EQUIP_GUBUN = '002'
+		</if>
+		<if test="useYn != null and !useYn.equals('')">
+		AND E.USE_YN = #{useYn}
+		</if>
+		<if test="(corrYear != null and corrYear != '') and (corrGubun != null and corrGubun != '')">
+		AND (
+			(SELECT CASE WHEN AA.CORR_WILL_DATE != '' THEN 'result' ELSE AA.CORR_DATE END FROM TB_CORR_DATA_LIST AA WHERE AA.MIT_CD = E.EQUIP_CD AND SUBSTRING(AA.CORR_DATE,1,6) = #{corrYear} + '01' AND AA.CORR_GUBUN = #{corrGubun}) IS NOT NULL 
+			OR (SELECT CASE WHEN AA.CORR_WILL_DATE != '' THEN 'result' ELSE AA.CORR_DATE END AS TEMP FROM TB_CORR_DATA_LIST AA WHERE AA.MIT_CD = E.EQUIP_CD AND SUBSTRING(AA.CORR_DATE,1,6) = #{corrYear} + '02' AND AA.CORR_GUBUN = #{corrGubun}) IS NOT NULL 
+			OR (SELECT CASE WHEN AA.CORR_WILL_DATE != '' THEN 'result' ELSE AA.CORR_DATE END AS TEMP FROM TB_CORR_DATA_LIST AA WHERE AA.MIT_CD = E.EQUIP_CD AND SUBSTRING(AA.CORR_DATE,1,6) = #{corrYear} + '03' AND AA.CORR_GUBUN = #{corrGubun}) IS NOT NULL 
+			OR (SELECT CASE WHEN AA.CORR_WILL_DATE != '' THEN 'result' ELSE AA.CORR_DATE END AS TEMP FROM TB_CORR_DATA_LIST AA WHERE AA.MIT_CD = E.EQUIP_CD AND SUBSTRING(AA.CORR_DATE,1,6) = #{corrYear} + '04' AND AA.CORR_GUBUN = #{corrGubun}) IS NOT NULL 
+			OR (SELECT CASE WHEN AA.CORR_WILL_DATE != '' THEN 'result' ELSE AA.CORR_DATE END AS TEMP FROM TB_CORR_DATA_LIST AA WHERE AA.MIT_CD = E.EQUIP_CD AND SUBSTRING(AA.CORR_DATE,1,6) = #{corrYear} + '05' AND AA.CORR_GUBUN = #{corrGubun}) IS NOT NULL 
+			OR (SELECT CASE WHEN AA.CORR_WILL_DATE != '' THEN 'result' ELSE AA.CORR_DATE END AS TEMP FROM TB_CORR_DATA_LIST AA WHERE AA.MIT_CD = E.EQUIP_CD AND SUBSTRING(AA.CORR_DATE,1,6) = #{corrYear} + '06' AND AA.CORR_GUBUN = #{corrGubun}) IS NOT NULL 
+			OR (SELECT CASE WHEN AA.CORR_WILL_DATE != '' THEN 'result' ELSE AA.CORR_DATE END AS TEMP FROM TB_CORR_DATA_LIST AA WHERE AA.MIT_CD = E.EQUIP_CD AND SUBSTRING(AA.CORR_DATE,1,6) = #{corrYear} + '07' AND AA.CORR_GUBUN = #{corrGubun}) IS NOT NULL 
+			OR (SELECT CASE WHEN AA.CORR_WILL_DATE != '' THEN 'result' ELSE AA.CORR_DATE END AS TEMP FROM TB_CORR_DATA_LIST AA WHERE AA.MIT_CD = E.EQUIP_CD AND SUBSTRING(AA.CORR_DATE,1,6) = #{corrYear} + '08' AND AA.CORR_GUBUN = #{corrGubun}) IS NOT NULL 
+			OR (SELECT CASE WHEN AA.CORR_WILL_DATE != '' THEN 'result' ELSE AA.CORR_DATE END AS TEMP FROM TB_CORR_DATA_LIST AA WHERE AA.MIT_CD = E.EQUIP_CD AND SUBSTRING(AA.CORR_DATE,1,6) = #{corrYear} + '09' AND AA.CORR_GUBUN = #{corrGubun}) IS NOT NULL 
+			OR (SELECT CASE WHEN AA.CORR_WILL_DATE != '' THEN 'result' ELSE AA.CORR_DATE END AS TEMP FROM TB_CORR_DATA_LIST AA WHERE AA.MIT_CD = E.EQUIP_CD AND SUBSTRING(AA.CORR_DATE,1,6) = #{corrYear} + '10' AND AA.CORR_GUBUN = #{corrGubun}) IS NOT NULL 
+			OR (SELECT CASE WHEN AA.CORR_WILL_DATE != '' THEN 'result' ELSE AA.CORR_DATE END AS TEMP FROM TB_CORR_DATA_LIST AA WHERE AA.MIT_CD = E.EQUIP_CD AND SUBSTRING(AA.CORR_DATE,1,6) = #{corrYear} + '11' AND AA.CORR_GUBUN = #{corrGubun}) IS NOT NULL 
+			OR (SELECT CASE WHEN AA.CORR_WILL_DATE != '' THEN 'result' ELSE AA.CORR_DATE END AS TEMP FROM TB_CORR_DATA_LIST AA WHERE AA.MIT_CD = E.EQUIP_CD AND SUBSTRING(AA.CORR_DATE,1,6) = #{corrYear} + '12' AND AA.CORR_GUBUN = #{corrGubun}) IS NOT NULL 
+		)
+		</if>
+		GROUP BY
+			E.EQUIP_CD
+			, E.EQUIP_GUBUN
+			, E.MAIN_GUBUN
+			, E.EQUIP_NO
+			, E.EQUIP_NM
+			, E.MAIN_EQUIP_CD
+			, E.EQUIP_INITIAL
+			, E.PRC_NM
+			, E.EQUIP_TYPE
+			, E.MOLD_LOCATION
+			, E.EQUIP_CAVITY
+			, E.MFC_CORP_CD
+			, E.MFC_DATE
+			, E.END_DATE
+			, E.ASSET_CD
+			, E.ASSET_GUBUN
+			, E.BUY_AMT
+			, E.EQUIP_COND
+			, E.WORKER_JUNG
+			, E.UPPER_AMT
+			, E.LOWER_AMT
+			, E.ANC_EQUIP_NM
+			, E.ANC_DATE
+			, E.ANC_CORP_CD
+			, E.EXP_NM
+			, E.ANC_EQUIP_TYPE
+			, E.BUY_CORP_NM
+			, E.EQUIP_WIDTH
+			, E.EQUIP_LENGTH
+			, E.EQUIP_HEIGHT
+			, E.DISPOSE_DATE
+			, E.MOLD_GRADE
+			, E.WARRANTY_LIFE
+			, E.EARLYPUNCH_NUM
+			, E.EFFECTIVE_DATE
+			, E.USE_YN
+			, E.EQUIPMANAGE_NO
+			, E.EQUIP_MODEL
+			, E.PURCHASE_DATE
+			, E.LOC_NO
+			, L.LOC_CD
+			, L.AREA_CD
+			, L.FLOOR_NM
+			, E.PURCHASE_PRICE
+			, E.EQUIP_DESC
+			, E.REG_ID
+			, E.REG_DATE
+			, E.UPD_ID
+			, E.UPD_DATE
+			, B.ITEM_CD
+			, B.ITEM_NM
+			, B.ITEM_MODEL
+			, E.EQUIP_STANDARD
+			, E.EQUIP_WEIGHT
+			, E.EQUIP_COMPANY
+			, E.EQUIP_STORAGE
+			, E.EQUIP_YANGSAN
+			, E.EQUIP_USED
+			, E.EQUIP_CORE
+			, E.CHECK_CYCLE
+			, E.CHECK_COUNT
+			<if test="corrGubun != null and !corrGubun.equals('')">
+	 		, D.MIT_CD
+			, D.CORR_GUBUN
+			</if>
+		HAVING 1=1
+		<if test="itemSeqCheck != null and !itemSeqCheck.equals('')">
+		AND COUNT(B.ITEM_SEQ) <![CDATA[<]]> 1
+		</if>
+	</select>
+	
+	<!-- 설비관리 상세 정보 -->
+	<select id="equipCodeAdmRead" resultMap="EquipCodeAdmVo">
+		SELECT 	
+			E.MAIN_GUBUN
+			, E.EQUIP_CD
+			, E.EQUIP_NO
+			, E.EQUIP_NM
+			, E.EQUIP_INITIAL
+			, E.PRC_NM
+			, E.EQUIP_TYPE
+			, E.MOLD_LOCATION
+			, E.EQUIP_CAVITY
+			, E.MFC_CORP_CD
+			, E.MFC_DATE
+			, E.END_DATE
+			, E.ASSET_CD
+			, E.ASSET_GUBUN
+			, E.BUY_AMT
+			, E.EQUIP_COND
+			, E.WORKER_JUNG
+			, E.UPPER_AMT
+			, E.LOWER_AMT
+			, E.ANC_EQUIP_NM
+			, E.ANC_DATE
+			, E.ANC_CORP_CD
+			, E.EXP_NM
+			, E.ANC_EQUIP_TYPE
+			, E.BUY_CORP_NM
+			, E.DISPOSE_DATE
+			, E.MOLD_GRADE
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = E.MOLD_GRADE AND X.BASE_GROUP_CD = '122') MOLD_GRADE_NM
+			, E.WARRANTY_LIFE
+			, E.EARLYPUNCH_NUM
+			, E.EFFECTIVE_DATE
+			, E.EQUIP_GUBUN
+			, E.MAIN_EQUIP_CD
+			, E.EQUIP_WIDTH
+			, E.EQUIP_LENGTH
+			, E.EQUIP_HEIGHT
+			, E.USE_YN
+			, E.EQUIPMANAGE_NO
+			, E.EQUIP_MODEL
+			, E.PURCHASE_DATE
+			, E.LOC_NO
+			, L.LOC_CD
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = L.LOC_CD AND X.BASE_GROUP_CD = '073') LOC_CD_NM
+			, E.PURCHASE_PRICE
+			, E.EQUIP_STANDARD
+			, E.EQUIP_WEIGHT
+			, E.EQUIP_COMPANY
+			, (SELECT EQUIP_NM FROM TB_EQUIP_CODE_ADM EE WHERE EE.EQUIP_CD = E.EQUIP_USED) EQUIP_USED_NM
+			, E.EQUIP_STORAGE
+			, E.EQUIP_YANGSAN
+			, E.EQUIP_USED
+			, E.EQUIP_CORE
+			, E.IMAGE_FILE1
+			, E.IMAGE_FILE2
+			, E.IMAGE_FILE3
+			, E.IMAGE_FILE4
+			, E.IMAGE_FILE1_NM
+			, E.IMAGE_FILE2_NM
+			, E.IMAGE_FILE3_NM
+			, E.IMAGE_FILE4_NM
+			, E.IMAGE_FILE1_CON
+			, E.IMAGE_FILE2_CON
+			, E.IMAGE_FILE3_CON
+			, E.IMAGE_FILE4_CON
+			, E.EQUIP_DESC
+			, E.REG_ID
+			, E.REG_DATE
+			, E.UPD_ID
+			, B.ITEM_CD
+			, B.ITEM_NM
+			, B.ITEM_MODEL
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = B.ITEM_MODEL AND X.BASE_GROUP_CD = '099') ITEM_MODEL_NM
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = PRC_NM AND X.BASE_GROUP_CD = '039') PRC_REAL_NM
+			, E.AS_CHARGR
+			, E.AS_PHONE_NUMBER
+			, E.CHECK_CYCLE 
+			, E.CHECK_COUNT
+			, E.EQUIP_CAPA
+		FROM TB_EQUIP_CODE_ADM E
+ 		LEFT JOIN TB_ITEM_INFO_ADM B
+ 		ON E.EQUIP_CD = B.MOLD_CD 
+ 		LEFT JOIN TB_LOCATION_ADM L
+ 		ON E.LOC_NO = L.LOC_NO 
+		WHERE EQUIP_CD = #{equipCd}
+	</select>
+	
+	<!-- 작업조건 상세 정보 -->
+	<select id="eqWorkStandAdmRead" resultMap="EquipCodeAdmVo">
+		SELECT	
+			ITEM_SEQ,
+			TIME_STAMP,
+			NZ_TEMPERATURE,
+			H1_TEMPERATURE,
+			H2_TEMPERATURE,
+			H3_TEMPERATURE,
+			H4_TEMPERATURE,
+			CHG_POSITION_1,
+			CHG_POSITION_2,
+			CHG_POSITION_3,
+			CHG_POSITION_4,
+			SUCK_BACK,
+			INJ_PRESSURE_1,
+			INJ_PRESSURE_2,
+			INJ_PRESSURE_3,
+			INJ_VELOCITY_1,
+			INJ_VELOCITY_2,
+			INJ_VELOCITY_3,
+			INJ_POSITION_1,
+			INJ_POSITION_2,
+			INJ_POSITION_3,
+			BACK_PRESSURE_1,
+			BACK_PRESSURE_2,
+			BACK_PRESSURE_3,
+			BACK_PRESSURE_4,
+			HLD_PRESSURE_1,
+			HLD_PRESSURE_2,
+			HLD_PRESSURE_3,
+			HLD_VEL_1,
+			HLD_VEL_2,
+			HLD_VEL_3,
+			THERMOSTAT,
+			HYDRAULIC_OIL,
+			COOLWATER_IN,
+			COOLWATER_OUT,
+			MOLD_FIXED,
+			MOLD_MOVING,
+			<if test='workcondiCheck.equals("stand")'>
+			IN_FIXED_ONE,
+			IN_FIXED_TWO,
+			IN_FIXED_THREE,
+			IN_MOVING_ONE,
+			IN_MOVING_TWO,
+			IN_MOVING_THREE,
+			</if>
+			REG_ID,
+			REG_DATE,
+			UPD_ID,
+			UPD_DATE
+		<if test='workcondiCheck.equals("stand")'>
+		FROM TB_EQ_WORK_STAND_ADM 
+		</if>
+		<if test='workcondiCheck.equals("cond")'>
+		FROM TB_EQ_WORK_COND_ADM
+		</if> 
+		WHERE	ITEM_SEQ = #{itemSeq}
+	</select>
+
+	<!-- 설비관리 생성 -->
+	<insert id="equipCodeAdmCreate" parameterType="mes.domain.bm.EquipCodeAdmVo">
+		INSERT INTO TB_EQUIP_CODE_ADM		(
+			MAIN_GUBUN,
+			EQUIP_CD,
+			EQUIP_NO,
+			EQUIP_NM,
+			EQUIP_INITIAL,
+			PRC_NM,
+			EQUIP_TYPE,
+			MOLD_LOCATION,
+			EQUIP_CAVITY,
+			MFC_CORP_CD,
+			MFC_DATE,
+			END_DATE,
+			ASSET_CD,
+			ASSET_GUBUN,
+			BUY_AMT,
+			EQUIP_COND,
+			WORKER_JUNG,
+			UPPER_AMT,
+			LOWER_AMT,
+			ANC_EQUIP_NM,
+			ANC_DATE,
+			ANC_CORP_CD,
+			EXP_NM,
+			ANC_EQUIP_TYPE,
+			BUY_CORP_NM,
+			DISPOSE_DATE,
+			MOLD_GRADE,
+			WARRANTY_LIFE,
+			EARLYPUNCH_NUM,
+			EFFECTIVE_DATE,
+			EQUIP_GUBUN,
+			MAIN_EQUIP_CD,
+			EQUIP_WIDTH,
+			EQUIP_LENGTH,
+			EQUIP_HEIGHT,
+			USE_YN,
+			EQUIPMANAGE_NO,
+			EQUIP_MODEL,
+			PURCHASE_DATE,
+			LOC_NO,
+			PURCHASE_PRICE,
+			EQUIP_STANDARD,
+			EQUIP_WEIGHT,
+			EQUIP_COMPANY,
+			EQUIP_STORAGE,
+			EQUIP_YANGSAN,
+			EQUIP_USED,
+			EQUIP_CORE,
+			CHECK_CYCLE,
+			CHECK_COUNT,
+			IMAGE_FILE1,
+			IMAGE_FILE2,
+			IMAGE_FILE3,
+			IMAGE_FILE4,
+			IMAGE_FILE1_NM,
+			IMAGE_FILE2_NM,
+			IMAGE_FILE3_NM,
+			IMAGE_FILE4_NM,
+			IMAGE_FILE1_CON,
+			IMAGE_FILE2_CON,
+			IMAGE_FILE3_CON,
+			IMAGE_FILE4_CON,
+			EQUIP_DESC,
+			AS_CHARGR,
+			AS_PHONE_NUMBER,
+			EQUIP_CAPA,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{mainGubun},
+			#{equipCd},
+			#{equipNo},
+			#{equipNm},
+			#{equipInitial},
+			#{prcNm},
+			#{equipType},
+			#{moldLocation},
+			#{equipCavity},
+			#{mfcCorpCd},
+			#{mfcDate},
+			#{endDate},
+			#{assetCd},
+			#{assetGubun},
+			#{buyAmt},
+			#{equipCond},
+			#{workerJung},
+			#{upperAmt},
+			#{lowerAmt},
+			#{ancEquipNm},
+			#{ancDate},
+			#{ancCorpCd},
+			#{expNm},
+			#{ancEquipType},
+			#{buyCorpNm},
+			#{disposeDate},
+			#{moldGrade},
+			#{warrantyLife},
+			#{earlyPunchNum},
+			#{effectiveDate},
+			#{equipGubun},
+			#{mainEquipCd},
+			#{equipWidth},
+			#{equipLength},
+			#{equipHeight},
+			#{useYn},
+			#{equipmanageNo},
+			#{equipModel},
+			#{purchaseDate},
+			#{locNo},
+			#{purchasePrice},
+			#{equipStandard},
+			#{equipWeight},
+			#{equipCompany},
+			#{equipStorage},
+			#{equipYangsan},
+			#{equipUsed},
+			#{equipCore},
+			#{checkCycle},
+			#{checkCount},
+			#{imageFile1},
+			#{imageFile2},
+			#{imageFile3},
+			#{imageFile4},
+			#{imageFile1Nm},
+			#{imageFile2Nm},
+			#{imageFile3Nm},
+			#{imageFile4Nm},
+			#{imageFile1Con},
+			#{imageFile2Con},
+			#{imageFile3Con},
+			#{imageFile4Con},
+			#{equipDesc},
+			#{asChargr},
+			#{asPhoneNumber},
+			#{equipCapa},
+			#{regId},
+			getDate()
+		)
+	</insert>
+	
+	<!-- 설비관리 Update -->
+	<update id="equipCodeAdmUpdate">
+		UPDATE	TB_EQUIP_CODE_ADM		 
+		SET	
+			MAIN_GUBUN = #{mainGubun},
+			EQUIP_CD = #{equipCd},
+			EQUIP_NO = #{equipNo},
+			EQUIP_NM = #{equipNm},
+			EQUIP_INITIAL = #{equipInitial},
+			PRC_NM = #{prcNm},
+			EQUIP_TYPE = #{equipType},
+			MOLD_LOCATION = #{moldLocation},
+			EQUIP_CAVITY = #{equipCavity},
+			MFC_CORP_CD = #{mfcCorpCd},
+			MFC_DATE = #{mfcDate},
+			END_DATE = #{endDate},
+			ASSET_CD = #{assetCd},
+			ASSET_GUBUN = #{assetGubun},
+			BUY_AMT = #{buyAmt},
+			EQUIP_COND = #{equipCond},
+			WORKER_JUNG = #{workerJung},
+			UPPER_AMT = #{upperAmt},
+			LOWER_AMT = #{lowerAmt},
+			ANC_EQUIP_NM = #{ancEquipNm},
+			ANC_DATE = #{ancDate},
+			ANC_CORP_CD = #{ancCorpCd},
+			EXP_NM = #{expNm},
+			ANC_EQUIP_TYPE = #{ancEquipType},
+			BUY_CORP_NM = #{buyCorpNm},
+			DISPOSE_DATE = #{disposeDate},
+			MOLD_GRADE = #{moldGrade},
+			WARRANTY_LIFE = #{warrantyLife},
+			EARLYPUNCH_NUM = #{earlyPunchNum},
+			EFFECTIVE_DATE = #{effectiveDate},
+			EQUIP_GUBUN = #{equipGubun},
+			EQUIP_WIDTH = #{equipWidth},
+			EQUIP_LENGTH = #{equipLength},
+			EQUIP_HEIGHT = #{equipHeight},
+			USE_YN = #{useYn},
+			EQUIPMANAGE_NO = #{equipmanageNo},
+			EQUIP_MODEL = #{equipModel},
+			PURCHASE_DATE = #{purchaseDate},
+			LOC_NO = #{locNo},
+			PURCHASE_PRICE = #{purchasePrice},
+			EQUIP_STANDARD = #{equipStandard},
+			EQUIP_WEIGHT = #{equipWeight},
+			EQUIP_COMPANY = #{equipCompany},
+			EQUIP_STORAGE = #{equipStorage},
+			EQUIP_YANGSAN = #{equipYangsan},
+			EQUIP_USED = #{equipUsed},
+			EQUIP_CORE = #{equipCore},
+			EQUIP_DESC = #{equipDesc},
+			CHECK_CYCLE = #{checkCycle},
+			CHECK_COUNT = #{checkCount},
+			AS_CHARGR = #{asChargr},
+			AS_PHONE_NUMBER = #{asPhoneNumber},
+			EQUIP_CAPA = #{equipCapa},
+			UPD_ID = #{updId},
+			UPD_DATE = GETDATE()
+		WHERE 1=1
+		AND EQUIP_CD = #{equipCd}
+	</update>
+	
+	<!-- 작업조건 Update -->
+	<update id="eqWorkStandAdmUpdate">
+		<if test='workcondiCheck.equals("stand")'>
+		UPDATE	TB_EQ_WORK_STAND_ADM
+		</if>
+		<if test='workcondiCheck.equals("cond")'>
+		UPDATE	TB_EQ_WORK_COND_ADM 
+		</if> 
+		SET	ITEM_SEQ = #{itemSeq},
+			TIME_STAMP = getDate(),
+			NZ_TEMPERATURE = #{nzTemperature},
+			H1_TEMPERATURE = #{h1Temperature},
+			H2_TEMPERATURE = #{h2Temperature},
+			H3_TEMPERATURE = #{h3Temperature},
+			H4_TEMPERATURE = #{h4Temperature},
+			CHG_POSITION_1 = #{chgPosition1},
+			CHG_POSITION_2 = #{chgPosition2},
+			CHG_POSITION_3 = #{chgPosition3},
+			CHG_POSITION_4 = #{chgPosition4},
+			SUCK_BACK = #{suckBack},
+			INJ_PRESSURE_1 = #{injPressure1},
+			INJ_PRESSURE_2 = #{injPressure2},
+			INJ_PRESSURE_3 = #{injPressure3},
+			INJ_VELOCITY_1 = #{injVelocity1},
+			INJ_VELOCITY_2 = #{injVelocity2},
+			INJ_VELOCITY_3 = #{injVelocity3},
+			INJ_POSITION_1 = #{injPosition1},
+			INJ_POSITION_2 = #{injPosition2},
+			INJ_POSITION_3 = #{injPosition3},
+			BACK_PRESSURE_1 = #{backPressure1},
+			BACK_PRESSURE_2 = #{backPressure2},
+			BACK_PRESSURE_3 = #{backPressure3},
+			BACK_PRESSURE_4 = #{backPressure4},
+			HLD_PRESSURE_1 = #{hldPressure1},
+			HLD_PRESSURE_2 = #{hldPressure2},
+			HLD_PRESSURE_3 = #{hldPressure3},
+			HLD_VEL_1 = #{hldVel1},
+			HLD_VEL_2 = #{hldVel2},
+			HLD_VEL_3 = #{hldVel3},
+			THERMOSTAT = #{thermostat},
+			HYDRAULIC_OIL = #{hydraulicOil},
+			COOLWATER_IN = #{coolwaterIn},
+			COOLWATER_OUT = #{coolwaterOut},
+			MOLD_FIXED = #{moldFixed},
+			MOLD_MOVING = #{moldMoving},
+			<if test='workcondiCheck.equals("stand")'>
+			IN_FIXED_ONE = #{inFixedOne},
+			IN_FIXED_TWO = #{inFixedTwo},
+			IN_FIXED_THREE = #{inFixedThree},
+			IN_MOVING_ONE = #{inMovingOne},
+			IN_MOVING_TWO = #{inMovingTwo},
+			IN_MOVING_THREE = #{inMovingThree},
+			</if>
+			UPD_ID = #{updId},
+			UPD_DATE = getDate()
+		WHERE	ITEM_SEQ = #{itemSeq}
+
+	</update>
+	
+	<!-- 부대설비 Update -->
+	<update id="ancFacUpdateDelete">
+		UPDATE	TB_EQUIP_CODE_ADM
+		SET	
+		<if test="mainEquipCd != null and !mainEquipCd.equals('')">
+			MAIN_EQUIP_CD = #{mainEquipCd},
+		</if>
+		<if test="mainEquipCd == null or mainEquipCd.equals('')">
+			MAIN_EQUIP_CD = NULL,
+		</if>
+			UPD_ID = #{updId},
+			UPD_DATE = getDate()
+		WHERE 1=1	
+		<if test="ancFacCheck != null and !ancFacCheck.equals('')">
+		AND MAIN_EQUIP_CD = #{equipCd}
+		</if>
+		<if test="ancFacCheck == null or ancFacCheck.equals('')">
+		AND EQUIP_CD = #{equipCd}
+		</if>
+	</update>
+	
+	<!-- 시퀀스 값 조회 -->
+	<select id="equipCodeSeq" resultType="String">
+		<![CDATA[
+			SELECT ISNULL(CAST(MAX(EQUIP_CD)+1 AS NVARCHAR), '100001') EQUIP_CD FROM TB_EQUIP_CODE_ADM
+		]]>
+	</select>
+	 
+	<!-- 교정내역 상세 정보 -->
+	<select id="equipCorrInfoList" resultMap="EquipCodeAdmVo">
+		<![CDATA[
+			SELECT 
+				EQUIP_CD
+				, CORR_REG_DATE
+				, CORR_CONT
+				, CORR_ACT_ORGAN
+				, CORR_DESC
+				, REG_ID
+				, REG_DATE
+			FROM TB_EQUIP_CORR_INFO
+			WHERE EQUIP_CD = #{equipCd}
+		]]>
+	</select>
+	 
+	<!-- 교정내역 추가 -->
+	<insert id="equipCorrInfoCreate">
+	 		INSERT INTO TB_EQUIP_CORR_INFO			(
+				EQUIP_CD,
+				CORR_REG_DATE,
+				CORR_CONT,
+				CORR_ACT_ORGAN,
+				CORR_DESC,
+				REG_ID,
+				REG_DATE
+			) 
+			VALUES(
+				#{equipCd},
+				#{corrRegDate},
+				#{corrCont},
+				#{corrActOrgan},
+				#{corrDesc},
+				#{regId},
+				getDate()
+			)
+	</insert>
+	
+	<!-- 작업조건 등록 -->
+	<insert id="eqWorkStandAdmCreate">
+		<if test='workcondiCheck.equals("stand")'>
+		INSERT INTO TB_EQ_WORK_STAND_ADM( 
+		</if>
+		<if test='workcondiCheck.equals("cond")'>
+		INSERT INTO TB_EQ_WORK_COND_ADM(
+		</if>
+			ITEM_SEQ,
+			TIME_STAMP,
+			NZ_TEMPERATURE,
+			H1_TEMPERATURE,
+			H2_TEMPERATURE,
+			H3_TEMPERATURE,
+			H4_TEMPERATURE,
+			CHG_POSITION_1,
+			CHG_POSITION_2,
+			CHG_POSITION_3,
+			CHG_POSITION_4,
+			SUCK_BACK,
+			INJ_PRESSURE_1,
+			INJ_PRESSURE_2,
+			INJ_PRESSURE_3,
+			INJ_VELOCITY_1,
+			INJ_VELOCITY_2,
+			INJ_VELOCITY_3,
+			INJ_POSITION_1,
+			INJ_POSITION_2,
+			INJ_POSITION_3,
+			BACK_PRESSURE_1,
+			BACK_PRESSURE_2,
+			BACK_PRESSURE_3,
+			BACK_PRESSURE_4,
+			HLD_PRESSURE_1,
+			HLD_PRESSURE_2,
+			HLD_PRESSURE_3,
+			HLD_VEL_1,
+			HLD_VEL_2,
+			HLD_VEL_3,
+			THERMOSTAT,
+			HYDRAULIC_OIL,
+			COOLWATER_IN,
+			COOLWATER_OUT,
+			MOLD_FIXED,
+			MOLD_MOVING,
+			<if test='workcondiCheck.equals("stand")'>
+			IN_FIXED_ONE,
+			IN_FIXED_TWO,
+			IN_FIXED_THREE,
+			IN_MOVING_ONE,
+			IN_MOVING_TWO,
+			IN_MOVING_THREE,
+			</if>
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{itemSeq},
+			getDate(),
+			#{nzTemperature},
+			#{h1Temperature},
+			#{h2Temperature},
+			#{h3Temperature},
+			#{h4Temperature},
+			#{chgPosition1},
+			#{chgPosition2},
+			#{chgPosition3},
+			#{chgPosition4},
+			#{suckBack},
+			#{injPressure1},
+			#{injPressure2},
+			#{injPressure3},
+			#{injVelocity1},
+			#{injVelocity2},
+			#{injVelocity3},
+			#{injPosition1},
+			#{injPosition2},
+			#{injPosition3},
+			#{backPressure1},
+			#{backPressure2},
+			#{backPressure3},
+			#{backPressure4},
+			#{hldPressure1},
+			#{hldPressure2},
+			#{hldPressure3},
+			#{hldVel1},
+			#{hldVel2},
+			#{hldVel3},
+			#{thermostat},
+			#{hydraulicOil},
+			#{coolwaterIn},
+			#{coolwaterOut},
+			#{moldFixed},
+			#{moldMoving},
+			<if test='workcondiCheck.equals("stand")'>
+			#{inFixedOne},
+			#{inFixedTwo},
+			#{inFixedThree},
+			#{inMovingOne},
+			#{inMovingTwo},
+			#{inMovingThree},
+			</if>
+			#{regId},
+			getDate()
+		)
+	</insert>
+	 
+	<!-- 교정내역 전체삭제 -->
+	<delete id="equipCorrInfoDelete">
+		<![CDATA[
+		DELETE FROM TB_EQUIP_CORR_INFO WHERE EQUIP_CD = #{equipCd}
+		]]>
+	</delete>
+	
+	<!-- 교정내역 상세삭제 -->
+	<delete id="equipCorrInfoDelete2">
+		DELETE 
+		FROM TB_EQUIP_CORR_INFO 
+		WHERE EQUIP_CD = #{equipCd} 
+		AND CORR_REG_DATE = #{corrRegDate}
+	</delete>
+	
+	<!-- 작업조건 삭제 -->
+	<delete id="eqWorkStandAdmDelete">
+		DELETE 
+		<if test='workcondiCheck.equals("stand")'>
+		FROM TB_EQ_WORK_STAND_ADM 
+		</if>
+		<if test='workcondiCheck.equals("cond")'>
+		FROM TB_EQ_WORK_COND_ADM
+		</if>
+		WHERE ITEM_SEQ = #{itemSeq}
+	</delete>
+	 
+	<!-- 교정이력 중복검사 -->
+	<select id="overlapCorrRegDate" resultType="integer">
+		SELECT COUNT(*) FROM TB_EQUIP_CORR_INFO WHERE EQUIP_CD=#{equipCd} AND CORR_REG_DATE=#{corrRegDate}
+	</select>
+	
+	
+	<!-- 이니셜 중복검사 -->
+	<select id="overlapEquipInitial" resultType="Integer">
+		SELECT COUNT(*) FROM TB_EQUIP_CODE_ADM WHERE EQUIP_INITIAL = #{equipInitial}
+	</select>
+	
+	<!-- 기타 상세 정보 -->
+	<select id="equipEtcInfoList" resultMap="EquipCodeAdmVo">
+			SELECT 
+				EQUIP_CD
+				, ETC_SEQ
+				, ETC_GUBUN
+				, ETC_CONT
+				, REG_ID
+				, REG_DATE
+			FROM TB_EQUIP_ETC_INFO
+			WHERE EQUIP_CD = #{equipCd}
+	</select>
+	
+	<!-- 부속품 목록 조회 -->
+	<select id="equipPartAdmList" resultMap="EquipCodeAdmVo">
+			SELECT	
+				EQUIP_CD,
+				PART_SEQ,
+				PART_ARTICLE,
+				EXCHANGE_CYCLE,
+				REG_ID,
+				REG_DATE,
+				UPD_ID,
+				UPD_DATE
+			FROM	TB_EQUIP_PART_ADM 
+			WHERE	EQUIP_CD = #{equipCd}
+	</select>
+	
+	<!-- 금형 SHOT 이력 목록 조회 -->
+	<select id="equipShotList" resultMap="EquipCodeAdmVo">
+		SELECT 
+			EQ_TB.EQUIP_CD,
+			EQ_TB.EQUIP_NO,
+			IIA_TB.ITEM_MODEL,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=IIA_TB.ITEM_MODEL AND X.BASE_GROUP_CD='099') ITEM_MODEL_NM,
+			IIA_TB.ITEM_CD,
+			IIA_TB.ITEM_NM,
+			EQ_TB.WARRANTY_LIFE,
+			Z.ACC_PUNCH,
+			CASE WHEN CONVERT(FLOAT,EQ_TB.WARRANTY_LIFE) - CONVERT(FLOAT,Z.ACC_PUNCH) <![CDATA[<]]> 0 THEN 0 ELSE CONVERT(FLOAT,EQ_TB.WARRANTY_LIFE) - CONVERT(FLOAT,Z.ACC_PUNCH) END REMAIN_PUNCH
+		FROM TB_EQUIP_CODE_ADM EQ_TB
+		LEFT OUTER JOIN TB_ITEM_INFO_ADM IIA_TB
+		ON IIA_TB.MOLD_CD = EQ_TB.EQUIP_CD
+		LEFT OUTER JOIN(
+		SELECT
+			IIA_TB.MOLD_CD,
+			ISNULL(SUM(WO_TB.OUTPUT_QTY),0) OUTPUT_QTY,
+			EQ_TB.EQUIP_CAVITY,
+			EQ_TB.EARLYPUNCH_NUM,
+			ROUND((CONVERT(FLOAT,ISNULL(SUM(WO_TB.OUTPUT_QTY),0)) / CONVERT(FLOAT,EQ_TB.EQUIP_CAVITY)),0) + CONVERT(FLOAT,EQ_TB.EARLYPUNCH_NUM) ACC_PUNCH
+		FROM TB_WORK_ORDER WO_TB
+		LEFT OUTER JOIN TB_ITEM_INFO_ADM IIA_TB
+		ON WO_TB.ITEM_SEQ=IIA_TB.ITEM_SEQ
+		LEFT OUTER JOIN TB_EQUIP_CODE_ADM EQ_TB
+		ON IIA_TB.MOLD_CD=EQ_TB.EQUIP_CD
+		GROUP BY IIA_TB.MOLD_CD, EQ_TB.EQUIP_CAVITY, EQ_TB.EARLYPUNCH_NUM
+		) Z
+		ON IIA_TB.MOLD_CD = Z.MOLD_CD
+		WHERE 1=1
+		AND EQ_TB.MAIN_GUBUN = '002'
+		AND IIA_TB.ITEM_SEQ IS NOT NULL
+		<if test="stateCd != null and !stateCd.equals('')">
+		AND IIA_TB.STATE_CD = #{stateCd}			
+		</if>
+	</select>
+	
+	<!-- 금형 SHOT 이력 년 조회 -->
+	<select id="moldYearList" resultMap="EquipCodeAdmVo">
+		SELECT
+			Z.MOLD_CD,
+			SUBSTRING(CONVERT(CHAR(8), Z.WORK_YEAR, 112),0,5)WORK_YEAR,
+			CONVERT(FLOAT,ISNULL(SUM(Z.SHOT_COUNT),0)) SHOT_COUNT
+		FROM (
+			SELECT
+				IIA_TB.MOLD_CD,
+				SUBSTRING(CONVERT(CHAR(8), WO_TB.WORK_START_TIME, 112),0,9) WORK_YEAR,
+				ISNULL(SUM(WO_TB.OUTPUT_QTY),0) OUTPUT_QTY,
+				EQ_TB.EQUIP_CAVITY,
+				ROUND(CONVERT(FLOAT,ISNULL(SUM(WO_TB.OUTPUT_QTY),0)) / CONVERT(FLOAT,EQ_TB.EQUIP_CAVITY),0) SHOT_COUNT,
+				(
+					SELECT 
+						ROUND(SUM(TEMP_TABLE.OUTPUT_QTY / TEMP_TABLE.EQUIP_CAVITY),0)
+					FROM (
+						SELECT 
+							CONVERT(FLOAT,ISNULL(SUM(A.OUTPUT_QTY),0)) AS OUTPUT_QTY,
+							CONVERT(FLOAT,C.EQUIP_CAVITY)  AS EQUIP_CAVITY
+						FROM TB_WORK_ORDER_PRCSS A
+						LEFT OUTER JOIN TB_ITEM_INFO_ADM B
+						ON A.ITEM_SEQ=B.ITEM_SEQ
+						LEFT OUTER JOIN TB_EQUIP_CODE_ADM C
+						ON B.MOLD_CD=C.EQUIP_CD
+						WHERE SUBSTRING(CONVERT(CHAR(8), A.WORK_START_TIME, 112),0,9) <![CDATA[<=]]> SUBSTRING(CONVERT(CHAR(8), WO_TB.WORK_START_TIME, 112),0,9)
+						AND B.MOLD_CD = #{equipCd}
+						<if test="selectMonth != null and selectMonth != ''">
+						AND SUBSTRING(CONVERT(CHAR(8), A.WORK_START_TIME, 112),0,5) = #{selectMonth}
+						</if>
+						GROUP BY 
+							B.MOLD_CD, 
+							C.EQUIP_CAVITY,
+							SUBSTRING(CONVERT(CHAR(8), A.WORK_START_TIME, 112),0,9)
+					) TEMP_TABLE
+			) SHOT_COUNT_ALL
+		FROM TB_WORK_ORDER_PRCSS WO_TB
+		LEFT OUTER JOIN TB_ITEM_INFO_ADM IIA_TB
+		ON WO_TB.ITEM_SEQ=IIA_TB.ITEM_SEQ
+		LEFT OUTER JOIN TB_EQUIP_CODE_ADM EQ_TB
+		ON IIA_TB.MOLD_CD=EQ_TB.EQUIP_CD
+		WHERE 1=1
+		AND IIA_TB.MOLD_CD = #{equipCd}
+		<if test="selectMonth != null and selectMonth != ''">
+		AND SUBSTRING(CONVERT(CHAR(8), WO_TB.WORK_START_TIME, 112),0,5) = #{selectMonth}
+		</if>
+		GROUP BY 
+			IIA_TB.MOLD_CD, 
+			EQ_TB.EQUIP_CAVITY,
+			SUBSTRING(CONVERT(CHAR(8), WO_TB.WORK_START_TIME, 112),0,9)
+		HAVING ISNULL(SUM(WO_TB.OUTPUT_QTY),0) != 0
+
+		)Z
+		GROUP BY Z.MOLD_CD,SUBSTRING(CONVERT(CHAR(8), Z.WORK_YEAR, 112),0,5)
+	</select>
+	
+	<!-- 금형 SHOT 이력 월 조회 -->
+	<select id="moldMonthList" resultMap="EquipCodeAdmVo">
+		SELECT
+			Z.MOLD_CD,
+			SUBSTRING(CONVERT(CHAR(8), Z.WORK_YEAR, 112),0,7)WORK_YEAR,
+			CONVERT(FLOAT,ISNULL(SUM(Z.SHOT_COUNT),0)) SHOT_COUNT
+		FROM (
+			SELECT
+				IIA_TB.MOLD_CD,
+				SUBSTRING(CONVERT(CHAR(8), WO_TB.WORK_START_TIME, 112),0,9) WORK_YEAR,
+				ISNULL(SUM(WO_TB.OUTPUT_QTY),0) OUTPUT_QTY,
+				EQ_TB.EQUIP_CAVITY,
+				ROUND(CONVERT(FLOAT,ISNULL(SUM(WO_TB.OUTPUT_QTY),0)) / CONVERT(FLOAT,EQ_TB.EQUIP_CAVITY),0) SHOT_COUNT,
+				(
+					SELECT 
+						ROUND(SUM(TEMP_TABLE.OUTPUT_QTY / TEMP_TABLE.EQUIP_CAVITY),0)
+					FROM (
+						SELECT 
+							CONVERT(FLOAT,ISNULL(SUM(A.OUTPUT_QTY),0)) AS OUTPUT_QTY,
+							CONVERT(FLOAT,C.EQUIP_CAVITY)  AS EQUIP_CAVITY
+						FROM TB_WORK_ORDER_PRCSS A
+						LEFT OUTER JOIN TB_ITEM_INFO_ADM B
+						ON A.ITEM_SEQ=B.ITEM_SEQ
+						LEFT OUTER JOIN TB_EQUIP_CODE_ADM C
+						ON B.MOLD_CD=C.EQUIP_CD
+						WHERE SUBSTRING(CONVERT(CHAR(8), A.WORK_START_TIME, 112),0,9) <![CDATA[<=]]> SUBSTRING(CONVERT(CHAR(8), WO_TB.WORK_START_TIME, 112),0,9)
+						AND B.MOLD_CD = #{equipCd}
+						<if test="selectMonth != null and selectMonth != ''">
+						AND SUBSTRING(CONVERT(CHAR(8), A.WORK_START_TIME, 112),0,5) = #{selectMonth}
+						</if>
+						GROUP BY 
+							B.MOLD_CD, 
+							C.EQUIP_CAVITY,
+							SUBSTRING(CONVERT(CHAR(8), A.WORK_START_TIME, 112),0,9)
+					) TEMP_TABLE
+			) SHOT_COUNT_ALL
+		FROM TB_WORK_ORDER_PRCSS WO_TB
+		LEFT OUTER JOIN TB_ITEM_INFO_ADM IIA_TB
+		ON WO_TB.ITEM_SEQ=IIA_TB.ITEM_SEQ
+		LEFT OUTER JOIN TB_EQUIP_CODE_ADM EQ_TB
+		ON IIA_TB.MOLD_CD=EQ_TB.EQUIP_CD
+		WHERE 1=1
+		AND IIA_TB.MOLD_CD = #{equipCd}
+		<if test="selectMonth != null and selectMonth != ''">
+		AND SUBSTRING(CONVERT(CHAR(8), WO_TB.WORK_START_TIME, 112),0,5) = #{selectMonth}
+		</if>
+		GROUP BY 
+			IIA_TB.MOLD_CD, 
+			EQ_TB.EQUIP_CAVITY,
+			SUBSTRING(CONVERT(CHAR(8), WO_TB.WORK_START_TIME, 112),0,9)
+		HAVING ISNULL(SUM(WO_TB.OUTPUT_QTY),0) != 0
+
+		)Z
+		GROUP BY Z.MOLD_CD,SUBSTRING(CONVERT(CHAR(8), Z.WORK_YEAR, 112),0,7)
+	</select>
+	
+	<!-- 금형 SHOT 이력 일 조회 -->
+	<select id="moldDayList" resultMap="EquipCodeAdmVo">
+		SELECT
+			IIA_TB.MOLD_CD,
+			SUBSTRING(CONVERT(CHAR(8), WO_TB.WORK_START_TIME, 112),0,9) WORK_YEAR,
+			ISNULL(SUM(WO_TB.OUTPUT_QTY),0) OUTPUT_QTY,
+			EQ_TB.EQUIP_CAVITY,
+			ROUND(CONVERT(FLOAT,ISNULL(SUM(WO_TB.OUTPUT_QTY),0)) / CONVERT(FLOAT,EQ_TB.EQUIP_CAVITY),0) SHOT_COUNT,
+			(
+				SELECT 
+					ROUND(SUM(TEMP_TABLE.OUTPUT_QTY / TEMP_TABLE.EQUIP_CAVITY),0)
+				FROM (
+							SELECT 
+								CONVERT(FLOAT,ISNULL(SUM(A.OUTPUT_QTY),0)) AS OUTPUT_QTY,
+								CONVERT(FLOAT,C.EQUIP_CAVITY)  AS EQUIP_CAVITY
+							FROM TB_WORK_ORDER_PRCSS A
+							LEFT OUTER JOIN TB_ITEM_INFO_ADM B
+							ON A.ITEM_SEQ=B.ITEM_SEQ
+							LEFT OUTER JOIN TB_EQUIP_CODE_ADM C
+							ON B.MOLD_CD=C.EQUIP_CD
+							WHERE SUBSTRING(CONVERT(CHAR(8), A.WORK_START_TIME, 112),0,9) <![CDATA[<=]]> SUBSTRING(CONVERT(CHAR(8), WO_TB.WORK_START_TIME, 112),0,9)
+							AND B.MOLD_CD = #{equipCd}
+							<if test="selectMonth != null and selectMonth != ''">
+							AND SUBSTRING(CONVERT(CHAR(8), A.WORK_START_TIME, 112),0,7) = #{selectMonth}
+							</if>
+							GROUP BY 
+								B.MOLD_CD, 
+								C.EQUIP_CAVITY,
+								SUBSTRING(CONVERT(CHAR(8), A.WORK_START_TIME, 112),0,9)
+					) TEMP_TABLE
+			) SHOT_COUNT_ALL
+			
+		FROM TB_WORK_ORDER_PRCSS WO_TB
+		LEFT OUTER JOIN TB_ITEM_INFO_ADM IIA_TB
+		ON WO_TB.ITEM_SEQ=IIA_TB.ITEM_SEQ
+		LEFT OUTER JOIN TB_EQUIP_CODE_ADM EQ_TB
+		ON IIA_TB.MOLD_CD=EQ_TB.EQUIP_CD
+		WHERE 1=1
+		AND IIA_TB.MOLD_CD = #{equipCd}
+		<if test="selectMonth != null and selectMonth != ''">
+		AND SUBSTRING(CONVERT(CHAR(8), WO_TB.WORK_START_TIME, 112),0,7) = #{selectMonth}
+		</if>
+		GROUP BY 
+			IIA_TB.MOLD_CD, 
+			EQ_TB.EQUIP_CAVITY,
+			SUBSTRING(CONVERT(CHAR(8), WO_TB.WORK_START_TIME, 112),0,9)
+		HAVING ISNULL(SUM(WO_TB.OUTPUT_QTY),0) != 0
+	</select>
+	
+	<!-- 기준서 목록 조회 -->
+	<select id="equipCheckAdmList" resultMap="EquipCodeAdmVo">
+			SELECT	
+				EQUIP_CD,
+				CHECK_SEQ,
+				CHECK_STATE,
+				CHECK_METHOD,
+				CHECK_STANDARD,
+				CHECK_DESC,
+				REG_ID,
+				REG_DATE,
+				UPD_ID,
+				UPD_DATE
+			FROM	TB_EQUIP_CHECK_ADM 
+			WHERE	EQUIP_CD = #{equipCd}
+	</select>
+	
+	<!-- 기타 추가 -->
+	<insert id="equipEtcInfoCreate">
+	 		INSERT INTO TB_EQUIP_ETC_INFO				(
+				EQUIP_CD,
+				ETC_SEQ,
+				ETC_GUBUN,
+				ETC_CONT,
+				REG_ID,
+				REG_DATE
+			) 
+			VALUES(
+				#{equipCd},
+				#{etcSeq},
+				#{etcGubun},
+				#{etcCont},
+				#{regId},
+				getDate()
+			)
+	</insert>
+	
+	<!-- 부속품 추가 -->
+	<insert id="partAdmCreate">
+	 		INSERT INTO TB_EQUIP_PART_ADM(
+				EQUIP_CD,
+				PART_SEQ,
+				PART_ARTICLE,
+				EXCHANGE_CYCLE,
+				REG_ID,
+				REG_DATE
+			) 
+			VALUES(
+				#{equipCd},
+				#{partSeq},
+				#{partArticle},
+				#{exchangeCycle},
+				#{regId},
+				getDate()
+			)
+	</insert>
+	
+	<!-- 기준서 추가 -->
+	<insert id="equipCheckAdmCreate">
+	 		INSERT INTO TB_EQUIP_CHECK_ADM(
+				EQUIP_CD,
+				CHECK_SEQ,
+				CHECK_STATE,
+				CHECK_METHOD,
+				CHECK_STANDARD,
+				CHECK_DESC,
+				REG_ID,
+				REG_DATE
+			) 
+			VALUES(
+				#{equipCd},
+				#{checkSeq},
+				#{checkState},
+				#{checkMethod},
+				#{checkStandard},
+				#{checkDesc},
+				#{regId},
+				getDate()
+			)
+	</insert>
+	
+	<!-- 일상점검 추가 -->
+	<insert id="equipDailyCheckCreate">
+	 		INSERT INTO TB_EQUIP_DAILY_CHECK(
+				EQUIP_CD,
+				CHECK_SEQ,
+				MAIN_GUBUN,
+				CHECK_LIST,
+				CHECK_METHOD,
+				CHECK_SPEC,
+				INSP_INPUT_METHOD,
+				REG_ID,
+				REG_DATE
+			) 
+			VALUES(
+				#{equipCd},
+				#{checkSeq},
+				#{mainGubun},
+				#{checkList},
+				#{checkMethod},
+				#{checkSpec},
+				#{inspInputMethod},
+				#{regId},
+				getDate()
+			)
+	</insert>
+	 
+	<!-- 기타 삭제 -->
+	<delete id="equipEtcInfoDelete">
+		DELETE 
+		FROM TB_EQUIP_ETC_INFO 
+		WHERE EQUIP_CD = #{equipCd}
+	</delete>
+	
+	<!-- 부속품 삭제 -->
+	<delete id="partAdmDelete">
+		DELETE 
+		FROM TB_EQUIP_PART_ADM 
+		WHERE EQUIP_CD = #{equipCd}
+		<if test="partSeq != null and !partSeq.equals('')">
+		AND PART_SEQ = #{partSeq}
+		</if>
+	</delete>
+	
+	<!-- 기준서 삭제 -->
+	<delete id="equipCheckAdmDelete">
+		DELETE 
+		FROM TB_EQUIP_CHECK_ADM  
+		WHERE EQUIP_CD = #{equipCd}
+		<if test="checkSeq != null and !checkSeq.equals('')">
+		AND CHECK_SEQ = #{checkSeq}
+		</if>
+	</delete>
+	
+	<!-- 일상점검 삭제 -->
+	<delete id="equipDailyCheckDelete">
+		DELETE 
+		FROM TB_EQUIP_DAILY_CHECK  
+		WHERE EQUIP_CD = #{equipCd}
+		<if test="checkSeq != null and !checkSeq.equals('')">
+		AND CHECK_SEQ = #{checkSeq}
+		</if>
+	</delete>
+	
+	<!-- 기타 시퀀스 -->
+	<select id="etcSeq" resultType="integer">
+		SELECT 
+			ISNULL(MAX(ETC_SEQ)+1, 0) 
+		FROM TB_EQUIP_ETC_INFO 
+		WHERE EQUIP_CD = #{equipCd}
+	</select>
+	
+	<!-- 부속품 시퀀스 -->
+	<select id="partSeq" resultType="integer">
+		SELECT 
+			ISNULL(MAX(PART_SEQ)+1, 0) 
+		FROM TB_EQUIP_PART_ADM 
+		WHERE EQUIP_CD = #{equipCd}
+	</select>
+	
+	<!-- 기준서 시퀀스 -->
+	<select id="checkSeq" resultType="integer">
+		SELECT 
+			ISNULL(MAX(CHECK_SEQ) + 1, 0) 
+		FROM TB_EQUIP_CHECK_ADM 
+		WHERE EQUIP_CD = #{equipCd}
+	</select>
+	
+	<!-- 일상점검 시퀀스 -->
+	<select id="getCheckSeq" resultType="integer">
+		SELECT 
+			ISNULL(MAX(CHECK_SEQ) + 1, 0) 
+		FROM TB_EQUIP_DAILY_CHECK 
+		WHERE EQUIP_CD = #{equipCd}
+	</select>
+	 
+	<!-- 설비관리 이미지 경로조회 -->
+	<select id="equipImgRead" resultMap="EquipCodeAdmVo">
+			SELECT
+				EQUIP_CD
+				, EQUIP_NM
+				, IMAGE_FILE1
+				, IMAGE_FILE2
+				, IMAGE_FILE3
+				, IMAGE_FILE4
+				, IMAGE_FILE1_NM
+				, IMAGE_FILE2_NM
+				, IMAGE_FILE3_NM
+				, IMAGE_FILE4_NM
+				, IMAGE_FILE1_CON
+				, IMAGE_FILE2_CON
+				, IMAGE_FILE3_CON
+				, IMAGE_FILE4_CON
+			FROM TB_EQUIP_CODE_ADM
+			WHERE EQUIP_CD = #{equipCd}
+	</select>
+	
+	<update id="equipImageUpload">
+		UPDATE TB_EQUIP_CODE_ADM
+		SET
+		<choose>
+			<when test="imageFile1 != null">
+				IMAGE_FILE1 = #{imageFile1}
+				, IMAGE_FILE1_NM = #{imageFile1Nm}
+			</when>
+			<when test="imageFile2 != null">
+				IMAGE_FILE2 = #{imageFile2}
+				, IMAGE_FILE2_NM = #{imageFile2Nm}
+			</when>
+			<when test="imageFile3 != null">
+				IMAGE_FILE3 = #{imageFile3}
+				, IMAGE_FILE3_NM = #{imageFile3Nm}
+			</when>
+			<when test="imageFile4 != null">
+				IMAGE_FILE4 = #{imageFile4}
+				, IMAGE_FILE4_NM = #{imageFile4Nm}
+			</when>
+		</choose>
+		WHERE 
+          	EQUIP_CD = #{equipCd}
+	</update>
+	
+	<update id="equipImageDelete">
+		UPDATE TB_EQUIP_CODE_ADM
+		SET
+		<choose>
+			<when test="value == 1">
+				IMAGE_FILE1 = null
+				, IMAGE_FILE1_NM = null
+			</when>
+			<when test="value == 2">
+				IMAGE_FILE2 = null
+				, IMAGE_FILE2_NM = null
+			</when>
+			<when test="value == 3">
+				IMAGE_FILE3 = null
+				, IMAGE_FILE3_NM = null
+			</when>
+			<when test="value == 4">
+				IMAGE_FILE4 = null
+				, IMAGE_FILE4_NM = null
+			</when>
+		</choose>
+		WHERE 
+          	EQUIP_CD = #{equipCd}
+	</update>
+	
+	<!-- 모니터링 - 설비가동/비가동현황 ////////////////////////////////////////////////////////// -->
+	
+	<!-- 설비구분별 설비목록 조회 -->
+	<select id="equipGubunToList" resultMap="EquipCodeAdmVo">
+		SELECT 
+			EQUIP_CD
+			, EQUIP_GUBUN
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=EQUIP_GUBUN AND X.BASE_GROUP_CD='030') EQUIP_GUBUN_NM
+			, EQUIP_NM
+			, EQUIP_TYPE
+			, MOLD_LOCATION
+			, EQUIP_CAVITY
+			, USE_YN
+		FROM TB_EQUIP_CODE_ADM
+		WHERE 1=1
+		<if test="equipGubun != null and !equipGubun.equals('')">
+		AND EQUIP_GUBUN = #{equipGubun}
+		</if>
+	</select>
+	
+	<!-- 설비구분별 설비가동/비가동현황 -->
+	<select id="equipStateList" resultMap="EquipCodeAdmVo">
+		SELECT
+			A.EQUIP_CD,
+			CASE WHEN (SELECT
+							COUNT(*)
+						FROM TB_WORK_ORDER_PRCSS B
+						WHERE 1=1
+						AND B.EQUIP_CD = A.EQUIP_CD
+						AND B.ORD_DATE = CONVERT(CHAR(8), GETDATE(), 112)
+						AND B.WORK_STATUS = 'WI') = '0' THEN 'N'
+				 ELSE 'Y'
+			END EQUIP_STATUS,
+			(SELECT
+				COUNT(*)
+			FROM TB_WORK_ORDER_PRCSS B
+			WHERE 1=1
+			AND B.EQUIP_CD = A.EQUIP_CD
+			AND B.ORD_DATE = CONVERT(CHAR(8), GETDATE(), 112)
+			AND B.WORK_STATUS = 'PD') PD,
+			(SELECT
+				COUNT(*)
+			FROM TB_WORK_ORDER_PRCSS B
+			WHERE 1=1
+			AND B.EQUIP_CD = A.EQUIP_CD
+			AND B.ORD_DATE = CONVERT(CHAR(8), GETDATE(), 112)
+			AND B.WORK_STATUS = 'WI') WI,
+			(SELECT
+				COUNT(*)
+			FROM TB_WORK_ORDER_PRCSS B
+			WHERE 1=1
+			AND B.EQUIP_CD = A.EQUIP_CD
+			AND B.ORD_DATE = CONVERT(CHAR(8), GETDATE(), 112)
+			AND B.WORK_STATUS = 'WC') WC
+		FROM TB_EQUIP_CODE_ADM A
+		WHERE 1=1
+		AND A.EQUIP_GUBUN = #{equipGubun}
+	</select>
+	
+	<!-- 설비코드 중복 체크 -->
+	<select id="overlapEquipCd" resultType="int">
+		SELECT COUNT(*) FROM TB_EQUIP_CODE_ADM WHERE EQUIP_CD = #{equipCd}
+	</select>
+	
+	<!-- 작업조건 중복 체크 -->
+	<select id="eqWorkStandAdmCount" resultType="int">
+		SELECT 
+		COUNT(*) 
+		<if test='workcondiCheck.equals("stand")'>
+		FROM TB_EQ_WORK_STAND_ADM 
+		</if>
+		<if test='workcondiCheck.equals("cond")'>
+		FROM TB_EQ_WORK_COND_ADM 
+		</if>
+		WHERE ITEM_SEQ = #{itemSeq}
+	</select>
+	
+	<!-- 이미지 내용 Update -->
+	<update id="equipImgUpdate">
+			UPDATE	TB_EQUIP_CODE_ADM		 
+			SET	IMAGE_FILE1_CON = #{imageFile1Con},
+				IMAGE_FILE2_CON = #{imageFile2Con},
+				IMAGE_FILE3_CON = #{imageFile3Con},
+				IMAGE_FILE4_CON = #{imageFile4Con}
+			WHERE	EQUIP_CD = #{equipCd}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="equipDataDelete">
+		DELETE 
+		FROM TB_EQUIP_CODE_ADM 
+		WHERE EQUIP_CD = #{equipCd}
+	</delete>
+	
+	<!-- 엑셀 추가 -->
+	<insert id="equipCodeExcelCreate">
+	 		INSERT INTO TB_EQUIP_CODE_ADM(
+				EQUIP_CD,
+				EQUIP_NO,
+				EQUIP_NM,
+				PRC_NM,
+				EQUIP_TYPE,
+				MOLD_LOCATION,
+				EQUIP_CAVITY,
+				MFC_CORP_CD,
+				MFC_DATE,
+				ASSET_CD,
+				ASSET_GUBUN,
+				BUY_AMT,
+				EQUIP_COND,
+				UPPER_AMT,
+				LOWER_AMT,
+				ANC_EQUIP_NM,
+				ANC_DATE,
+				ANC_CORP_CD,
+				EXP_NM,
+				ANC_EQUIP_TYPE,
+				BUY_CORP_NM,
+				REG_ID,
+				REG_DATE
+			) 
+			VALUES(
+				#{equipCd},
+				#{equipNo},
+				#{equipNm},
+				#{prcNm},
+				#{equipType},
+				#{moldLocation},
+				#{equipCavity},
+				#{mfcCorpCd},
+				#{mfcDate},
+				#{assetCd},
+				#{assetGubun},
+				#{buyAmt},
+				#{equipCond},
+				#{upperAmt},
+				#{lowerAmt},
+				#{ancEquipNm},
+				#{ancDate},
+				#{ancCorpCd},
+				#{expNm},
+				#{ancEquipType},
+				#{buyCorpNm},
+				#{regId},
+				getDate()
+			)
+	</insert>
+	
+	
+	<!-- 금형수명관리 전체조회 -->
+	<select id="readMoldMonthListAll" resultMap="EquipCodeAdmVo">
+		<![CDATA[
+			SELECT * FROM
+			(		
+				SELECT * FROM
+				(
+					select C.EQUIP_NO,
+						C.EQUIP_CD,
+						C.EQUIP_NM,
+						ISNULL(C.EQUIP_CAVITY,0) EQUIP_CAVITY,
+						ISNULL(C.WARRANTY_LIFE,0) WARRANTY_LIFE,
+						ISNULL(C.WARRANTY_LIFE,0) - ISNULL(SUM(EARLYPUNCH_NUM),0) - (ISNULL(SUM(D.OUTPUT_QTY),0) / ISNULL(C.EQUIP_CAVITY,0)) REMAIN_PUNCH,
+						ISNULL(SUM(EARLYPUNCH_NUM),0) + (ISNULL(SUM(D.OUTPUT_QTY),0) / ISNULL(C.EQUIP_CAVITY,0)) ACC_PUNCH,
+						ISNULL(SUM(EARLYPUNCH_NUM),0) + (ISNULL(SUM(AA.OUTPUT_QTY),0) / ISNULL(C.EQUIP_CAVITY,0)) LAST_MONTH,
+						(ISNULL(SUM(A.OUTPUT_QTY),0) / ISNULL(C.EQUIP_CAVITY,0))  THIS_MONTH	
+			
+					from TB_EQUIP_CODE_ADM C
+						LEFT OUTER JOIN 
+						TB_ITEM_INFO_ADM B
+						ON B.MOLD_CD = C.EQUIP_CD
+						LEFT OUTER JOIN
+						( select ITEM_SEQ, SUM(OUTPUT_QTY) OUTPUT_QTY from TB_WORK_ORDER_PRCSS
+						where LEFT(ORD_DATE,6) = #{thisMonth}
+						group by ITEM_SEQ) A
+						ON A.ITEM_SEQ = B.ITEM_SEQ
+						LEFT OUTER JOIN
+						( select ITEM_SEQ, SUM(OUTPUT_QTY) OUTPUT_QTY from TB_WORK_ORDER_PRCSS
+						where LEFT(ORD_DATE,6) = (SELECT LEFT(CONVERT(CHAR(8), DATEADD(MONTH,-1,#{lastMonth}), 112),6))
+						group by ITEM_SEQ) AA
+						ON AA.ITEM_SEQ = B.ITEM_SEQ
+						LEFT OUTER JOIN
+						( select ITEM_SEQ, SUM(OUTPUT_QTY) OUTPUT_QTY from TB_WORK_ORDER_PRCSS
+						where LEFT(ORD_DATE,6) <= #{thisMonth}
+						group by ITEM_SEQ) D
+						ON D.ITEM_SEQ = B.ITEM_SEQ		
+			
+					where  C.MAIN_GUBUN = '002'
+						GROUP BY C.EQUIP_CD,
+						C.EQUIP_NO,
+						C.EQUIP_NM,
+						C.EQUIP_CAVITY,
+						C.WARRANTY_LIFE
+			
+				) AS RESULT
+			
+			
+			) XX LEFT OUTER JOIN
+			(
+				SELECT 0 ITEM_SEQ,
+				0 [PUNCH1],
+				0 [PUNCH2],
+				0 [PUNCH3],
+				0 [PUNCH4],
+				0 [PUNCH5],
+				0 [PUNCH6],
+				0 [PUNCH7],
+				0 [PUNCH8],
+				0 [PUNCH9],
+				0 [PUNCH10],
+				0 [PUNCH11],
+				0 [PUNCH12],
+				0 [PUNCH13],
+				0 [PUNCH14],
+				0 [PUNCH15],
+				0 [PUNCH16],
+				0 [PUNCH17],
+				0 [PUNCH18],
+				0 [PUNCH19],
+				0 [PUNCH20],
+				0 [PUNCH21],
+				0 [PUNCH22],
+				0 [PUNCH23],
+				0 [PUNCH24],
+				0 [PUNCH25],
+				0 [PUNCH26],
+				0 [PUNCH27],
+				0 [PUNCH28],
+				0 [PUNCH29],
+				0 [PUNCH30],
+				0 [PUNCH31]
+			
+				UNION ALL
+			
+				SELECT A.* FROM 
+				(
+					SELECT * FROM
+					(
+						select ORD_DATE
+							,C.EQUIP_CD
+							,SUM(OUTPUT_QTY) / ISNULL(C.EQUIP_CAVITY,0)  OUTPUT_QTY 
+						from  TB_EQUIP_CODE_ADM C 
+							LEFT OUTER JOIN
+							TB_ITEM_INFO_ADM B
+							ON C.EQUIP_CD = B.MOLD_CD
+							LEFT OUTER JOIN TB_WORK_ORDER_PRCSS A
+							ON A.ITEM_SEQ = B.ITEM_SEQ
+							where  C.MAIN_GUBUN = '002'
+						group by ORD_DATE,C.EQUIP_CD,C.EQUIP_CAVITY 
+					) AS RESULT
+					PIVOT ( SUM(OUTPUT_QTY) FOR ORD_DATE IN (${dayList}) 
+					) AS pivot_result
+				) A
+			) YY
+			ON XX.EQUIP_CD = YY.ITEM_SEQ
+	
+		]]>
+	</select>
+	
+	<!-- 설비재가동 이력 조회 -->
+	<select id="equipRestartInfoList" resultMap="EquipCodeAdmVo">
+		SELECT 
+			W.WORK_ORD_NO,
+			N.NO_SEQ,
+			N.NO_START_DATE,
+			N.NO_START_TIME,
+			N.NO_END_DATE,
+			N.NO_END_TIME,
+			W.EQUIP_CD,
+			E.EQUIP_NO,
+			E.EQUIP_NM,
+			E.EQUIP_GUBUN,
+			E.EQUIP_TYPE,
+			N.NO_GUBUN,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM C WHERE C.BASE_CD = N.NO_GUBUN AND C.BASE_GROUP_CD = '115') NO_GUBUN_NM,
+			N.NO_REASON,
+			N.NO_TIME,
+			W.MAIN_WORK_CHARGR WORK_CHARGR,
+			U.USER_NM,
+			(SELECT	TOP(1) ATTACH_CD FROM TB_ATTACH_DATA A WHERE A.ATTACH_GUBUN = 'EI' AND A.ATTACH_CD = W.WORK_ORD_NO AND A.ETC1 = N.NO_SEQ) ATTACH_CHECK
+		FROM TB_WORK_ORDER W
+		INNER JOIN TB_EQUIP_CODE_ADM E
+		ON W.EQUIP_CD = E.EQUIP_CD
+		INNER JOIN TB_WORK_ORDER_NON_OPERATION N
+		ON W.WORK_ORD_NO = N.WORK_ORD_NO
+		INNER JOIN TB_USER U
+		ON W.MAIN_WORK_CHARGR = U.USER_NUMBER
+		WHERE 1=1
+		AND N.NO_GUBUN != '009'
+		<if test="noGubun != null and !noGubun.equals('')">
+		AND N.NO_GUBUN = #{noGubun}
+		</if>
+		GROUP BY 
+			W.WORK_ORD_NO,
+			N.NO_SEQ,
+			N.NO_START_DATE,
+			N.NO_START_TIME,
+			N.NO_END_DATE,
+			N.NO_END_TIME,
+			W.EQUIP_CD,
+			E.EQUIP_NO,
+			E.EQUIP_NM,
+			E.EQUIP_GUBUN,
+			E.EQUIP_TYPE,
+			N.NO_GUBUN,
+			N.NO_REASON,
+			N.NO_TIME,
+			W.MAIN_WORK_CHARGR,
+			U.USER_NM
+		ORDER BY W.WORK_ORD_NO
+	</select>
+	
+	<!-- 일상점검 조회 -->
+	<select id="equipDailyCheckList" resultMap="EquipCodeAdmVo">
+		SELECT	
+			EQUIP_CD,
+			CHECK_SEQ,
+			MAIN_GUBUN,
+			CHECK_LIST,
+			CHECK_METHOD,
+			CHECK_SPEC,
+			INSP_INPUT_METHOD,
+			REG_ID,
+			REG_DATE,
+			UPD_ID,
+			UPD_DATE
+		FROM	TB_EQUIP_DAILY_CHECK 
+		WHERE 	1=1
+		AND EQUIP_CD = #{equipCd}
+	</select> 
+	
+	<!-- 설비재가동 이력 read -->
+	<select id="equipRestartInfoRead" resultMap="EquipCodeAdmVo">
+		SELECT 
+			W.WORK_ORD_NO,
+			N.NO_SEQ,
+			N.NO_START_DATE,
+			N.NO_START_TIME,
+			N.NO_END_DATE,
+			N.NO_END_TIME,
+			W.EQUIP_CD,
+			E.EQUIP_NO,
+			E.EQUIP_NM,
+			E.EQUIP_GUBUN,
+			E.EQUIP_TYPE,
+			N.NO_GUBUN,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM C WHERE C.BASE_CD = N.NO_GUBUN AND C.BASE_GROUP_CD = '115') NO_GUBUN_NM,
+			N.NO_REASON,
+			N.NO_TIME,
+			P.WORK_CHARGR,
+			U.USER_NM
+		FROM TB_WORK_ORDER W
+		INNER JOIN TB_EQUIP_CODE_ADM E
+		ON W.EQUIP_CD = E.EQUIP_CD
+		INNER JOIN TB_WORK_ORDER_NON_OPERATION N
+		ON W.WORK_ORD_NO = N.WORK_ORD_NO
+		INNER JOIN 
+		(
+			SELECT 
+				WORK_ORD_NO,
+				MIN(WORK_CHARGR) WORK_CHARGR
+			FROM TB_WORK_ORDER_PRCSS 
+			GROUP BY WORK_ORD_NO
+		)P
+		ON W.WORK_ORD_NO = P.WORK_ORD_NO
+		INNER JOIN TB_USER U
+		ON P.WORK_CHARGR = U.USER_NUMBER
+		WHERE 1=1
+		AND W.WORK_ORD_NO = #{workOrdNo}
+		AND N.NO_SEQ = #{noSeq}
+		GROUP BY 
+			W.WORK_ORD_NO,
+			N.NO_SEQ,
+			N.NO_START_DATE,
+			N.NO_START_TIME,
+			N.NO_END_DATE,
+			N.NO_END_TIME,
+			W.EQUIP_CD,
+			E.EQUIP_NO,
+			E.EQUIP_NM,
+			E.EQUIP_GUBUN,
+			E.EQUIP_TYPE,
+			N.NO_GUBUN,
+			N.NO_REASON,
+			N.NO_TIME,
+			P.WORK_CHARGR,
+			U.USER_NM
+		ORDER BY W.WORK_ORD_NO
+	</select>
+	
+	<!-- 설비관리번호 중복체크 -->
+	<select id="equipNoCheck" resultType="integer">
+		SELECT 
+			COUNT(*)
+		FROM TB_EQUIP_CODE_ADM 
+		WHERE EQUIP_NO = #{equipNo}
+		AND MAIN_GUBUN = #{mainGubun} 
+	</select>
+	
+	
+	<!-- 설비제원 리스트 조회 -->
+	<select id="equipDataList" resultMap="EquipCodeAdmVo">
+		SELECT
+			EQUIP_CD,
+			EQUIP_SEQ,
+			EQUIP_PART,
+			EQUIP_UNIT,
+			EQUIP_DC
+			FROM TB_EQUIP_DATA
+			WHERE EQUIP_CD = #{equipCd}
+	</select>
+	
+	<!-- 설비제원 생성 -->
+	<insert id="equipDataDtlCreate" parameterType="mes.domain.bm.EquipCodeAdmVo">
+	INSERT INTO TB_EQUIP_DATA		(
+			EQUIP_CD,
+			EQUIP_SEQ,
+			EQUIP_PART,
+			EQUIP_UNIT,
+			EQUIP_DC,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{equipCd},
+			#{equipSeq},
+			#{equipPart},
+			#{equipUnit},
+			#{equipDc},
+			#{regId},
+			getDate()
+		)
+	</insert>
+	
+	<!-- 설비제원 삭제 -->
+	<update id="equipDataDtlDelete">
+		DELETE FROM TB_EQUIP_DATA
+		WHERE EQUIP_CD = #{equipCd}
+	</update>
+	
+	
+	<!-- 철형품목정보관리 ********************************************************* -->
+	<!-- 철형품목정보관리 리스트 -->
+	<select id="ironItemList" resultMap="EquipCodeAdmVo">
+		SELECT
+			IRON.IDX 
+			, IRON.EQUIP_CD
+			, IRON.ITEM_SEQ
+			, IIA.ITEM_CD
+			, IIA.ITEM_NM
+			, IIA.ITEM_MODEL
+			, IRON.ETC1
+			, IRON.ETC2
+			, IRON.ETC3
+		FROM TB_IRON_ITEM_ADM IRON
+		LEFT OUTER JOIN TB_ITEM_INFO_ADM IIA
+		ON IRON.ITEM_SEQ=IIA.ITEM_SEQ
+		WHERE 1=1
+		AND IRON.EQUIP_CD = #{equipCd}	
+	</select>
+	
+	<!-- 철형품목정보관리 등록 -->
+	<insert id="ironItemCreate">
+		INSERT INTO TB_IRON_ITEM_ADM		(
+			EQUIP_CD,
+			ITEM_SEQ,
+			ETC1,
+			ETC2,
+			ETC3,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{equipCd},
+			#{itemSeq},
+			#{etc1},
+			#{etc2},
+			#{etc3},
+			#{regId},
+			GETDATE()
+		)
+	</insert>
+	
+	<!-- 철형차종정보관리 삭제 -->
+	<delete id="ironItemDelete">
+		DELETE FROM TB_IRON_ITEM_ADM
+		WHERE EQUIP_CD = #{equipCd}
+		<if test="idx != null and idx != ''">
+		AND IDX = #{idx}		
+		</if>		
+	</delete>
+	
+	<delete id="ironItemDeleteAll">
+		DELETE FROM TB_IRON_ITEM_ADM
+		WHERE EQUIP_CD = #{equipCd}
+	</delete>
+	
+</mapper>
+

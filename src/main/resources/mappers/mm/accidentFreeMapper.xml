@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.mm.accidentFreeMapper">
+
+	<resultMap id="AccidentFreeVo" type="mes.domain.mm.AccidentFreeVo">
+		<result property="startDate"			column="START_DATE"				/>
+		<result property="endDate"				column="END_DATE"				/>
+		<result property="number"				column="NUMBER"					/>
+		<result property="targetDate"			column="TARGET_DATE"			/>
+		<result property="accidentStartDate"	column="ACCIDENT_START_DATE"	/>
+		<result property="accidentEndDate"		column="ACCIDENT_END_DATE"		/>
+		<result property="mainGubun"			column="MAIN_GUBUN"				/>		
+	</resultMap>
+	
+	<!-- 조회 -->
+	<select id="read" resultMap="AccidentFreeVo">
+		<![CDATA[
+			SELECT
+				*
+			FROM TB_ACCIDENT_FREE
+			WHERE MAIN_GUBUN = #{mainGubun}
+		]]>
+	</select>
+	
+	<!-- 수정 -->
+	<update id="edit" parameterType="mes.domain.mm.AccidentFreeVo">
+		<![CDATA[
+			UPDATE TB_ACCIDENT_FREE
+			SET
+				NUMBER = #{number},
+				TARGET_DATE = #{targetDate},
+				ACCIDENT_START_DATE = #{accidentStartDate},
+				ACCIDENT_END_DATE = #{accidentEndDate}
+			WHERE 1=1
+			AND MAIN_GUBUN = #{mainGubun}
+		]]>
+	</update>
+</mapper>

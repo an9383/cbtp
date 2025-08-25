@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.io.partReqMapper">
+
+	<resultMap id="PartReqVo" type="mes.domain.io.PartReqVo">
+		<result property="partReqNo"    	column="PART_REQ_NO"		/>	<!-- 부품요청번호 -->
+		<result property="partReqSeq"    	column="PART_REQ_SEQ"		/>	<!-- 시퀀스 -->
+		<result property="partReqChargr"    column="PART_REQ_CHARGR"	/>	<!-- 요청자 -->
+		<result property="partReqChargrNm"   column="PART_REQ_CHARGR_NM"/>	<!-- 요청자 -->
+		<result property="partReqDept"    	column="PART_REQ_DEPT"		/>	<!-- 요청부서 -->
+		<result property="partReqDeptNm"	column="PART_REQ_DEPT_NM"	/>
+		<result property="workOrdNo"    	column="WORK_ORD_NO"		/>	<!-- 작업지시번호 -->
+		<result property="prcssCd"    		column="PRCSS_CD"			/>	<!-- 소공정 -->
+		<result property="prcssNm"    		column="PRCSS_NM"			/>	<!-- 소공정 명-->
+		<result property="partCd"    		column="PART_CD"			/>	<!-- 부품코드 -->
+		<result property="partRev"    		column="PART_REV"			/>	<!-- 리비전 -->
+		<result property="partNm"    		column="PART_NM"			/>	<!-- 부품명 -->
+		<result property="partGubun"    	column="PART_GUBUN"			/>	<!-- 부품구분 -->
+		<result property="partGubunNm"    	column="PART_GUBUN_NM"		/>	<!-- 부품구분명 -->
+		<result property="reqQty"			column="REQ_QTY"			/>	<!-- 요청수량 -->
+		<result property="reqOutQty"		column="REQ_OUT_QTY"		/>	<!-- 출고수량 -->
+		<result property="partReqDate"    	column="PART_REQ_DATE"		/>	<!-- 출고예정일 -->
+		<result property="outReqDate"    	column="OUT_REQ_DATE"		/>	<!-- 출고예정일 -->
+		<result property="emerYn"    		column="EMER_YN"			/>	<!-- 긴급여부 -->
+		<result property="emerYnNm"    		column="EMER_YN_NM"			/>	<!-- 긴급여부 -->
+		<result property="reqStatus"   		column="REQ_STATUS"			/>	<!-- 요청상태 -->
+		<result property="partReqGubun"   	column="PART_REQ_GUBUN"		/>	<!-- 구분 -->
+		<result property="reqReason"   		column="REQ_REASON"			/>	<!-- 사유 -->
+		<result property="regId"    		column="REG_ID"				/>	<!-- 등록자 -->
+		<result property="regDate"    		column="REG_DATE"			/>	<!-- 등록일 -->		
+		<result property="updId"    		column="UPD_ID"				/>	<!-- 수정자 -->
+		<result property="updDate"    		column="UPD_DATE"			/>	<!-- 수정일 -->
+		
+		<!-- 추가항목 -->
+		<result property="startDate"    	column="START_DATE"			/>	<!-- 시작날짜 -->
+		<result property="endDate"    		column="END_DATE"			/>	<!-- 종료날짜 -->
+		<result property="partSpec"    		column="PART_SPEC"			/>	<!-- SPEC-->
+		<result property="partUnitNm"  		column="PART_UNIT_NM"		/>	<!-- 단위 -->
+		<result property="reqGubun"  		column="REQ_GUBUN"			/>	<!-- 요청구분자 -->
+		<result property="approvalCd"  		column="APPROVAL_CD"		/>	<!-- 승인여부 -->
+		<result property="partReqDesc" 		column="PART_REQ_DESC"		/>	<!-- 비고 -->
+		<result property="partReqKey" 		column="PART_REQ_KEY"		/>	<!-- 부품요청번호 + 시퀀스 -->
+		
+		<result property="poNo" 			column="PO_NO"				/>	
+		<result property="poSeq" 			column="PO_SEQ"				/>	
+		<result property="inSeq" 			column="IN_SEQ"				/>	
+		<result property="barcodeNo" 		column="BARCODE_NO"			/>	
+		<result property="remainQty" 		column="REMAIN_QTY"			/>	
+		<result property="partUnit" 		column="PART_UNIT"			/>
+		<result property="preOutQty" 		column="PRE_OUT_QTY"		/>	
+		<result property="unPreOutQty" 		column="UN_PRE_OUT_QTY"		/>	
+		
+	</resultMap>
+	
+	<!-- 부품요청 ADM 목록 조회  -->
+	<select id="partReqAdmList" resultMap="PartReqVo">
+		<![CDATA[
+			SELECT
+				A.PART_REQ_NO
+				, A.PART_REQ_DATE
+				, A.PART_REQ_CHARGR
+				, (SELECT USER_NM FROM TB_USER X WHERE  X.USER_NUMBER = A.PART_REQ_CHARGR) PART_REQ_CHARGR_NM
+				, A.PART_REQ_DEPT
+				, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM Z WHERE Z.BASE_GROUP_CD='003' AND Z.BASE_CD= A.PART_REQ_DEPT) PART_REQ_DEPT_NM
+				, A.APPROVAL_CD
+				, A.PART_REQ_DESC
+				, A.PART_REQ_GUBUN
+				, A.PART_REQ_DESC
+				, A.REG_ID
+				, A.REG_DATE
+				, A.UPD_ID
+				, A.UPD_DATE
+			FROM TB_PART_REQ_ADM A
+			WHERE 1=1
+		]]>
+		<if test="startDate != null and endDate != null and !startDate.equals('') and !endDate.equals('')">
+			<![CDATA[
+				AND A.PART_REQ_DATE BETWEEN #{startDate} AND #{endDate}
+			]]>
+		</if>
+		<!-- 001-> 작지, 002-> 일반 -->
+		<if test="partReqGubun != null and !partReqGubun.equals('')">
+			<![CDATA[
+				AND A.PART_REQ_GUBUN = #{partReqGubun}
+			]]>
+		</if>
+		<if test="approvalCd != null and !approvalCd.equals('')">
+			AND A.APPROVAL_CD = #{approvalCd}
+		</if>
+	</select>
+	
+	<!-- 부품요청ADM 등록 -->
+	<insert id="partReqAdmCreate" parameterType="mes.domain.io.PartReqAdmVo">
+		<![CDATA[
+			INSERT INTO TB_PART_REQ_ADM(
+				PART_REQ_NO
+				, PART_REQ_DATE
+				, PART_REQ_CHARGR
+				, PART_REQ_DEPT
+				, PART_REQ_DESC
+				, PART_REQ_GUBUN
+				, APPROVAL_CD
+				, REG_ID
+				, REG_DATE
+			) 
+			VALUES(
+				#{partReqNo}
+				, #{partReqDate}
+				, #{partReqChargr}
+				, #{partReqDept}
+				, #{partReqDesc}
+				, #{partReqGubun}
+				, #{approvalCd}
+				, #{regId}
+				, getDate()
+			)
+		]]>
+	</insert>
+	
+	<!-- 부품요청ADM 수정 -->
+	<update id="partReqAdmUpdate" parameterType="mes.domain.io.PartReqAdmVo">
+			UPDATE	TB_PART_REQ_ADM							 
+			SET PART_REQ_NO = #{partReqNo}
+				<if test="partReqDate != null">
+					, PART_REQ_DATE = #{partReqDate}
+				</if>
+				<if test="partReqChargr != null">
+					, PART_REQ_CHARGR = #{partReqChargr}
+				</if>
+				<if test="partReqDept != null">
+					, PART_REQ_DEPT = #{partReqDept}
+				</if>
+				<if test="partReqDesc != null">
+					, PART_REQ_DESC = #{partReqDesc}
+				</if>
+				<if test="partReqGubun != null">
+					, PART_REQ_GUBUN = #{partReqGubun}
+				</if>
+				<if test="approvalCd != null">
+					, APPROVAL_CD =#{approvalCd}
+				</if>
+				<if test="updId != null">
+					, UPD_ID = #{updId}
+				</if>
+					, UPD_DATE = getDate()
+			WHERE 1=1
+			AND PART_REQ_NO = #{partReqNo}
+	</update>
+	
+	<!-- 부품요청ADM 삭제 -->
+	<update id="partReqAdmDelete">
+		DELETE FROM	TB_PART_REQ_ADM WHERE PART_REQ_NO=#{partReqNo}
+	</update>
+	
+	
+	<!-- 부품요청DTL -->
+	<!-- 부품요청 목록조회 -->
+	<select id="partReqList" resultMap="PartReqVo">
+		<![CDATA[
+			SELECT
+				A.PART_REQ_NO
+				, A.PART_REQ_SEQ
+				, A.PART_REQ_CHARGR
+				, (SELECT USER_NM FROM TB_USER X WHERE  X.USER_NUMBER = A.PART_REQ_CHARGR) PART_REQ_CHARGR_NM
+				, (SELECT DEPARTMENT_CD FROM TB_USER X WHERE  X.USER_NUMBER = A.PART_REQ_CHARGR) PART_REQ_DEPT
+				, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE B.BASE_GROUP_CD='003' AND B.BASE_CD=(SELECT DEPARTMENT_CD FROM TB_USER X WHERE  X.USER_NUMBER = A.PART_REQ_CHARGR)) PART_REQ_DEPT_NM
+				, A.WORK_ORD_NO
+				, A.PRCSS_CD
+				, (SELECT PRCSS_NM FROM TB_PRCSS_CODE_ADM X WHERE X.PRCSS_CD=A.PRCSS_CD) PRCSS_NM
+				, A.PART_CD
+				, A.PART_REV
+				, B.PART_NM
+				, B.PART_GUBUN
+				, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=B.PART_GUBUN AND X.BASE_GROUP_CD='036')PART_GUBUN_NM
+				, B.PART_SPEC
+				, B.PART_UNIT
+				, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=B.PART_UNIT AND X.BASE_GROUP_CD='036')PART_UNIT_NM
+				, A.REQ_QTY
+				, A.PART_REQ_DATE
+				, A.OUT_REQ_DATE
+				, A.EMER_YN
+				, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=A.EMER_YN AND X.BASE_GROUP_CD='060')EMER_YN_NM
+				, A.REQ_STATUS
+				, A.PART_REQ_GUBUN
+				, A.REQ_REASON
+				, A.REG_ID
+				, A.REG_DATE
+			FROM TB_PART_REQ_DTL A
+			
+			LEFT OUTER JOIN TB_ITEM_PART_ADM B
+			ON A.PART_CD = B.PART_CD
+			AND A.PART_REV = B.PART_REV
+			
+			LEFT OUTER JOIN TB_PART_REQ_ADM C
+			ON A.PART_REQ_NO = C.PART_REQ_NO
+
+			WHERE 1=1
+		]]>
+		<!-- 날짜검색 -->
+		<if test="startDate != null and endDate != null and !startDate.equals('') and !endDate.equals('')">
+			<!-- 				AND LEFT(WORK_ORD_NO,8) BETWEEN #{startDate} AND #{endDate} -->
+			<![CDATA[
+				AND A.PART_REQ_DATE BETWEEN #{startDate} AND #{endDate}
+			]]>
+		</if>
+		<!-- 부품일때 -->
+		<if test="reqGubun == 001">
+			<![CDATA[
+				AND A.WORK_ORD_NO IS NOT NULL
+			]]>
+		</if>
+		<!-- 자재일때 -->
+		<if test="reqGubun == 002">
+			<![CDATA[
+				AND A.WORK_ORD_NO IS NULL
+			]]>
+		</if>
+		<!-- 자재요청 -->
+		<if test="partReqNo != null and !partReqNo.equals('')">
+			<![CDATA[
+				AND A.PART_REQ_NO = #{partReqNo}
+			]]>
+		</if>
+		<if test="approvalCd != null and !approvalCd.equals('')">
+			<![CDATA[
+				AND C.APPROVAL_CD = #{approvalCd}
+			]]>
+		</if>
+		
+	</select>
+	
+	<!-- 요청출고 DTL 목록 조회  -->
+	<select id="partReqDtlOutList" resultMap="PartReqVo">
+		<![CDATA[
+			SELECT
+				A.PART_REQ_NO
+				, A.PART_REQ_SEQ
+				, (A.PART_REQ_NO +'-'+A.PART_REQ_SEQ)PART_REQ_KEY
+				, A.PART_REQ_CHARGR
+				, (SELECT USER_NM FROM TB_USER X WHERE  X.USER_NUMBER = A.PART_REQ_CHARGR) PART_REQ_CHARGR_NM
+				, (SELECT DEPARTMENT_CD FROM TB_USER X WHERE  X.USER_NUMBER = A.PART_REQ_CHARGR) PART_REQ_DEPT
+				, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE B.BASE_GROUP_CD='003' AND B.BASE_CD=(SELECT DEPARTMENT_CD FROM TB_USER X WHERE  X.USER_NUMBER = A.PART_REQ_CHARGR)) PART_REQ_DEPT_NM
+				, A.WORK_ORD_NO
+				, A.PRCSS_CD
+				, (SELECT PRCSS_NM FROM TB_PRCSS_CODE_ADM X WHERE X.PRCSS_CD=A.PRCSS_CD) PRCSS_NM
+				, A.PART_CD
+				, A.PART_REV
+				, B.PART_NM
+				, B.PART_GUBUN
+				, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=B.PART_GUBUN AND X.BASE_GROUP_CD='036')PART_GUBUN_NM
+				, B.PART_SPEC
+				, B.PART_UNIT
+				, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=B.PART_UNIT AND X.BASE_GROUP_CD='036')PART_UNIT_NM
+				, ISNULL(A.REQ_QTY,0) REQ_QTY
+				, A.PART_REQ_DATE
+				, A.OUT_REQ_DATE
+				, A.EMER_YN
+				, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=A.EMER_YN AND X.BASE_GROUP_CD='060')EMER_YN_NM
+				, A.REQ_STATUS
+				, A.PART_REQ_GUBUN
+				, A.REQ_REASON
+				, A.REG_ID
+				, A.REG_DATE
+				, ISNULL(A.REQ_OUT_QTY,0) REQ_OUT_QTY
+				, ISNULL(A.REQ_QTY,0) - ISNULL(A.REQ_OUT_QTY,0) UN_PRE_OUT_QTY
+			FROM TB_PART_REQ_DTL A
+			
+			LEFT OUTER JOIN TB_ITEM_PART_ADM B
+			ON A.PART_CD = B.PART_CD
+			AND A.PART_REV = B.PART_REV
+			
+			LEFT OUTER JOIN TB_PART_REQ_ADM C
+			ON A.PART_REQ_NO = C.PART_REQ_NO
+			WHERE 1=1
+			
+			]]>
+			<if test="approvalCd != null and !approvalCd.equals('') ">
+			<![CDATA[
+				AND (C.APPROVAL_CD = #{approvalCd} OR  A.WORK_ORD_NO IS NOT NULL)
+			]]>
+			</if>
+			<!-- 날짜검색 -->
+			<if test="startDate != null and endDate != null and !startDate.equals('') and !endDate.equals('')">
+			<![CDATA[
+				AND A.OUT_REQ_DATE BETWEEN #{startDate} AND #{endDate}
+			]]>
+			</if>
+			<if test="workOrdNo != null and !workOrdNo.equals('')">
+			<![CDATA[
+				AND A.WORK_ORD_NO = #{workOrdNo}
+				AND A.PRCSS_CD = #{prcssCd}
+			]]>
+			</if>
+			<if test="reqStatus != null and !reqStatus.equals('')">
+			<![CDATA[
+				AND A.REQ_STATUS = #{reqStatus}
+			]]>
+			</if>
+			GROUP BY A.PART_REQ_NO
+				, A.PART_REQ_SEQ
+				, A.PART_REQ_CHARGR
+				, A.WORK_ORD_NO
+				, A.PRCSS_CD
+				, A.PART_CD
+				, A.PART_REV
+				, B.PART_NM
+				, B.PART_GUBUN
+				, B.PART_SPEC
+				, B.PART_UNIT
+				, A.REQ_QTY
+				, A.REQ_OUT_QTY
+				, A.PART_REQ_DATE
+				, A.OUT_REQ_DATE
+				, A.EMER_YN
+				, A.REQ_STATUS
+				, A.PART_REQ_GUBUN
+				, A.REQ_REASON
+				, A.REG_ID
+				, A.REG_DATE
+	</select>
+	
+	<!-- 부품요청 상세조회 -->
+	<select id="partReqRead" resultMap="PartReqVo">
+		<![CDATA[
+			SELECT
+				PART_REQ_NO
+				, A.PART_REQ_SEQ
+				, A.PART_REQ_CHARGR
+				, (SELECT USER_NM FROM TB_USER X WHERE  X.USER_NUMBER = A.PART_REQ_CHARGR) PART_REQ_CHARGR_NM
+				, (SELECT DEPARTMENT_CD FROM TB_USER X WHERE  X.USER_NUMBER = A.PART_REQ_CHARGR) PART_REQ_DEPT
+				, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE B.BASE_GROUP_CD='003' AND B.BASE_CD=(SELECT DEPARTMENT_CD FROM TB_USER X WHERE  X.USER_NUMBER = A.PART_REQ_CHARGR)) PART_REQ_DEPT_NM
+				, A.WORK_ORD_NO
+				, A.PRCSS_CD
+				, (SELECT PRCSS_NM FROM TB_PRCSS_CODE_ADM X WHERE X.PRCSS_CD=A.PRCSS_CD) PRCSS_NM
+				, A.PART_CD
+				, A.PART_REV
+				, B.PART_NM
+				, B.PART_GUBUN
+				, B.PART_SPEC
+				, B.PART_UNIT
+				, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=B.PART_UNIT AND X.BASE_GROUP_CD='036')PART_UNIT_NM
+				, A.REQ_QTY
+				, A.PART_REQ_DATE
+				, A.OUT_REQ_DATE
+				, A.EMER_YN
+				, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=A.EMER_YN AND X.BASE_GROUP_CD='060')EMER_YN_NM
+				, A.REQ_STATUS
+				, A.PART_REQ_GUBUN
+				, A.REQ_REASON
+				, A.REG_ID
+				, A.REG_DATE
+			FROM TB_PART_REQ_DTL A
+			
+			LEFT OUTER JOIN TB_ITEM_PART_ADM B
+			ON A.PART_CD = B.PART_CD
+			AND A.PART_REV = B.PART_REV
+
+			WHERE 1=1
+			AND PART_REQ_NO = #{partReqNo}
+		]]>
+		<!-- 부품일때 -->
+		<if test="reqGubun == 001">
+			<![CDATA[
+				AND A.WORK_ORD_NO IS NOT NULL
+			]]>
+		</if>
+		<!-- 자재일때 -->
+		<if test="reqGubun == 002">
+			<![CDATA[
+				AND A.WORK_ORD_NO IS NULL
+			]]>
+		</if>
+	</select>
+	
+	<!-- 부품요청 등록 -->
+	<insert id="partReqCreate">
+		<![CDATA[
+			INSERT INTO TB_PART_REQ_DTL(
+				PART_REQ_NO
+				, PART_REQ_SEQ
+				, PART_REQ_CHARGR
+				, PART_REQ_DEPT
+				, WORK_ORD_NO
+				, PRCSS_CD
+				, PART_CD
+				, PART_REV
+				, REQ_QTY
+				, PART_REQ_DATE
+				, OUT_REQ_DATE
+				, EMER_YN
+				, REQ_STATUS
+				, PART_REQ_GUBUN
+				, REQ_REASON
+				, REG_ID
+				, REG_DATE
+			) 
+			VALUES(
+				#{partReqNo}
+				, #{partReqSeq}
+				, #{partReqChargr}
+				, #{partReqDept}
+				, #{workOrdNo}
+				, #{prcssCd}
+				, #{partCd}
+				, #{partRev}
+				, #{reqQty}
+				, #{partReqDate}
+				, #{outReqDate}
+				, #{emerYn}
+				, #{reqStatus}
+				, #{partReqGubun}
+				, #{reqReason}
+				, #{regId}
+				, getDate()
+			)
+		]]>
+	</insert>
+	
+	<!-- 부품요청 수정 -->
+	<update id="partReqUpdate">
+			UPDATE	TB_PART_REQ_DTL							 
+			SET
+				PART_REQ_NO=#{partReqNo}
+				<if test="partReqSeq != null">
+					, PART_REQ_SEQ =#{partReqSeq}
+				</if>
+				<if test="partReqChargr != null">
+					, PART_REQ_CHARGR =#{partReqChargr}
+				</if>
+				<if test="partReqDept != null">
+					, PART_REQ_DEPT =#{partReqDept}
+				</if>
+				<if test="workOrdNo != null">
+					, WORK_ORD_NO = #{workOrdNo}
+				</if>
+				<if test="prcssCd != null">
+					, PRCSS_CD = #{prcssCd}
+				</if>
+				<if test="partCd != null">
+					, PART_CD = #{partCd}
+				</if>
+				<if test="partRev != null">
+					, PART_REV = #{partRev}
+				</if>
+				<if test="reqQty != null">
+					, REQ_QTY = #{reqQty}
+				</if>
+				<if test="reqOutQty != null">
+					, REQ_OUT_QTY = ISNULL(REQ_OUT_QTY,0) + #{reqOutQty}
+				</if>
+				<if test="partReqDate != null">
+					, PART_REQ_DATE = #{partReqDate}
+				</if>
+				<if test="outReqDate != null">
+					, OUT_REQ_DATE = #{outReqDate}
+				</if>
+				<if test="emerYn != null">
+					, EMER_YN = #{emerYn}
+				</if>
+				<if test="reqStatus != null">
+					, REQ_STATUS = #{reqStatus}
+				</if>
+				<if test="partReqGubun != null">
+					, PART_REQ_GUBUN = #{partReqGubun}
+				</if>
+				<if test="reqReason != null">
+					, REQ_REASON =#{reqReason}
+				</if>
+				<if test="updId != null">
+					, UPD_ID = #{updId}
+				</if>
+				, UPD_DATE = getDate()
+			WHERE 1=1
+			AND PART_REQ_NO = #{partReqNo}
+			AND PART_REQ_SEQ = #{partReqSeq}
+	</update>
+	
+	<!-- 부품요청 DTL 삭제 -->
+	<update id="partReqDelete">
+		DELETE FROM	TB_PART_REQ_DTL WHERE PART_REQ_NO=#{partReqNo}
+		<if test="partReqSeq != null and !partReqSeq.equals('')">
+			AND PART_REQ_SEQ =#{partReqSeq}
+		</if>
+	</update>
+
+	<!-- 부품요청번호  생성 -->
+	<select id="partReqNo" resultType="int">
+		SELECT ISNULL(RIGHT('000' + CAST(MAX(RIGHT(PART_REQ_NO,3))+1 AS NVARCHAR),3), '001') FROM TB_PART_REQ_DTL WHERE LEFT(PART_REQ_NO,8) = #{date}
+
+<!-- 	SELECT ISNULL(RIGHT('000' + CAST(MAX(RIGHT(PART_REQ_NO,3))+1 AS NVARCHAR),3), '001') FROM TB_PART_REQ_DTL WHERE WORK_ORD_NO != #{workOrdNo} -->
+	</select>
+	
+	<!-- 시퀀스 생성 -->
+	<select id="partReqSeq" resultType="int">
+		SELECT ISNULL(MAX(PART_REQ_SEQ)+1, '1') FROM TB_PART_REQ_DTL WHERE PART_REQ_NO = #{partReqNo}
+	</select>
+
+	<!-- 출고요청  -->
+	<!-- 바코드 목록조회  -->
+	<select id="partReqBarcodeList" resultMap="PartReqVo">
+		<![CDATA[
+			SELECT
+				A.PART_REQ_NO
+				, A.BARCODE_NO
+				, A.PART_CD
+				, A.PART_REV
+				
+				, OUT_QTY
+				, B.PART_UNIT
+				, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=B.PART_UNIT AND X.BASE_GROUP_CD='036') PART_UNIT_NM
+			FROM TB_OUT_WHS_ADM A
+			
+			LEFT OUTER JOIN TB_ITEM_PART_ADM B
+			ON A.PART_CD = B.PART_CD
+			AND A.PART_REV = B.PART_REV
+			
+			WHERE 1=1
+			AND A.PART_REQ_NO =#{partReqNo}
+		]]>
+	</select>
+	
+	<!-- 바코드 상세조회  -->
+	<select id="partReqBarcodeRead" resultMap="PartReqVo">
+		<![CDATA[
+			SELECT 
+				A.PO_NO
+				, A.PO_SEQ
+				, A.IN_SEQ
+				, A.BARCODE_NO
+				, A.PART_CD
+				, A.PART_REV
+				, A.REMAIN_QTY
+				, B.PART_UNIT
+				, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=B.PART_UNIT AND X.BASE_GROUP_CD='036') PART_UNIT_NM
+			FROM TB_IN_OUT_WHS_ADM A
+				
+			LEFT OUTER JOIN TB_ITEM_PART_ADM B
+			ON A.PART_CD = B.PART_CD
+			AND A.PART_REV = B.PART_REV
+			
+			WHERE 1=1
+			AND BARCODE_NO =#{barcodeNo}
+		]]>
+	</select>
+	
+
+	
+</mapper>

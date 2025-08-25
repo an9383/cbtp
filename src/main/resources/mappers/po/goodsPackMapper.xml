@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.po.goodsPackMapper">
+
+	<resultMap id="WorkOrderVo" type="mes.domain.po.WorkOrderVo">
+		<result property="workOrdNo"			column="WORK_ORD_NO"			/>
+		<result property="prcssCd"				column="PRCSS_CD"				/>
+		<result property="prcssNm"				column="PRCSS_NM"				/>
+		<result property="prcssGubun"			column="PRCSS_GUBUN"			/>
+		<result property="equipCd"				column="EQUIP_CD"				/>
+		<result property="equipNm"				column="EQUIP_NM"				/>
+		<result property="equipGubun"			column="EQUIP_GUBUN"			/>
+		<result property="equipOrderPlanNo1"	column="EQUIP_ORDER_PLAN_NO1"	/>
+		<result property="equipOrderPlanNo2"	column="EQUIP_ORDER_PLAN_NO2"	/>
+		<result property="equipOrderPlanNo3"	column="EQUIP_ORDER_PLAN_NO3"	/>
+		<result property="equipOrderPlanNo4"	column="EQUIP_ORDER_PLAN_NO4"	/>
+		<result property="equipOrderPlanNo5"	column="EQUIP_ORDER_PLAN_NO5"	/>
+		<result property="goodsCd"				column="GOODS_CD"				/>
+		<result property="goodsNm"				column="GOODS_NM"				/>
+		<result property="goodsNo"				column="GOODS_NO"				/>
+		<result property="workOrdPrcss"			column="WORK_ORD_PRCSS"			/>
+		<result property="autoKind"				column="AUTO_KIND"				/>
+		<result property="autoKindNm"			column="AUTO_KIND_NM"			/>
+		<result property="ordLotNo"				column="ORD_LOT_NO"				/>
+		<result property="workOrdPlanNo"		column="ORD_PLAN_NO"			/>
+		<result property="ordDate"				column="ORD_DATE"				/>
+		<result property="workStartTime"		column="WORK_START_TIME"		/>
+		<result property="workEndTime"			column="WORK_END_TIME"			/>
+		<result property="workStatus"			column="WORK_STATUS"			/>
+		<result property="workOrdStatus"		column="WORK_ORD_STATUS"		/>
+		<result property="workChargr"			column="WORK_CHARGR"			/>
+		<result property="targetCnt"			column="TARGET_CNT"				/>
+		<result property="outputCnt"			column="OUTPUT_CNT"				/>
+		<result property="fairCnt"				column="FAIR_CNT"				/>
+		<result property="faultyCnt"			column="FAULTY_CNT"				/>
+		<result property="sitaCnt"				column="SITA_CNT"				/>
+		<result property="etcCnt"				column="ETC_CNT"				/>
+		<result property="goodsDesc"			column="GOODS_DESC"				/>
+		<result property="dealCorpCd"			column="DEAL_CORP_CD"			/>
+		<result property="dealCorpNm"			column="DEAL_CORP_NM"			/>
+		<result property="regId"				column="REG_ID"					/>
+		<result property="regDate"				column="REG_DATE"				/>
+		<result property="updId"				column="UPD_ID"					/>
+		<result property="updDate"				column="UPD_DATE"				/>
+		<result property="packYn"				column="PACK_YN"				/>
+		<result property="packUnit"				column="PACK_UNIT"				/>
+		<result property="packUnitNm"			column="PACK_UNIT_NM"			/>
+		<result property="packCnt"				column="PACK_CNT"				/>
+		<result property="ordGubun"				column="ORD_GUBUN"				/>
+		<result property="ordGubunNm"			column="ORD_GUBUN_NM"			/>						
+	</resultMap>
+	
+	<resultMap id="GoodsProductInfoAdmVo" type="mes.domain.po.GoodsProductInfoAdmVo">
+		<result property="boxNo"					column="BOX_NO"				/>
+		<result property="goodsCd"					column="GOODS_CD"			/>
+		<result property="goodsNm"					column="GOODS_NM"			/>
+		<result property="ordGubun"					column="ORD_GUBUN"		/>		
+		<result property="ordGubunNm"				column="ORD_GUBUN_NM"		/>
+		<result property="packCnt"					column="PACK_CNT"			/>		
+		<result property="packDate"					column="PACK_DATE"			/>
+		<result property="boxSeq"					column="BOX_SEQ"			/>		
+		<result property="workOrdNo"				column="WORK_ORD_NO"		/>
+		<result property="packDtlCnt"				column="PACK_DTL_CNT"		/>	
+		<result property="packYn"					column="PACK_YN"			/>			
+		<result property="regId"					column="REG_ID"				/>
+		<result property="regDate"					column="REG_DATE"			/>
+		<result property="updId"					column="UPD_ID"				/>
+		<result property="updDate"					column="UPD_DATE"			/>			
+	</resultMap>
+				
+	<!-- 작업지시서 목록조회 -->
+	<select id="workOrderPackDataList" resultMap="WorkOrderVo">
+	    SELECT
+			A.WORK_ORD_NO
+		    ,A.ORD_LOT_NO
+		    ,A.EQUIP_CD
+		    ,B.EQUIP_NM
+		    ,A.GOODS_CD		    
+		    ,C.GOODS_NM
+		    ,A.EQUIP_COND_SEQ		  
+		    ,A.WORK_TEAM_CD
+			,(SELECT BASE_CD_NM FROM TB_SYSTEM_COMMON_CODE B WHERE B.BASE_GROUP_CD='016' AND B.BASE_CD = A.WORK_TEAM_CD) WORK_TEAM_NM
+		    ,A.DEAL_CORP_CD
+			,(SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM B WHERE B.DEAL_CORP_CD = A.DEAL_CORP_CD) DEAL_CORP_NM
+		    ,A.WORK_CHARGR
+			,(SELECT USER_NM FROM TB_USER B WHERE B.USER_NUMBER = A.MAIN_WORK_CHARGR) WORK_CHARGR_NM		   
+			,D.QUTY_CD
+			,(SELECT BASE_NM FROM TB_SYSTEM_COMMON_CODE B WHERE B.BASE_GROUP_CD='007' AND B.BASE_CD = D.QUTY_CD) QUTY_NM
+			,C.MODEL
+			,C.GRAVITY
+			,D.SURFACE_TRTMT_CD
+			,(SELECT BASE_NM FROM TB_SYSTEM_COMMON_CODE B WHERE B.BASE_GROUP_CD='021' AND B.BASE_CD = D.SURFACE_TRTMT_CD) SURFACE_TRTMT_NM			
+			,A.TARGET_CNT
+			,A.OUTPUT_CNT
+			,A.WORK_START_TIME
+			,A.WORK_END_TIME
+			,A.FAIR_CNT
+			,A.FAULTY_CNT
+			,C.PACK_UNIT
+			,(SELECT BASE_NM FROM TB_SYSTEM_COMMON_CODE B WHERE B.BASE_GROUP_CD='029' AND B.BASE_CD = C.PACK_UNIT_CD) PACK_UNIT_NM
+			,A.PACK_YN
+	    FROM TB_WORK_ORDER A,
+			TB_EQUIP_CODE_ADM B,
+			TB_GOODS_CODE_ADM C,
+			TB_MATRL_CODE_ADM D
+		WHERE 1=1 
+			AND A.GOODS_CD = (SELECT GOODS_CD FROM TB_WORK_ORDER WHERE WORK_ORD_NO = #{workOrdNo})
+			<!-- AND A.ORD_DATE = #{ordDate}  -->
+			AND A.EQUIP_CD = B.EQUIP_CD			
+			AND A.WORK_STATUS_CD = 'WC'	
+			AND (A.PACK_YN != 'Y' OR A.PACK_YN IS NULL)
+	</select>	
+	
+	<!-- 제품포장 목록조회(해외1,해외2,국내) -->
+	<select id="goodsPackList" resultMap="GoodsProductInfoAdmVo">
+		SELECT 
+			A.BOX_NO
+			,A.GOODS_CD
+			,A.ORD_GUBUN
+			,A.PACK_CNT
+			,A.PACK_DATE
+			,A.REG_ID
+			,A.REG_DATE
+			,A.UPD_ID
+			,A.UPD_DATE
+			,B.BOX_SEQ
+			,B.WORK_ORD_NO
+			,B.PACK_DTL_CNT
+			,'001' PACK_YN
+		FROM TB_GOODS_PRODUCT_INFO_ADM A,
+			TB_GOODS_PRODUCT_INFO_DTL B
+		WHERE A.BOX_NO = B.BOX_NO
+			AND A.PACK_DATE = #{packDate} 
+		<if test="goodsCd != null and goodsCd != ''"> 			
+			AND A.GOODS_CD = #{goodsCd}
+		</if>	
+			AND	A.ORD_GUBUN = #{ordGubun}
+			AND A.PACK_DATE = #{packDate}
+		UNION
+		SELECT 
+			BOX_NO
+			,GOODS_CD
+			,ORD_GUBUN
+			,PACK_DTL_CNT PACK_CNT
+			,'' PACK_DATE
+			,REG_ID
+			,REG_DATE
+			,'' UPD_ID
+			,'' UPD_DATE
+			,BOX_SEQ
+			,WORK_ORD_NO
+			,PACK_DTL_CNT
+			,'002' PACK_YN
+		FROM TB_GOODS_PRODUCT_INFO_TMP
+		WHERE BOX_NO = #{goodsCd} + #{ordGubun}	
+			AND PACK_DATE = #{packDate}
+			
+						    
+	</select>	
+	
+	<!-- 생산실적라벨발행 등록 -->
+	<insert id="createGoodsLabelPublish" parameterType="mes.domain.po.GoodsProductInfoAdmVo">
+		INSERT INTO TB_GOODS_PRODUCT_INFO_ADM(
+			BOX_NO
+			,GOODS_CD
+			,ORD_GUBUN
+			,PACK_CNT
+			,PACK_DATE
+			,GOODS_STATUS
+			,REG_ID
+			,REG_DATE
+		) 
+		VALUES(
+			#{boxNo}
+			,#{goodsCd}
+			,#{ordGubun}
+			,#{packCnt}
+			,#{packDate}
+			,'B'
+			,#{regId}
+			,getDate()
+		)
+	</insert>
+	
+	<!-- 생산실적라벨발행 상세 등록 -->
+	<insert id="createGoodsLabelPublishDtl" parameterType="mes.domain.po.GoodsProductInfoAdmVo">
+		INSERT INTO TB_GOODS_PRODUCT_INFO_DTL(
+			BOX_NO
+			,BOX_SEQ
+			,GOODS_CD
+			,ORD_GUBUN			
+			,WORK_ORD_NO
+			,PACK_DTL_CNT
+			,PACK_DATE
+			,REG_ID
+			,REG_DATE
+		) 
+		VALUES(
+			#{boxNo}
+			,#{boxSeq}
+			,#{goodsCd}
+			,#{ordGubun}			
+			,#{workOrdNo}
+			,#{packDtlCnt}
+			,#{packDate}
+			,#{regId}
+			,getDate()
+		)
+	</insert>	
+	
+	<!-- 생산실적 작지 오더별 양품정보  수정 -->
+	<update id="updateWorkOrdAppearCnt" parameterType="mes.domain.po.WorkOrderVo">
+		UPDATE	TB_WORK_ORDER 
+		SET	
+			
+			UPD_ID = #{updId}
+			,UPD_DATE = getDate()
+		WHERE WORK_ORD_NO = #{workOrdNo}
+	</update>
+		
+	<!-- 생산실적 작지 라벨발행 상태 수정 -->
+	<update id="updateWorkOrdPublish" parameterType="mes.domain.po.WorkOrderVo">
+		UPDATE	TB_WORK_ORDER 
+		SET	
+			PACK_YN = #{packYn}
+			,UPD_ID = #{updId}
+			,UPD_DATE = getDate()
+		WHERE WORK_ORD_NO = #{workOrdNo}
+	</update>
+			
+	<!-- 생산실적라벨발행 수정 -->
+	<update id="updateGoodsLabelPublish" parameterType="mes.domain.po.GoodsProductInfoAdmVo">
+		UPDATE	TB_GOODS_PRODUCT_INFO_ADM 
+		SET	
+			GOODS_CD = #{goodsCd}
+			,ORDER_GUBUN = #{orderGubun}
+			,PACK_CNT = #{packCnt}
+			,PACK_DATE = #{packDate}
+			,UPD_ID = #{updId}
+			,UPD_DATE = #{updDate}
+		WHERE	BOX_NO = #{boxNo}
+		AND	GOODS_CD = #{goodsCd}
+		AND	ORDER_GUBUN = #{orderGubun}
+	</update>
+	
+	<!-- 생산실적라벨발행 상세 수정 -->
+	<update id="updateGoodsLabelPublishDtl" parameterType="mes.domain.po.GoodsProductInfoAdmVo">
+		UPDATE	TB_GOODS_PRODUCT_INFO_DTL 
+		SET	
+			BOX_SEQ = #{boxSeq}
+			,WORK_ORD_NO = #{workOrdNo}
+			,PACK_DTL_CNT = #{packDtlCnt}
+			,UPD_ID = #{updId}
+			,UPD_DATE = #{updDate}
+		WHERE	BOX_NO = #{boxNo}
+			AND	BOX_SEQ = #{boxSeq}
+			AND	WORK_ORD_NO = #{workOrdNo}
+	</update>
+	
+	<!-- 생산실적라벨발행 미포장 목록조회(해외1,해외2,국내) -->
+	<select id="goodsPackTmpInfo" resultMap="GoodsProductInfoAdmVo">
+		SELECT	
+			BOX_NO
+			,MAX(BOX_SEQ) BOX_SEQ
+			,MAX(GOODS_CD) GOODS_CD
+			,MAX(ORD_GUBUN) ORD_GUBUN
+			,MAX(WORK_ORD_NO) WORK_ORD_NO
+			,SUM(PACK_DTL_CNT) PACK_DTL_CNT
+		FROM	TB_GOODS_PRODUCT_INFO_TMP		 
+		WHERE	BOX_NO = #{boxNo}
+		GROUP BY BOX_NO
+	</select>
+	
+	<!-- 생산실적라벨발행 미포장 정보 포장정보로 등록(해외1,해외2,국내) -->
+	<insert id="createGoodsPackTmpToDtl" parameterType="mes.domain.po.GoodsProductInfoAdmVo">
+		INSERT INTO TB_GOODS_PRODUCT_INFO_DTL
+			(BOX_NO
+			,BOX_SEQ
+			,GOODS_CD
+			,ORD_GUBUN
+			,WORK_ORD_NO 
+			,PACK_DTL_CNT
+			,PACK_DATE
+			,REG_ID
+			,REG_DATE)
+		SELECT	
+			#{boxNo}
+			,BOX_SEQ
+			,GOODS_CD
+			,ORD_GUBUN
+			,WORK_ORD_NO 
+			,PACK_DTL_CNT
+			,#{packDate}
+			,REG_ID
+			,getDate()
+		FROM	TB_GOODS_PRODUCT_INFO_TMP		 
+		WHERE	BOX_NO = #{tmpBoxNo}
+	</insert>	
+		
+	<!-- 생산실적라벨발행 미포장 정보 등록 -->
+	<insert id="createGoodsLabelTmp" parameterType="mes.domain.po.GoodsProductInfoAdmVo">
+		INSERT INTO TB_GOODS_PRODUCT_INFO_TMP		(
+			BOX_NO
+			,BOX_SEQ
+			,GOODS_CD
+			,ORD_GUBUN
+			,WORK_ORD_NO
+			,PACK_DTL_CNT
+			,PACK_DATE
+			,REG_ID
+			,REG_DATE
+		) 
+		VALUES(
+			#{boxNo}
+			,#{boxSeq}
+			,#{goodsCd}
+			,#{ordGubun}
+			,#{workOrdNo}
+			,#{packDtlCnt}
+			,#{packDate}
+			,#{regId}
+			,getDate()
+		)
+	</insert>
+		
+	<!-- 생산실적라벨발행 미포장 정보 삭제 -->
+	<delete id="deleteGoodsLabelTmp" parameterType="mes.domain.po.GoodsProductInfoAdmVo">
+		DELETE TB_GOODS_PRODUCT_INFO_TMP WHERE BOX_NO = #{tmpBoxNo}
+	</delete>		
+
+	<!-- 생산실적라벨발행 시퀀스 조회-->
+	<select id="selectGoodsPackSeqCd" resultType="int">
+		SELECT ISNULL(MAX(SUBSTRING(BOX_NO,10,4))+1,1) FROM TB_GOODS_PRODUCT_INFO_ADM WHERE BOX_NO LIKE #{boxNo}+'%'
+	</select>
+	
+	<!-- 생산실적라벨발행 포장 Temp 복원정보 삭제 -->
+	<delete id="deleteGoodsUnlabelTmp" parameterType="mes.domain.po.GoodsProductInfoAdmVo">
+		DELETE TB_GOODS_PRODUCT_INFO_TMP WHERE BOX_NO = #{tmpBoxNo} AND WORK_ORD_NO = #{workOrdNo} AND ORD_GUBUN = #{ordGubun}
+	</delete>
+	
+	<!-- 생산실적라벨발행 포장 복원정보 삭제(포장단위) -->
+	<delete id="deleteGoodsUnlabelPackUnitInfo" parameterType="mes.domain.po.GoodsProductInfoAdmVo">
+		DELETE TB_GOODS_PRODUCT_INFO_ADM 
+		WHERE BOX_NO IN (SELECT BOX_NO FROM TB_GOODS_PRODUCT_INFO_DTL WHERE WORK_ORD_NO = #{workOrdNo} AND PACK_DTL_CNT = #{packCnt} AND ORD_GUBUN = #{ordGubun})
+			AND ORD_GUBUN = #{ordGubun}
+	</delete>
+	
+	<!-- 생산실적라벨발행 포장 상세 복원정보 삭제(포장단위) -->
+	<delete id="deleteGoodsUnlabelPackUnitDtl" parameterType="mes.domain.po.GoodsProductInfoAdmVo">
+		DELETE TB_GOODS_PRODUCT_INFO_DTL 
+		WHERE WORK_ORD_NO = #{workOrdNo} 
+			AND PACK_DTL_CNT = #{packCnt} 
+			AND ORD_GUBUN = #{ordGubun}
+	</delete>		
+	
+	<!-- 생산실적라벨발행 포장상세정보 미포장정보로 이동 등록(해외1,해외2,국내) -->
+	<insert id="createGoodsPackDtlToTmp" parameterType="mes.domain.po.GoodsProductInfoAdmVo">
+		INSERT INTO TB_GOODS_PRODUCT_INFO_TMP
+			(BOX_NO
+			,BOX_SEQ
+			,GOODS_CD
+			,ORD_GUBUN
+			,WORK_ORD_NO
+			,PACK_DTL_CNT
+			,PACK_DATE
+			,REG_ID
+			,REG_DATE)
+		SELECT DISTINCT	
+			#{tmpBoxNo}
+			,BOX_SEQ
+			,GOODS_CD
+			,ORD_GUBUN
+			,WORK_ORD_NO 
+			,PACK_DTL_CNT
+			,PACK_DATE
+			,REG_ID
+			,REG_DATE
+		FROM TB_GOODS_PRODUCT_INFO_DTL		 
+		WHERE BOX_NO IN (SELECT DISTINCT BOX_NO FROM TB_GOODS_PRODUCT_INFO_DTL
+						WHERE WORK_ORD_NO = #{workOrdNo} AND PACK_DTL_CNT != #{packCnt} AND ORD_GUBUN = #{ordGubun})	
+			AND PACK_DTL_CNT != #{packCnt}
+			AND ORD_GUBUN = #{ordGubun}
+	</insert>
+		
+	<!-- 생산실적라벨발행 포장 복원정보 삭제(포장단위보다 작은 경우) -->
+	<delete id="deleteGoodsUnlabelNoPackUnitInfo" parameterType="mes.domain.po.GoodsProductInfoAdmVo">
+		DELETE TB_GOODS_PRODUCT_INFO_ADM 
+		WHERE BOX_NO IN (SELECT BOX_NO FROM TB_GOODS_PRODUCT_INFO_DTL WHERE WORK_ORD_NO = #{workOrdNo} AND PACK_DTL_CNT != #{packCnt} AND ORD_GUBUN = #{ordGubun})
+		AND ORD_GUBUN = #{ordGubun} 
+	</delete>
+	
+	<!-- 생산실적라벨발행 포장 상세 복원정보 삭제(포장단위보다 작은 경우) -->
+	<delete id="deleteGoodsUnlabelNoPackUnitDtl" parameterType="mes.domain.po.GoodsProductInfoAdmVo">
+		DELETE TB_GOODS_PRODUCT_INFO_DTL 
+		WHERE BOX_NO IN (SELECT DISTINCT BOX_NO FROM TB_GOODS_PRODUCT_INFO_DTL
+						WHERE WORK_ORD_NO = #{workOrdNo} AND PACK_DTL_CNT != #{packCnt} AND ORD_GUBUN = #{ordGubun})	
+			AND PACK_DTL_CNT != #{packCnt}
+			AND ORD_GUBUN = #{ordGubun}
+	</delete>
+			
+	<!-- 생산실적라벨발행 복원후 마지막 작지번호 조회 -->
+	<select id="selectGoodsPackLastWorkOrdNo" resultType="String">
+		SELECT 
+			TOP 1 A.WORK_ORD_NO  
+		FROM (
+			SELECT TOP 1 BOX_NO, WORK_ORD_NO, '1' SEQ_NUM FROM TB_GOODS_PRODUCT_INFO_DTL WHERE BOX_NO = 
+			(SELECT MAX(BOX_NO) FROM TB_GOODS_PRODUCT_INFO_ADM WHERE GOODS_CD = #{goodsCd})
+			ORDER BY BOX_SEQ DESC
+			UNION
+			SELECT TOP 1 BOX_NO, WORK_ORD_NO, '10' SEQ_NUM FROM TB_GOODS_PRODUCT_INFO_TMP WHERE BOX_NO LIKE #{goodsCd}+'%'
+			ORDER BY BOX_SEQ DESC) A
+		ORDER BY A.SEQ_NUM DESC 
+	</select>
+					
+</mapper>

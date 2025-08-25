@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mes.mappers.bm.moldAdmMapper">
+	<resultMap id="MoldAdmVo"		type="mes.domain.bm.MoldAdmVo">
+	
+		<result property="moldCd"            	  column="MOLD_CD"				/>
+		<result property="moldNm"            	  column="MOLD_NM"              />
+		<result property="mitNm"             	  column="MIT_NM"               />
+		<result property="assetCd"           	  column="ASSET_CD"             />
+		<result property="assetNm"           	  column="ASSET_NM"             />
+		<result property="mfcCorpNm"              column="MFC_CORP_NM"          />
+		<result property="acqDate"                column="ACQ_DATE"             />
+		<result property="moldGubun"              column="MOLD_GUBUN"           />
+		<result property="moldGubunNm"            column="MOLD_GUBUN_NM"        />
+		<result property="buyAmount"              column="BUY_AMOUNT"           />
+		<result property="usePurpose"             column="USE_PURPOSE"          />
+		<result property="admNo"             	  column="ADM_NO"               />
+		<result property="mainChargr"        	  column="MAIN_CHARGR"          />
+		<result property="subChargr"         	  column="SUB_CHARGR"           />
+		<result property="moldModel"              column="MOLD_MODEL"           />
+		<result property="moldSpec"          	  column="MOLD_SPEC"            />
+		<result property="moldKind"          	  column="MOLD_KIND"            />
+		<result property="moldKindNm"          	  column="MOLD_KIND_NM"         />
+		<result property="moldQuty"           	  column="MOLD_QUTY"            />
+		<result property="mitForm"           	  column="MIT_FORM"             />
+		<result property="locationMajor"     	  column="LOCATION_MAJOR"       />
+		<result property="locationMiddle"    	  column="LOCATION_MIDDLE"      />
+		<result property="locationMinor"      	  column="LOCATION_MINOR"       />
+		<result property="customerNm"        	  column="CUSTOMER_NM"          />
+		<result property="printFn"           	  column="PRINT_FN"             />
+		<result property="goodsNm"           	  column="GOODS_NM"             />
+		<result property="wheelModel"        	  column="WHEEL_MODEL"          />
+		<result property="wheelQutyHub"           column="WHEEL_QUTY_HUB"       />
+		<result property="wheelQutyUrethane"      column="WHEEL_QUTY_URETHANE"  />
+		<result property="sculptItem"             column="SCULPT_ITEM"          />
+		<result property="formType"               column="FORM_TYPE"            />
+		<result property="contractRate"           column="CONTRACT_RATE"        />
+		<result property="equipImportance"        column="EQUIP_IMPORTANCE"     />
+		<result property="useYn"                  column="USE_YN"               />
+		<result property="moldDesc"               column="MOLD_DESC"            />
+		<result property="imageFile1"             column="IMAGE_FILE1"          />
+		<result property="imageFile2"             column="IMAGE_FILE2"          />
+		<result property="imageFile3"             column="IMAGE_FILE3"          />
+		<result property="imageFile4"             column="IMAGE_FILE4"          />
+		<result property="regId"                  column="REG_ID"               />
+		<result property="regDate"                column="REG_DATE"             />
+		<result property="updId"                  column="UPD_ID"               />
+		<result property="updDate"                column="UPD_DATE"             />
+
+	</resultMap>
+
+
+	<!-- 금형 목록조회 -->
+	<select id="listAll" resultMap="MoldAdmVo">
+		<![CDATA[
+			SELECT	MOLD_CD
+				,MOLD_NM
+				,ASSET_CD
+				,MFC_CORP_NM
+				,ACQ_DATE
+				,MOLD_GUBUN
+				,(SELECT BASE_NM FROM TB_SYSTEM_COMMON_CODE B WHERE B.BASE_GROUP_CD='107' AND B.BASE_CD = A.MOLD_GUBUN) MOLD_GUBUN_NM
+				,BUY_AMOUNT
+				,USE_PURPOSE
+				,ADM_NO
+				,MAIN_CHARGR
+				,SUB_CHARGR
+				,MOLD_MODEL
+				,MOLD_SPEC
+				,MOLD_KIND
+				,(SELECT BASE_NM FROM TB_SYSTEM_COMMON_CODE B WHERE B.BASE_GROUP_CD='108' AND B.BASE_CD = A.MOLD_KIND) MOLD_KIND_NM
+				,MOLD_QUTY
+				,MIT_FORM
+				,LOCATION_MAJOR
+				,LOCATION_MIDDLE
+				,LOCATION_MINOR
+				,CUSTOMER_NM
+				,PRINT_FN
+				,GOODS_NM
+				,WHEEL_MODEL
+				,WHEEL_QUTY_HUB
+				,WHEEL_QUTY_URETHANE
+				,SCULPT_ITEM
+				,FORM_TYPE
+				,CONTRACT_RATE
+				,EQUIP_IMPORTANCE
+				,USE_YN
+				,MOLD_DESC
+				,IMAGE_FILE1
+				,IMAGE_FILE2
+				,IMAGE_FILE3
+				,IMAGE_FILE4
+				,REG_ID
+				,REG_DATE
+				,UPD_ID
+				,UPD_DATE
+			FROM	TB_MOLD_ADM A
+		]]>
+	</select>
+	
+	<!-- 금형 목록조회 -->
+	<select id="read" resultMap="MoldAdmVo">
+		<![CDATA[
+			SELECT	MOLD_CD
+				,MOLD_NM
+				,ASSET_CD
+				,MFC_CORP_NM
+				,ACQ_DATE
+				,MOLD_GUBUN
+				,BUY_AMOUNT
+				,USE_PURPOSE
+				,ADM_NO
+				,MAIN_CHARGR
+				,SUB_CHARGR
+				,MOLD_MODEL
+				,MOLD_SPEC
+				,MOLD_KIND
+				,MOLD_QUTY
+				,MIT_FORM
+				,LOCATION_MAJOR
+				,LOCATION_MIDDLE
+				,LOCATION_MINOR
+				,CUSTOMER_NM
+				,PRINT_FN
+				,GOODS_NM
+				,WHEEL_MODEL
+				,WHEEL_QUTY_HUB
+				,WHEEL_QUTY_URETHANE
+				,SCULPT_ITEM
+				,FORM_TYPE
+				,CONTRACT_RATE
+				,EQUIP_IMPORTANCE
+				,USE_YN
+				,MOLD_DESC
+				,IMAGE_FILE1
+				,IMAGE_FILE2
+				,IMAGE_FILE3
+				,IMAGE_FILE4
+				,REG_ID
+				,REG_DATE
+				,UPD_ID
+				,UPD_DATE
+			FROM	TB_MOLD_ADM  
+			WHERE	MOLD_CD = #{moldCd}
+		]]>
+	</select>
+	
+	<update id="update">
+		UPDATE	TB_MOLD_ADM  
+		SET	MOLD_CD = #{moldCd},
+			MOLD_NM = #{moldNm},
+			ASSET_CD = #{assetCd},
+			MFC_CORP_NM = #{mfcCorpNm},
+			ACQ_DATE = #{acqDate},
+			MOLD_GUBUN = #{moldGubun},
+			BUY_AMOUNT = #{buyAmount},
+			USE_PURPOSE = #{usePurpose},
+			ADM_NO = #{admNo},
+			MAIN_CHARGR = #{mainChargr},
+			SUB_CHARGR = #{subChargr},
+			MOLD_MODEL = #{moldModel},
+			MOLD_SPEC = #{moldSpec},
+			MOLD_KIND = #{moldKind},
+			MOLD_QUTY = #{moldQuty},
+			MIT_FORM = #{mitForm},
+			LOCATION_MAJOR = #{locationMajor},
+			LOCATION_MIDDLE = #{locationMiddle},
+			LOCATION_MINOR = #{locationMinor},
+			CUSTOMER_NM = #{customerNm},
+			PRINT_FN = #{printFn},
+			GOODS_NM = #{goodsNm},
+			WHEEL_MODEL = #{wheelModel},
+			WHEEL_QUTY_HUB = #{wheelQutyHub},
+			WHEEL_QUTY_URETHANE = #{wheelQutyUrethane},
+			SCULPT_ITEM = #{sculptItem},
+			FORM_TYPE = #{formType},
+			CONTRACT_RATE = #{contractRate},
+			EQUIP_IMPORTANCE = #{equipImportance},
+			USE_YN = #{useYn},
+			MOLD_DESC = #{moldDesc},					
+			UPD_ID = #{updId},
+			UPD_DATE = GETDATE()
+		WHERE	MOLD_CD = #{moldCd}
+	</update>
+	
+	<insert id="create">
+		INSERT INTO TB_MOLD_ADM (
+			MOLD_CD,
+			MOLD_NM,
+			ASSET_CD,
+			MFC_CORP_NM,
+			ACQ_DATE,
+			MOLD_GUBUN,
+			BUY_AMOUNT,
+			USE_PURPOSE,
+			ADM_NO,
+			MAIN_CHARGR,
+			SUB_CHARGR,
+			MOLD_MODEL,
+			MOLD_SPEC,
+			MOLD_KIND,
+			MOLD_QUTY,
+			MIT_FORM,
+			LOCATION_MAJOR,
+			LOCATION_MIDDLE,
+			LOCATION_MINOR,
+			CUSTOMER_NM,
+			PRINT_FN,
+			GOODS_NM,
+			WHEEL_MODEL,
+			WHEEL_QUTY_HUB,
+			WHEEL_QUTY_URETHANE,
+			SCULPT_ITEM,
+			FORM_TYPE,
+			CONTRACT_RATE,
+			EQUIP_IMPORTANCE,
+			USE_YN,
+			MOLD_DESC,
+			REG_ID,
+			REG_DATE
+		
+		) 
+		VALUES(
+			#{moldCd},
+			#{moldNm},
+			#{assetCd},
+			#{mfcCorpNm},
+			#{acqDate},
+			#{moldGubun},
+			#{buyAmount},
+			#{usePurpose},
+			#{admNo},
+			#{mainChargr},
+			#{subChargr},
+			#{moldModel},
+			#{moldSpec},
+			#{moldKind},
+			#{moldQuty},
+			#{mitForm},
+			#{locationMajor},
+			#{locationMiddle},
+			#{locationMinor},
+			#{customerNm},
+			#{printFn},
+			#{goodsNm},
+			#{wheelModel},
+			#{wheelQutyHub},
+			#{wheelQutyUrethane},
+			#{sculptItem},
+			#{formType},
+			#{contractRate},
+			#{equipImportance},
+			#{useYn},
+			#{moldDesc},
+			#{regId},
+			GETDATE()
+			)
+	</insert>
+	
+		<!-- 시퀀스 값 조회 -->
+	<select id="moldCdSeq" resultType="String">
+		<![CDATA[
+			SELECT ISNULL(CAST(MAX(MOLD_CD)+1 AS NVARCHAR), '100001') FROM TB_MOLD_ADM 			
+		]]>
+	</select>
+	 
+	 <!-- 설비관리 이미지 경로조회 -->
+	<select id="moldImgRead" resultMap="MoldAdmVo">
+			SELECT
+				MOLD_CD
+				, IMAGE_FILE1
+				, IMAGE_FILE2
+				, IMAGE_FILE3
+				, IMAGE_FILE4
+			FROM TB_MOLD_ADM
+			WHERE MOLD_CD = #{moldCd}
+	</select>
+	
+	<update id="moldImageUpload">
+		UPDATE TB_MOLD_ADM
+		SET
+		<choose>
+			<when test="imageFile1 != null">
+				IMAGE_FILE1 = #{imageFile1}
+			</when>
+			<when test="imageFile2 != null">
+				IMAGE_FILE2 = #{imageFile2}
+			</when>
+			<when test="imageFile3 != null">
+				IMAGE_FILE3 = #{imageFile3}
+			</when>
+			<when test="imageFile4 != null">
+				IMAGE_FILE4 = #{imageFile4}
+			</when>
+		</choose>
+		WHERE 
+          	MOLD_CD = #{moldCd}
+	</update>
+
+</mapper>

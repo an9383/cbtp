@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.bm.dealCorpAdmMapper">
+
+	<resultMap id="DealCorpAdmVo" type="mes.domain.bm.DealCorpAdmVo">
+		<result property="dealCorpCd"			column="DEAL_CORP_CD"			/>
+		<result property="dealCorpNm"			column="DEAL_CORP_NM"			/>
+		<result property="presidentNm"			column="PRESIDENT_NM"			/>
+		<result property="corpNo"				column="CORP_NO"				/>
+		<result property="bizCond"				column="BIZ_COND"				/>
+		<result property="bizType"				column="BIZ_TYPE"				/>
+		<result property="addrNo"				column="ADDR_NO"				/>				
+		<result property="addrBase"				column="ADDR_BASE"				/>
+		<result property="addrDtl"				column="ADDR_DTL"				/>
+		<result property="companyGubun"			column="COMPANY_GUBUN"			/>
+		<result property="telNo"				column="TEL_NO"					/>		
+		<result property="faxNo"				column="FAX_NO"					/>
+		<result property="emailAddr"			column="EMAIL_ADDR"				/>
+		<result property="officeCharger"		column="OFFICE_CHARGER"			/>		
+		<result property="bizCharger"			column="BIZ_CHARGER"			/>		
+		<result property="dealGubun"			column="DEAL_GUBUN"				/>
+		<result property="dealCorpDesc"			column="DEAL_CORP_DESC"			/>
+		<result property="useYn"				column="USE_YN"					/>	
+		<result property="visitSeq"				column="VISIT_SEQ"				/>		
+		<result property="fileNm"				column="FILE_NM"				/>		
+		<result property="visitDate"			column="VISIT_DATE"				/>	
+		<result property="visitContent"			column="VISIT_CONTENT"			/>					
+		<result property="regId"				column="REG_ID"					/>
+		<result property="regNm"				column="REG_NM"					/>
+		<result property="regDate"				column="REG_DATE"				/>
+		<result property="updId"				column="UPD_ID"					/>
+		<result property="updDate"				column="UPD_DATE"				/>
+		<result property="totalCount"			column="TOTAL_COUNT"			/>		
+		
+<!-- 		추가 -->
+		<result property="repreItem"			column="REPRE_ITEM"				/>
+		<result property="dealGubunNm"			column="DEAL_GUBUN_NM"			/>
+		<result property="dealHomepage"			column="DEAL_HOMEPAGE"			/>
+		<result property="taxEmail"				column="TAX_EMAIL"				/>
+	</resultMap>
+	
+	
+	<!-- 거래처정보관리 전체조회 -->
+	<select id="listAll" resultMap="DealCorpAdmVo">
+		SELECT
+			D.DEAL_CORP_CD
+			, D.DEAL_CORP_NM
+			, D.PRESIDENT_NM
+			, D.CORP_NO
+			, D.BIZ_COND
+			, D.BIZ_TYPE
+			, D.ADDR_NO
+			, D.ADDR_BASE
+			, D.ADDR_DTL
+			, D.COMPANY_GUBUN
+			, D.TEL_NO
+			, D.FAX_NO
+			, D.EMAIL_ADDR
+			, D.DEAL_HOMEPAGE
+			, D.TAX_EMAIL
+			, D.OFFICE_CHARGER
+			, D.BIZ_CHARGER
+			, D.DEAL_GUBUN
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = D.DEAL_GUBUN AND X.BASE_GROUP_CD = '102') DEAL_GUBUN_NM
+			, D.USE_YN
+			, D.DEAL_CORP_DESC
+			, D.REG_ID
+			, D.REG_DATE
+			, D.UPD_ID
+			, D.UPD_DATE
+			, TOTAL_COUNT = COUNT(*) OVER()
+			, D.REPRE_ITEM
+		FROM TB_DEAL_CORP_ADM D
+		WHERE 1=1 
+		<if test="dealGubun!=null and !dealGubun.equals('')">
+		AND D.DEAL_GUBUN = #{dealGubun}
+		</if>
+		<if test="dealArr!=null">
+		AND D.DEAL_GUBUN IN 
+		 <foreach collection="dealArr" item="arr"  open="(" close=")" separator=",">
+          	#{arr}
+    	 </foreach>	
+		</if>
+		<if test="orderByDcn != null and !orderByDcn.equals('')">
+		ORDER BY D.DEAL_CORP_NM
+		</if>
+		
+	</select>
+	
+	<!-- 거래처정보관리 전체조회2 -->
+	<select id="dealCorpDataJustList" resultMap="DealCorpAdmVo">
+		SELECT	DEAL_CORP_CD,
+			DEAL_CORP_NM,
+			PRESIDENT_NM,
+			CORP_NO,
+			REPRE_ITEM,
+			BIZ_COND,
+			BIZ_TYPE,
+			ADDR_NO,
+			ADDR_BASE,
+			ADDR_DTL,
+			COMPANY_GUBUN,
+			TEL_NO,
+			FAX_NO,
+			EMAIL_ADDR,
+			DEAL_HOMEPAGE,
+			TAX_EMAIL,
+			OFFICE_CHARGER,
+			BIZ_CHARGER,
+			DEAL_GUBUN,
+			USE_YN,
+			DEAL_CORP_DESC,
+			REG_ID,
+			REG_DATE,
+			UPD_ID,
+			UPD_DATE
+		FROM	TB_DEAL_CORP_ADM			 
+		WHERE	1=1
+	</select>
+	
+	<!-- 거래처정보관리 상세조회 -->
+	<select id="read" resultMap="DealCorpAdmVo">
+		SELECT
+		    DEAL_CORP_CD
+			,DEAL_CORP_NM
+			,REPRE_ITEM
+			,PRESIDENT_NM
+			,CORP_NO
+			,BIZ_COND
+			,BIZ_TYPE
+			,ADDR_NO
+			,ADDR_BASE
+			,ADDR_DTL
+			,COMPANY_GUBUN
+			,TEL_NO
+			,FAX_NO
+			,EMAIL_ADDR
+			,DEAL_HOMEPAGE
+			,TAX_EMAIL
+			,OFFICE_CHARGER
+			,BIZ_CHARGER
+			,DEAL_GUBUN
+			,USE_YN
+			,DEAL_CORP_DESC
+			,REG_ID
+			,REG_DATE
+			,UPD_ID
+			,UPD_DATE
+			,REPRE_ITEM
+		FROM TB_DEAL_CORP_ADM 
+		WHERE DEAL_CORP_CD = #{dealCorpCd}
+	</select>
+	
+	<!-- 거래처정보관리 등록 -->
+	<insert id="create" parameterType="mes.domain.bm.DealCorpAdmVo">
+			INSERT INTO TB_DEAL_CORP_ADM(
+				DEAL_CORP_CD
+				,DEAL_CORP_NM
+				,REPRE_ITEM
+				,PRESIDENT_NM
+				,CORP_NO
+				,BIZ_COND
+				,BIZ_TYPE
+				,ADDR_NO
+				,ADDR_BASE
+				,ADDR_DTL
+				,COMPANY_GUBUN
+				,TEL_NO
+				,FAX_NO
+				,EMAIL_ADDR
+				,DEAL_HOMEPAGE
+				,TAX_EMAIL
+				,OFFICE_CHARGER
+				,BIZ_CHARGER
+				,DEAL_GUBUN
+				,USE_YN
+				,DEAL_CORP_DESC
+				,REG_ID
+				,REG_DATE
+			) VALUES (
+				#{dealCorpCd}
+				,#{dealCorpNm}
+				,#{repreItem}
+				,#{presidentNm}
+				,#{corpNo}
+				,#{bizCond}
+				,#{bizType}
+				,#{addrNo}
+				,#{addrBase}
+				,#{addrDtl}
+				,#{companyGubun}
+				,#{telNo}
+				,#{faxNo}
+				,#{emailAddr}
+				,#{dealHomepage}
+				,#{taxEmail}
+				,#{officeCharger}
+				,#{bizCharger}
+				,#{dealGubun}
+				,#{useYn}
+				,#{dealCorpDesc}
+				,#{regId}
+				,getDate()
+			)
+	</insert>
+	
+	<!-- 거래처정보관리 수정 -->
+	<update id="update" parameterType="mes.domain.bm.GoodsCodeAdmVo">
+			UPDATE	TB_DEAL_CORP_ADM 
+			SET	DEAL_CORP_NM = #{dealCorpNm}
+				,PRESIDENT_NM = #{presidentNm}
+				,REPRE_ITEM = #{repreItem}
+				,CORP_NO = #{corpNo}
+				,BIZ_COND = #{bizCond}
+				,BIZ_TYPE = #{bizType}
+				,ADDR_NO = #{addrNo}
+				,ADDR_BASE = #{addrBase}
+				,ADDR_DTL = #{addrDtl}
+				,COMPANY_GUBUN = #{companyGubun}
+				,TEL_NO = #{telNo}
+				,FAX_NO = #{faxNo}
+				,EMAIL_ADDR = #{emailAddr}
+				,DEAL_HOMEPAGE = #{dealHomepage}
+				,TAX_EMAIL = #{taxEmail}
+				,OFFICE_CHARGER = #{officeCharger}
+				,BIZ_CHARGER = #{bizCharger}
+				,DEAL_GUBUN = #{dealGubun}
+				,USE_YN = #{useYn}
+				,DEAL_CORP_DESC = #{dealCorpDesc}
+				,UPD_ID = #{updId}
+				,UPD_DATE = getDate()
+			WHERE	DEAL_CORP_CD = #{dealCorpCd}
+	</update>
+	
+	<!-- 거래처정보관리 거래처명 중복검사 -->
+	<select id="overlapDealCorpNm" resultType="Integer">
+			SELECT COUNT(*) 
+			FROM TB_DEAL_CORP_ADM 
+			WHERE DEAL_CORP_NM = #{dealCorpNm}
+			AND DEAL_GUBUN = #{dealGubun}
+	</select>
+	
+	<!-- 방문관련자료 전체조회 -->
+	<select id="dealCorpVisitList" resultMap="DealCorpAdmVo" >
+			SELECT	
+			DEAL_CORP_CD
+				, VISIT_SEQ
+				, VISIT_DATE
+				, VISIT_CONTENT
+				, FILE_NM 
+				, ISNULL((SELECT USER_NM FROM TB_USER B WHERE B.USER_ID=A.REG_ID), '관리자') AS  REG_NM
+				, REG_DATE 
+			FROM	TB_DEAL_CORP_VISIT A 
+			WHERE	DEAL_CORP_CD = #{dealCorpCd}
+	</select>
+	
+	<!-- 방문관련자료 등록 -->
+	<select id="dealCorpVisitCreate">
+			INSERT INTO TB_DEAL_CORP_VISIT		(
+				DEAL_CORP_CD
+				, VISIT_SEQ
+				, VISIT_CONTENT
+				, VISIT_DATE
+				, FILE_NM
+				, REG_ID
+				, REG_DATE
+			) 
+			VALUES(
+				#{dealCorpCd}
+				, #{visitSeq}
+				, #{visitContent}
+				, #{visitDate}
+				, #{fileNm}
+				, #{regId}
+				, getdate()
+			)
+	</select>
+	
+	<!-- 방문관련자료 삭제 -->
+	<select id="dealCorpVisitDelete">
+			DELETE FROM TB_DEAL_CORP_VISIT 
+			WHERE DEAL_CORP_CD = #{dealCorpCd}
+			<if test="visitSeq != null and !visitSeq.equals('')">
+			AND VISIT_SEQ = #{visitSeq}
+			</if>
+	</select>
+	
+	<!-- 방문관련자료 시퀀스 -->
+	<select id="dealCorpVisitSeq" resultType="String">
+			SELECT ISNULL(MAX(VISIT_SEQ)+1 ,'1')
+			FROM TB_DEAL_CORP_VISIT
+			WHERE DEAL_CORP_CD = #{dealCorpCd}
+	</select>
+	
+	
+	<!-- 파일명 가져오기 -->
+	<select id="getFileNm" resultType="String">
+			SELECT FILE_NM 
+			FROM TB_DEAL_CORP_VISIT
+			WHERE DEAL_CORP_CD = #{dealCorpCd}
+			AND VISIT_SEQ = #{visitSeq}
+	</select>
+	
+	<!-- 거래처정보관리 거래처코드 중복검사 -->
+	<select id="overlapDealCordCd" resultType="Integer">
+			SELECT COUNT(*) 
+			FROM TB_DEAL_CORP_ADM 
+			WHERE DEAL_CORP_CD = #{dealCorpCd}
+	</select>
+	
+	<!--삭제 -->
+	<delete id="dealCorpDataDelete">
+		DELETE 
+		FROM TB_DEAL_CORP_ADM 
+		WHERE DEAL_CORP_CD = #{dealCorpCd}
+	</delete>
+	
+</mapper>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.qm.itemCompleteFaultyJdgAdmMapper">
+
+	<resultMap id="ItemCompleteFaultyJdgAdmVo" type="mes.domain.qm.ItemCompleteFaultyJdgAdmVo">
+
+		<result property="workOrdNo"			column="WORK_ORD_NO"		/>
+		<result property="itemCd"		    	column="ITEM_CD"			/>
+		<result property="itemRev"				column="ITEM_REV"			/>			
+		<result property="faultyPcs"			column="FAULTY_PCS"			/>
+		<result property="pairCnt"				column="PAIR_CNT"			/>
+		<result property="faultyCnt"			column="FAULTY_CNT"			/>
+		<result property="faultyDate"			column="FAULTY_DATE"		/>		
+		<result property="faultyChargr"			column="FAULTY_CHARGR"		/>
+		<result property="faultyChargrNm"		column="FAULTY_CHARGR_NM"	/>
+		<result property="disuseQty"			column="DISUSE_QTY"			/>
+		<result property="disuseDate"			column="DISUSE_DATE"		/> 
+		<result property="repairQty"			column="REPAIR_QTY"			/> 
+		<result property="repairDate"			column="REPAIR_DATE"		/> 
+		<result property="reworkQty"			column="REWORK_QTY"			/> 
+		<result property="reworkDate"			column="REWORK_DATE"		/> 
+		<result property="approvalYn"			column="APPROVAL_YN"		/> 
+		<result property="faultyDesc"			column="FAULTY_DESC"		/> 
+		<result property="regId"				column="REG_ID"				/>
+		<result property="regDate"				column="REG_DATE"			/>
+		<result property="updId"				column="UPD_ID"				/>				
+		<result property="updDate"				column="UPD_DATE"			/>
+	</resultMap>
+
+	<!-- 부적합처리 목록 -->
+	<select id="itemCompleteFaultyJdgAdmRead" resultMap="ItemCompleteFaultyJdgAdmVo">
+		SELECT 
+			WORK_ORD_NO,
+			ITEM_CD,
+			ITEM_REV,
+			FAULTY_PCS,
+			PAIR_CNT,
+		    FAULTY_CNT,
+			FAULTY_DATE,
+			FAULTY_CHARGR,
+			(SELECT USER_NM FROM TB_USER X WHERE X.USER_NUMBER=FAULTY_CHARGR) FAULTY_CHARGR_NM,
+			DISUSE_QTY,
+			DISUSE_DATE,
+			REPAIR_QTY,
+			REPAIR_DATE,
+			REWORK_QTY,
+			REWORK_DATE,
+			APPROVAL_YN,
+			FAULTY_DESC
+		FROM TB_ITEM_COMPLETE_FAULTY_JDG_ADM
+		WHERE WORK_ORD_NO = #{workOrdNo}
+	</select>
+	
+	<!-- 부적합처리 등록 -->
+	<insert id="itemCompleteFaultyJdgAdmCreate">
+		INSERT INTO TB_ITEM_COMPLETE_FAULTY_JDG_ADM (
+			 WORK_ORD_NO,
+             ITEM_CD,
+             ITEM_REV,
+             FAULTY_PCS,
+             PAIR_CNT,
+             FAULTY_CNT,
+             FAULTY_DATE,
+             FAULTY_CHARGR,
+             DISUSE_QTY,
+             DISUSE_DATE,
+             REPAIR_QTY,
+             REPAIR_DATE,
+             REWORK_QTY,
+             REWORK_DATE,
+             APPROVAL_YN,
+             FAULTY_DESC,
+             REG_ID,
+             REG_DATE
+        )
+		VALUES     (
+			#{workOrdNo},
+            #{itemCd},
+            #{itemRev},
+            #{faultyPcs},
+            #{pairCnt},
+            #{faultyCnt},
+            #{faultyDate},
+            #{faultyChargr},
+            #{disuseQty},
+            #{disuseDate},
+            #{repairQty},
+            #{repairDate},
+            #{reworkQty},
+            #{reworkDate},
+            #{approvalYn},
+            #{faultyDesc},
+            #{regId},
+            GETDATE()
+        ) 
+	</insert>
+	
+	<!-- 부적합처리 수정 -->
+	<update id="itemCompleteFaultyJdgAdmUpdate">
+		UPDATE TB_ITEM_COMPLETE_FAULTY_JDG_ADM
+		SET    
+		       FAULTY_PCS = #{faultyPcs},
+		       PAIR_CNT = #{pairCnt},
+		       FAULTY_CNT = #{faultyCnt},
+		       FAULTY_DATE = #{faultyDate},
+		       FAULTY_CHARGR = #{faultyChargr},
+		       DISUSE_QTY = #{disuseQty},
+		       DISUSE_DATE = #{disuseDate},
+		       REPAIR_QTY = #{repairQty},
+		       REPAIR_DATE = #{repairDate},
+		       REWORK_QTY = #{reworkQty},
+		       REWORK_DATE = #{reworkDate},
+		       FAULTY_DESC = #{faultyDesc},
+		       UPD_ID = #{updId},
+		       UPD_DATE = GETDATE()
+		WHERE  WORK_ORD_NO = #{workOrdNo}
+	</update>
+	
+	<!-- 부적합처리 승인여부 수정-->
+	<update id="updateApprovalYn">
+		UPDATE TB_ITEM_COMPLETE_FAULTY_JDG_ADM 
+		SET APPROVAL_YN = #{approvalYn}
+		WHERE WORK_ORD_NO = #{workOrdNo}
+	</update>
+	
+	
+</mapper>
