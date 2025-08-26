@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.mt.finishOperInfoMapper">
+
+	<resultMap id="FinishOperInfoVo" type="mes.domain.mt.FinishOperInfoVo">
+		<result property="workOrdNo"				column="Workordno"			/>
+		<result property="equipCd"					column="Equipcd"			/>
+		<result property="setupWeight"		    	column="SetupWeight"		/>
+		<result property="startSignal"				column="StartSignal"		/>	
+		<result property="speed"					column="Speed"			    />			
+		<result property="weight"					column="Weight"				/>		
+		<result property="outputCount"		  	  	column="OutputCount"		/>
+		<result property="temperature"	 	  		column="Temperature"		/>
+		<result property="pressure"					column="Pressure"			/>
+		<result property="time"						column="Time"				/>
+		<result property="operStatus"			    column="OperStatus"			/>
+		<result property="faultyType"				column="FaultyType"			/>	
+		<result property="eventAlarm"				column="EventAlarm"			/>			
+		<result property="capInputCount"			column="CapInputCount"		/>		
+		<result property="capOutputCount"		  	column="CapOutputCount"		/>
+		<result property="capOperStatus"	 	  	column="CapOperStatus"		/>
+		<result property="capFaultyCount"			column="CapFaultyCount"		/>
+		<result property="packInputCount"			column="PackInputCount"		/>
+		<result property="packOutputCount"	    	column="PackOutputCount"	/>
+		<result property="packOperStatus"			column="PackOperStatus"		/>
+		<result property="boxCount"					column="BoxCount"			/>			
+		<result property="boxLoadCount"				column="BoxLoadCount"		/>		
+		<result property="boxTappingCount"	  	  	column="BoxTappingCount"	/>
+		<result property="boxPalletCount"	 	  	column="BoxPalletCount"		/>
+		<result property="boxWorkOrderNo"			column="BoxWorkOrderNo"		/>		
+		<result property="regId"				  	column="RegId"				/>
+		<result property="regDate"		 	  		column="RegDate"			/>
+		<result property="equipNm"					column="EQUIP_NM"			/>			
+		<result property="workStatus"				column="WORK_STATUS"		/>		
+		<result property="itemNm"	  	 		 	column="ITEM_NM"			/>
+		<result property="dealCorpNm"	 	  		column="DEAL_CORP_NM"		/>
+		<result property="workOrdNo"				column="WORK_ORD_NO"		/>
+		
+		<result property="itemTempMax"				column="ITEM_TEMP_MAX"		/>
+		<result property="itemTempMin"				column="ITEM_TEMP_MIN"		/>
+		<result property="itemPressMax"				column="ITEM_PRESS_MAX"		/>
+		<result property="itemPressMin"				column="ITEM_PRESS_MIN"		/>
+		<result property="itemTimeMax"				column="ITEM_TIME_MAX"		/>
+		<result property="itemTimeMin"				column="ITEM_TIME_MIN"		/>
+		<result property="contDtlNo"				column="CONT_DTL_NO"		/>
+		<result property="outputQty"				column="OUTPUT_QTY"			/>
+		
+		<result property="fillPvFrontTemp"			column="FillPvFrontTemp"	/>			
+		<result property="fillSvFrontTemp"			column="FillSvFrontTemp"	/>		
+		<result property="fillPvBackTemp"	  	 	column="FillPvBackTemp"		/>
+		<result property="fillSvBackTemp"	 	  	column="FillSvBackTemp"		/>
+		<result property="fillPressure"				column="FillPressure"		/>
+		<result property="fillTime"					column="FillTime"			/>
+		<result property="fillNozzle1OpenTime"		column="FillNozzle1OpenTime"/>
+	</resultMap>
+	
+	<!--목록조회 -->
+	<select id="list" resultMap="FinishOperInfoVo">
+		SELECT	
+			WorkOrdNo
+			,EquipCd
+			,SetupWeight
+			,StartSignal
+			,Speed
+			,Weight
+			,OutputCount
+			,Temperature
+			,Pressure
+			,Time
+			,OperStatus
+			,FaultyType
+			,EventAlarm
+			,CapInputCount
+			,CapOutputCount
+			,CapOperStatus
+			,CapFaultyCount
+			,PackInputCount
+			,PackOutputCount
+			,PackFaultyCount
+			,PackOperStatus
+			,BoxCount
+			,BoxLoadCount
+			,BoxTappingCount
+			,BoxPalletCount
+			,BoxWorkOrderNo
+			,RegId
+			,RegDate
+		FROM	TB_FINISH_OPER_INFO 
+	</select>
+	
+	<!--상세조회 -->
+	<select id="read" resultMap="FinishOperInfoVo">
+		SELECT	
+			WorkOrdNo
+			,EquipCd
+			,SetupWeight
+			,StartSignal
+			,Speed
+			,Weight
+			,ISNULL(OutputCount,0) OutputCount
+			,Temperature
+			,Pressure
+			,Time
+			,OperStatus
+			,FaultyType
+			,EventAlarm
+			,ISNULL(CapInputCount,0) CapInputCount
+			,ISNULL(CapOutputCount,0) CapOutputCount
+			,CapOperStatus
+			,ISNULL(CapFaultyCount,0) CapFaultyCount
+			,ISNULL(PackInputCount,0) PackInputCount
+			,ISNULL(PackOutputCount,0) PackOutputCount
+			,ISNULL(PackFaultyCount,0) PackFaultyCount
+			,PackOperStatus
+			,ISNULL(BoxCount,0) BoxCount
+			,ISNULL(BoxLoadCount,0) BoxLoadCount
+			,BoxTappingCount
+			,BoxPalletCount
+			,BoxWorkOrderNo
+			,RegId
+			,RegDate
+		FROM	TB_FINISH_OPER_INFO 
+		WHERE	WorkOrdNo = #{workOrdNo}
+	</select>
+	
+	<!--등록 -->
+	<insert id="create">
+		INSERT INTO TB_FINISH_OPER_INFO(
+			WorkOrdNo,
+			EquipCd,
+			SetupWeight,
+			StartSignal,
+			Speed,
+			Weight,
+			OutputCount,
+			Temperature,
+			Pressure,
+			Time,
+			OperStatus,
+			FaultyType,
+			EventAlarm,
+			CapInputCount,
+			CapOutputCount,
+			CapOperStatus,
+			CapFaultyCount,
+			PackInputCount,
+			PackOutputCount,
+			PackFaultyCount,
+			PackOperStatus,
+			BoxCount,
+			BoxLoadCount,
+			BoxTappingCount,
+			BoxPalletCount,
+			BoxWorkOrderNo,
+			RegId,
+			RegDate
+		) 
+		VALUES(
+			#{workOrdNo},
+			#{equipCd},
+			#{setupWeight},
+			#{startSignal},
+			#{speed},
+			#{weight},
+			#{outputCount},
+			#{temperature},
+			#{pressure},
+			#{time},
+			#{operStatus},
+			#{faultyType},
+			#{eventAlarm},
+			#{capInputCount},
+			#{capOutputCount},
+			#{capOperStatus},
+			#{capFaultyCount},
+			#{packInputCount},
+			#{packOutputCount},
+			#{packFaultyCount},
+			#{packOperStatus},
+			#{boxCount},
+			#{boxLoadCount},
+			#{boxTappingCount},
+			#{boxPalletCount},
+			#{boxWorkOrderNo},
+			#{regId},
+			GETDATE()
+		)
+	</insert>
+	
+	<!-- 수정 -->
+	<update id="update">
+		UPDATE	TB_FINISH_OPER_INFO 
+		<set>
+			<if test="setupWeight!=null and !setupWeight.equals('')">
+			SetupWeight = #{setupWeight},
+			</if>
+			<if test="startSignal!=null and !startSignal.equals('')">
+			StartSignal = #{startSignal},
+			</if>
+			<if test="speed!=null and !speed.equals('')">
+			Speed = #{speed},
+			</if>
+			<if test="weight!=null and !weight.equals('')">
+			Weight = #{weight},
+			</if>
+			<if test="outputCount!=null and !outputCount.equals('')">
+			OutputCount = #{outputCount},
+			</if>
+			<if test="temperature!=null and !temperature.equals('')">
+			Temperature = #{temperature},
+			</if>
+			<if test="pressure!=null and !pressure.equals('')">
+			Pressure = #{pressure},
+			</if>
+			<if test="time!=null and !time.equals('')">
+			Time = #{time},
+			</if>
+			<if test="operStatus!=null and !operStatus.equals('')">
+			OperStatus = #{operStatus},
+			</if>
+			<if test="faultyType!=null and !faultyType.equals('')">
+			FaultyType = #{faultyType},
+			</if>
+			<if test="eventAlarm!=null and !eventAlarm.equals('')">
+			EventAlarm = #{eventAlarm},
+			</if>
+			<if test="capInputCount!=null and !capInputCount.equals('')">
+			CapInputCount = #{capInputCount},
+			</if>
+			<if test="capOutputCount!=null and !capOutputCount.equals('')">
+			CapOutputCount = #{capOutputCount},
+			</if>
+			<if test="capOperStatus!=null and !capOperStatus.equals('')">
+			CapOperStatus = #{capOperStatus},
+			</if>
+			<if test="capFaultyCount!=null and !capFaultyCount.equals('')">
+			CapFaultyCount = #{capFaultyCount},
+			</if>
+			<if test="packInputCount!=null and !packInputCount.equals('')">
+			PackInputCount = #{packInputCount},
+			</if>
+			<if test="packOutputCount!=null and !packOutputCount.equals('')">
+			PackOutputCount = #{packOutputCount},
+			</if>
+			<if test="packFaultyCount!=null and !packFaultyCount.equals('')">
+			PackFaultyCount = #{packFaultyCount},
+			</if>
+			<if test="packOperStatus!=null and !packOperStatus.equals('')">
+			PackOperStatus = #{packOperStatus},
+			</if>
+			<if test="boxCount!=null and !boxCount.equals('')">
+			BoxCount = #{boxCount},
+			</if>
+			<if test="boxLoadCount!=null and !boxLoadCount.equals('')">
+			BoxLoadCount = #{boxLoadCount},
+			</if>
+			<if test="boxTappingCount!=null and !boxTappingCount.equals('')">
+			BoxTappingCount = #{boxTappingCount},
+			</if>
+			<if test="boxPalletCount!=null and !boxPalletCount.equals('')">
+			BoxPalletCount = #{boxPalletCount},
+			</if>
+			<if test="boxWorkOrderNo!=null and !boxWorkOrderNo.equals('')">
+			BoxWorkOrderNo = #{boxWorkOrderNo},
+			</if>
+			RegId = #{regId},
+			RegDate = GETDATE()
+		</set>
+		WHERE	WorkOrdNo = #{workOrdNo}
+	</update>
+	
+	<!--삭제 -->
+	<delete id="delete">
+		DELETE FROM TB_FINISH_OPER_INFO 
+		WHERE	WorkOrdNo = #{workOrdNo}
+	</delete>
+	
+	<!--목록조회 -->
+	<select id="finishOperInfoEquipList" resultMap="FinishOperInfoVo">
+		SELECT 
+			ECA.EQUIP_NM,
+			WOA.WORK_STATUS,
+			WOA.WORK_ORD_NO,
+			IIA.ITEM_NM,
+			DCA.DEAL_CORP_NM
+		FROM 
+			TB_EQUIP_CODE_ADM ECA LEFT OUTER JOIN TB_WORK_ORDER_ADM WOA
+			ON ECA.EQUIP_CD = WOA.EQUIP_CD
+			AND WOA.WORK_STATUS = 'S' LEFT OUTER JOIN TB_ITEM_INFO_ADM IIA
+			ON WOA.ITEM_SEQ = IIA.ITEM_SEQ LEFT OUTER JOIN TB_BIZ_ORDER_DTL BOD
+			ON BOD.CONT_DTL_NO = WOA.CONT_DTL_NO LEFT OUTER JOIN TB_BIZ_ORDER_ADM BOA
+			ON BOA.CONT_NO = BOD.CONT_NO LEFT OUTER JOIN TB_DEAL_CORP_ADM DCA
+			ON BOA.ORD_CORP_CD = DCA.DEAL_CORP_CD
+		WHERE 
+			ECA.PRC_NM = '002'
+	</select>
+	
+	
+	<!-- 제조조건 모니터링 리스트 -->
+	<select id="finishOperInfoList" resultMap="FinishOperInfoVo">
+		SELECT 
+			WOA.CONT_DTL_NO,
+			(SELECT X.ITEM_NM FROM TB_ITEM_INFO_ADM X WHERE X.ITEM_SEQ = WOA.ITEM_SEQ) ITEM_NM,
+			(SELECT X.ITEM_TEMP_MAX FROM TB_ITEM_INFO_ADM X WHERE X.ITEM_SEQ = WOA.ITEM_SEQ) ITEM_TEMP_MAX,
+			(SELECT X.ITEM_TEMP_MIN FROM TB_ITEM_INFO_ADM X WHERE X.ITEM_SEQ = WOA.ITEM_SEQ) ITEM_TEMP_MIN,
+			(SELECT X.ITEM_PRESS_MAX FROM TB_ITEM_INFO_ADM X WHERE X.ITEM_SEQ = WOA.ITEM_SEQ) ITEM_PRESS_MAX,
+			(SELECT X.ITEM_PRESS_MIN FROM TB_ITEM_INFO_ADM X WHERE X.ITEM_SEQ = WOA.ITEM_SEQ) ITEM_PRESS_MIN,
+			(SELECT X.ITEM_TIME_MAX FROM TB_ITEM_INFO_ADM X WHERE X.ITEM_SEQ = WOA.ITEM_SEQ) ITEM_TIME_MAX,
+			(SELECT X.ITEM_TIME_MIN FROM TB_ITEM_INFO_ADM X WHERE X.ITEM_SEQ = WOA.ITEM_SEQ) ITEM_TIME_MIN,
+			(SELECT X.EQUIP_NM FROM TB_EQUIP_CODE_ADM X WHERE X.EQUIP_CD = WOA.EQUIP_CD) EQUIP_NM,
+			B.OUTPUT_QTY
+		FROM TB_WORK_ORDER_ADM WOA LEFT OUTER JOIN TB_EQUIP_CODE_ADM ECA 
+			ON WOA.EQUIP_CD = ECA.EQUIP_CD, (
+				SELECT CONT_DTL_NO, COUNT(CONT_DTL_NO)OUTPUT_QTY FROM TB_WORK_ORDER_ADM GROUP BY CONT_DTL_NO
+			) B
+		WHERE
+			1=1
+			AND WOA.CONT_DTL_NO = B.CONT_DTL_NO
+			AND CONVERT(VARCHAR(10), WOA.REG_DATE, 112) = #{regDate}
+			AND ECA.PRC_NM = '002'
+		GROUP BY
+			WOA.CONT_DTL_NO, WOA.ITEM_SEQ, WOA.EQUIP_CD, B.OUTPUT_QTY
+	</select>
+	
+	<!-- 제조조건 모니터링 상세 리스트 -->
+	<select id="finishOperInfoDtlList" resultMap="FinishOperInfoVo">
+		SELECT 
+		<if test="contDtlNo == null or contDtlNo == ''">
+			TOP 100
+		</if>
+		<if test="regDate != null and regDate != ''">
+			TOP 500
+		</if>
+			FillPvFrontTemp,
+			FillSvFrontTemp,
+			FillPvBackTemp,
+			FillSvBackTemp,
+			FillPressure,
+			FillNozzle1OpenTime,
+			FillTime,
+			RegDate
+		FROM 
+			TB_PACKING_OPER_INFO 
+		WHERE
+			1=1
+		<if test="contDtlNo != null and contDtlNo != '' and contDtlNo == null and  contDtlNo == ''">
+			AND WorkOrdNo IN (SELECT WORK_ORD_NO FROM TB_WORK_ORDER_ADM WHERE CONT_DTL_NO = #{contDtlNo})
+		</if>
+		<if test="regDate != null and regDate != ''">
+			AND CONVERT(VARCHAR(10), RegDate, 112) = #{regDate}
+		</if>
+		<if test="workOrdNo != null and workOrdNo != ''">
+			AND WorkOrdNo = #{workOrdNo}
+		</if>
+		ORDER BY RegDate DESC
+	</select>
+	
+	
+	<!-- 후가공 템프테이블  -->
+	<!-- 후가공 템프테이블 조회 -->
+	<select id="finishTempInfoList" resultMap="FinishOperInfoVo">
+		SELECT
+		TOP(1)
+			EquipCd
+			,SetupWeight
+			,StartSignal
+			,Speed
+			,Weight
+			,OutputCount
+			,Temperature
+			,Pressure
+			,Time
+			,OperStatus
+			,FaultyType
+			,EventAlarm
+			,CapInputCount
+			,CapOutputCount
+			,CapOperStatus
+			,CapFaultyCount
+			,PackInputCount
+			,PackOutputCount
+			,PackFaultyCount
+			,PackOperStatus
+			,BoxCount
+			,BoxLoadCount
+			,BoxTappingCount
+			,BoxPalletCount
+			,BoxWorkOrderNo
+			,RegId
+			,RegDate
+		FROM TB_FINISH_TEMP_INFO
+		ORDER BY RegDate DESC
+	</select>
+	
+	
+</mapper>

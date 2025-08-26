@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.mt.prodTargetMapper">
+
+	<resultMap id="ProdTargetVo" type="mes.domain.mt.ProdTargetVo">
+		<result property="salesMon"			column="SALES_MON"			/>
+		<result property="prodTotalQty"		column="PROD_TOTAL_QTY"		/>
+		<result property="prodQty"			column="PROD_QTY"			/>
+		<result property="prodFaultyQty"	column="PROD_FAULTY_QTY"	/>
+		<result property="salesYear"		column="SALES_YEAR"			/>
+		
+		<result property="regId"			column="REG_ID"				/>
+		<result property="regDate"			column="REG_DATE"			/>
+		<result property="updId"			column="UPD_ID"				/>
+		<result property="updDate"			column="UPD_DATE"			/>
+	</resultMap>
+	
+	<!-- 생산목표대비실적(레이저) 리스트 -->
+	<select id="prodTargetTotalList" resultMap="ProdTargetVo">
+		--목표수량 조회쿼리
+		SELECT 
+			A.SALES_MON,
+			SUM((
+				CASE WHEN C.PROD_TOTAL_QTY IS NULL
+				THEN CONVERT(FLOAT, ISNULL(REPLACE(B.SAFETY_STOCK, ',', ''), 0)) + CONVERT(FLOAT, ISNULL(REPLACE(A.SALES_PLAN_QTY, ',', ''), 0)) - CONVERT(FLOAT, ISNULL(0, 0))
+				ELSE C.PROD_TOTAL_QTY END
+			)) PROD_TOTAL_QTY
+		FROM TB_MON_SALES_PLAN_ADM A
+		LEFT OUTER JOIN TB_ITEM_INFO_ADM B
+		ON A.ITEM_SEQ = B.ITEM_SEQ
+		LEFT OUTER JOIN (
+			SELECT
+				X.PROD_YEAR
+				, X.PROD_MON
+				, X.ITEM_SEQ
+				, X.PROD_TOTAL_QTY
+			FROM TB_MON_PROD_PLAN_ADM X
+		) C
+		ON A.SALES_YEAR = C.PROD_YEAR
+		AND A.SALES_MON = C.PROD_MON
+		AND A.ITEM_SEQ = C.ITEM_SEQ
+		WHERE 1=1
+		AND A.CONFIRM_YN = '001'
+		AND A.SALES_YEAR = #{salesYear}
+		AND A.ITEM_SEQ = B.ITEM_SEQ
+		AND (SELECT Z.MAIN_GUBUN FROM TB_ITEM_INFO_ADM Z WHERE Z.ITEM_SEQ = A.ITEM_SEQ) = '001'
+		GROUP BY A.SALES_MON
+		
+		UNION ALL
+		
+		--생산수량 조회쿼리
+		SELECT A.date SALES_MON, COUNT(*) PROD_QTY
+		FROM (
+		SELECT DATEPART(mm,WORK_START_DATE) date
+		FROM TB_WORK_ORDER_ADM WOA
+			LEFT OUTER JOIN	TB_EQUIP_CODE_ADM ECA
+			ON WOA.EQUIP_CD = ECA.EQUIP_CD
+		WHERE CONVERT(CHAR(8), WORK_START_DATE, 112) LIKE #{salesYear} + '%'	
+			AND WORK_END_DATE IS Not Null
+			AND ECA.USE_YN = '001'
+			AND ECA.PRC_NM = '001'
+		) A
+		GROUP BY A.date
+
+		UNION ALL
+		
+		--불량개수 조회쿼리
+		SELECT DATEPART(mm,A.WORK_START_DATE) SALES_MON, ISNULL(SUM(A.FAULTY_QTY), 0) PROD_FAULTY_QTY
+		FROM TB_WORK_ORDER_ADM A, TB_EQUIP_CODE_ADM B
+		WHERE A.EQUIP_CD = B.EQUIP_CD
+			AND B.PRC_NM = '001'
+			AND B.USE_YN = '001'
+			AND A.WORK_END_DATE IS NOT NULL
+			AND CONVERT(CHAR(8), A.WORK_START_DATE, 112) LIKE #{salesYear} + '%'
+		GROUP BY DATEPART(mm,A.WORK_START_DATE)
+	</select>
+	
+	<!-- 생산목표대비실적(후가공) 리스트 -->
+	<select id="prodTargetFinishList" resultMap="ProdTargetVo">
+		--목표수량 조회쿼리
+		SELECT 
+			A.SALES_MON,
+			SUM((
+				CASE WHEN C.PROD_TOTAL_QTY IS NULL
+				THEN CONVERT(FLOAT, ISNULL(REPLACE(B.SAFETY_STOCK, ',', ''), 0)) + CONVERT(FLOAT, ISNULL(REPLACE(A.SALES_PLAN_QTY, ',', ''), 0)) - CONVERT(FLOAT, ISNULL(0, 0))
+				ELSE C.PROD_TOTAL_QTY END
+			)) PROD_TOTAL_QTY
+		FROM TB_MON_SALES_PLAN_ADM A
+		LEFT OUTER JOIN TB_ITEM_INFO_ADM B
+		ON A.ITEM_SEQ = B.ITEM_SEQ
+		LEFT OUTER JOIN (
+			SELECT
+				X.PROD_YEAR
+				, X.PROD_MON
+				, X.ITEM_SEQ
+				, X.PROD_TOTAL_QTY
+			FROM TB_MON_PROD_PLAN_ADM X
+		) C
+		ON A.SALES_YEAR = C.PROD_YEAR
+		AND A.SALES_MON = C.PROD_MON
+		AND A.ITEM_SEQ = C.ITEM_SEQ
+		WHERE 1=1
+			AND A.CONFIRM_YN = '001'
+			AND A.SALES_YEAR = #{salesYear}
+			AND A.ITEM_SEQ = B.ITEM_SEQ
+			AND (SELECT Z.MAIN_GUBUN FROM TB_ITEM_INFO_ADM Z WHERE Z.ITEM_SEQ = A.ITEM_SEQ) = '002'
+		GROUP BY A.SALES_MON
+		
+		UNION ALL
+		
+		--생산수량 조회쿼리
+		SELECT A.date SALES_MON, ISNULL(SUM(OUTPUT_QTY), 0)
+		FROM (
+		SELECT DATEPART(mm,WORK_START_DATE) date, OUTPUT_QTY
+		FROM TB_WORK_ORDER_ADM WOA
+			LEFT OUTER JOIN	TB_EQUIP_CODE_ADM ECA
+			ON WOA.EQUIP_CD = ECA.EQUIP_CD
+		WHERE 
+			CONVERT(CHAR(8), WORK_START_DATE, 112) LIKE #{salesYear} + '%'	
+			AND WORK_END_DATE IS Not Null
+			AND ECA.USE_YN = '001'
+			AND ECA.PRC_NM = '002'
+		) A
+		GROUP BY A.date
+		
+		UNION ALL
+		
+		--불량개수 조회쿼리
+		SELECT DATEPART(mm,A.WORK_START_DATE) SALES_MON, ISNULL(SUM(A.FAULTY_QTY), 0) PROD_FAULTY_QTY
+		FROM TB_WORK_ORDER_ADM A, TB_EQUIP_CODE_ADM B
+		WHERE A.EQUIP_CD = B.EQUIP_CD
+			AND B.PRC_NM = '002'
+			AND B.USE_YN = '001'
+			AND A.WORK_END_DATE IS NOT NULL
+			AND CONVERT(CHAR(8), A.WORK_START_DATE, 112) LIKE #{salesYear} + '%'
+		GROUP BY DATEPART(mm,A.WORK_START_DATE)
+	</select>
+	
+</mapper>

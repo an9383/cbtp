@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.bs.deliveryProcDtlMapper">
+	
+	<resultMap id="DeliveryProcDtlVo" type="mes.domain.bs.DeliveryProcDtlVo">
+		<result property="dpNo" 			column="DP_NO"				/>
+		<result property="doNo" 			column="DO_NO"				/>
+		<result property="dpQty" 			column="DP_QTY"				/>
+		<result property="dpDate" 			column="DP_DATE"			/>
+		<result property="dpDesc" 			column="DP_DESC"			/>
+		<result property="barcodeNo" 		column="BARCODE_NO"			/>
+		<result property="outCorpCd" 		column="OUT_CORP_CD"		/>
+		<result property="outCorpNm" 		column="OUT_CORP_NM"		/>
+		<result property="itemSeq" 			column="ITEM_SEQ"			/>
+		<result property="itemCd" 			column="ITEM_CD"			/>
+		<result property="itemNm" 			column="ITEM_NM"			/>
+		
+		<result property="itemGubun" 		column="ITEM_GUBUN"			/>
+		<result property="itemGubunNm" 		column="ITEM_GUBUN_NM"		/>
+		
+		
+		<result property="spNo" 			column="SP_NO"				/>
+		<result property="locationCd" 		column="LOCATION_CD"		/>
+		<result property="locationNo" 		column="LOCATION_NO"		/>
+		
+		
+		<result property="contDtlNo" 		column="CONT_DTL_NO"		/>
+		<result property="regId"			column="REG_ID"				/>
+		<result property="regDate"			column="REG_DATE"			/>
+		<result property="updId"			column="UPD_ID"				/>
+		<result property="updDate"			column="UPD_DATE"			/>
+	</resultMap>
+	
+	<!-- 출고처리 상세조회 -->
+	<select id="deliveryProcDtlList" resultMap="DeliveryProcDtlVo">
+		SELECT 
+			DPD.DP_NO,
+			DPD.DO_NO,
+			DPD.DP_QTY,
+			DPD.DP_DATE,
+			DPD.DP_DESC,
+			DPD.BARCODE_NO,
+			DPD.OUT_CORP_CD,
+			DOA.CONT_DTL_NO,
+			IIA.ITEM_SEQ,
+			IIA.ITEM_CD,
+			IIA.ITEM_NM,
+			IIA.ITEM_GUBUN,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=IIA.ITEM_GUBUN AND X.BASE_GROUP_CD='079') ITEM_GUBUN_NM,
+			SPA.SP_NO,
+			SPA.LOCATION_CD,
+			SPA.LOCATION_NO
+		FROM TB_DELIVERY_PROC_DTL DPD
+		LEFT OUTER JOIN TB_DELIVERY_ORDER_ADM DOA
+		ON DPD.DO_NO = DOA.DO_NO
+		LEFT OUTER JOIN TB_STOCK_PAYMENT_ADM SPA
+		ON SPA.SOURCE_NO=DPD.DP_NO
+		LEFT JOIN TB_ITEM_INFO_ADM IIA
+		ON DPD.ITEM_SEQ = IIA.ITEM_SEQ
+		WHERE 1=1
+		AND DPD.DO_NO = #{doNo}
+	</select>
+	
+	<!-- 출고처리 등록 -->
+	<insert id="deliveryProcDtlIns">
+		INSERT INTO TB_DELIVERY_PROC_DTL(
+			DP_NO,
+			DO_NO,
+			ITEM_SEQ,
+			BARCODE_NO,
+			DP_QTY,
+			DP_DATE,
+			OUT_CORP_CD,
+			DP_DESC,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{dpNo},
+			#{doNo},
+			#{itemSeq},
+			#{barcodeNo},
+			#{dpQty},
+			#{dpDate},
+			#{outCorpCd},
+			#{dpDesc},
+			#{regId},
+			GETDATE()
+		)
+	</insert>
+	
+	<!-- 출고처리 수정 -->
+	<update id="deliveryProcDtlUpd">
+		UPDATE	TB_DELIVERY_PROC_DTL 
+		SET	
+			DP_QTY = #{dpQty},
+			DP_DATE = #{dpDate},
+			OUT_CORP_CD = #{outCorpCd},
+			DP_DESC = #{dpDesc},
+			UPD_ID = #{updId},
+			UPD_DATE = GETDATE()
+		WHERE	DP_NO = #{dpNo}
+
+	</update>
+	
+	<!-- 출고처리 삭제 -->
+	<delete id="deliveryProcDtlDel">
+		DELETE FROM TB_DELIVERY_PROC_DTL							 
+		WHERE 1=1
+		<if test="dpNoArr!=null">
+			AND DP_NO IN 
+			<foreach collection="dpNoArr" item="arr" open="(" separator="," close=")">
+			#{arr}
+			</foreach>
+		</if>
+		<if test="dpNo!=null and !dpNo.equals('')">
+		AND DP_NO = #{dpNo}
+		</if>
+		
+	</delete>
+	
+	<!-- 출고번호 생성 -->
+	<select id="getDpNo" resultType="String">
+		SELECT
+			CONCAT(#{date},'-',FORMAT(CONVERT(INT,ISNULL(RIGHT(MAX(DP_NO),3),'0'))+1,'000'))
+		FROM TB_DELIVERY_PROC_DTL
+		WHERE 1=1
+		AND SUBSTRING(DP_NO,1,8) = #{date}
+	</select>
+	
+	<!-- 바코드별 제품출고 모니터링 조회 -->
+	<select id="itemWhsAdmMonitoringList" resultMap="DeliveryProcDtlVo">
+		SELECT 
+			A.BARCODE_NO,
+			B.ITEM_CD,
+			B.ITEM_REV,
+			Z.ITEM_NM,
+			B.TARGET_QTY,
+			A.OUTPUT_DTL_QTY,
+			D.REMAIN_QTY,
+			B.DLV_DATE,
+			C.DO_CORP_CD,
+			(SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD=C.DO_CORP_CD)DO_CORP_NM,
+			C.DO_DATE
+		FROM TB_ITEM_MOTOR_ADM Z 
+		INNER JOIN TB_DELIVERY_PROC_DTL A
+		ON Z.ITEM_CD=A.ITEM_CD
+		AND Z.ITEM_REV=A.ITEM_REV
+		INNER JOIN TB_DELIVERY_ORDER_DTL B
+		ON A.DO_NO=B.DO_NO
+		AND A.DO_SEQ=B.DO_SEQ
+		INNER JOIN TB_DELIVERY_ORDER_ADM C
+		ON B.DO_NO=C.DO_NO
+		LEFT OUTER JOIN TB_ITEM_WHS_ADM D
+		ON A.BARCODE_NO=D.BARCODE_NO
+		WHERE A.BARCODE_NO=#{barcodeNo}
+	</select>
+	
+	
+</mapper>

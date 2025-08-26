@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.mm.operationNoticeMapper">
+
+	<resultMap id="OperationNoticeVo" type="mes.domain.mm.OperationNoticeVo">
+		<result property="startDate"			column="START_DATE"				/>
+		<result property="endDate"				column="END_DATE"				/>
+		
+		<result property="idx"					column="IDX"					/>
+		<result property="type"					column="TYPE"					/>
+		<result property="gubun"				column="GUBUN"					/>
+		<result property="origin"				column="ORIGIN"					/>
+		<result property="originPrcss"			column="ORIGIN_PRCSS"			/>
+		<result property="originContents"		column="ORIGIN_CONTENTS"		/>
+		<result property="originAction"			column="ORIGIN_ACTION"			/>
+		<result property="noticeStartDate"		column="NOTICE_START_DATE"		/>
+		<result property="noticeEndDate"		column="NOTICE_END_DATE"		/>
+		<result property="manager"				column="MANAGER"				/>
+		<result property="manageNumber"			column="MANAGE_NUMBER"			/>
+		<result property="regId"				column="REG_ID"					/>
+		<result property="regDate"				column="REG_DATE"				/>
+		<result property="updId"				column="UPD_ID"					/>
+		<result property="updDate"				column="UPD_DATE"				/>
+		
+	</resultMap>
+	
+	<!-- 목록조회 -->
+	<select id="list" resultMap="OperationNoticeVo" parameterType="mes.domain.mm.OperationNoticeVo">
+		<![CDATA[
+			SELECT
+				IDX,
+				TYPE,
+				GUBUN,
+				ORIGIN,
+				ORIGIN_PRCSS,
+				ORIGIN_CONTENTS,
+				ORIGIN_ACTION,
+				NOTICE_START_DATE,
+				NOTICE_END_DATE,
+				MANAGER,
+				MANAGE_NUMBER,
+				REG_ID,
+				REG_DATE,
+				UPD_ID,
+				UPD_DATE
+			FROM TB_OPERATION_NOTICE
+			WHERE REG_DATE BETWEEN #{startDate} AND DATEADD(DAY, 1, #{endDate})
+		]]>
+	</select>
+	
+	<!-- 상세조회 -->
+	<select id="read" resultMap="OperationNoticeVo" parameterType="mes.domain.mm.OperationNoticeVo">
+		<![CDATA[
+			SELECT
+				IDX,
+				TYPE,
+				GUBUN,
+				ORIGIN,
+				ORIGIN_PRCSS,
+				ORIGIN_CONTENTS,
+				ORIGIN_ACTION,
+				NOTICE_START_DATE,
+				NOTICE_END_DATE,
+				MANAGER,
+				MANAGE_NUMBER,
+				REG_ID,
+				REG_DATE,
+				UPD_ID,
+				UPD_DATE
+			FROM TB_OPERATION_NOTICE
+			WHERE IDX = #{idx}
+		]]>
+	</select>
+	
+	<!-- 등록 -->
+	<insert id="add" parameterType="mes.domain.mm.OperationNoticeVo" useGeneratedKeys="true" keyProperty="idx" keyColumn="idx">
+		<![CDATA[
+		INSERT INTO TB_OPERATION_NOTICE (
+			TYPE,
+			GUBUN,
+			ORIGIN,
+			ORIGIN_PRCSS,
+			ORIGIN_CONTENTS,
+			ORIGIN_ACTION,
+			NOTICE_START_DATE,
+			NOTICE_END_DATE,
+			MANAGER,
+			MANAGE_NUMBER,
+			REG_ID,
+			REG_DATE
+		) VALUES (
+			#{type},
+			#{gubun},
+			#{origin},
+			#{originPrcss},
+			#{originContents},
+			#{originAction},
+			#{noticeStartDate},
+			#{noticeEndDate},
+			#{manager},
+			#{manageNumber},
+			#{regId},
+			GETDATE()
+		)
+		]]>
+		<selectKey resultType="String" keyProperty="idx" order="AFTER">
+    		SELECT SCOPE_IDENTITY()
+		</selectKey>
+	</insert>
+	
+	<!-- 수정 -->
+	<update id="edit" parameterType="mes.domain.mm.OperationNoticeVo">
+		<![CDATA[
+			UPDATE TB_OPERATION_NOTICE
+			SET
+				TYPE = #{type},
+				GUBUN = #{gubun},
+				ORIGIN = #{origin},
+				ORIGIN_PRCSS = #{originPrcss},
+				ORIGIN_CONTENTS = #{originContents},
+				ORIGIN_ACTION = #{originAction},
+				NOTICE_START_DATE = #{noticeStartDate},
+				NOTICE_END_DATE = #{noticeEndDate},
+				MANAGER = #{manager},
+				MANAGE_NUMBER = #{manageNumber},
+				UPD_ID = #{updId},
+				UPD_DATE = GETDATE()
+			WHERE IDX = #{idx}
+		]]>
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="remove" parameterType="mes.domain.mm.OperationNoticeVo">
+		<![CDATA[
+			DELETE FROM TB_OPERATION_NOTICE WHERE IDX = #{idx}
+		]]>
+	</delete>
+</mapper>

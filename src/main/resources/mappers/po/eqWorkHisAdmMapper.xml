@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.po.eqWorkHisAdmMapper">
+	
+	<resultMap id="EqWorkHisAdmVo" type="mes.domain.po.EqWorkHisAdmVo">
+		<result property="workOrdNo"		column="WORK_ORD_NO"	/>
+		<result property="histSeq"			column="HIST_SEQ"	/>
+		
+		<result property="stNzTemperature"	column="ST_NZ_TEMPERATURE"	/>
+		<result property="stH1Temperature"	column="ST_H1_TEMPERATURE"	/>
+		<result property="stH2Temperature"	column="ST_H2_TEMPERATURE"	/>
+		<result property="stH3Temperature"	column="ST_H3_TEMPERATURE"	/>
+		<result property="stH4Temperature"	column="ST_H4_TEMPERATURE"	/>
+		<result property="stChgPosition1"	column="ST_CHG_POSITION_1"	/>
+		<result property="stChgPosition2"	column="ST_CHG_POSITION_2"	/>
+		<result property="stChgPosition3"	column="ST_CHG_POSITION_3"	/>
+		<result property="stChgPosition4"	column="ST_CHG_POSITION_4"	/>
+		<result property="stSuckBack"		column="ST_SUCK_BACK"		/>
+		<result property="stInjPressure1"	column="ST_INJ_PRESSURE_1"	/>
+		<result property="stInjPressure2"	column="ST_INJ_PRESSURE_2"	/>
+		<result property="stInjPressure3"	column="ST_INJ_PRESSURE_3"	/>
+		<result property="stInjVelocity1"	column="ST_INJ_VELOCITY_1"	/>
+		<result property="stInjVelocity2"	column="ST_INJ_VELOCITY_2"	/>
+		<result property="stInjVelocity3"	column="ST_INJ_VELOCITY_3"	/>
+		<result property="stInjPosition1"	column="ST_INJ_POSITION_1"	/>
+		<result property="stInjPosition2"	column="ST_INJ_POSITION_2"	/>
+		<result property="stInjPosition3"	column="ST_INJ_POSITION_3"	/>
+		<result property="stBackPressure1"	column="ST_BACK_PRESSURE_1"	/>
+		<result property="stBackPressure2"	column="ST_BACK_PRESSURE_2"	/>
+		<result property="stBackPressure3"	column="ST_BACK_PRESSURE_3" />
+		<result property="stBackPressure4"	column="ST_BACK_PRESSURE_4"	/>
+		<result property="stHldPressure1"	column="ST_HLD_PRESSURE_1"	/>
+		<result property="stHldPressure2"	column="ST_HLD_PRESSURE_2"	/>
+		<result property="stHldPressure3"	column="ST_HLD_PRESSURE_3"	/>
+		<result property="stHldVel1"		column="ST_HLD_VEL_1"		/>
+		<result property="stHldVel2"		column="ST_HLD_VEL_2"		/>
+		<result property="stHldVel3"		column="ST_HLD_VEL_3"		/>
+		<result property="stThermostat"		column="ST_THERMOSTAT"		/>
+		<result property="stHydraulicOil"	column="ST_HYDRAULIC_OIL"	/>
+		<result property="stCoolwaterIn"	column="ST_COOLWATER_IN"	/>
+		<result property="stCoolwaterOut"	column="ST_COOLWATER_OUT"	/>
+		<result property="stMoldFixed"		column="ST_MOLD_FIXED"		/>
+		<result property="stMoldMoving"		column="ST_MOLD_MOVING"		/>
+		
+		<result property="inFixedOne"		column="IN_FIXED_ONE"		/>
+		<result property="inFixedTwo"		column="IN_FIXED_TWO"		/>
+		<result property="inFixedThree"		column="IN_FIXED_THREE"		/>
+		<result property="inMovingOne"		column="IN_MOVING_ONE"		/>
+		<result property="inMovingTwo"		column="IN_MOVING_TWO"		/>
+		<result property="inMovingThree"	column="IN_MOVING_THREE"	/>
+		
+		
+		<result property="cdNzTemperature"	column="CD_NZ_TEMPERATURE"	/>
+		<result property="cdH1Temperature"	column="CD_H1_TEMPERATURE"	/>
+		<result property="cdH2Temperature"	column="CD_H2_TEMPERATURE"	/>
+		<result property="cdH3Temperature"	column="CD_H3_TEMPERATURE"	/>
+		<result property="cdH4Temperature"	column="CD_H4_TEMPERATURE"	/>
+		<result property="cdChgPosition1"	column="CD_CHG_POSITION_1"	/>
+		<result property="cdChgPosition2"	column="CD_CHG_POSITION_2"	/>
+		<result property="cdChgPosition3"	column="CD_CHG_POSITION_3"	/>
+		<result property="cdChgPosition4"	column="CD_CHG_POSITION_4"	/>
+		<result property="cdSuckBack"		column="CD_SUCK_BACK"		/>
+		<result property="cdInjPressure1"	column="CD_INJ_PRESSURE_1"	/>
+		<result property="cdInjPressure2"	column="CD_INJ_PRESSURE_2"	/>
+		<result property="cdInjPressure3"	column="CD_INJ_PRESSURE_3"	/>
+		<result property="cdInjVelocity1"	column="CD_INJ_VELOCITY_1"	/>
+		<result property="cdInjVelocity2"	column="CD_INJ_VELOCITY_2"	/>
+		<result property="cdInjVelocity3"	column="CD_INJ_VELOCITY_3"	/>
+		<result property="cdInjPosition1"	column="CD_INJ_POSITION_1"	/>
+		<result property="cdInjPosition2"	column="CD_INJ_POSITION_2"	/>
+		<result property="cdInjPosition3"	column="CD_INJ_POSITION_3"	/>
+		<result property="cdBackPressure1"	column="CD_BACK_PRESSURE_1"	/>
+		<result property="cdBackPressure2"	column="CD_BACK_PRESSURE_2"	/>
+		<result property="cdBackPressure3"	column="CD_BACK_PRESSURE_3"	/>
+		<result property="cdBackPressure4"	column="CD_BACK_PRESSURE_4"	/>
+		<result property="cdHldPressure1"	column="CD_HLD_PRESSURE_1"	/>
+		<result property="cdHldPressure2"	column="CD_HLD_PRESSURE_2"	/>
+		<result property="cdHldPressure3"	column="CD_HLD_PRESSURE_3"	/>
+		<result property="cdHldVel1"		column="CD_HLD_VEL_1"		/>
+		<result property="cdHldVel2"		column="CD_HLD_VEL_2"		/>
+		<result property="cdHldVel3"		column="CD_HLD_VEL_3"		/>
+		<result property="cdThermostat"		column="CD_THERMOSTAT"		/>
+		<result property="cdHydraulicOil"	column="CD_HYDRAULIC_OIL"	/>
+		<result property="cdCoolwaterIn"	column="CD_COOLWATER_IN"	/>
+		<result property="cdCoolwaterOut"	column="CD_COOLWATER_OUT"	/>
+		<result property="cdMoldFixed"		column="CD_MOLD_FIXED"		/>
+		<result property="cdMoldMoving"		column="CD_MOLD_MOVING"		/>
+		
+		<result property="inFixTemp1"		column="IN_FIX_TEMP1"		/>
+		<result property="inFixTemp2"		column="IN_FIX_TEMP2"		/>
+		<result property="inFixTemp3"		column="IN_FIX_TEMP3"		/>
+		<result property="inMoveTemp1"		column="IN_MOVE_TEMP1"		/>
+		<result property="inMoveTemp2"		column="IN_MOVE_TEMP2"		/>
+		<result property="inMoveTemp3"		column="IN_MOVE_TEMP3"		/>
+		
+		
+		<result property="regId"			column="REG_ID"				/>
+		<result property="regDate"			column="REG_DATE"			/>
+		<result property="updId"			column="UPD_ID"				/>
+		<result property="updDate"			column="UPD_DATE"			/>
+	</resultMap>
+	
+	<!-- 작업조건 목록조회 -->
+	<select id="listAll" resultMap="EqWorkHisAdmVo">
+		SELECT	
+			WORK_ORD_NO,
+			HIST_SEQ,
+			ST_NZ_TEMPERATURE,
+			ST_H1_TEMPERATURE,
+			ST_H2_TEMPERATURE,
+			ST_H3_TEMPERATURE,
+			ST_H4_TEMPERATURE,
+			ST_CHG_POSITION_1,
+			ST_CHG_POSITION_2,
+			ST_CHG_POSITION_3,
+			ST_CHG_POSITION_4,
+			ST_SUCK_BACK,
+			ST_INJ_PRESSURE_1,
+			ST_INJ_PRESSURE_2,
+			ST_INJ_PRESSURE_3,
+			ST_INJ_VELOCITY_1,
+			ST_INJ_VELOCITY_2,
+			ST_INJ_VELOCITY_3,
+			ST_INJ_POSITION_1,
+			ST_INJ_POSITION_2,
+			ST_INJ_POSITION_3,
+			ST_BACK_PRESSURE_1,
+			ST_BACK_PRESSURE_2,
+			ST_BACK_PRESSURE_3,
+			ST_BACK_PRESSURE_4,
+			ST_HLD_PRESSURE_1,
+			ST_HLD_PRESSURE_2,
+			ST_HLD_PRESSURE_3,
+			ST_HLD_VEL_1,
+			ST_HLD_VEL_2,
+			ST_HLD_VEL_3,
+			ST_THERMOSTAT,
+			ST_HYDRAULIC_OIL,
+			ST_COOLWATER_IN,
+			ST_COOLWATER_OUT,
+			ST_MOLD_FIXED,
+			ST_MOLD_MOVING,
+			IN_FIXED_ONE,
+			IN_FIXED_TWO,	
+			IN_FIXED_THREE,	
+			IN_MOVING_ONE,
+			IN_MOVING_TWO,	
+			IN_MOVING_THREE,
+			CD_NZ_TEMPERATURE,
+			CD_H1_TEMPERATURE,
+			CD_H2_TEMPERATURE,
+			CD_H3_TEMPERATURE,
+			CD_H4_TEMPERATURE,
+			CD_CHG_POSITION_1,
+			CD_CHG_POSITION_2,
+			CD_CHG_POSITION_3,
+			CD_CHG_POSITION_4,
+			CD_SUCK_BACK,
+			CD_INJ_PRESSURE_1,
+			CD_INJ_PRESSURE_2,
+			CD_INJ_PRESSURE_3,
+			CD_INJ_VELOCITY_1,
+			CD_INJ_VELOCITY_2,
+			CD_INJ_VELOCITY_3,
+			CD_INJ_POSITION_1,
+			CD_INJ_POSITION_2,
+			CD_INJ_POSITION_3,
+			CD_BACK_PRESSURE_1,
+			CD_BACK_PRESSURE_2,
+			CD_BACK_PRESSURE_3,
+			CD_BACK_PRESSURE_4,
+			CD_HLD_PRESSURE_1,
+			CD_HLD_PRESSURE_2,
+			CD_HLD_PRESSURE_3,
+			CD_HLD_VEL_1,
+			CD_HLD_VEL_2,
+			CD_HLD_VEL_3,
+			CD_THERMOSTAT,
+			CD_HYDRAULIC_OIL,
+			CD_COOLWATER_IN,
+			CD_COOLWATER_OUT,
+			CD_MOLD_FIXED,
+			CD_MOLD_MOVING,
+			IN_FIX_TEMP1,
+			IN_FIX_TEMP2,
+			IN_FIX_TEMP3,
+			IN_MOVE_TEMP1,
+			IN_MOVE_TEMP2,
+			IN_MOVE_TEMP3
+		FROM	TB_EQ_WORK_HIST_ADM 
+		WHERE 1=1
+		AND	WORK_ORD_NO = #{workOrdNo}
+		<if test="histSeq!=null and !histSeq.equals('')">
+			AND	HIST_SEQ = #{histSeq}
+		</if>
+	</select>
+	
+	<!-- 작업조건 등록유무 -->
+	<select id="listCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM TB_EQ_WORK_HIST_ADM 
+		WHERE 1=1
+		AND	WORK_ORD_NO = #{workOrdNo}
+		AND	HIST_SEQ = #{histSeq}
+	</select>
+	
+	<!-- 작업조건 등록 -->
+	<insert id="create">
+		INSERT INTO TB_EQ_WORK_HIST_ADM(
+			WORK_ORD_NO,
+			HIST_SEQ,
+			ST_NZ_TEMPERATURE,
+			ST_H1_TEMPERATURE,
+			ST_H2_TEMPERATURE,
+			ST_H3_TEMPERATURE,
+			ST_H4_TEMPERATURE,
+			ST_CHG_POSITION_1,
+			ST_CHG_POSITION_2,
+			ST_CHG_POSITION_3,
+			ST_CHG_POSITION_4,
+			ST_SUCK_BACK,
+			ST_INJ_PRESSURE_1,
+			ST_INJ_PRESSURE_2,
+			ST_INJ_PRESSURE_3,
+			ST_INJ_VELOCITY_1,
+			ST_INJ_VELOCITY_2,
+			ST_INJ_VELOCITY_3,
+			ST_INJ_POSITION_1,
+			ST_INJ_POSITION_2,
+			ST_INJ_POSITION_3,
+			ST_BACK_PRESSURE_1,
+			ST_BACK_PRESSURE_2,
+			ST_BACK_PRESSURE_3,
+			ST_BACK_PRESSURE_4,
+			ST_HLD_PRESSURE_1,
+			ST_HLD_PRESSURE_2,
+			ST_HLD_PRESSURE_3,
+			ST_HLD_VEL_1,
+			ST_HLD_VEL_2,
+			ST_HLD_VEL_3,
+			ST_THERMOSTAT,
+			ST_HYDRAULIC_OIL,
+			ST_COOLWATER_IN,
+			ST_COOLWATER_OUT,
+			ST_MOLD_FIXED,
+			ST_MOLD_MOVING,
+			IN_FIXED_ONE,
+			IN_FIXED_TWO,	
+			IN_FIXED_THREE,	
+			IN_MOVING_ONE,
+			IN_MOVING_TWO,	
+			IN_MOVING_THREE,
+			CD_NZ_TEMPERATURE,
+			CD_H1_TEMPERATURE,
+			CD_H2_TEMPERATURE,
+			CD_H3_TEMPERATURE,
+			CD_H4_TEMPERATURE,
+			CD_CHG_POSITION_1,
+			CD_CHG_POSITION_2,
+			CD_CHG_POSITION_3,
+			CD_CHG_POSITION_4,
+			CD_SUCK_BACK,
+			CD_INJ_PRESSURE_1,
+			CD_INJ_PRESSURE_2,
+			CD_INJ_PRESSURE_3,
+			CD_INJ_VELOCITY_1,
+			CD_INJ_VELOCITY_2,
+			CD_INJ_VELOCITY_3,
+			CD_INJ_POSITION_1,
+			CD_INJ_POSITION_2,
+			CD_INJ_POSITION_3,
+			CD_BACK_PRESSURE_1,
+			CD_BACK_PRESSURE_2,
+			CD_BACK_PRESSURE_3,
+			CD_BACK_PRESSURE_4,
+			CD_HLD_PRESSURE_1,
+			CD_HLD_PRESSURE_2,
+			CD_HLD_PRESSURE_3,
+			CD_HLD_VEL_1,
+			CD_HLD_VEL_2,
+			CD_HLD_VEL_3,
+			CD_THERMOSTAT,
+			CD_HYDRAULIC_OIL,
+			CD_COOLWATER_IN,
+			CD_COOLWATER_OUT,
+			CD_MOLD_FIXED,
+			CD_MOLD_MOVING,
+			IN_FIX_TEMP1,
+			IN_FIX_TEMP2,
+			IN_FIX_TEMP3,
+			IN_MOVE_TEMP1,
+			IN_MOVE_TEMP2,
+			IN_MOVE_TEMP3,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{workOrdNo},
+			#{histSeq},
+			#{stNzTemperature},
+			#{stH1Temperature},
+			#{stH2Temperature},
+			#{stH3Temperature},
+			#{stH4Temperature},
+			#{stChgPosition1},
+			#{stChgPosition2},
+			#{stChgPosition3},
+			#{stChgPosition4},
+			#{stSuckBack},
+			#{stInjPressure1},
+			#{stInjPressure2},
+			#{stInjPressure3},
+			#{stInjVelocity1},
+			#{stInjVelocity2},
+			#{stInjVelocity3},
+			#{stInjPosition1},
+			#{stInjPosition2},
+			#{stInjPosition3},
+			#{stBackPressure1},
+			#{stBackPressure2},
+			#{stBackPressure3},
+			#{stBackPressure4},
+			#{stHldPressure1},
+			#{stHldPressure2},
+			#{stHldPressure3},
+			#{stHldVel1},
+			#{stHldVel2},
+			#{stHldVel3},
+			#{stThermostat},
+			#{stHydraulicOil},
+			#{stCoolwaterIn},
+			#{stCoolwaterOut},
+			#{stMoldFixed},
+			#{stMoldMoving},
+			#{inFixedOne},
+			#{inFixedTwo},
+			#{inFixedThree},
+			#{inMovingOne},
+			#{inMovingTwo},
+			#{inMovingThree},
+			#{cdNzTemperature},
+			#{cdH1Temperature},
+			#{cdH2Temperature},
+			#{cdH3Temperature},
+			#{cdH4Temperature},
+			#{cdChgPosition1},
+			#{cdChgPosition2},
+			#{cdChgPosition3},
+			#{cdChgPosition4},
+			#{cdSuckBack},
+			#{cdInjPressure1},
+			#{cdInjPressure2},
+			#{cdInjPressure3},
+			#{cdInjVelocity1},
+			#{cdInjVelocity2},
+			#{cdInjVelocity3},
+			#{cdInjPosition1},
+			#{cdInjPosition2},
+			#{cdInjPosition3},
+			#{cdBackPressure1},
+			#{cdBackPressure2},
+			#{cdBackPressure3},
+			#{cdBackPressure4},
+			#{cdHldPressure1},
+			#{cdHldPressure2},
+			#{cdHldPressure3},
+			#{cdHldVel1},
+			#{cdHldVel2},
+			#{cdHldVel3},
+			#{cdThermostat},
+			#{cdHydraulicOil},
+			#{cdCoolwaterIn},
+			#{cdCoolwaterOut},
+			#{cdMoldFixed},
+			#{cdMoldMoving},
+			#{inFixTemp1},
+			#{inFixTemp2},
+			#{inFixTemp3},
+			#{inMoveTemp1},
+			#{inMoveTemp2},
+			#{inMoveTemp3},
+			#{regId},
+			GETDATE()
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE	TB_EQ_WORK_HIST_ADM 
+		SET	
+			ST_NZ_TEMPERATURE = #{stNzTemperature},
+			ST_H1_TEMPERATURE = #{stH1Temperature},
+			ST_H2_TEMPERATURE = #{stH2Temperature},
+			ST_H3_TEMPERATURE = #{stH3Temperature},
+			ST_H4_TEMPERATURE = #{stH4Temperature},
+			ST_CHG_POSITION_1 = #{stChgPosition1},
+			ST_CHG_POSITION_2 = #{stChgPosition2},
+			ST_CHG_POSITION_3 = #{stChgPosition3},
+			ST_CHG_POSITION_4 = #{stChgPosition4},
+			ST_SUCK_BACK = #{stSuckBack},
+			ST_INJ_PRESSURE_1 = #{stInjPressure1},
+			ST_INJ_PRESSURE_2 = #{stInjPressure2},
+			ST_INJ_PRESSURE_3 = #{stInjPressure3},
+			ST_INJ_VELOCITY_1 = #{stInjVelocity1},
+			ST_INJ_VELOCITY_2 = #{stInjVelocity2},
+			ST_INJ_VELOCITY_3 = #{stInjVelocity3},
+			ST_INJ_POSITION_1 = #{stInjPosition1},
+			ST_INJ_POSITION_2 = #{stInjPosition2},
+			ST_INJ_POSITION_3 = #{stInjPosition3},
+			ST_BACK_PRESSURE_1 = #{stBackPressure1},
+			ST_BACK_PRESSURE_2 = #{stBackPressure2},
+			ST_BACK_PRESSURE_3 = #{stBackPressure3},
+			ST_BACK_PRESSURE_4 = #{stBackPressure4},
+			ST_HLD_PRESSURE_1 = #{stHldPressure1},
+			ST_HLD_PRESSURE_2 = #{stHldPressure2},
+			ST_HLD_PRESSURE_3 = #{stHldPressure3},
+			ST_HLD_VEL_1 = #{stHldVel1},
+			ST_HLD_VEL_2 = #{stHldVel2},
+			ST_HLD_VEL_3 = #{stHldVel3},
+			ST_THERMOSTAT = #{stThermostat},
+			ST_HYDRAULIC_OIL = #{stHydraulicOil},
+			ST_COOLWATER_IN = #{stCoolwaterIn},
+			ST_COOLWATER_OUT = #{stCoolwaterOut},
+			ST_MOLD_FIXED = #{stMoldFixed},
+			ST_MOLD_MOVING = #{stMoldMoving},
+			
+			IN_FIXED_ONE = #{inFixedOne},
+			IN_FIXED_TWO = #{inFixedTwo},
+			IN_FIXED_THREE = #{inFixedThree},
+			IN_MOVING_ONE = #{inMovingOne},
+			IN_MOVING_TWO = #{inMovingTwo},
+			IN_MOVING_THREE = #{inMovingThree},
+			
+			CD_NZ_TEMPERATURE = #{cdNzTemperature},
+			CD_H1_TEMPERATURE = #{cdH1Temperature},
+			CD_H2_TEMPERATURE = #{cdH2Temperature},
+			CD_H3_TEMPERATURE = #{cdH3Temperature},
+			CD_H4_TEMPERATURE = #{cdH4Temperature},
+			CD_CHG_POSITION_1 = #{cdChgPosition1},
+			CD_CHG_POSITION_2 = #{cdChgPosition2},
+			CD_CHG_POSITION_3 = #{cdChgPosition3},
+			CD_CHG_POSITION_4 = #{cdChgPosition4},
+			CD_SUCK_BACK = #{cdSuckBack},
+			CD_INJ_PRESSURE_1 = #{cdInjPressure1},
+			CD_INJ_PRESSURE_2 = #{cdInjPressure2},
+			CD_INJ_PRESSURE_3 = #{cdInjPressure3},
+			CD_INJ_VELOCITY_1 = #{cdInjVelocity1},
+			CD_INJ_VELOCITY_2 = #{cdInjVelocity2},
+			CD_INJ_VELOCITY_3 = #{cdInjVelocity3},
+			CD_INJ_POSITION_1 = #{cdInjPosition1},
+			CD_INJ_POSITION_2 = #{cdInjPosition2},
+			CD_INJ_POSITION_3 = #{cdInjPosition3},
+			CD_BACK_PRESSURE_1 = #{cdBackPressure1},
+			CD_BACK_PRESSURE_2 = #{cdBackPressure2},
+			CD_BACK_PRESSURE_3 = #{cdBackPressure3},
+			CD_BACK_PRESSURE_4 = #{cdBackPressure4},
+			CD_HLD_PRESSURE_1 = #{cdHldPressure1},
+			CD_HLD_PRESSURE_2 = #{cdHldPressure2},
+			CD_HLD_PRESSURE_3 = #{cdHldPressure3},
+			CD_HLD_VEL_1 = #{cdHldVel1},
+			CD_HLD_VEL_2 = #{cdHldVel2},
+			CD_HLD_VEL_3 = #{cdHldVel3},
+			CD_THERMOSTAT = #{cdThermostat},
+			CD_HYDRAULIC_OIL = #{cdHydraulicOil},
+			CD_COOLWATER_IN = #{cdCoolwaterIn},
+			CD_COOLWATER_OUT = #{cdCoolwaterOut},
+			CD_MOLD_FIXED = #{cdMoldFixed},
+			CD_MOLD_MOVING = #{cdMoldMoving},
+			IN_FIX_TEMP1 = #{inFixTemp1},
+			IN_FIX_TEMP2 = #{inFixTemp2},
+			IN_FIX_TEMP3 = #{inFixTemp3},
+			IN_MOVE_TEMP1 = #{inMoveTemp1},
+			IN_MOVE_TEMP2 = #{inMoveTemp2},
+			IN_MOVE_TEMP3 = #{inMoveTemp3},
+			UPD_ID = #{updId},
+			UPD_DATE = GETDATE()
+		WHERE 1=1
+		AND	WORK_ORD_NO = #{workOrdNo}
+		AND	HIST_SEQ = #{histSeq}
+	</update>
+	
+
+</mapper>

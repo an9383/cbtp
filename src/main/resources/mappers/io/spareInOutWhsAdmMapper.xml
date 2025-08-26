@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.io.spareInOutWhsAdmMapper">
+
+	<resultMap id="SpareInOutWhsAdmVo" type="mes.domain.io.SpareInOutWhsAdmVo">
+		<result property="spaIoNo"					column="SPA_IO_NO"			/>
+		<result property="spaIoSeq"					column="SPA_IO_SEQ"			/>
+		<result property="itemSeq"					column="ITEM_SEQ"			/>
+		<result property="mainGubun"				column="MAIN_GUBUN"		/>
+		<result property="spaWhse"					column="SPA_WHSE"			/>
+		<result property="spaBarcode"				column="SPA_BARCODE"		/>
+		<result property="spaSpec"					column="SPA_SPEC"			/>
+		<result property="spaSafyStock"				column="SPA_SAFY_STOCK"		/>
+		<result property="spaEquip"					column="SPA_EQUIP"			/>	
+		
+		<result property="itemCd"					column="ITEM_CD"			/>
+		<result property="itemNm"					column="ITEM_NM"			/>
+		<result property="itemCus"					column="ITEM_CUS"			/>
+		<result property="barcodeNo"				column="BARCODE_NO"			/>
+		<result property="spaIoGubun"				column="SPA_IO_GUBUN"		/>
+		<result property="spaIoDate"				column="SPA_IO_DATE"		/>
+		<result property="spaIoQty"					column="SPA_IO_QTY"			/>
+		<result property="spaIoDesc"				column="SPA_IO_DESC"		/>
+		<result property="realQty"					column="REAL_QTY"			/>
+		<result property="regId"					column="PO_NO"				/>
+		<result property="regDate"					column="PO_NO"				/>
+		<result property="updId"					column="PO_NO"				/>
+		<result property="updDate"					column="PO_NO"				/>
+		
+	</resultMap>
+	
+	<select id="spareItemInfoList" resultMap="SpareInOutWhsAdmVo">
+		SELECT 
+			IIA.ITEM_SEQ,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM WHERE BASE_CD=IIA.MAIN_GUBUN AND BASE_GROUP_CD='112') MAIN_GUBUN,
+			IIA.SPA_WHSE,
+			IIA.SPA_BARCODE,
+			IIA.ITEM_NM,
+			IIA.SPA_SPEC,
+			IIA.SPA_SAFY_STOCK,
+			IIA.SPA_EQUIP,
+			(
+				SELECT 
+					SUM(CASE WHEN SPA_IO_GUBUN='001' THEN SPA_IO_QTY ELSE 0 END)-SUM(CASE WHEN SPA_IO_GUBUN='002' THEN SPA_IO_QTY ELSE 0 END)
+				FROM 
+				(
+	
+					SELECT 
+						SPA_IO_NO,
+						SPA_IO_SEQ,
+						ITEM_SEQ,
+						BARCODE_NO,
+						SPA_IO_GUBUN,
+						SPA_IO_DATE,
+						SPA_IO_QTY
+					FROM TB_SPARE_IN_OUT_WHS_ADM
+					WHERE SPA_IO_GUBUN ='001'
+					UNION
+					SELECT 
+						SPA_IO_NO,
+						SPA_IO_SEQ,
+						ITEM_SEQ,
+						BARCODE_NO,
+						SPA_IO_GUBUN,
+						SPA_IO_DATE,
+						SPA_IO_QTY
+					FROM TB_SPARE_IN_OUT_WHS_ADM
+					WHERE SPA_IO_GUBUN ='002'
+				)A
+				GROUP BY ITEM_SEQ
+				HAVING ITEM_SEQ=IIA.ITEM_SEQ
+			) REAL_QTY
+			
+		FROM TB_ITEM_INFO_ADM IIA
+		WHERE 1=1
+		AND ITEM_GUBUN='005'
+	</select>
+	
+	<!-- 스페어관리 조회 -->
+	<select id="spareInOutWhsList" resultMap="SpareInOutWhsAdmVo">
+		SELECT	
+			SPA_IO_NO,
+			SPA_IO_SEQ,
+			SPA.ITEM_SEQ,
+			BARCODE_NO,
+			INFO.ITEM_CUS,
+			SPA_IO_GUBUN,
+			SPA_IO_DATE,
+			SPA_IO_QTY,
+			SPA_IO_DESC
+		FROM	TB_SPARE_IN_OUT_WHS_ADM SPA
+		LEFT OUTER JOIN TB_ITEM_INFO_ADM INFO
+		ON SPA.ITEM_SEQ=INFO.ITEM_SEQ
+		WHERE 1=1
+		AND	SPA.ITEM_SEQ = #{itemSeq}
+		<if test="startDate!=null and !startDate.equals('')">
+		AND SPA.SPA_IO_DATE BETWEEN #{startDate} AND #{endDate}
+		</if>
+	</select>
+	
+	<!-- 스페어관리 등록 -->
+	<insert id="spareInOutWhsCreate">
+		INSERT INTO TB_SPARE_IN_OUT_WHS_ADM(
+			SPA_IO_NO,
+			SPA_IO_SEQ,
+			ITEM_SEQ,
+			BARCODE_NO,
+			SPA_IO_GUBUN,
+			SPA_IO_DATE,
+			SPA_IO_QTY,
+			SPA_IO_DESC,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{spaIoNo},
+			#{spaIoSeq},
+			#{itemSeq},
+			#{barcodeNo},
+			#{spaIoGubun},
+			#{spaIoDate},
+			#{spaIoQty},
+			#{spaIoDesc},
+			#{regId},
+			GETDATE()
+		)
+	</insert>
+	
+	<!-- 스페어관리 수정 -->
+	<update id="spareInOutWhsUpdate">
+		UPDATE	TB_SPARE_IN_OUT_WHS_ADM 
+		SET	
+			SPA_IO_DATE = #{spaIoDate},
+			SPA_IO_QTY = #{spaIoQty},
+			SPA_IO_DESC = #{spaIoDesc},
+			UPD_ID = #{updId},
+			UPD_DATE = GETDATE()
+		WHERE	SPA_IO_NO = #{spaIoNo}
+		AND	SPA_IO_SEQ = #{spaIoSeq}
+	</update>
+	
+	
+	<!-- 스페어관리 삭제 -->
+	<delete id="spareInOutWhsDelete">
+		DELETE FROM TB_SPARE_IN_OUT_WHS_ADM 
+		WHERE	SPA_IO_NO = #{spaIoNo}
+		AND	SPA_IO_SEQ = #{spaIoSeq}
+	</delete>
+	
+	<!-- 스페어관리 전표번호 -->
+	<select id="getSpaIoNo" resultType="String">
+		SELECT CONCAT(#{today},'-',(
+										SELECT ISNULL(RIGHT('000' + CAST(MAX(RIGHT(SPA_IO_NO,3))+1 AS NVARCHAR),3), '001') 
+										FROM TB_SPARE_IN_OUT_WHS_ADM  
+										WHERE SUBSTRING(SPA_IO_NO,0,9) = #{today})
+									)
+	</select>
+	
+	
+	<!-- 스페어관리 전표시퀀스 -->
+	<select id="getSpaIoSeq" resultType="int">
+		SELECT ISNULL(MAX(SPA_IO_SEQ)+1,0)
+		FROM TB_SPARE_IN_OUT_WHS_ADM
+		WHERE SPA_IO_NO = #{spaIoNo}
+	</select>
+	
+	<!-- 스페어 현재고 가져오기 -->
+	<select id="getTmQtyRead" resultMap="SpareInOutWhsAdmVo">
+		SELECT 
+			AA.ITEM_SEQ,
+			AA.BARCODE_NO,
+			(AA.INPUT-AA.OUTPUT) REAL_QTY
+		FROM
+	
+			(SELECT 
+				A.ITEM_SEQ,
+				A.BARCODE_NO,
+				SUM(CASE WHEN SPA_IO_GUBUN='001' THEN SPA_IO_QTY ELSE 0 END) INPUT,
+				SUM(CASE WHEN SPA_IO_GUBUN='002' THEN SPA_IO_QTY ELSE 0 END) OUTPUT
+			FROM 
+			(
+	
+				SELECT 
+					SPA_IO_NO,
+					SPA_IO_SEQ,
+					ITEM_SEQ,
+					BARCODE_NO,
+					SPA_IO_GUBUN,
+					SPA_IO_DATE,
+					SPA_IO_QTY
+				FROM TB_SPARE_IN_OUT_WHS_ADM
+				WHERE SPA_IO_GUBUN ='001'
+				UNION
+				SELECT 
+					SPA_IO_NO,
+					SPA_IO_SEQ,
+					ITEM_SEQ,
+					BARCODE_NO,
+					SPA_IO_GUBUN,
+					SPA_IO_DATE,
+					SPA_IO_QTY
+				FROM TB_SPARE_IN_OUT_WHS_ADM
+				WHERE SPA_IO_GUBUN ='002'
+			)A
+			GROUP BY ITEM_SEQ, BARCODE_NO
+		)AA
+		WHERE 1=1
+		AND ITEM_SEQ = #{itemSeq}
+	
+	</select>
+	
+</mapper>

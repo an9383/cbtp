@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.qm.monPriManageAdmMapper">
+
+	<resultMap id="MonPriManageAdmVo" type="mes.domain.qm.MonPriManageAdmVo">
+
+		<result property="monPriNo"             column="MON_PRI_NO"			/> 
+		<result property="monPriType"           column="MON_PRI_TYPE"		/> 
+		<result property="monPriCont"           column="MON_PRI_CONT"		 /> 
+		<result property="regId"				column="REG_ID"				/>
+		<result property="regDate"				column="REG_DATE"			/>
+		<result property="updId"				column="UPD_ID"				/>				
+		<result property="updDate"				column="UPD_DATE"			/>
+
+	</resultMap>
+	
+	<!--월 주요 중점관리 사항 목록조회 -->
+	<select id="monPriManageAdmList" resultMap="MonPriManageAdmVo">
+		SELECT MON_PRI_NO,
+			MON_PRI_TYPE,
+			MON_PRI_CONT
+		FROM TB_MON_PRI_MANAGE_ADM
+		WHERE MON_PRI_TYPE=#{monPriType}
+	</select>
+	
+	<!--월 주요 중점관리 사항 등록 -->
+	<insert id="monPriManageAdmCreate">
+		INSERT INTO TB_MON_PRI_MANAGE_ADM	(
+			MON_PRI_NO,
+	        MON_PRI_TYPE,
+	        MON_PRI_CONT,
+	        REG_ID,
+	        REG_DATE)
+		VALUES     (
+			#{monPriNo},
+	        #{monPriType},
+	        #{monPriCont},
+	        #{regId},
+	        GETDATE()
+	    ) 
+	</insert>
+	
+	<!--월 주요 중점관리 번호 가져오기 -->
+	<select id="getMonPriNo" parameterType="String"  resultType="String">
+		 SELECT  ISNULL(RIGHT('000' + CAST(MAX(RIGHT(MON_PRI_NO,3))+1 AS NVARCHAR) ,3), '001') FROM TB_MON_PRI_MANAGE_ADM WHERE SUBSTRING(MON_PRI_NO,0,9) = #{date}
+	</select>
+	
+	<!--월 주요 중점관리 사항 삭제 -->
+	<delete id="monPriManageAdmDelete">
+		 DELETE FROM TB_MON_PRI_MANAGE_ADM WHERE MON_PRI_TYPE=#{monPriType}
+	</delete>
+		
+	 
+</mapper>

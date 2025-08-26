@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.po.workOrderResultMapper">
+
+	<!-- 작업지시 -->
+	<resultMap id="WorkOrderResultVo" type="mes.domain.po.WorkOrderResultVo">
+		<result property="workOrdNo"			column="WORK_ORD_NO"			/>
+		<result property="prcssCd"				column="PRCSS_CD"				/>
+		<result property="prcssNm"				column="PRCSS_NM"				/>
+		<result property="prcssGubun"			column="PRCSS_GUBUN"			/>
+		<result property="prcssGubunNm"			column="PRCSS_GUBUN_NM"			/>
+		<result property="equipCd"				column="EQUIP_CD"				/>
+		<result property="equipNm"				column="EQUIP_NM"				/>
+		<result property="goodsCd"				column="GOODS_CD"				/>
+		<result property="goodsNm"				column="GOODS_NM"				/>
+		<result property="goodsNo"				column="GOODS_NO"				/>
+		<result property="workOrdPrcss"			column="WORK_ORD_PRCSS"			/>
+		<result property="autoKind"				column="AUTO_KIND"				/>
+		<result property="autoKindNm"			column="AUTO_KIND_NM"			/>
+		<result property="ordLotNo"				column="ORD_LOT_NO"				/>
+		<result property="workOrdPlanNo"		column="ORD_PLAN_NO"			/>
+		<result property="ordDate"				column="ORD_DATE"				/>
+		<result property="workStartTime"		column="WORK_START_TIME"		/>
+		<result property="workEndTime"			column="WORK_END_TIME"			/>
+		<result property="workStatus"			column="WORK_STATUS"			/>
+		<result property="workChargr"			column="WORK_CHARGR"			/>
+		<result property="targetCnt"			column="TARGET_CNT"				/>
+		<result property="outputCnt"			column="OUTPUT_CNT"				/>
+		<result property="fairCnt"				column="FAIR_CNT"				/>
+		<result property="faultyCnt"			column="FAULTY_CNT"				/>
+		<result property="sitaCnt"				column="SITA_CNT"				/>
+		<result property="etcCnt"				column="ETC_CNT"				/>
+		<result property="dealCorpCd"			column="DEAL_CORP_CD"			/>
+		<result property="dealCorpNm"			column="DEAL_CORP_NM"			/>
+		<result property="regId"				column="REG_ID"					/>
+		<result property="regDate"				column="REG_DATE"				/>
+		<result property="updId"				column="UPD_ID"					/>
+		<result property="updDate"				column="UPD_DATE"				/>
+		<result property="selStartDate"			column="SEL_START_DATE"			/>
+		<result property="selEndDate"			column="SEL_END_DATE"			/>
+	</resultMap>
+	
+	<!-- 시스템공통그룹 전체조회 -->
+	<select id="listAll" resultMap="WorkOrderResultVo">
+		<![CDATA[
+			SELECT
+			    WORK_ORD_NO,
+				PRCSS_CD,
+				(SELECT PRCSS_NM FROM TB_PRCSS_CODE_ADM B WHERE B.PRCSS_CD = A.PRCSS_CD) PRCSS_NM,
+				(SELECT PRCSS_GUBUN FROM TB_PRCSS_CODE_ADM B WHERE B.PRCSS_CD = A.PRCSS_CD) PRCSS_GUBUN,
+				(SELECT BASE_NM FROM TB_SYSTEM_COMMON_CODE B WHERE B.BASE_GROUP_CD='015' AND B.BASE_CD = (SELECT PRCSS_GUBUN FROM TB_PRCSS_CODE_ADM B WHERE B.PRCSS_CD = A.PRCSS_CD)) PRCSS_GUBUN_NM,
+				EQUIP_CD,
+				(SELECT EQUIP_NM FROM TB_EQUIP_CODE_ADM B WHERE B.EQUIP_CD = A.EQUIP_CD) EQUIP_NM,
+				GOODS_CD,
+				(SELECT GOODS_NM FROM TB_GOODS_CODE_ADM B WHERE B.GOODS_CD = A.GOODS_CD) GOODS_NM,
+				(SELECT GOODS_NO FROM TB_GOODS_CODE_ADM B WHERE B.GOODS_CD = A.GOODS_CD) GOODS_NO,
+				(SELECT AUTO_KIND FROM TB_GOODS_CODE_ADM B WHERE B.GOODS_CD = A.GOODS_CD) AUTO_KIND,
+				(SELECT BASE_NM FROM TB_SYSTEM_COMMON_CODE C WHERE C.BASE_GROUP_CD='014' AND (SELECT AUTO_KIND FROM TB_GOODS_CODE_ADM B WHERE B.GOODS_CD = A.GOODS_CD) = C.BASE_CD) AUTO_KIND_NM,
+				ORD_LOT_NO,
+				ORD_DATE,
+				WORK_START_TIME,
+				WORK_END_TIME,
+				WORK_STATUS,
+				WORK_CHARGR,
+				OUTPUT_CNT,
+				DEAL_CORP_CD,
+				(SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM B WHERE B.DEAL_CORP_CD = A.DEAL_CORP_CD) DEAL_CORP_NM,
+				REG_ID,
+				REG_DATE,
+				UPD_ID,
+				UPD_DATE
+			FROM TB_WORK_ORDER A
+			WHERE 1=1
+		]]>
+		<if test="selStartDate != null and selStartDate != ''">
+			AND ORD_DATE <![CDATA[>=]]> #{selStartDate}
+		</if>
+		<if test="selEndDate != null and selEndDate != ''">
+			AND ORD_DATE <![CDATA[<=]]> #{selEndDate}
+		</if>
+		<if test="prcssGubun != null and prcssGubun != ''">
+			AND (SELECT PRCSS_GUBUN FROM TB_PRCSS_CODE_ADM B WHERE B.PRCSS_CD = A.PRCSS_CD) = #{prcssGubun}
+		</if>
+	</select>
+</mapper>

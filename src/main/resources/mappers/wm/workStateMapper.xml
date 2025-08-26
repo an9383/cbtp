@@ -1,0 +1,626 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.wm.workStateMapper">
+
+	<resultMap id="WorkStateVo" type="mes.domain.wm.WorkStateVo">
+		<result property="startDate"			column="START_DATE"				/>
+		<result property="endDate"				column="END_DATE"				/>
+		
+		<!-- 기간별 생산 현황 -->
+		<result property="workOrdNo"			column="WORK_ORD_NO"			/>
+		<result property="workOrdDate"			column="WORK_ORD_DATE"			/>
+		<result property="workGubun"			column="WORK_GUBUN"				/>
+		<result property="workGubunNm"			column="WORK_GUBUN_NM"			/>
+		<result property="equipCd"				column="EQUIP_CD"				/>
+		<result property="equipNm"				column="EQUIP_NM"				/>
+		<result property="workChargr"			column="WORK_CHARGR"			/>
+		<result property="workChargrNm"			column="WORK_CHARGR_NM"			/>
+		<result property="itemCd"				column="ITEM_CD"				/>
+		<result property="itemNm"				column="ITEM_NM"				/>
+		<result property="itemModel"			column="ITEM_MODEL"				/>
+		<result property="itemModelNm"			column="ITEM_MODEL_NM"			/>
+		<result property="itemCus"				column="ITEM_CUS"				/>
+		<result property="itemCusNm"			column="ITEM_CUS_NM"			/>
+		
+		<result property="itemColor"			column="ITEM_COLOR"				/>
+		
+		<result property="itemGubun"			column="ITEM_GUBUN"				/>
+		<result property="itemGubunNm"			column="ITEM_GUBUN_NM"			/>
+		
+		<result property="cutSize"				column="CUT_SIZE"				/>
+		<result property="fillingWt"         	column="FILLING_WT"				/>
+		
+		<result property="prcssCd"				column="PRCSS_CD"				/>
+		<result property="prcssNm"				column="PRCSS_NM"				/>
+		<result property="itemSeq"				column="ITEM_SEQ"				/>
+		<result property="matrlItemNm"			column="MATRL_ITEM_NM"			/>
+		<result property="matrlItemGrade"		column="MATRL_ITEM_GRADE"		/>
+		<result property="moldCd"				column="MOLD_CD"				/>
+		<result property="equipNo"				column="EQUIP_NO"				/>
+		<result property="cavity"				column="CAVITY"					/>
+		<result property="outputQty"			column="OUTPUT_QTY"				/>
+		<result property="fairQty"				column="FAIR_QTY"				/>
+		<result property="faultyQty"			column="FAULTY_QTY"				/>
+		<result property="workTime"				column="WORK_TIME"				/>
+		<result property="noTime"				column="NO_TIME"				/>
+		<result property="fuzzCnt"				column="FUZZ_CNT"				/>
+		<result property="fuzzQty"				column="FUZZ_QTY"				/>
+		<result property="runnerQty"			column="RUNNER_QTY"				/>
+		<result property="faultyTypeQty0"		column="FAULTY_TYPE_QTY_0"		/>
+		<result property="faultyTypeQty1"		column="FAULTY_TYPE_QTY_1"		/>
+		<result property="faultyTypeQty2"		column="FAULTY_TYPE_QTY_2"		/>
+		<result property="faultyTypeQty3"		column="FAULTY_TYPE_QTY_3"		/>
+		<result property="faultyTypeQty4"		column="FAULTY_TYPE_QTY_4"		/>
+		<result property="faultyTypeQty5"		column="FAULTY_TYPE_QTY_5"		/>
+		<result property="faultyTypeQty6"		column="FAULTY_TYPE_QTY_6"		/>
+		<result property="faultyTypeQty7"		column="FAULTY_TYPE_QTY_7"		/>
+		<result property="faultyTypeQty8"		column="FAULTY_TYPE_QTY_8"		/>
+		<result property="faultyTypeQty9"		column="FAULTY_TYPE_QTY_9"		/>
+		<result property="faultyTypeQty10"		column="FAULTY_TYPE_QTY_10"		/>
+		<result property="faultyTypeQty11"		column="FAULTY_TYPE_QTY_11"		/>
+		<result property="faultyTypeQty12"		column="FAULTY_TYPE_QTY_12"		/>
+		<result property="faultyTypeQty13"		column="FAULTY_TYPE_QTY_13"		/>
+		<result property="faultyTypeQty14"		column="FAULTY_TYPE_QTY_14"		/>
+		<result property="faultyTypeQty15"		column="FAULTY_TYPE_QTY_15"		/>
+		<result property="faultyTypeQtySum"		column="FAULTY_TYPE_QTY_SUM"	/>
+		<result property="noTime0"				column="NO_TIME_0"				/>
+		<result property="noTime1"				column="NO_TIME_1"				/>
+		<result property="noTime2"				column="NO_TIME_2"				/>
+		<result property="noTime3"				column="NO_TIME_3"				/>
+		<result property="noTime4"				column="NO_TIME_4"				/>
+		<result property="noTime5"				column="NO_TIME_5"				/>
+		<result property="noTime6"				column="NO_TIME_6"				/>
+		<result property="noTime7"				column="NO_TIME_7"				/>
+		<result property="noTime8"				column="NO_TIME_8"				/>
+		<result property="noTime9"				column="NO_TIME_9"				/>
+		<result property="noTime10"				column="NO_TIME_10"				/>
+		<result property="noTime11"				column="NO_TIME_11"				/>
+		<result property="noTime12"				column="NO_TIME_12"				/>
+		<result property="noTime13"				column="NO_TIME_13"				/>
+		<result property="noTime14"				column="NO_TIME_14"				/>
+		<result property="noTime15"				column="NO_TIME_15"				/>
+		<result property="noTimeSum"			column="NO_TIME_SUM"			/>
+		
+		<result property="biTimeSum"			column="BI_TIME_SUM"			/>
+		<result property="noTimeRate"			column="NO_TIME_RATE"			/>
+		<result property="biTimeRate"			column="BI_TIME_RATE"			/>
+		
+		<!-- 기간별 자재사용 현황 -->
+		<result property="matrlItemCd"			column="MATRL_ITEM_CD"			/>
+		<result property="barcodeNo"			column="BARCODE_NO"				/>
+		<result property="totalConsumpt"		column="TOTAL_CONSUMPT"			/>
+		<result property="matrlItemCel"			column="MATRL_ITEM_CEL"			/>
+		<result property="matrlItemHr"			column="MATRL_ITEM_HR"			/>
+		<result property="matrlCel"				column="MATRL_CEL"				/>
+		<result property="matrlHr"				column="MATRL_HR"				/>
+		<result property="matrlDate"			column="MATRL_DATE"				/>
+		
+		<!-- 기간별 비가동 현황 -->
+		<result property="noGubun"				column="NO_GUBUN"				/>
+		<result property="noGubunNm"			column="NO_GUBUN_NM"			/>
+		<result property="noReason"				column="NO_REASON"				/>
+		<result property="noStartDate"			column="NO_START_DATE"			/>
+		<result property="noStartTime"			column="NO_START_TIME"			/>
+		<result property="noEndDate"			column="NO_END_DATE"			/>
+		<result property="noEndTime"			column="NO_END_TIME"			/>
+		
+		<!-- 기간별 작업조건 현황 -->
+		<result property="histSeq"				column="HIST_SEQ"				/>
+		<result property="histSeqNm"			column="HIST_SEQ_NM"			/>
+		
+		<result property="stNzTemperature"		column="ST_NZ_TEMPERATURE"		/>
+		<result property="stH1Temperature"		column="ST_H1_TEMPERATURE"		/>
+		<result property="stH2Temperature"		column="ST_H2_TEMPERATURE"		/>
+		<result property="stH3Temperature"		column="ST_H3_TEMPERATURE"		/>
+		<result property="stH4Temperature"		column="ST_H4_TEMPERATURE"		/>
+		<result property="stChgPosition1"		column="ST_CHG_POSITION_1"		/>
+		<result property="stChgPosition2"		column="ST_CHG_POSITION_2"		/>
+		<result property="stChgPosition3"		column="ST_CHG_POSITION_3"		/>
+		<result property="stChgPosition4"		column="ST_CHG_POSITION_4"		/>
+		<result property="stSuckBack"			column="ST_SUCK_BACK"			/>
+		<result property="stInjPressure1"		column="ST_INJ_PRESSURE_1"		/>
+		<result property="stInjPressure2"		column="ST_INJ_PRESSURE_2"		/>
+		<result property="stInjPressure3"		column="ST_INJ_PRESSURE_3"		/>
+		<result property="stInjVelocity1"		column="ST_INJ_VELOCITY_1"		/>
+		<result property="stInjVelocity2"		column="ST_INJ_VELOCITY_2"		/>
+		<result property="stInjVelocity3"		column="ST_INJ_VELOCITY_3"		/>
+		<result property="stInjPosition1"		column="ST_INJ_POSITION_1"		/>
+		<result property="stInjPosition2"		column="ST_INJ_POSITION_2"		/>
+		<result property="stInjPosition3"		column="ST_INJ_POSITION_3"		/>
+		<result property="stBackPressure1"		column="ST_BACK_PRESSURE_1"		/>
+		<result property="stBackPressure2"		column="ST_BACK_PRESSURE_2"		/>
+		<result property="stBackPressure3"		column="ST_BACK_PRESSURE_3"	 	/>
+		<result property="stBackPressure4"		column="ST_BACK_PRESSURE_4"		/>
+		<result property="stHldPressure1"		column="ST_HLD_PRESSURE_1"		/>
+		<result property="stHldPressure2"		column="ST_HLD_PRESSURE_2"		/>
+		<result property="stHldPressure3"		column="ST_HLD_PRESSURE_3"		/>
+		<result property="stHldVel1"			column="ST_HLD_VEL_1"			/>
+		<result property="stHldVel2"			column="ST_HLD_VEL_2"			/>
+		<result property="stHldVel3"			column="ST_HLD_VEL_3"			/>
+		<result property="stThermostat"			column="ST_THERMOSTAT"			/>
+		<result property="stHydraulicOil"		column="ST_HYDRAULIC_OIL"		/>
+		<result property="stCoolwaterIn"		column="ST_COOLWATER_IN"		/>
+		<result property="stCoolwaterOut"		column="ST_COOLWATER_OUT"		/>
+		<result property="stMoldFixed"			column="ST_MOLD_FIXED"			/>
+		<result property="stMoldMoving"			column="ST_MOLD_MOVING"			/>
+		
+		<result property="cdNzTemperature"		column="CD_NZ_TEMPERATURE"		/>
+		<result property="cdH1Temperature"		column="CD_H1_TEMPERATURE"		/>
+		<result property="cdH2Temperature"		column="CD_H2_TEMPERATURE"		/>
+		<result property="cdH3Temperature"		column="CD_H3_TEMPERATURE"		/>
+		<result property="cdH4Temperature"		column="CD_H4_TEMPERATURE"		/>
+		<result property="cdChgPosition1"		column="CD_CHG_POSITION_1"		/>
+		<result property="cdChgPosition2"		column="CD_CHG_POSITION_2"		/>
+		<result property="cdChgPosition3"		column="CD_CHG_POSITION_3"		/>
+		<result property="cdChgPosition4"		column="CD_CHG_POSITION_4"		/>
+		<result property="cdSuckBack"			column="CD_SUCK_BACK"			/>
+		<result property="cdInjPressure1"		column="CD_INJ_PRESSURE_1"		/>
+		<result property="cdInjPressure2"		column="CD_INJ_PRESSURE_2"		/>
+		<result property="cdInjPressure3"		column="CD_INJ_PRESSURE_3"		/>
+		<result property="cdInjVelocity1"		column="CD_INJ_VELOCITY_1"		/>
+		<result property="cdInjVelocity2"		column="CD_INJ_VELOCITY_2"		/>
+		<result property="cdInjVelocity3"		column="CD_INJ_VELOCITY_3"		/>
+		<result property="cdInjPosition1"		column="CD_INJ_POSITION_1"		/>
+		<result property="cdInjPosition2"		column="CD_INJ_POSITION_2"		/>
+		<result property="cdInjPosition3"		column="CD_INJ_POSITION_3"		/>
+		<result property="cdBackPressure1"		column="CD_BACK_PRESSURE_1"		/>
+		<result property="cdBackPressure2"		column="CD_BACK_PRESSURE_2"		/>
+		<result property="cdBackPressure3"		column="CD_BACK_PRESSURE_3"		/>
+		<result property="cdBackPressure4"		column="CD_BACK_PRESSURE_4"		/>
+		<result property="cdHldPressure1"		column="CD_HLD_PRESSURE_1"		/>
+		<result property="cdHldPressure2"		column="CD_HLD_PRESSURE_2"		/>
+		<result property="cdHldPressure3"		column="CD_HLD_PRESSURE_3"		/>
+		<result property="cdHldVel1"			column="CD_HLD_VEL_1"			/>
+		<result property="cdHldVel2"			column="CD_HLD_VEL_2"			/>
+		<result property="cdHldVel3"			column="CD_HLD_VEL_3"			/>
+		<result property="cdThermostat"			column="CD_THERMOSTAT"			/>
+		<result property="cdHydraulicOil"		column="CD_HYDRAULIC_OIL"		/>
+		<result property="cdCoolwaterIn"		column="CD_COOLWATER_IN"		/>
+		<result property="cdCoolwaterOut"		column="CD_COOLWATER_OUT"		/>
+		<result property="cdMoldFixed"			column="CD_MOLD_FIXED"			/>
+		<result property="cdMoldMoving"			column="CD_MOLD_MOVING"			/>
+		
+		<result property="inFixTemp1"			column="IN_FIX_TEMP1"			/>
+		<result property="inFixTemp2"			column="IN_FIX_TEMP2"			/>
+		<result property="inFixTemp3"			column="IN_FIX_TEMP3"			/>
+		<result property="inMoveTemp1"			column="IN_MOVE_TEMP1"			/>
+		<result property="inMoveTemp2"			column="IN_MOVE_TEMP2"			/>
+		<result property="inMoveTemp3"			column="IN_MOVE_TEMP3"			/>
+		
+		<!-- 추가사항 -->
+		<result property="ordCorpCd" 			column="ORD_CORP_CD"			/>
+		<result property="ordCorpNm" 			column="ORD_CORP_NM"			/>
+		<result property="workStartDate" 		column="WORK_START_DATE"		/>
+		<result property="workEndDate" 			column="WORK_END_DATE"			/>
+		<result property="faultyTypeCd" 		column="FAULTY_TYPE_CD"			/>
+		<result property="faultyTypeNm" 		column="FAULTY_TYPE_NM"			/>
+		<result property="rcvDate" 				column="RCV_DATE"				/>
+		<result property="dtlOrdCnt" 			column="DTL_ORD_CNT"			/>
+			
+		<result property="useQty" 				column="USE_QTY"				/>
+		<result property="partCd" 				column="PART_CD"				/>
+		<result property="partNm" 				column="PART_NM"				/>
+		<result property="dtlRegDate" 		    column="DTL_REG_DATE"			/>
+		
+		<result property="itemUnit" 			column="ITEM_UNIT"				/>
+		<result property="itemUnitNm" 			column="ITEM_UNIT_NM"			/>
+		
+		<result property="fillingCount" 	    column="FILLING_COUNT"			/>
+		<result property="boxCount" 		    column="BOX_COUNT"			/>
+		<result property="regDate" 		    	column="REG_DATE"			/>
+	</resultMap>
+	
+	<!-- ================================== 기간별 생산 현황 ======================================= -->
+	<!-- 기간별 생산 현황(사출) 목록조회 -->
+	<select id="workList" resultMap="WorkStateVo">
+		SELECT
+			WOA.WORK_ORD_NO
+			, REPLACE(LEFT(WOA.WORK_START_DATE,10),'-','') WORK_START_DATE
+			, REPLACE(LEFT(WOA.WORK_END_DATE,10),'-','') WORK_END_DATE
+			, DATEDIFF(MINUTE, WOA.WORK_START_DATE, WOA.WORK_END_DATE) WORK_TIME
+			, WONO.NO_TIME
+			, WOA.WORK_CHARGR
+			, (SELECT X.USER_NM FROM TB_USER X WHERE X.USER_NUMBER = WOA.WORK_CHARGR) WORK_CHARGR_NM
+			, WOA.OUTPUT_QTY
+			, WOA.FAIR_QTY
+			, WOA.FAULTY_QTY
+			, (SELECT TOP(1) FAULTY_TYPE_CD FROM TB_WORK_ORDER_FAULTY_TYPE X WHERE X.WORK_ORD_NO = WOA.WORK_ORD_NO) FAULTY_TYPE_CD
+			, (SELECT BASE_INFO_NM FROM TB_BASE_INFO_ADM X WHERE X.BASE_INFO_TYPE='FT' AND X.BASE_INFO_CD=(SELECT TOP(1) FAULTY_TYPE_CD FROM TB_WORK_ORDER_FAULTY_TYPE X WHERE X.WORK_ORD_NO = WOA.WORK_ORD_NO)) FAULTY_TYPE_NM
+			, BOA.RCV_DATE
+			, BOA.ORD_CORP_CD
+			, (SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD = BOA.ORD_CORP_CD) ORD_CORP_NM
+			, BOD.DTL_ORD_CNT
+			, ECA.EQUIP_CD
+			, ECA.EQUIP_NM
+			, IIA.ITEM_SEQ
+			, IIA.ITEM_NM
+			, IIA.CUT_SIZE
+			, IIA.ITEM_COLOR
+			, IIA.FILLING_WT
+			, ISNULL(IIA.FILLING_COUNT,1) FILLING_COUNT
+			, ISNULL(IIA.BOX_COUNT,1) BOX_COUNT
+			, CONVERT(VARCHAR,WOA.REG_DATE,112) REG_DATE
+		FROM
+			TB_WORK_ORDER_ADM WOA
+			LEFT OUTER JOIN TB_WORK_ORDER_NON_OPERATION WONO
+			ON WONO.WORK_ORD_NO = WOA.WORK_ORD_NO
+			LEFT OUTER JOIN TB_BIZ_ORDER_DTL BOD
+			ON WOA.CONT_DTL_NO = BOD.CONT_DTL_NO
+			LEFT OUTER JOIN TB_BIZ_ORDER_ADM BOA
+			ON BOD.CONT_NO = BOA.CONT_NO
+			LEFT OUTER JOIN TB_EQUIP_CODE_ADM ECA
+			ON WOA.EQUIP_CD = ECA.EQUIP_CD
+			LEFT OUTER JOIN TB_ITEM_INFO_ADM IIA
+			ON WOA.ITEM_SEQ = IIA.ITEM_SEQ
+		WHERE 1=1
+			AND CONVERT(VARCHAR,WOA.REG_DATE,112) BETWEEN #{startDate} AND #{endDate}
+			AND WOA.WORK_START_DATE IS NOT NULL
+			<if test="mainGubun != null and mainGubun != ''">
+			AND IIA.MAIN_GUBUN = #{mainGubun}
+			</if>
+			<if test="itemSeq != null and itemSeq != ''">
+			AND IIA.ITEM_SEQ = #{itemSeq}
+			</if>
+			<if test="equipCd != null and equipCd != ''">
+			AND ECA.EQUIP_CD = #{equipCd}
+			</if>
+			<if test="ordCorpCd != null and ordCorpCd != ''">
+			AND BOA.ORD_CORP_CD = #{ordCorpCd}
+			</if>
+		ORDER BY REPLACE(LEFT(WOA.WORK_START_DATE,10),'-','') DESC, ECA.EQUIP_CD
+	</select>
+	
+	<!-- 기간별 생산현황(봉제) 목록조회-->
+	<select id="workListByBongjae" resultMap="WorkStateVo">
+		<![CDATA[
+			SELECT
+					WO.WORK_ORD_NO,
+					WOPG.WORK_PROG_NO,
+					WOP.WORK_START_TIME WORK_ORD_DATE,
+					WOP.WORK_GUBUN,
+					(SELECT BASE_NM FROM TB_COMMON_CODE_ADM WHERE BASE_CD = WOP.WORK_GUBUN AND BASE_GROUP_CD = '114') WORK_GUBUN_NM,
+					WO.EQUIP_CD,
+					(SELECT X.EQUIP_NM FROM TB_EQUIP_CODE_ADM X WHERE X.EQUIP_CD = WO.EQUIP_CD) EQUIP_NM,
+					WOP.WORK_CHARGR,
+					(SELECT X.USER_NM FROM TB_USER X WHERE X.USER_NUMBER = WOP.WORK_CHARGR) WORK_CHARGR_NM,
+					IIA.ITEM_CD,
+					IIA.ITEM_NM,
+					IIA.ITEM_MODEL,
+					(SELECT BASE_NM FROM TB_COMMON_CODE_ADM WHERE BASE_CD = IIA.ITEM_MODEL AND BASE_GROUP_CD = '099') ITEM_MODEL_NM,
+					IIA.ITEM_CUS,
+					(SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD=IIA.ITEM_CUS) ITEM_CUS_NM,
+					IIA.ITEM_WORKPLACE PRCSS_CD,
+					(SELECT PRCSS_NM FROM TB_PRCSS_CODE_ADM X WHERE X.PRCSS_CD=IIA.ITEM_WORKPLACE) PRCSS_NM,
+					WOM.ITEM_SEQ,
+					(SELECT X.ITEM_NM FROM TB_ITEM_INFO_ADM X WHERE X.ITEM_SEQ = WOM.ITEM_SEQ) MATRL_ITEM_NM,
+					(SELECT X.ITEM_GRADE FROM TB_ITEM_INFO_ADM X WHERE X.ITEM_SEQ = WOM.ITEM_SEQ) MATRL_ITEM_GRADE,
+					IIA.MOLD_CD,
+					(SELECT X.EQUIP_NO FROM TB_EQUIP_CODE_ADM X WHERE X.EQUIP_CD = IIA.MOLD_CD) EQUIP_NO,
+					(SELECT X.EQUIP_CAVITY FROM TB_EQUIP_CODE_ADM X WHERE X.EQUIP_CD = IIA.MOLD_CD) CAVITY,
+					WOP.OUTPUT_QTY,
+					WOP.FAIR_QTY,
+					WOP.FAULTY_QTY,
+		]]>
+			<foreach collection="faultyTypeQtyList" index="index" item="item" open=" " close=" " separator=" ">
+				ISNULL(WOFT_${index}.FAULTY_TYPE_QTY,'0') FAULTY_TYPE_QTY_${index},
+			</foreach>
+			<foreach collection="faultyTypeQtyList" index="index" item="item" open="(" close=") FAULTY_TYPE_QTY_SUM" separator="+">
+				ISNULL(WOFT_${index}.FAULTY_TYPE_QTY,'0')
+			</foreach>
+		<![CDATA[
+			FROM TB_WORK_ORDER WO 
+			LEFT JOIN TB_WORK_ORDER_PROGRESS WOPG
+			ON 1=1
+			AND WO.WORK_ORD_NO=WOPG.WORK_ORD_NO LEFT JOIN (SELECT
+												WORK_ORD_NO,
+												MIDDLE_PRCSS_CD,
+												CONVERT(CHAR(8), WORK_START_TIME, 112) WORK_START_TIME,
+												WORK_GUBUN,
+												WORK_CHARGR,
+												SUM(OUTPUT_QTY) OUTPUT_QTY,
+												SUM(FAIR_QTY) FAIR_QTY,
+												SUM(FAULTY_QTY) FAULTY_QTY
+											FROM TB_WORK_ORDER_PRCSS
+											WHERE 1=1
+											AND WORK_STATUS != '003'
+											GROUP BY
+												WORK_ORD_NO, CONVERT(CHAR(8), WORK_START_TIME, 112), WORK_GUBUN, WORK_CHARGR,MIDDLE_PRCSS_CD
+											) WOP
+				ON 1=1
+				AND WOPG.WORK_ORD_NO = WOP.WORK_ORD_NO
+			    AND WOPG.WORK_PROG_NO = WOP.MIDDLE_PRCSS_CD LEFT OUTER JOIN (SELECT
+																			WORK_ORD_NO,
+																			MAX(ITEM_SEQ) ITEM_SEQ
+																		FROM TB_WORK_ORDER_MATRL
+																		WHERE 1=1
+																		GROUP BY
+																			WORK_ORD_NO) WOM
+				ON 1=1
+				AND WOP.WORK_ORD_NO = WOM.WORK_ORD_NO LEFT OUTER JOIN TB_ITEM_INFO_ADM IIA
+				ON 1=1
+				AND WO.ITEM_SEQ = IIA.ITEM_SEQ LEFT OUTER JOIN (SELECT
+																			X.WORK_ORD_NO,
+																			SUM(CONVERT(INT,X.FUZZ_CNT)) FUZZ_CNT
+																		FROM TB_WORK_ORDER_FUZZ X
+																		GROUP BY
+																			X.WORK_ORD_NO)WOF
+				ON 1=1
+				AND WO.WORK_ORD_NO = WOF.WORK_ORD_NO 
+																		
+		]]>
+			<foreach collection="faultyTypeQtyList" index="index" item="item" open=" " close=" " separator=" ">
+				LEFT OUTER JOIN (SELECT
+									WORK_ORD_NO,
+									FAULTY_TYPE_CD,
+									SUM(FAULTY_TYPE_QTY) FAULTY_TYPE_QTY
+								FROM TB_WORK_ORDER_FAULTY_TYPE
+								WHERE 1=1
+								GROUP BY
+									WORK_ORD_NO, FAULTY_TYPE_CD) WOFT_${index}
+				ON 1=1
+				AND WOP.WORK_ORD_NO = WOFT_${index}.WORK_ORD_NO
+				AND WOFT_${index}.FAULTY_TYPE_CD = #{item}
+			</foreach>
+		<![CDATA[
+			WHERE 1=1
+			AND WOP.WORK_START_TIME BETWEEN #{startDate} AND #{endDate}
+		]]>
+		<if test="mainGubun != null and mainGubun != ''">
+			AND IIA.MAIN_GUBUN = #{mainGubun}
+		</if>
+		<if test="itemSeq != null and itemSeq != ''">
+			AND WO.ITEM_SEQ = #{itemSeq}
+		</if>
+		<if test="equipCd != null and equipCd != ''">
+			AND WO.EQUIP_CD = #{equipCd}
+		</if>
+		<![CDATA[
+			ORDER BY WO.WORK_ORD_NO
+		]]>
+	</select>
+	
+	
+	
+	<!-- ================================== 기간별 자재사용 현황 ======================================= -->
+	<!-- 기간별 자재사용 현황 목록조회 -->
+	<select id="materialList" resultMap="WorkStateVo">
+		SELECT
+			WOA.WORK_ORD_NO
+			, WORK_ORD_DATE
+			, IIA.ITEM_SEQ
+			, IIA.ITEM_NM
+			, IIA.ITEM_GUBUN
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = IIA.ITEM_GUBUN AND X.BASE_GROUP_CD = '079') ITEM_GUBUN_NM
+			, WOA.EQUIP_CD
+			,(SELECT EQUIP_NM FROM TB_EQUIP_CODE_ADM X WHERE X.EQUIP_CD=WOA.EQUIP_CD) EQUIP_NM
+			, REPLACE(LEFT(WOA.WORK_START_DATE,10),'-','') WORK_START_DATE
+			, REPLACE(LEFT(WOA.WORK_END_DATE,10),'-','') WORK_END_DATE
+			, WOA.WORK_CHARGR
+			, (SELECT X.USER_NM FROM TB_USER X WHERE X.USER_NUMBER = WOA.WORK_CHARGR) WORK_CHARGR_NM
+			, PIA.ITEM_SEQ PART_SEQ
+			, PIA.ITEM_NM PART_NM
+			, PIA.ITEM_CD PART_CD
+			, PIA.ITEM_UNIT
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = PIA.ITEM_UNIT AND X.BASE_GROUP_CD = '036') ITEM_UNIT_NM
+			, WOM.USE_QTY
+			, WOM.BARCODE_NO
+			, WOA.WORK_CHARGR
+			,(SELECT USER_NM FROM TB_USER X WHERE X.USER_NUMBER=WOA.WORK_CHARGR) WORK_CHARGR_NM
+		FROM
+			TB_WORK_ORDER_MATRL WOM
+			LEFT OUTER JOIN TB_WORK_ORDER_ADM WOA
+			ON WOM.WORK_ORD_NO = WOA.WORK_ORD_NO
+		
+			LEFT OUTER JOIN TB_ITEM_INFO_ADM IIA --제품
+			ON WOA.ITEM_SEQ = IIA.ITEM_SEQ
+			LEFT OUTER JOIN TB_ITEM_INFO_ADM PIA --자재
+			ON WOM.ITEM_SEQ = PIA.ITEM_SEQ
+			
+		WHERE 1=1
+		AND WOM.MATRL_DATE BETWEEN #{startDate} AND #{endDate}
+		<if test="mainGubun != null and mainGubun != ''">
+		AND IIA.MAIN_GUBUN = #{mainGubun}
+		</if>
+		<if test="itemSeq != null and itemSeq != ''">
+		AND IIA.ITEM_SEQ = #{itemSeq}
+		</if>
+	</select>
+	
+		<!-- ================================== 기간별 비가동 현황 ======================================= -->
+	<!-- 기간별 가동 현황 목록조회 -->
+	<select id="uptimeList" resultMap="WorkStateVo">
+		<![CDATA[
+			SET ANSI_WARNINGS OFF
+			SET ARITHIGNORE ON
+			SET ARITHABORT OFF
+
+			SELECT
+				WO.WORK_ORD_NO,
+				WO.EQUIP_CD,
+				(SELECT X.EQUIP_NM FROM TB_EQUIP_CODE_ADM X WHERE X.EQUIP_CD = WO.EQUIP_CD) EQUIP_NM,
+				IIA.ITEM_CD,
+				IIA.ITEM_NM,
+				IIA.ITEM_MODEL,
+				(SELECT BASE_NM FROM TB_COMMON_CODE_ADM WHERE BASE_CD = IIA.ITEM_MODEL AND BASE_GROUP_CD = '099') ITEM_MODEL_NM,
+				IIA.MOLD_CD,
+				(SELECT X.EQUIP_NO FROM TB_EQUIP_CODE_ADM X WHERE X.EQUIP_CD = IIA.MOLD_CD) EQUIP_NO,
+				(SELECT X.EQUIP_CAVITY FROM TB_EQUIP_CODE_ADM X WHERE X.EQUIP_CD = IIA.MOLD_CD) CAVITY,
+				WOP.OUTPUT_QTY,
+				WOP.FAIR_QTY,
+				WOP.FAULTY_QTY,
+				WOP.WORK_TIME,
+				WONO.NO_GUBUN,
+				(SELECT BASE_NM FROM TB_COMMON_CODE_ADM WHERE BASE_CD = WONO.NO_GUBUN AND BASE_GROUP_CD = '115') NO_GUBUN_NM,
+				WONO.NO_REASON,
+				WONO.NO_START_DATE,
+				WONO.NO_START_TIME,
+				WONO.NO_END_DATE,
+				WONO.NO_END_TIME,
+				WONO.NO_TIME,
+				WONO_SUM.NO_TIME NO_TIME_SUM,
+				WONOBI_SUM.NO_TIME BI_TIME_SUM,
+				ISNULL(ROUND((CONVERT(FLOAT,WONO_SUM.NO_TIME))/(CONVERT(FLOAT,WONOTT_SUM.NO_TIME))*100,2),0) NO_TIME_RATE,
+				ISNULL(ROUND((CONVERT(FLOAT,WONOBI_SUM.NO_TIME))/(CONVERT(FLOAT,WONOTT_SUM.NO_TIME))*100,2),0) BI_TIME_RATE
+			FROM TB_WORK_ORDER WO LEFT JOIN (SELECT
+												WORK_ORD_NO,
+												SUM(OUTPUT_QTY) OUTPUT_QTY,
+												SUM(FAIR_QTY) FAIR_QTY,
+												SUM(FAULTY_QTY) FAULTY_QTY,
+												SUM(DATEDIFF(MINUTE, WORK_START_TIME, ISNULL(WORK_END_TIME,GETDATE()))) WORK_TIME
+											FROM TB_WORK_ORDER_PRCSS
+											WHERE 1=1
+											GROUP BY
+												WORK_ORD_NO
+											) WOP
+				ON 1=1
+				AND WO.WORK_ORD_NO = WOP.WORK_ORD_NO LEFT JOIN TB_ITEM_INFO_ADM IIA
+				ON 1=1
+				AND WO.ITEM_SEQ = IIA.ITEM_SEQ LEFT OUTER JOIN TB_WORK_ORDER_NON_OPERATION WONO
+				ON 1=1
+				AND WOP.WORK_ORD_NO = WONO.WORK_ORD_NO LEFT OUTER JOIN (SELECT
+																			WORK_ORD_NO,
+																			SUM(CONVERT(INT,NO_TIME)) NO_TIME
+																		FROM TB_WORK_ORDER_NON_OPERATION
+																		WHERE 1=1
+																		AND NO_GUBUN = '009'
+																		GROUP BY
+																			WORK_ORD_NO) WONO_SUM
+				ON 1=1
+				AND WOP.WORK_ORD_NO = WONO_SUM.WORK_ORD_NO LEFT OUTER JOIN (SELECT
+																			WORK_ORD_NO,
+																			SUM(CONVERT(INT,NO_TIME)) NO_TIME
+																		FROM TB_WORK_ORDER_NON_OPERATION
+																		WHERE 1=1
+																		AND NO_GUBUN != '009'
+																		GROUP BY
+																			WORK_ORD_NO) WONOBI_SUM
+				ON 1=1
+				AND WOP.WORK_ORD_NO = WONOBI_SUM.WORK_ORD_NO
+
+				LEFT OUTER JOIN (SELECT
+																			WORK_ORD_NO,
+																			SUM(CONVERT(INT,NO_TIME)) NO_TIME
+																		FROM TB_WORK_ORDER_NON_OPERATION
+																		WHERE 1=1
+																		GROUP BY
+																			WORK_ORD_NO) WONOTT_SUM
+				ON 1=1
+				AND WOP.WORK_ORD_NO = WONOTT_SUM.WORK_ORD_NO
+			WHERE 1=1
+			AND WONO.NO_GUBUN = '009'
+			AND WONO.NO_START_DATE BETWEEN #{startDate} AND #{endDate}
+		]]>
+		<if test="itemSeq != null and itemSeq != ''">
+			AND WO.ITEM_SEQ = #{itemSeq}
+		</if>
+		<if test="equipCd != null and equipCd != ''">
+			AND WO.EQUIP_CD = #{equipCd}
+		</if>
+		<![CDATA[
+			ORDER BY
+				WONO.NO_START_DATE ASC, WO.EQUIP_CD DESC
+		]]>
+	</select>
+	
+	
+	
+	<!-- ================================== 기간별 비가동 현황 ======================================= -->
+	<!-- 기간별 비가동 현황 목록조회 -->
+	<select id="downtimeList" resultMap="WorkStateVo">
+		<![CDATA[
+			 SELECT
+				WOA.WORK_ORD_NO
+				, REPLACE(LEFT(WOA.WORK_START_DATE,10),'-','') WORK_START_DATE
+				, REPLACE(LEFT(WOA.WORK_END_DATE,10),'-','') WORK_END_DATE
+				, WOA.WORK_CHARGR
+				, (SELECT X.USER_NM FROM TB_USER X WHERE X.USER_NUMBER = WOA.WORK_CHARGR) WORK_CHARGR_NM
+				, WOA.OUTPUT_QTY
+				, WOA.FAIR_QTY
+				, WOA.FAULTY_QTY
+				, WONO.NO_START_DATE
+				, WONO.NO_START_TIME
+				, WONO.NO_END_DATE
+				, WONO.NO_END_TIME
+				, WONO.NO_TIME
+				, WONO_SUM.NO_TIME_SUM
+				, WONO.NO_GUBUN
+				, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = WONO.NO_GUBUN AND X.BASE_GROUP_CD = '115') NO_GUBUN_NM
+				, WONO.NO_REASON
+				, BOA.RCV_DATE
+				, ECA.EQUIP_NM
+				, IIA.ITEM_SEQ
+				, IIA.ITEM_NM
+				, IIA.ITEM_GUBUN
+				, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = IIA.ITEM_GUBUN AND X.BASE_GROUP_CD = '079') ITEM_GUBUN_NM
+			FROM
+				TB_WORK_ORDER_NON_OPERATION WONO
+				LEFT OUTER JOIN TB_WORK_ORDER_ADM WOA
+				ON WONO.WORK_ORD_NO = WOA.WORK_ORD_NO
+				LEFT OUTER JOIN TB_BIZ_ORDER_DTL BOD
+				ON WOA.CONT_DTL_NO = BOD.CONT_DTL_NO
+				LEFT OUTER JOIN TB_BIZ_ORDER_ADM BOA
+				ON BOD.CONT_NO = BOA.CONT_NO
+				LEFT OUTER JOIN TB_EQUIP_CODE_ADM ECA
+				ON WOA.EQUIP_CD = ECA.EQUIP_CD
+				LEFT OUTER JOIN TB_ITEM_INFO_ADM IIA
+				ON WOA.ITEM_SEQ = IIA.ITEM_SEQ
+				LEFT OUTER JOIN (
+					SELECT
+						WORK_ORD_NO,
+						SUM(CONVERT(INT,NO_TIME)) NO_TIME_SUM
+					FROM TB_WORK_ORDER_NON_OPERATION
+					WHERE 1=1
+					GROUP BY
+						WORK_ORD_NO) WONO_SUM --비가동합
+				ON WOA.WORK_ORD_NO = WONO_SUM.WORK_ORD_NO
+			WHERE 1=1
+			AND WONO.NO_START_DATE BETWEEN #{startDate} AND #{endDate}
+		]]>
+		<if test="equipCd != null and equipCd != ''">
+			AND ECA.EQUIP_CD = #{equipCd}
+		</if>
+		<![CDATA[
+			ORDER BY
+				WONO.NO_START_DATE DESC
+		]]>
+	</select>
+	
+	<!-- ================================== 기간별 작업조건 현황 ======================================= -->
+	<!-- 기간별 작업조건 현황 목록조회 -->
+	<select id="workConditionList" resultMap="WorkStateVo">
+		<![CDATA[
+			SELECT
+				WO.WORK_ORD_NO,
+				WO.WORK_ORD_DATE,
+				WO.EQUIP_CD,
+				(SELECT X.EQUIP_NM FROM TB_EQUIP_CODE_ADM X WHERE X.EQUIP_CD = WO.EQUIP_CD) EQUIP_NM,
+				IIA.ITEM_CD,
+				IIA.ITEM_NM,
+				IIA.ITEM_MODEL,
+				(SELECT BASE_NM FROM TB_COMMON_CODE_ADM WHERE BASE_CD = IIA.ITEM_MODEL AND BASE_GROUP_CD = '099') ITEM_MODEL_NM,
+				IIA.MOLD_CD,
+				(SELECT X.EQUIP_NO FROM TB_EQUIP_CODE_ADM X WHERE X.EQUIP_CD = IIA.MOLD_CD) EQUIP_NO,
+				(SELECT X.EQUIP_CAVITY FROM TB_EQUIP_CODE_ADM X WHERE X.EQUIP_CD = IIA.MOLD_CD) CAVITY,
+				(SELECT BASE_NM FROM TB_COMMON_CODE_ADM WHERE BASE_CD = EWHA.HIST_SEQ AND BASE_GROUP_CD = '121') HIST_SEQ_NM,
+				EWHA.*
+			FROM TB_WORK_ORDER WO LEFT OUTER JOIN TB_ITEM_INFO_ADM IIA
+				ON 1=1
+				AND WO.ITEM_SEQ = IIA.ITEM_SEQ LEFT OUTER JOIN TB_EQ_WORK_HIST_ADM EWHA
+				ON 1=1
+				AND WO.WORK_ORD_NO = EWHA.WORK_ORD_NO
+			WHERE 1=1
+			AND WO.WORK_ORD_DATE BETWEEN #{startDate} AND #{endDate}
+		]]>
+		<if test="itemSeq != null and itemSeq != ''">
+			AND WO.ITEM_SEQ = #{itemSeq}
+		</if>
+		<if test="equipCd != null and equipCd != ''">
+			AND WO.EQUIP_CD = #{equipCd}
+		</if>
+		<![CDATA[
+			ORDER BY
+				WO.WORK_ORD_DATE ASC, WO.WORK_ORD_NO DESC
+		]]>
+	</select>
+</mapper>

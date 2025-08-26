@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.bt.batchProcMapper">
+
+	<resultMap id="BatchProcVo" type="mes.domain.bt.BatchProcVo">
+		<result property="batchId"			column="BATCH_ID"			/>
+		<result property="batchNm"			column="BATCH_NM"			/>
+		<result property="batchStartTime"	column="BATCH_START_TIME"	/>
+		<result property="batchEndTime"		column="BATCH_END_TIME"		/>
+		<result property="successYn"		column="SUCCESS_YN"			/>
+		<result property="batchDesc"		column="BATCH_DESC"			/>
+		<result property="tmMon"			column="TM_MON"				/>
+		<result property="regId"			column="REG_ID"				/>
+		<result property="regDate"			column="REG_DATE"			/>
+		<result property="updId"			column="UPD_ID"				/>
+		<result property="updDate"			column="UPD_DATE"			/>
+		<result property="regNm"			column="REG_NM"				/>
+	</resultMap>
+
+
+	<!-- 배치 수행 결과 생성 -->
+	<insert id="batchProcLog" parameterType="mes.domain.bt.BatchProcVo">
+		<![CDATA[
+			INSERT INTO TB_BATCH_PROC_LOG(
+				BATCH_ID,
+				BATCH_NM,
+				BATCH_START_TIME,
+				BATCH_END_TIME,
+				SUCCESS_YN,
+				BATCH_DESC,
+				REG_ID,
+				REG_DATE
+			) 
+			VALUES
+			(
+				#{batchId},
+				#{batchNm},
+				#{batchStartTime},
+				#{batchEndTime},
+				#{successYn},
+				#{batchDesc},
+				'batchAdmin',
+				getDate()
+			)
+		]]>
+	</insert>
+	
+	<!-- 일별 부품 재고정보 생성 -->
+	<update id="batchTmData" parameterType="mes.domain.bt.BatchProcVo">
+		UPDATE TB_ITEM_PART_ADM
+		SET TM_QTY=B.REAL_QTY
+		FROM TB_ITEM_PART_ADM A, 
+		(
+			SELECT
+			Z.SP_CD,
+			Z.SP_REV,
+			(ISNULL(TM_QTY,0)+ISNULL(A.QTY,0)+ISNULL(D.QTY,0))-ISNULL(B.QTY,0)-ISNULL(E.QTY,0) REAL_QTY
+		FROM 
+			(
+			SELECT PART_CD SP_CD,
+				PART_REV SP_REV,
+				'001' SP_TYPE
+			FROM TB_ITEM_PART_ADM
+		) Z
+		LEFT OUTER JOIN
+		(
+			SELECT 
+			    SP_TYPE,
+				SP_CD,
+				SP_REV,
+				SP_GUBUN,
+				SUM(SP_QTY) QTY
+			FROM TB_STOCK_PAYMENT_ADM
+			WHERE SUBSTRING(SP_DATE,0,7) = #{tmMon}
+			AND SP_TYPE = '001'
+			AND SP_GUBUN='001'
+			GROUP BY SP_TYPE,SP_CD,SP_REV,SP_GUBUN 
+		) A
+		ON Z.SP_CD=A.SP_CD
+		AND Z.SP_REV=A.SP_REV
+		LEFT OUTER JOIN 
+		(
+			SELECT 
+				SP_TYPE,
+				SP_CD,
+				SP_REV,
+				SP_GUBUN,
+				SUM(SP_QTY) QTY
+			FROM TB_STOCK_PAYMENT_ADM
+			WHERE SUBSTRING(SP_DATE,0,7) = #{tmMon}
+			AND SP_TYPE = '001'
+			AND SP_GUBUN='002'
+			GROUP BY SP_TYPE,SP_CD,SP_REV,SP_GUBUN 
+		) B
+		ON Z.SP_CD=B.SP_CD
+		AND Z.SP_REV=B.SP_REV
+		LEFT OUTER JOIN 
+		(
+			SELECT 
+				SP_TYPE,
+				SP_CD,
+				SP_REV,
+				SP_GUBUN,
+				SUM(SP_QTY) QTY
+			FROM TB_STOCK_PAYMENT_ADM
+			WHERE SUBSTRING(SP_DATE,0,7) = #{tmMon}
+			AND SP_TYPE = '001'
+			AND SP_GUBUN='003'
+			GROUP BY SP_TYPE,SP_CD,SP_REV,SP_GUBUN 
+		) D
+		ON Z.SP_CD=D.SP_CD
+		AND Z.SP_REV=D.SP_REV
+		LEFT OUTER JOIN 
+		(
+			SELECT 
+				SP_TYPE,
+				SP_CD,
+				SP_REV,
+				SP_GUBUN,
+				SUM(SP_QTY) QTY
+			FROM TB_STOCK_PAYMENT_ADM
+			WHERE SUBSTRING(SP_DATE,0,7) = #{tmMon}
+			AND SP_TYPE = '001'
+			AND SP_GUBUN='004'
+			GROUP BY SP_TYPE,SP_CD,SP_REV,SP_GUBUN 
+		) E
+		ON Z.SP_CD=E.SP_CD
+		AND Z.SP_REV=E.SP_REV
+		LEFT OUTER JOIN
+		(
+			SELECT 
+				Z.SP_CD,
+				Z.SP_REV,
+				(ISNULL(A.QTY,0)+ISNULL(D.QTY,0))-ISNULL(B.QTY,0)-ISNULL(E.QTY,0) TM_QTY,
+			    SUBSTRING(CONVERT(VARCHAR(14),DATEADD(M,-1,CONVERT(DATETIME,CONCAT(#{tmMon},'10'),120)),112),0,7) TM_MON
+			FROM (
+			SELECT PART_CD SP_CD,
+				PART_REV SP_REV,
+				'001' SP_TYPE
+			FROM TB_ITEM_PART_ADM
+			) Z
+			LEFT OUTER JOIN
+			(
+				SELECT 
+					SP_TYPE,
+					SP_CD,
+					SP_REV,
+					SP_GUBUN,
+					SUM(SP_QTY) QTY
+				FROM TB_STOCK_PAYMENT_ADM
+				WHERE SUBSTRING(SP_DATE,0,7) <![CDATA[<=]]> SUBSTRING(CONVERT(VARCHAR(14),DATEADD(M,-1,CONVERT(DATETIME,CONCAT(#{tmMon},'10'),120)),112),0,7)
+				AND SP_TYPE = '001'
+				AND SP_GUBUN='001'
+				GROUP BY SP_TYPE,SP_CD,SP_REV,SP_GUBUN 
+			) A
+			ON Z.SP_CD=A.SP_CD
+			AND Z.SP_REV=A.SP_REV
+			LEFT OUTER JOIN 
+			(
+				SELECT 
+					SP_TYPE,
+					SP_CD,
+					SP_REV,
+					SP_GUBUN,
+					SUM(SP_QTY) QTY
+				FROM TB_STOCK_PAYMENT_ADM
+				WHERE SUBSTRING(SP_DATE,0,7) <![CDATA[<=]]> SUBSTRING(CONVERT(VARCHAR(14),DATEADD(M,-1,CONVERT(DATETIME,CONCAT(#{tmMon},'10'),120)),112),0,7)
+				AND SP_TYPE = '001'
+				AND SP_GUBUN='002'
+				GROUP BY SP_TYPE,SP_CD,SP_REV,SP_GUBUN 
+			) B
+			ON Z.SP_CD=B.SP_CD
+			AND Z.SP_REV=B.SP_REV
+			LEFT OUTER JOIN 
+			(
+				SELECT 
+					SP_TYPE,
+					SP_CD,
+					SP_REV,
+					SP_GUBUN,
+					SUM(SP_QTY) QTY
+				FROM TB_STOCK_PAYMENT_ADM
+				WHERE SUBSTRING(SP_DATE,0,7) <![CDATA[<=]]> SUBSTRING(CONVERT(VARCHAR(14),DATEADD(M,-1,CONVERT(DATETIME,CONCAT(#{tmMon},'10'),120)),112),0,7)
+				AND SP_TYPE = '001'
+				AND SP_GUBUN='003'
+				GROUP BY SP_TYPE,SP_CD,SP_REV,SP_GUBUN 
+			) D
+			ON Z.SP_CD=D.SP_CD
+			AND Z.SP_REV=D.SP_REV
+			LEFT OUTER JOIN 
+			(
+				SELECT 
+					SP_TYPE,
+					SP_CD,
+					SP_REV,
+					SP_GUBUN,
+					SUM(SP_QTY) QTY
+				FROM TB_STOCK_PAYMENT_ADM
+				WHERE SUBSTRING(SP_DATE,0,7) <![CDATA[<=]]> SUBSTRING(CONVERT(VARCHAR(14),DATEADD(M,-1,CONVERT(DATETIME,CONCAT(#{tmMon},'10'),120)),112),0,7)
+				AND SP_TYPE = '001'
+				AND SP_GUBUN='004'
+				GROUP BY SP_TYPE,SP_CD,SP_REV,SP_GUBUN 
+			) E
+			ON Z.SP_CD=E.SP_CD
+			AND Z.SP_REV=E.SP_REV
+		) C
+		ON Z.SP_CD=C.SP_CD
+		AND Z.SP_REV=C.SP_REV
+		WHERE 1=1
+			
+		) B
+		WHERE A.PART_CD=B.SP_CD
+		AND A.PART_REV=B.SP_REV
+	</update>
+	
+</mapper>
+
+

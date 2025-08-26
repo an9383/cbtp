@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.fr.fileReferenceMapper">
+
+	<resultMap id="FileReferenceVo" type="mes.domain.fr.FileReferenceVo">
+		<result property="idx"							column="IDX"							/>
+		<result property="gubun"						column="GUBUN"							/>
+		<result property="fileName"						column="FILE_NAME"						/>
+		<result property="fileBlob"						column="FILE_BLOB"						/>
+		<result property="fileGubun"					column="FILE_GUBUN"						/>
+		<result property="fileManager"					column="FILE_MANAGER"					/>
+		<result property="fileInputDate"				column="FILE_INPUT_DATE"				/>
+		<result property="fileDesc"						column="FILE_DESC"						/>
+		<result property="fileInfo1"					column="FILE_INFO_1"					/>
+		<result property="fileInfo2"					column="FILE_INFO_2"					/>
+		<result property="fileInfo3"					column="FILE_INFO_3"					/>
+		<result property="regId"						column="REG_ID"							/>
+		<result property="regDate"						column="REG_DATE"						/>
+		<result property="updId"						column="UPD_ID"							/>
+		<result property="updDate"						column="UPD_DATE"						/>
+		
+		<result property="fileManagerNm"				column="FILE_MANAGER_NM"				/>
+		<result property="fileManagerDepartmentCd"		column="FILE_MANAGER_DEPAERMENT_CD"		/>
+		<result property="fileManagerDepartmentNm"		column="FILE_MANAGER_DEPAERMENT_NM"		/>
+	</resultMap>
+	
+	<!-- 목록조회 -->
+	<select id="list" resultMap="FileReferenceVo" parameterType="mes.domain.fr.FileReferenceVo">
+		SELECT 
+			*
+		FROM
+		(
+			SELECT
+				FR.IDX,
+				FR.GUBUN,
+				FR.FILE_GUBUN,
+				FR.FILE_NAME,
+				FR.FILE_MANAGER,
+				(SELECT X.USER_NM FROM TB_USER X WHERE X.USER_NUMBER = FR.FILE_MANAGER) FILE_MANAGER_NM,
+				(SELECT DEPARTMENT_CD FROM TB_USER U WHERE U.USER_NUMBER = FR.FILE_MANAGER) FILE_MANAGER_DEPAERMENT_CD,
+				(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = (SELECT DEPARTMENT_CD FROM TB_USER U WHERE U.USER_NUMBER = FR.FILE_MANAGER) AND X.BASE_GROUP_CD = '003') FILE_MANAGER_DEPAERMENT_NM,
+				FR.FILE_INPUT_DATE,
+				FR.FILE_DESC,
+				FR.FILE_INFO_1,
+				FR.FILE_INFO_2,
+				FR.FILE_INFO_3,
+				FR.REG_ID,
+				FR.REG_DATE,
+				FR.UPD_ID,
+				FR.UPD_DATE
+			FROM TB_FILE_REFERENCE FR
+			WHERE 1=1
+		)Z
+		WHERE 1=1
+		AND Z.GUBUN = #{gubun}
+		<if test="fileGubun != null and fileGubun != ''">
+		AND Z.FILE_GUBUN = #{fileGubun}
+		</if>
+		<if test="fileManagerDepartmentCd != null and fileManagerDepartmentCd != ''">
+		AND Z.FILE_INFO_1 = #{fileManagerDepartmentCd}
+		</if>
+		<if test="fileInfo3 != null and fileInfo3 != ''">
+		AND Z.FILE_INFO_3 = #{fileInfo3}
+		</if>
+	</select>
+	
+	<!-- 상세조회 -->
+	<select id="read" resultMap="FileReferenceVo" parameterType="mes.domain.fr.FileReferenceVo">
+		SELECT
+			FR.IDX,
+			FR.GUBUN,
+			FR.FILE_GUBUN,
+			FR.FILE_NAME,
+			FR.FILE_BLOB,
+			FR.FILE_MANAGER,
+			(SELECT X.USER_NM FROM TB_USER X WHERE X.USER_NUMBER = FR.FILE_MANAGER) FILE_MANAGER_NM,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = (SELECT DEPARTMENT_CD FROM TB_USER U WHERE U.USER_NUMBER = FR.FILE_MANAGER) AND X.BASE_GROUP_CD = '003') FILE_MANAGER_DEPAERMENT_NM,
+			FR.FILE_INPUT_DATE,
+			FR.FILE_DESC,
+			FR.FILE_INFO_1,
+			FR.FILE_INFO_2,
+			FR.FILE_INFO_3,
+			FR.REG_ID,
+			FR.REG_DATE,
+			FR.UPD_ID,
+			FR.UPD_DATE
+		FROM TB_FILE_REFERENCE FR
+		WHERE IDX = #{idx}
+	</select>
+	
+	<!-- 등록 -->
+	<insert id="add" parameterType="mes.domain.fr.FileReferenceVo" useGeneratedKeys="true" keyProperty="idx" keyColumn="idx">
+		INSERT INTO TB_FILE_REFERENCE (
+			GUBUN,
+			FILE_NAME,
+			FILE_BLOB,
+			FILE_MANAGER,
+			FILE_INPUT_DATE,
+			FILE_INFO_3,
+			REG_ID,
+			REG_DATE
+		) VALUES (
+			#{gubun},
+			#{fileName},
+			#{fileBlob},
+			#{fileManager},
+			CONVERT(CHAR(8), GETDATE(), 112),
+			#{fileInfo3},
+			#{regId},
+			GETDATE()
+		)
+		<selectKey resultType="String" keyProperty="idx" order="AFTER">
+    	SELECT SCOPE_IDENTITY()
+		</selectKey>
+	</insert>
+	
+	<!-- 수정 -->
+	<update id="edit" parameterType="mes.domain.fr.FileReferenceVo">
+		UPDATE TB_FILE_REFERENCE
+		SET
+			FILE_MANAGER = #{fileManager},
+			FILE_GUBUN = #{fileGubun},
+			FILE_INPUT_DATE = #{fileInputDate},
+			FILE_DESC = #{fileDesc},
+			FILE_INFO_1 = #{fileInfo1},
+			FILE_INFO_2 = #{fileInfo2},
+			FILE_INFO_3 = #{fileInfo3},
+			UPD_ID = #{updId},
+			UPD_DATE = GETDATE()
+		WHERE IDX = #{idx}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="remove" parameterType="mes.domain.fr.FileReferenceVo">
+		DELETE
+		FROM TB_FILE_REFERENCE
+		WHERE IDX = #{idx}
+	</delete>
+</mapper>

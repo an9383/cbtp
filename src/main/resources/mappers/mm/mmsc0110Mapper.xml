@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.mm.mmsc0110Mapper">
+
+<!-- 작업지시 -->
+	<resultMap id="WorkOrderVo" type="mes.domain.po.WorkOrderVo">
+		<result property="itemGubun"                column="ITEM_GUBUN"				/>
+		<result property="outputQty"                column="OUTPUT_QTY"				/>
+	</resultMap>
+	
+	<!--수주접수(전체) -->
+	<select id="countBizOrederAdmAll" resultType="int">
+		SELECT ISNULL(COUNT(*),0) FROM TB_BIZ_ORDER_ADM
+	</select>
+	
+	<!--수주접수(금일) -->
+	<select id="countBizOrederAdmToday" resultType="int">
+		SELECT ISNULL(COUNT(*),0) FROM TB_BIZ_ORDER_ADM WHERE RCV_DATE = #{date}
+	</select>
+	
+	<!--발주대기 -->
+	<select id="countPurchaseOrderDtl" resultType="int">
+		SELECT ISNULL(COUNT(*),0) FROM TB_PURCHASE_ORDER_DTL 
+		WHERE 1=1
+		AND PO_STATUS = '001'
+	</select>
+	
+	<!--자재미입고 -->
+	<select id="countInOutWhsAdm" resultType="int">
+		SELECT ISNULL(COUNT(*),0) FROM TB_IN_OUT_WHS_ADM WHERE PRE_IN_WHS_QTY > IN_WHS_QTY
+	</select>
+
+	
+	<!--공정현황 -->
+	<select id="countWorkOrderPrcssAdm" resultType="int">
+		SELECT	ISNULL(COUNT(*),0)
+		FROM (
+		SELECT	E.WORK_ORD_NO	
+				,E.ITEM_CD
+				,E.ITEM_REV
+		FROM TB_WORK_ORDER A, TB_ITEM_MOTOR_MBOM B, TB_PRCSS_BOM_DTL C, TB_PRCSS_CODE_ADM D, TB_WORK_ORDER_PRCSS E, TB_ITEM_MOTOR_ADM F
+		WHERE A.ITEM_CD = B.ITEM_CD
+			AND A.ITEM_REV = B.ITEM_REV
+			AND B.BOM_CD = C.BOM_CD
+			AND C.PRCSS_SEQ = (SELECT MAX(PRCSS_SEQ) FROM TB_PRCSS_BOM_DTL WHERE BOM_CD = B.BOM_CD)
+			AND C.PRCSS_CD = D.PRCSS_CD
+			AND D.PRCSS_CD != D.LOWER_PRCSS_CD
+			AND D.PRCSS_SEQ = (SELECT MAX(PRCSS_SEQ) FROM TB_PRCSS_CODE_ADM WHERE PRCSS_CD = C.PRCSS_CD)
+			AND A.WORK_ORD_NO = E.WORK_ORD_NO
+			AND D.LOWER_PRCSS_CD = E.MINOR_PRCSS_CD
+			AND D.PRCSS_CD = E.MIDDLE_PRCSS_CD
+			AND E.WORK_STATUS = 'WC'
+			AND F.ITEM_CD = A.ITEM_CD
+			AND F.ITEM_REV = A.ITEM_REV
+		) A
+		LEFT OUTER JOIN TB_ITEM_COMPLETE_ADM B
+		ON A.ITEM_CD = B.ITEM_CD 
+		AND A.ITEM_REV = B.ITEM_REV
+		AND A.WORK_ORD_NO = B.WORK_ORD_NO
+	</select>
+	
+	<!--생산지시수량(소형) -->
+	<select id="countWorkOrdQty1" resultType="int">
+		SELECT ISNULL(SUM(WORK_ORD_QTY),0) 
+		FROM TB_WORK_ORDER
+		WHERE 1=1
+		AND ITEM_GUBUN='001' 
+		AND WORK_ORD_DATE = #{date}
+	</select>
+	
+	
+	<!--생산지시수량(중형) -->
+	<select id="countWorkOrdQty2" resultType="int">
+		SELECT ISNULL(SUM(WORK_ORD_QTY),0)
+		FROM TB_WORK_ORDER
+		WHERE 1=1
+		AND ITEM_GUBUN='002' 
+		AND WORK_ORD_DATE = #{date}
+	</select>
+	
+	
+	<!-- 생산량(소형,중형) --> 
+	<select id="countWorkOrdOutputQty" resultMap="WorkOrderVo">
+		SELECT	A.ITEM_GUBUN,
+				ISNULL(A.OUTPUT_QTY,0) OUTPUT_QTY
+			FROM (
+				SELECT	E.WORK_ORD_NO	
+				      ,A.CONT_DTL_NO
+					  ,A.WORK_ORD_DATE
+				      ,E.ITEM_CD
+				      ,E.ITEM_REV
+					  ,C.PRCSS_CD MIDDLE_CLASS
+					  ,(SELECT PRCSS_NM FROM TB_PRCSS_CODE_ADM WHERE C.PRCSS_CD = LOWER_PRCSS_CD) MIDDLE_CLASS_NM
+					  ,D.LOWER_PRCSS_CD MINOR_CLASS
+					  ,D.PRCSS_NM MINOR_CLASS_NM
+					  ,F.ITEM_NM
+					  ,F.ITEM_GUBUN	
+					  ,(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE F.ITEM_GUBUN = X.BASE_CD AND BASE_GROUP_CD='037') ITEM_GUBUN_NM
+					  ,F.ITEM_SERIES
+					  ,F.ITEM_ENCDR
+					  ,F.ITEM_CAPA
+					  ,F.FRAME_SIZE		
+					  ,E.OUTPUT_QTY	
+				FROM TB_WORK_ORDER A, TB_ITEM_MOTOR_MBOM B, TB_PRCSS_BOM_DTL C, TB_PRCSS_CODE_ADM D, TB_WORK_ORDER_PRCSS E, TB_ITEM_MOTOR_ADM F
+				WHERE A.ITEM_CD = B.ITEM_CD
+					AND A.ITEM_REV = B.ITEM_REV
+					AND B.BOM_CD = C.BOM_CD
+					AND C.PRCSS_SEQ = (SELECT MAX(PRCSS_SEQ) FROM TB_PRCSS_BOM_DTL WHERE BOM_CD = B.BOM_CD)
+					AND C.PRCSS_CD = D.PRCSS_CD
+					AND D.PRCSS_CD != D.LOWER_PRCSS_CD
+					AND D.PRCSS_SEQ = (SELECT MAX(PRCSS_SEQ) FROM TB_PRCSS_CODE_ADM WHERE PRCSS_CD = C.PRCSS_CD)
+					AND A.WORK_ORD_NO = E.WORK_ORD_NO
+					AND D.LOWER_PRCSS_CD = E.MINOR_PRCSS_CD
+					AND D.PRCSS_CD = E.MIDDLE_PRCSS_CD
+					AND E.WORK_STATUS = 'WC'
+					AND F.ITEM_CD = A.ITEM_CD
+					AND F.ITEM_REV = A.ITEM_REV
+			 ) A
+			 LEFT OUTER JOIN TB_ITEM_COMPLETE_ADM B
+			 ON A.ITEM_CD = B.ITEM_CD 
+			 AND A.ITEM_REV = B.ITEM_REV
+			 AND A.WORK_ORD_NO = B.WORK_ORD_NO 
+			 LEFT OUTER JOIN TB_ITEM_FAULTY_CAUSE C
+			 ON C.ITEM_CD = B.ITEM_CD 
+			 AND C.ITEM_REV = B.ITEM_REV
+			 AND C.WORK_ORD_NO = B.WORK_ORD_NO  
+			 WHERE  A.WORK_ORD_DATE= #{date}
+	</select>
+	
+	
+	<!--불량개수(소형) -->
+	<select id="countFaultyRate1" resultType="int">
+		SELECT ISNULL(SUM(A.DISUSE_QTY+A.REPAIR_QTY+A.REWORK_QTY),0) FROM TB_ITEM_COMPLETE_FAULTY_JDG_ADM A
+		INNER JOIN TB_ITEM_MOTOR_ADM B
+		ON A.ITEM_CD = B.ITEM_CD
+		AND A.ITEM_REV=B.ITEM_REV
+		WHERE 1=1
+		AND B.ITEM_GUBUN = '001'
+		AND A.FAULTY_DATE =#{date}
+	</select>
+	
+	
+	<!--불량개수(중형) -->
+	<select id="countFaultyRate2" resultType="int">
+		SELECT ISNULL(SUM(A.DISUSE_QTY+A.REPAIR_QTY+A.REWORK_QTY),0) FROM TB_ITEM_COMPLETE_FAULTY_JDG_ADM A
+		INNER JOIN TB_ITEM_MOTOR_ADM B
+		ON A.ITEM_CD = B.ITEM_CD
+		AND A.ITEM_REV=B.ITEM_REV
+		WHERE 1=1
+		AND A.FAULTY_DATE =#{date}
+	</select>
+	
+	
+	
+</mapper>

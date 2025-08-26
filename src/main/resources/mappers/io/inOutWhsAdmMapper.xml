@@ -1,0 +1,1160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  	
+<mapper namespace="mes.mappers.io.inOutWhsAdmMapper">
+
+	<resultMap id="InOutWhsAdmVo" type="mes.domain.io.InOutWhsAdmVo">
+		<result property="poNo"					column="PO_NO"				/>
+		<result property="poSeq"		    	column="PO_SEQ"				/>
+		
+		<result property="inSlipNo"				column="IN_SLIP_NO"			/>			
+		<result property="inSlipSeq"			column="IN_SLIP_SEQ"		/>		
+		
+		<result property="inSeq"				column="IN_SEQ"				/>			
+		<result property="lotNo"				column="LOT_NO"				/>		
+		<result property="itemSeq"		  	  	column="ITEM_SEQ"			/>
+		<result property="itemCd"		  	  	column="ITEM_CD"			/>	
+		<result property="itemNm"		  	  	column="ITEM_NM"			/>
+		<result property="itemModel"		  	column="ITEM_MODEL"			/>
+		<result property="itemUnit"		  		column="ITEM_UNIT"			/>
+		<result property="importCost"	  		column="IMPORT_COST"		/>
+		<result property="importYn"		  		column="IMPORT_YN"			/>
+		
+		<result property="partCd"		  	  	column="PART_CD"			/>
+		<result property="partRev"		        column="PART_REV"			/>
+		<result property="partNm"		        column="PART_NM"			/>
+		<result property="partSpec"		        column="PART_SPEC"			/>
+		<result property="partGubun"		    column="PART_GUBUN"			/>
+		<result property="partUnit"		        column="PART_UNIT"			/>
+		<result property="itemFifoGubun"		column="ITEM_FIFO_GUBUN"	/>
+		<result property="itemFifoGubunNm"		column="ITEM_FIFO_GUBUN_NM"	/>
+		<result property="ordQty"		        column="ORD_QTY"			/>
+		
+		<result property="partQty"		        column="PART_QTY"			/>
+		<result property="safyStockCnt"		    column="SAFY_STOCK_CNT"		/>
+		<result property="addQty"		        column="ADD_QTY"			/>
+		<result property="payYn"		        column="PAY_YN"				/>
+		<result property="inspectYn"			column="INSPECT_YN"			/>
+		<result property="preInWhsQty"			column="PRE_IN_WHS_QTY"		/>
+		<result property="inWhsQty"				column="IN_WHS_QTY"			/>
+		<result property="inspectQty"			column="INSPECT_QTY"		/> 
+		<result property="adjustQty"			column="ADJUST_QTY"			/> 
+		<result property="faultyQty"			column="FAULTY_QTY"			/> 
+		<result property="returnQty"			column="RETURN_QTY"			/>
+		<result property="exceptQty"			column="EXCEPT_QTY"			/> 
+		<result property="diffQty"				column="DIFF_QTY"			/> 
+		<result property="remainQty"			column="REMAIN_QTY"			/> 
+		<result property="spplyCorpCd"			column="SPPLY_CORP_CD"		/> 
+		<result property="spplyCorpNm"			column="SPPLY_CORP_NM"		/> 
+		<result property="preInWhsDate"			column="PRE_IN_WHS_DATE"	/> 
+		<result property="preInStatus"			column="PRE_IN_STATUS"		/> 
+		<result property="inWhsDate"			column="IN_WHS_DATE"		/> 
+		<result property="inspectDate"			column="INSPECT_DATE"		/> 
+		<result property="barcodeNo"			column="BARCODE_NO"			/> 
+		<result property="approvalCd"			column="APPROVAL_CD"		/> 
+		<result property="approvalYn"			column="APPROVAL_YN"		/> 
+		<result property="approvalNm"			column="APPROVAL_NM"		/> 
+		<result property="statusCd"				column="STATUS_CD"			/> 
+		<result property="partChargr"			column="PART_CHARGR"		/> 
+		<result property="preOutWhsDate"		column="PRE_OUT_WHS_DATE"	/> 
+		<result property="preOutEquipCd"		column="PRE_OUT_EQUIP_CD"	/>
+		<result property="preOutPartCd"			column="PRE_OUT_PART_CD"	/> 
+		<result property="preOutQty"			column="PRE_OUT_QTY"		/> 
+		<result property="preWorkCharger"		column="PRE_WORK_CHARGER"	/>
+		<result property="preWorkChargerNm"		column="PRE_WORK_CHARGER_NM"/>  
+		<result property="outWhsDate"			column="OUT_WHS_DATE"		/>
+		<result property="outEquipCd"			column="OUT_EQUIP_CD"		/> 
+		<result property="outPartCd"			column="OUT_PART_CD"		/> 
+		<result property="outQty"				column="OUT_QTY"			/> 
+		<result property="outWorkCharger"		column="OUT_WORK_CHARGER"	/> 
+		<result property="locationCd"			column="LOCATION_CD"		/>		
+		<result property="locationNm"			column="LOCATION_NM"		/>
+		<result property="areaCd"				column="AREA_CD"			/>		
+		<result property="areaNm"				column="AREA_NM"			/>
+		<result property="floorCd"				column="FLOOR_CD"			/>		
+		<result property="floorNm"				column="FLOOR_NM"			/>
+		<result property="locationNo"			column="LOCATION_NO"		/>
+		<result property="outputDate"			column="OUTPUT_DATE"		/>
+		<result property="manufactrCd"			column="MANUFACTR_CD"		/> 
+		<result property="inWhsDesc"			column="IN_WHS_DESC"		/> 
+		<result property="regId"				column="REG_ID"				/>
+		<result property="regDate"				column="REG_DATE"			/>
+		<result property="updId"				column="UPD_ID"				/>				
+		<result property="updDate"				column="UPD_DATE"			/>
+		
+		<result property="startDate"			column="START_DATE"			/>				
+		<result property="endDate"				column="END_DATE"			/>
+		
+		<result property="poDate"				column="PO_DATE"			/>
+		<result property="poDesc"				column="PO_DESC"			/>
+		<result property="dlvDate"				column="DLV_DATE"			/>
+		<result property="receiptGubun"			column="RECEIPT_GUBUN"		/>
+		<result property="receiptGubunNm"		column="RECEIPT_GUBUN_NM"	/>
+		<result property="dealCorpCd"		    column="DEAL_CORP_CD"		/>
+		<result property="dealCorpNm"		    column="DEAL_CORP_NM"		/>
+		<result property="pairCnt"		    	column="PAIR_CNT"			/>
+		<result property="faultyCnt"		    column="FAULTY_CNT"			/>
+		<result property="tmMon"		   		column="TM_MON"				/>
+		
+		<result property="contDtlNo"		   	column="CONT_DTL_NO"		/>
+		<result property="status"		   		column="STATUS"				/>
+		<result property="today"		   		column="TODAY"				/>
+	
+		<!--추가사항 -->
+		<result property="itemInspectCheck"		column="ITEM_INSPECT_CHECK"	/>
+		<result property="inOutWhsCheck"		column="IN_OUT_WHS_CHECK"	/>
+		<result property="mainGubun"			column="MAIN_GUBUN"			/>
+		<result property="mainGubunNm"			column="MAIN_GUBUN_NM"		/>
+		<result property="itemGubun"			column="ITEM_GUBUN"			/>
+		<result property="itemGubunNm"			column="ITEM_GUBUN_NM"		/>
+		<result property="qaEval"				column="QA_EVAL"			/>
+		<result property="faultyPcs"			column="FAULTY_PCS"			/>
+		<result property="faultyPcsNm"			column="FAULTY_PCS_NM"		/>
+		<result property="unfitProc"			column="UNFIT_PROC"			/>
+		<result property="unfitProcNm"			column="UNFIT_PROC_NM"		/>
+		<result property="inspectChargr"		column="INSPECT_CHARGR"		/>
+		<result property="areaNmSewing"			column="AREA_NM_SEWING"		/>
+		<result property="floorNmSewing"		column="FLOOR_NM_SEWING"	/>
+		<result property="totalCount"			column="TOTAL_COUNT"		/>
+		<result property="inWhsCost"			column="IN_WHS_COST"		/>
+	</resultMap>
+	
+	<!-- 가입고등록,개별입고등록 목록조회 -->
+	<select id="preInOutWhsAdmList" resultMap="InOutWhsAdmVo">
+		SELECT 
+			A.IN_SLIP_NO
+			, A.IN_SLIP_SEQ
+			, A.PO_NO
+			, A.PO_SEQ 
+			, A.IN_SLIP_NO
+			, A.IN_SLIP_SEQ
+			, A.IN_SEQ 
+			, A.ITEM_SEQ
+			, B.ITEM_CD
+			, B.ITEM_NM
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=B.ITEM_MODEL AND X.BASE_GROUP_CD='099') ITEM_MODEL
+			, LOT_NO 
+			, BARCODE_NO
+			, STATUS_CD
+			, PRE_IN_WHS_DATE 
+			, (SELECT ISNULL(SUM(ORD_QTY),0)
+				FROM TB_PURCHASE_ORDER_DTL X 
+				WHERE X.PO_NO=A.PO_NO
+				AND X.ITEM_SEQ=A.ITEM_SEQ)ORD_QTY
+			, PRE_IN_WHS_QTY
+			, IIA_TB.PAIR_CNT
+			, IIA_TB.FAULTY_CNT
+			, IN_WHS_DESC
+			, SPPLY_CORP_CD
+			,(SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD=SPPLY_CORP_CD) SPPLY_CORP_NM
+			, IIA_TB.QA_EVAL
+			, A.APPROVAL_CD
+			, IFJ_TB.FAULTY_PCS
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=IFJ_TB.FAULTY_PCS AND X.BASE_GROUP_CD='059' ) FAULTY_PCS_NM
+			, A.LOCATION_NO
+			, A.LOCATION_CD
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM WHERE BASE_CD=A.LOCATION_CD AND BASE_GROUP_CD='073' ) LOCATION_NM
+			, A.AREA_CD
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM WHERE BASE_CD=A.AREA_CD AND BASE_GROUP_CD='067' ) AREA_NM
+			, A.FLOOR_CD
+			, UF_TB.UNFIT_PROC
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = UF_TB.UNFIT_PROC AND X.BASE_GROUP_CD = '139') UNFIT_PROC_NM
+		FROM TB_IN_OUT_WHS_ADM A
+		INNER JOIN TB_ITEM_INFO_ADM B
+		ON A.ITEM_SEQ=B.ITEM_SEQ
+		LEFT OUTER JOIN TB_ITEM_INSPECT_ADM IIA_TB
+		ON A.IN_SLIP_NO=IIA_TB.IN_SLIP_NO
+		AND A.IN_SLIP_SEQ=IIA_TB.IN_SLIP_SEQ
+		LEFT OUTER JOIN TB_ITEM_FAULTY_JDG_ADM IFJ_TB
+		ON A.IN_SLIP_NO=IFJ_TB.IN_SLIP_NO
+		AND A.IN_SLIP_SEQ=IFJ_TB.IN_SLIP_SEQ
+		LEFT JOIN TB_UNFIT_ADM UF_TB
+		ON A.BARCODE_NO = UF_TB.UNFIT_LOT
+		AND UF_TB.UNFIT_GUBUN = '001'
+		WHERE 1=1
+		<if test="poNo!=null and !poNo.equals('')">
+		AND A.PO_NO = #{poNo}
+		AND A.PO_SEQ = #{poSeq}
+		</if>
+		<if test="inSlipNo != null and !inSlipNo.equals('')">
+		AND A.IN_SLIP_NO = #{inSlipNo}
+		</if>
+		<if test="inSlipSeq != null and !inSlipSeq.equals('')">
+		AND A.IN_SLIP_SEQ = #{inSlipSeq}
+		</if>
+	</select>
+	
+	
+	
+	<!-- 발주수량대비 가입고수량 조회 -->
+	<select id="unPreInOutQtyList" resultMap="InOutWhsAdmVo">
+		SELECT 
+			A.PO_NO,
+			A.PO_SEQ,	
+			A.PART_CD,
+			ISNULL(A.TOTAL_PART_QTY,0) - ISNULL(B.PRE_IN_WHS_QTY,0) DIFF_QTY
+		FROM 
+		(
+		SELECT 
+			PO_NO,
+			PO_SEQ,
+			MRP_NO,
+			CONT_DTL_NO,
+			PART_CD,
+			ISNULL(PART_QTY,0) PART_QTY,
+			ISNULL(SAFY_STOCK_CNT,0) SAFY_STOCK_CNT,
+			ISNULL(PART_QTY,0)+ISNULL(SAFY_STOCK_CNT,0) TOTAL_PART_QTY
+		FROM TB_PURCHASE_ORDER_DTL 
+		)A
+		LEFT OUTER JOIN
+		(
+		SELECT 
+			PO_NO,
+			PO_SEQ,
+			ISNULL(SUM(PRE_IN_WHS_QTY),0) PRE_IN_WHS_QTY
+		FROM TB_IN_OUT_WHS_ADM
+		GROUP BY PO_NO, PO_SEQ
+		)B
+		ON A.PO_NO=B.PO_NO
+		AND A.PO_SEQ=B.PO_SEQ
+		WHERE 1=1
+		AND ISNULL(A.TOTAL_PART_QTY,0) - ISNULL(B.PRE_IN_WHS_QTY,0) != 0
+		AND A.PO_NO=#{poNo}
+	</select>
+	
+	
+	
+	<!-- 가입고등록 등록 -->
+	<insert id="preInOutWhsAdmCreate">
+		INSERT INTO TB_IN_OUT_WHS_ADM	(
+			IN_SLIP_NO
+			, IN_SLIP_SEQ
+			, PO_NO
+			, PO_SEQ
+			, IN_SEQ
+			, LOT_NO
+			, ITEM_SEQ
+			, ORD_QTY
+			, ADD_QTY
+			, PAY_YN
+			, PRE_IN_WHS_QTY
+			, IN_WHS_QTY
+			, INSPECT_QTY
+			, ADJUST_QTY
+			, FAULTY_QTY
+			, EXCEPT_QTY
+			, DIFF_QTY
+			, REMAIN_QTY
+			, PRE_IN_WHS_DATE
+			, INSPECT_YN
+			, BARCODE_NO
+			, SPPLY_CORP_CD
+			, IN_WHS_DESC
+			, STATUS_CD
+			, LOCATION_CD
+			, AREA_CD
+			, FLOOR_CD
+			, LOCATION_NO
+			, REG_ID
+			, REG_DATE
+		) 
+		VALUES(
+			#{inSlipNo}
+			, #{inSlipSeq}
+			, #{poNo}
+			, #{poSeq}
+			, #{inSeq}
+			, #{lotNo}
+			, #{itemSeq}
+			, #{ordQty}
+			, #{addQty}
+			, #{payYn}
+			, #{preInWhsQty}
+			, 0
+			, 0
+			, 0
+			, 0
+			, 0
+			, 0
+			, 0
+			, #{preInWhsDate}
+			, #{inspectYn}
+			, #{barcodeNo}
+			, #{spplyCorpCd}
+			, #{inWhsDesc}
+			, 'S'
+			, #{locationCd}
+			, #{areaCd}
+			, #{floorCd}
+			, #{locationNo}
+			, #{regId}
+			, getDate()
+		)
+	</insert>
+	
+	<!-- 가입고등록 수정 -->
+	<update id="preInOutWhsAdmUpdate">
+<!-- 		<![CDATA[ -->
+			UPDATE	TB_IN_OUT_WHS_ADM							 
+			SET	
+				<if test="remainQty != null">
+					REMAIN_QTY = #{remainQty},
+				</if>
+				<if test="addQty != null">
+					ADD_QTY = #{addQty},
+				</if>
+				<if test="payYn != null">
+					PAY_YN = #{payYn},
+				</if>
+				<if test="preInWhsQty != null">
+					PRE_IN_WHS_QTY = #{preInWhsQty},
+				</if>
+				<if test="preInWhsDate != null">
+					PRE_IN_WHS_DATE = #{preInWhsDate},
+				</if>
+				<if test="inspectYn != null">
+					INSPECT_YN = #{inspectYn},
+				</if>
+				<if test="inWhsDesc != null">
+					IN_WHS_DESC = #{inWhsDesc},
+				</if>
+				<if test="lotNo != null">
+					LOT_NO = #{lotNo},
+				</if>
+				
+				<if test="locationCd != null">
+					LOCATION_CD = #{locationCd},
+				</if>
+				<if test="areaCd != null">
+					AREA_CD = #{areaCd},
+				</if>
+				<if test="floorCd != null">
+					FLOOR_CD = #{floorCd},
+				</if>
+				<if test="locationNo != null">
+					LOCATION_NO = #{locationNo},
+				</if>
+				
+				<if test="updId != null">
+					UPD_ID = #{updId},
+				</if>
+				UPD_DATE = getDate()
+			WHERE 1=1
+			AND	IN_SLIP_NO = #{inSlipNo}
+			AND	IN_SLIP_SEQ = #{inSlipSeq}
+<!-- 		]]> -->
+	</update>
+	
+	<!-- 라벨출력처리 -->
+	<update id="preInOutWhsAdmLabelPrint">
+<!-- 		<![CDATA[ -->
+			UPDATE	TB_IN_OUT_WHS_ADM							 
+			SET	
+				OUTPUT_DATE = getDate()
+			WHERE 1=1
+			AND	IN_SLIP_NO = #{inSlipNo}
+			AND	IN_SLIP_SEQ = #{inSlipSeq}
+<!-- 		]]> -->
+	</update>
+	
+	<!-- 가입고등록 삭제 -->
+	<delete id="preInOutWhsAdmDelete">
+		DELETE FROM TB_IN_OUT_WHS_ADM 
+		WHERE 1=1
+		AND	IN_SLIP_NO = #{inSlipNo}
+		AND	IN_SLIP_SEQ = #{inSlipSeq}
+	</delete>
+
+	<!-- 가입고시퀀스 생성 -->
+	<select id="getInSeq" resultType="String">
+		SELECT ISNULL(MAX(IN_SEQ)+1,0) FROM TB_IN_OUT_WHS_ADM WHERE PO_NO = #{poNo} AND PO_SEQ = #{poSeq}
+	</select>
+	
+	<!-- 발주현황 삭제 확인 -->
+	<select id="inOutWhsDataCheck" resultType="String">
+		SELECT 
+			COUNT(*) 
+		FROM TB_IN_OUT_WHS_ADM 
+		WHERE PO_NO = #{poNo}
+		AND PO_SEQ = #{poSeq}
+	</select>
+	
+	<!-- 입고전표번호 생성 -->
+	<select id="getInSlipNo" resultType="String">
+		SELECT ISNULL(RIGHT('000' + CAST(MAX(RIGHT(IN_SLIP_NO,3))+1 AS NVARCHAR),3), '001') 
+		FROM TB_IN_OUT_WHS_ADM 
+		WHERE SUBSTRING(IN_SLIP_NO,0,9) = #{today}
+	</select>
+	
+	<!-- 입고전표시퀀스 생성 -->
+	<select id="getInSlipSeq" resultType="String">
+		SELECT ISNULL(MAX(IN_SLIP_SEQ)+1,0) FROM TB_IN_OUT_WHS_ADM WHERE IN_SLIP_NO = #{inSlipNo}
+	</select>
+	
+	
+	<!-- 바코드 시퀀스 가져오기 -->
+	<select id="getBarcodeSeq" parameterType="String" resultType="String">
+		SELECT ISNULL(RIGHT('000' + CAST(MAX(RIGHT(BARCODE_NO,3))+1 AS NVARCHAR),3), '001') FROM TB_IN_OUT_WHS_ADM  WHERE SUBSTRING(BARCODE_NO,0,14) = #{date}
+	</select>
+	
+	<!-- 가입고등록 자재상태 확인 -->
+	<select id="statusCdCheck" resultType="String" >
+		SELECT STATUS_CD FROM TB_IN_OUT_WHS_ADM 
+		WHERE 1=1
+		AND IN_SLIP_NO = #{inSlipNo} 
+		AND IN_SLIP_SEQ = #{inSlipSeq}
+	</select>
+	
+	<!-- !입고등록! -->
+	<!-- 입고등록 목록조회 -->
+	<select id="inOutWhsAdmList" resultMap="InOutWhsAdmVo">
+	SELECT
+			IIA_TB.MAIN_GUBUN
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = IIA_TB.MAIN_GUBUN AND X.BASE_GROUP_CD = '112') MAIN_GUBUN_NM
+			, IIA_TB.ITEM_GUBUN
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = IIA_TB.ITEM_GUBUN AND X.BASE_GROUP_CD = '079') ITEM_GUBUN_NM
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = IIA_TB.ITEM_MODEL AND X.BASE_GROUP_CD = '099') ITEM_MODEL
+			, IIA_TB.ITEM_CD
+			, IIA_TB.ITEM_NM
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = IIA_TB.ITEM_UNIT AND X.BASE_GROUP_CD = '036') ITEM_UNIT
+			, IWA_TB.IN_SLIP_NO
+			, IWA_TB.IN_SLIP_SEQ
+			, IWA_TB.PO_NO
+			, IWA_TB.BARCODE_NO
+			, IWA_TB.PRE_IN_WHS_DATE
+			, IMA_TB.INSPECT_DATE
+			, IWA_TB.IN_WHS_DATE
+			, IWA_TB.LOT_NO
+			, ISNULL(IWA_TB.PRE_IN_WHS_QTY, 0) PRE_IN_WHS_QTY
+			, ISNULL(IWA_TB.IN_WHS_QTY, 0)IN_WHS_QTY
+			, IMA_TB.APPROVAL_YN
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = IMA_TB.APPROVAL_YN AND X.BASE_GROUP_CD = '062') APPROVAL_NM
+			, INS_TB.QA_EVAL
+			, ISNULL(INS_TB.PAIR_CNT, 0) PAIR_CNT
+			, ISNULL(INS_TB.FAULTY_CNT, 0) FAULTY_CNT
+			, (SELECT X.USER_NM FROM TB_USER X WHERE X.USER_NUMBER = IMA_TB.INSPECT_CHARGR) INSPECT_CHARGR
+			, IWA_TB.LOCATION_CD
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = IWA_TB.LOCATION_CD AND X.BASE_GROUP_CD = '073') LOCATION_NM
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = IWA_TB.AREA_CD AND X.BASE_GROUP_CD = '067') AREA_NM
+			, IWA_TB.FLOOR_CD
+			, IWA_TB.LOCATION_NO
+			, POA_TB.DEAL_CORP_CD
+			, (SELECT Z.DEAL_CORP_NM FROM TB_DEAL_CORP_ADM Z WHERE Z.DEAL_CORP_CD = POA_TB.DEAL_CORP_CD) DEAL_CORP_NM
+			, IWA_TB.OUTPUT_DATE
+		FROM TB_IN_OUT_WHS_ADM IWA_TB
+		LEFT OUTER JOIN TB_ITEM_INSPECT_MASTER_ADM IMA_TB
+		ON IWA_TB.IN_SLIP_NO = IMA_TB.IN_SLIP_NO
+		LEFT OUTER JOIN TB_ITEM_INSPECT_ADM INS_TB
+		ON IWA_TB.IN_SLIP_NO = INS_TB.IN_SLIP_NO
+		AND IWA_TB.IN_SLIP_SEQ = INS_TB.IN_SLIP_SEQ
+		LEFT OUTER JOIN TB_PURCHASE_ORDER_ADM POA_TB
+		ON IWA_TB.PO_NO = POA_TB.PO_NO
+		LEFT OUTER JOIN TB_ITEM_INFO_ADM IIA_TB
+		ON IWA_TB.ITEM_SEQ = IIA_TB.ITEM_SEQ
+		WHERE 1=1
+		<if test="mainGubun != null and !mainGubun.equals('')">
+		AND IIA_TB.MAIN_GUBUN = #{mainGubun}
+		</if>
+		
+		<if test="approvalYn!=null and !approvalYn.equals('')">
+			<if test="approvalYn == '001'">
+				AND IMA_TB.APPROVAL_YN = '001'
+			</if>
+			<if test="approvalYn == '002'">
+				AND (IMA_TB.APPROVAL_YN IS NULL OR IMA_TB.APPROVAL_YN = '' OR IMA_TB.APPROVAL_YN = '002')
+			</if>
+		</if>
+		
+		<if test="inWhsYn!=null and !inWhsYn.equals('')">
+			<if test="inWhsYn == '001'">
+				AND IWA_TB.IN_WHS_DATE = '001'
+			</if>
+			<if test="inWhsYn == '002'">
+				AND (IWA_TB.IN_WHS_DATE IS NULL OR IWA_TB.IN_WHS_DATE = '')
+			</if>
+		</if>
+		
+        <if test="startDate!=null and !startDate.equals('')">
+			<if test="searchOption == '001'">
+				AND IWA_TB.PRE_IN_WHS_DATE BETWEEN #{startDate} AND #{endDate}
+				ORDER BY IWA_TB.PRE_IN_WHS_DATE DESC
+			</if>
+			<if test="searchOption == '002'">
+				AND IMA_TB.INSPECT_DATE BETWEEN #{startDate} AND #{endDate}
+				ORDER BY IMA_TB.INSPECT_DATE DESC
+			</if>
+			<if test="searchOption == '003'">
+				AND IWA_TB.IN_WHS_DATE BETWEEN #{startDate} AND #{endDate}
+				ORDER BY IWA_TB.IN_WHS_DATE DESC
+			</if>
+			<if test="searchOption == ''">
+				AND IWA_TB.PRE_IN_WHS_DATE BETWEEN #{startDate} AND #{endDate}
+				ORDER BY IWA_TB.PRE_IN_WHS_DATE DESC
+			</if>
+		</if>
+	</select>
+	
+	<!-- 기간별입고현황(봉제) 바코드별 조회 -->
+	<select id="inOutWhsBarcList" resultMap="InOutWhsAdmVo">
+		SELECT
+			POA_TB.PO_NO
+			, (SELECT Z.DEAL_CORP_NM FROM TB_DEAL_CORP_ADM Z WHERE Z.DEAL_CORP_CD = POA_TB.DEAL_CORP_CD) DEAL_CORP_NM
+			, IWA_TB.IN_WHS_DATE
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = IIA_TB.ITEM_MODEL AND X.BASE_GROUP_CD = '099') ITEM_MODEL
+			, IIA_TB.ITEM_CD
+			, IIA_TB.ITEM_SEQ
+			, IIA_TB.ITEM_NM
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = IIA_TB.ITEM_UNIT AND X.BASE_GROUP_CD = '036') ITEM_UNIT
+			, IIA_TB.IMPORT_COST
+			, SUM(ISNULL(IWA_TB.ORD_QTY, 0)) ORD_QTY
+			, SUM(ISNULL(IWA_TB.PRE_IN_WHS_QTY, 0)) PRE_IN_WHS_QTY
+			, SUM(ISNULL(IWA_TB.IN_WHS_QTY, 0)) IN_WHS_QTY
+			, CONVERT(NUMERIC,SUM(ISNULL(IWA_TB.IN_WHS_QTY, 0))) * CONVERT(NUMERIC,IIA_TB.IMPORT_COST) IN_WHS_COST
+			, IWA_TB.BARCODE_NO
+			, COUNT(*) OVER() TOTAL_COUNT
+		FROM TB_IN_OUT_WHS_ADM IWA_TB
+		LEFT OUTER JOIN TB_ITEM_INSPECT_MASTER_ADM IMA_TB
+		ON IWA_TB.IN_SLIP_NO = IMA_TB.IN_SLIP_NO
+		LEFT OUTER JOIN TB_PURCHASE_ORDER_ADM POA_TB
+		ON IWA_TB.PO_NO = POA_TB.PO_NO
+		LEFT OUTER JOIN TB_ITEM_INFO_ADM IIA_TB
+		ON IWA_TB.ITEM_SEQ = IIA_TB.ITEM_SEQ
+		WHERE 1=1
+		AND IIA_TB.MAIN_GUBUN = #{mainGubun}
+        <if test="startDate != null and !startDate.equals('')">
+		AND IWA_TB.IN_WHS_DATE BETWEEN #{startDate} AND #{endDate}
+		</if>
+		<if test="dealCorpCd != null and !dealCorpCd.equals('')">
+		AND POA_TB.DEAL_CORP_CD = #{dealCorpCd}
+		</if>
+		<if test="approvalYn != null and !approvalYn.equals('')">
+			<if test="approvalYn == '001'">
+				AND IMA_TB.APPROVAL_YN = '001'
+			</if>
+			<if test="approvalYn == '002'">
+				AND (IMA_TB.APPROVAL_YN IS NULL OR IMA_TB.APPROVAL_YN = '' OR IMA_TB.APPROVAL_YN = '002')
+			</if>
+		</if>
+		<if test="itemCd != null and !itemCd.equals('')">
+		AND IIA_TB.ITEM_CD = #{itemCd}
+		</if>
+		GROUP BY 
+			POA_TB.PO_NO
+			, POA_TB.DEAL_CORP_CD
+			, IIA_TB.ITEM_MODEL
+			, IIA_TB.ITEM_CD
+			, IIA_TB.ITEM_SEQ
+			, IIA_TB.ITEM_NM
+			, IIA_TB.ITEM_UNIT
+			, IWA_TB.IN_WHS_DATE
+			, IWA_TB.BARCODE_NO
+			, IIA_TB.IMPORT_COST
+			, IMA_TB.APPROVAL_YN
+		HAVING 1=1
+		<if test="searchVal != '' and searchVal != null"> 
+		AND (
+			(SELECT Z.DEAL_CORP_NM FROM TB_DEAL_CORP_ADM Z WHERE Z.DEAL_CORP_CD = POA_TB.DEAL_CORP_CD) LIKE '%' + #{searchVal} + '%'
+			OR (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = IIA_TB.ITEM_MODEL AND X.BASE_GROUP_CD = '099') LIKE '%' + #{searchVal} + '%'
+			OR IIA_TB.ITEM_CD LIKE '%' + #{searchVal} + '%'
+			OR IIA_TB.ITEM_NM LIKE '%' + #{searchVal} + '%'
+			OR (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = IIA_TB.ITEM_UNIT AND X.BASE_GROUP_CD = '036') LIKE '%' + #{searchVal} + '%'
+			OR IIF(IWA_TB.IN_WHS_DATE IS NOT NULL, CONCAT(SUBSTRING(IWA_TB.IN_WHS_DATE, 1, 4), '-', SUBSTRING(IWA_TB.IN_WHS_DATE, 5, 2), '-', SUBSTRING(IWA_TB.IN_WHS_DATE, 7, 2)), '') LIKE '%' + #{searchVal} + '%'
+			OR IWA_TB.BARCODE_NO LIKE '%' + #{searchVal} + '%'
+			OR IIF(SUM(ISNULL(IWA_TB.IN_WHS_QTY, 0)) != 0, FORMAT(SUM(ISNULL(IWA_TB.IN_WHS_QTY, 0)), '#,#'), '0') LIKE '%' + #{searchVal} + '%'
+			OR IIF(IMA_TB.APPROVAL_YN = '001', IIF(INS_TB.QA_EVAL = '001', '합격', '불합격'), '판정중') LIKE '%' + #{searchVal} + '%'
+		)
+		</if>
+		<if test="itemSeq != null and !itemSeq.equals('')">
+		AND IIA_TB.ITEM_SEQ = #{itemSeq}
+		</if>
+		<if test="ordColumn != '' and ordColumn != null and ordDir != null and ordDir != null">
+ 		ORDER BY ${ordColumn} ${ordDir}
+ 		</if>
+	</select>
+	
+	<!-- 기간별입고현황(봉제) 일자별 조회 -->
+	<select id="inOutWhsDateList" resultMap="InOutWhsAdmVo">
+		SELECT
+			POA_TB.PO_NO
+			, (SELECT Z.DEAL_CORP_NM FROM TB_DEAL_CORP_ADM Z WHERE Z.DEAL_CORP_CD = POA_TB.DEAL_CORP_CD) DEAL_CORP_NM
+			, IWA_TB.IN_WHS_DATE
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = IIA_TB.ITEM_MODEL AND X.BASE_GROUP_CD = '099') ITEM_MODEL
+			, IIA_TB.ITEM_CD
+			, IIA_TB.ITEM_SEQ
+			, IIA_TB.ITEM_NM
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = IIA_TB.ITEM_UNIT AND X.BASE_GROUP_CD = '036') ITEM_UNIT
+			, IIA_TB.IMPORT_COST
+			, SUM(ISNULL(IWA_TB.ORD_QTY, 0)) ORD_QTY
+			, SUM(ISNULL(IWA_TB.PRE_IN_WHS_QTY, 0)) PRE_IN_WHS_QTY
+			, SUM(ISNULL(IWA_TB.IN_WHS_QTY, 0)) IN_WHS_QTY
+			, CONVERT(NUMERIC,SUM(ISNULL(IWA_TB.IN_WHS_QTY, 0))) * CONVERT(NUMERIC,IIA_TB.IMPORT_COST) IN_WHS_COST
+			, COUNT(*) OVER() TOTAL_COUNT
+		FROM TB_IN_OUT_WHS_ADM IWA_TB
+		LEFT OUTER JOIN TB_PURCHASE_ORDER_ADM POA_TB
+		ON IWA_TB.PO_NO = POA_TB.PO_NO
+		LEFT OUTER JOIN TB_ITEM_INFO_ADM IIA_TB
+		ON IWA_TB.ITEM_SEQ = IIA_TB.ITEM_SEQ
+		WHERE 1=1
+		AND IIA_TB.MAIN_GUBUN = #{mainGubun}
+        <if test="startDate != null and !startDate.equals('')">
+		AND IWA_TB.IN_WHS_DATE BETWEEN #{startDate} AND #{endDate}
+		</if>
+		<if test="dealCorpCd != null and !dealCorpCd.equals('')">
+		AND POA_TB.DEAL_CORP_CD = #{dealCorpCd}
+		</if>
+		<if test="itemCd != null and !itemCd.equals('')">
+		AND IIA_TB.ITEM_CD = #{itemCd}
+		</if>
+		GROUP BY 
+			POA_TB.PO_NO
+			, POA_TB.DEAL_CORP_CD
+			, IIA_TB.ITEM_MODEL
+			, IIA_TB.ITEM_CD
+			, IIA_TB.ITEM_SEQ
+			, IIA_TB.ITEM_NM
+			, IIA_TB.ITEM_UNIT
+			, IIA_TB.IMPORT_COST
+			, IWA_TB.IN_WHS_DATE
+		HAVING 1=1
+		<if test="searchVal != '' and searchVal != null"> 
+		AND (
+			(SELECT Z.DEAL_CORP_NM FROM TB_DEAL_CORP_ADM Z WHERE Z.DEAL_CORP_CD = POA_TB.DEAL_CORP_CD) LIKE '%' + #{searchVal} + '%'
+			OR (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = IIA_TB.ITEM_MODEL AND X.BASE_GROUP_CD = '099') LIKE '%' + #{searchVal} + '%'
+			OR IIA_TB.ITEM_CD LIKE '%' + #{searchVal} + '%'
+			OR IIA_TB.ITEM_NM LIKE '%' + #{searchVal} + '%'
+			OR (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = IIA_TB.ITEM_UNIT AND X.BASE_GROUP_CD = '036') LIKE '%' + #{searchVal} + '%'
+			OR IIF(IWA_TB.IN_WHS_DATE IS NOT NULL, CONCAT(SUBSTRING(IWA_TB.IN_WHS_DATE, 1, 4), '-', SUBSTRING(IWA_TB.IN_WHS_DATE, 5, 2), '-', SUBSTRING(IWA_TB.IN_WHS_DATE, 7, 2)), '') LIKE '%' + #{searchVal} + '%'
+			OR IIF(SUM(ISNULL(IWA_TB.IN_WHS_QTY, 0)) != 0, FORMAT(SUM(ISNULL(IWA_TB.IN_WHS_QTY, 0)), '#,#'), '0') LIKE '%' + #{searchVal} + '%'
+		)
+		</if>
+		<if test="itemSeq != null and !itemSeq.equals('')">
+		AND IIA_TB.ITEM_SEQ = #{itemSeq}
+		</if>
+		<if test="ordColumn != '' and ordColumn != null and ordDir != null and ordDir != null">
+ 		ORDER BY ${ordColumn} ${ordDir}
+ 		</if>
+	</select>
+	
+	<!-- 기간별입고현황(봉제) 품목별 조회 -->
+	<select id="inOutWhsItemList" resultMap="InOutWhsAdmVo">
+		SELECT
+			(SELECT Z.DEAL_CORP_NM FROM TB_DEAL_CORP_ADM Z WHERE Z.DEAL_CORP_CD = POA_TB.DEAL_CORP_CD) DEAL_CORP_NM
+			, LEFT(IWA_TB.IN_WHS_DATE, 6) IN_WHS_DATE
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = IIA_TB.ITEM_MODEL AND X.BASE_GROUP_CD = '099') ITEM_MODEL
+			, IIA_TB.ITEM_CD
+			, IIA_TB.ITEM_SEQ
+			, IIA_TB.ITEM_NM
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = IIA_TB.ITEM_UNIT AND X.BASE_GROUP_CD = '036') ITEM_UNIT
+			, IIA_TB.IMPORT_COST
+			, SUM(ISNULL(IWA_TB.PRE_IN_WHS_QTY, 0)) PRE_IN_WHS_QTY
+			, SUM(ISNULL(IWA_TB.IN_WHS_QTY, 0)) IN_WHS_QTY
+			, CONVERT(NUMERIC,SUM(ISNULL(IWA_TB.IN_WHS_QTY, 0))) * CONVERT(NUMERIC,IIA_TB.IMPORT_COST) IN_WHS_COST
+			, COUNT(*) OVER() TOTAL_COUNT
+		FROM TB_IN_OUT_WHS_ADM IWA_TB
+		LEFT OUTER JOIN TB_PURCHASE_ORDER_ADM POA_TB
+		ON IWA_TB.PO_NO = POA_TB.PO_NO
+		LEFT OUTER JOIN TB_ITEM_INFO_ADM IIA_TB
+		ON IWA_TB.ITEM_SEQ = IIA_TB.ITEM_SEQ
+		WHERE 1=1
+		AND IIA_TB.MAIN_GUBUN = #{mainGubun}
+        <if test="startDate != null and !startDate.equals('')">
+		AND LEFT(IWA_TB.IN_WHS_DATE, 6) BETWEEN #{startDate} AND #{endDate}
+		</if>
+		<if test="dealCorpCd != null and !dealCorpCd.equals('')">
+		AND POA_TB.DEAL_CORP_CD = #{dealCorpCd}
+		</if>
+		<if test="itemCd != null and !itemCd.equals('')">
+		AND IIA_TB.ITEM_CD = #{itemCd}
+		</if>
+		GROUP BY POA_TB.DEAL_CORP_CD
+			, IIA_TB.ITEM_MODEL
+			, IIA_TB.ITEM_CD
+			, IIA_TB.ITEM_SEQ
+			, IIA_TB.ITEM_NM
+			, IIA_TB.ITEM_UNIT
+			, IIA_TB.IMPORT_COST
+			, LEFT(IWA_TB.IN_WHS_DATE, 6)
+		HAVING 1=1
+		<if test="searchVal != '' and searchVal != null"> 
+		AND (
+			(SELECT Z.DEAL_CORP_NM FROM TB_DEAL_CORP_ADM Z WHERE Z.DEAL_CORP_CD = POA_TB.DEAL_CORP_CD) LIKE '%' + #{searchVal} + '%'
+			OR (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = IIA_TB.ITEM_MODEL AND X.BASE_GROUP_CD = '099') LIKE '%' + #{searchVal} + '%'
+			OR IIA_TB.ITEM_CD LIKE '%' + #{searchVal} + '%'
+			OR IIA_TB.ITEM_NM LIKE '%' + #{searchVal} + '%'
+			OR (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = IIA_TB.ITEM_UNIT AND X.BASE_GROUP_CD = '036') LIKE '%' + #{searchVal} + '%'
+			OR IIF(IWA_TB.IN_WHS_DATE IS NOT NULL, CONCAT(SUBSTRING(IWA_TB.IN_WHS_DATE, 1, 4), '-', SUBSTRING(IWA_TB.IN_WHS_DATE, 5, 2)), '') LIKE '%' + #{searchVal} + '%'
+			OR IIF(SUM(ISNULL(IWA_TB.IN_WHS_QTY, 0)) != 0, FORMAT(SUM(ISNULL(IWA_TB.IN_WHS_QTY, 0)), '#,#'), '0') LIKE '%' + #{searchVal} + '%'
+		)
+		</if>
+		<if test="itemSeq != null and !itemSeq.equals('')">
+		AND IIA_TB.ITEM_SEQ = #{itemSeq}
+		</if>
+		<if test="ordColumn != '' and ordColumn != null and ordDir != null and ordDir != null">
+ 		ORDER BY ${ordColumn} ${ordDir}
+ 		</if>
+	</select>
+	
+	<!-- 입고등록 상세조회 -->
+	<select id="inOutWhsAdmRead" resultMap="InOutWhsAdmVo">
+		SELECT
+			A.PO_NO
+			, A.PO_SEQ
+			, A.IN_SEQ
+			, A.BARCODE_NO
+			, A.LOT_NO
+			, A.ITEM_SEQ
+			, C.ITEM_CD
+			, C.MAIN_GUBUN
+			, C.ITEM_NM
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=C.ITEM_MODEL AND X.BASE_GROUP_CD='099') ITEM_MODEL
+			, C.ITEM_GUBUN
+			, C.IMPORT_YN
+			, (SELECT BASE_NM  FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=C.ITEM_UNIT AND X.BASE_GROUP_CD='036' )ITEM_UNIT
+			, C.ITEM_FIFO_GUBUN
+			, IN_WHS_QTY
+			, IN_WHS_DATE
+			, INSPECT_DATE
+			, A.LOCATION_NO
+			, A.LOCATION_CD
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=A.LOCATION_CD AND X.BASE_GROUP_CD='073') LOCATION_NM
+			, A.AREA_CD
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=A.AREA_CD AND X.BASE_GROUP_CD='067') AREA_NM
+			, A.FLOOR_CD
+			, A.STATUS_CD
+			, REMAIN_QTY
+			, PRE_IN_WHS_QTY
+			, PRE_IN_WHS_DATE
+			, (PRE_IN_WHS_QTY-FAULTY_QTY)-IN_WHS_QTY PAIR_CNT
+			
+		FROM TB_IN_OUT_WHS_ADM A
+		LEFT OUTER JOIN TB_ITEM_INFO_ADM C
+		ON A.ITEM_SEQ=C.ITEM_SEQ
+		WHERE 1=1
+		AND A.BARCODE_NO = #{barcodeNo}
+		GROUP BY A.PO_NO
+			, A.PO_SEQ
+			, A.IN_SEQ
+			, A.BARCODE_NO
+			, A.LOT_NO
+			, A.ITEM_SEQ
+			, C.ITEM_CD
+			, C.MAIN_GUBUN
+			, C.ITEM_NM
+			, C.ITEM_MODEL
+			, C.ITEM_GUBUN
+			, C.ITEM_UNIT
+			, C.IMPORT_YN
+			, A.IN_WHS_QTY
+			, A.IN_WHS_DATE
+			, A.INSPECT_DATE
+			, A.LOCATION_NO
+			, A.LOCATION_CD
+			, A.AREA_CD
+			, A.FLOOR_CD
+			, A.STATUS_CD
+			, A.REMAIN_QTY
+			, A.PRE_IN_WHS_QTY
+			, A.PRE_IN_WHS_DATE
+			, A.FAULTY_QTY
+			, A.IN_WHS_QTY
+			, C.ITEM_FIFO_GUBUN
+	</select>
+	
+	<!-- 입고등록 바코드 상세조회 -->
+	<select id="inOutWhsAdmBarcodeRead" resultMap="InOutWhsAdmVo">
+		SELECT
+			A.PO_NO
+			, A.PO_SEQ
+			, A.IN_SEQ
+			, A.BARCODE_NO
+			, A.LOT_NO
+			, A.PART_CD
+			, A.PART_REV
+			, (SELECT PART_NM FROM TB_ITEM_PART_ADM X WHERE X.PART_CD=A.PART_CD AND X.PART_REV=A.PART_REV) PART_NM
+			, (SELECT PART_SPEC FROM TB_ITEM_PART_ADM X WHERE X.PART_CD=A.PART_CD AND X.PART_REV=A.PART_REV) PART_SPEC
+			, (SELECT PART_GUBUN FROM TB_ITEM_PART_ADM X WHERE X.PART_CD=A.PART_CD AND X.PART_REV=A.PART_REV) PART_GUBUN
+			, (SELECT INSPECT_YN FROM TB_ITEM_PART_ADM X WHERE X.PART_CD=A.PART_CD AND X.PART_REV=A.PART_REV) INSPECT_YN
+			, (SELECT BASE_NM 
+			   FROM TB_COMMON_CODE_ADM X 
+			   WHERE X.BASE_CD=(SELECT PART_UNIT 
+			   					FROM TB_ITEM_PART_ADM X 
+			   					WHERE X.PART_CD=A.PART_CD 
+			   					AND X.PART_REV=A.PART_REV) 
+			   AND X.BASE_GROUP_CD='036' )PART_UNIT
+			, IN_WHS_QTY
+			, IN_WHS_DATE
+			, INSPECT_DATE
+			, A.LOCATION_NO
+			, A.LOCATION_CD
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=A.LOCATION_CD AND X.BASE_GROUP_CD='073') LOCATION_NM
+			, A.AREA_CD
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=A.AREA_CD AND X.BASE_GROUP_CD='067') AREA_NM
+			, A.FLOOR_CD
+			, A.STATUS_CD
+			, REMAIN_QTY
+			, PRE_IN_WHS_QTY
+			, PRE_IN_WHS_DATE
+			, (PRE_IN_WHS_QTY-FAULTY_QTY)-IN_WHS_QTY PAIR_CNT
+			, SUM(B.PRE_OUT_QTY)PRE_OUT_QTY_TOTAL
+		FROM TB_IN_OUT_WHS_ADM A
+		LEFT OUTER JOIN TB_OUT_WHS_ADM B
+		ON A.PO_NO=B.PO_NO
+		AND A.PO_SEQ=B.PO_SEQ
+		AND A.IN_SEQ=B.IN_SEQ
+		WHERE 1=1
+		AND A.BARCODE_NO = #{barcodeNo}
+		GROUP BY A.PO_NO
+			, A.PO_SEQ
+			, A.IN_SEQ
+			, A.BARCODE_NO
+			, A.LOT_NO
+			, A.PART_CD
+			, A.PART_REV
+			, IN_WHS_QTY
+			, IN_WHS_DATE
+			, INSPECT_DATE
+			, A.LOCATION_NO
+			, A.LOCATION_CD
+			, A.AREA_CD
+			, A.FLOOR_CD
+			, A.STATUS_CD
+			, REMAIN_QTY
+			, PRE_IN_WHS_QTY
+			, PRE_IN_WHS_DATE
+			, FAULTY_QTY
+	</select>
+	
+	<!-- 입고등록 등록 -->
+	<update id="inOutWhsAdmCreate">
+		UPDATE	TB_IN_OUT_WHS_ADM									 
+		SET	
+			<if test='!itemInspectCheck.equals("true") and !inOutWhsCheck.equals("true")'>
+			IN_WHS_QTY = IN_WHS_QTY + #{inWhsQty},
+			INSPECT_QTY = INSPECT_QTY + #{inWhsQty},
+			ADJUST_QTY = ADJUST_QTY + #{inWhsQty},
+			REMAIN_QTY = REMAIN_QTY + #{inWhsQty},
+			STATUS_CD = 'L',
+			IN_WHS_DATE = #{inWhsDate},
+			LOCATION_NO = #{locationNo},
+			LOCATION_CD = #{locationCd},
+			AREA_CD = #{areaCd},
+			FLOOR_CD = #{floorNm},
+			</if>
+			<if test='itemInspectCheck.equals("true")'>
+			IN_WHS_QTY = IN_WHS_QTY + #{inWhsQty},
+			INSPECT_QTY = INSPECT_QTY + #{inWhsQty},
+			ADJUST_QTY = ADJUST_QTY + #{inWhsQty},
+			REMAIN_QTY = REMAIN_QTY + #{inWhsQty},
+			IN_WHS_DATE = #{inWhsDate},
+			STATUS_CD = 'L',
+			</if>
+			<if test='inOutWhsCheck.equals("true")'>
+			IN_WHS_DATE = #{inWhsDate},
+			LOCATION_NO = #{locationNo},
+			LOCATION_CD = #{locationCd},
+			AREA_CD = #{areaCd},
+			FLOOR_CD = #{floorNm},
+			</if>
+			UPD_ID = #{updId},
+			UPD_DATE = getDate()
+		WHERE 1=1
+		AND IN_SLIP_NO = #{inSlipNo}	
+		AND IN_SLIP_SEQ = #{inSlipSeq}
+	</update>
+	
+	<!-- 입고등록 창고목록 가져오기 -->
+	<select id="getLocationCd"  resultMap="InOutWhsAdmVo">
+		<![CDATA[
+			SELECT DISTINCT
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=LOC_CD AND X.BASE_GROUP_CD='073') LOCATION_NM
+			, LOC_CD AS LOCATION_CD
+			FROM TB_LOCATION_ADM
+			WHERE 1=1
+		]]>
+		<if test="mainGubun!=null and !mainGubun.equals('')">
+			AND MAIN_GUBUN = #{mainGubun}
+		</if>
+	</select>
+	
+	<!-- 입고등록 구역목록 가져오기 -->
+	<select id="getAreaCd" resultMap="InOutWhsAdmVo">
+		<![CDATA[
+			SELECT DISTINCT 
+				(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=A.AREA_CD AND X.BASE_GROUP_CD='067') AREA_NM,
+				AREA_CD
+			FROM TB_LOCATION_ADM A
+			WHERE A.LOC_CD = #{locationCd}
+		]]>
+		<if test="mainGubun!=null and !mainGubun.equals('')">
+			AND MAIN_GUBUN = #{mainGubun}
+		</if>
+	</select>
+	
+	<!-- 입고등록 위치목록 가져오기 -->
+	<select id="getFloorCd" resultMap="InOutWhsAdmVo">
+		<![CDATA[
+			SELECT 
+				BASE_INFO_CD AS FLOOR_CD
+				, ETC2 AS FLOOR_NM
+			FROM TB_BASE_INFO_ADM A
+			WHERE A.BASE_INFO_TYPE = 'AR'
+			AND A.ETC1 = #{locationCd}
+			AND A.ETC3 = #{areaCd}
+		]]>
+	</select>
+	
+	<!-- 창고바코드 스캔(창고,구역,위치 값  가져오기) -->
+	<select id="getLocInfo" resultMap="InOutWhsAdmVo">
+		SELECT 
+			LOC_CD LOCATION_CD
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=LOC_CD AND X.BASE_GROUP_CD='073') LOCATION_NM
+			, AREA_CD
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=AREA_CD AND X.BASE_GROUP_CD='067') AREA_NM
+			, FLOOR_NM
+			, MAIN_GUBUN
+		FROM TB_LOCATION_ADM
+		WHERE 1=1
+		AND LOC_NO = #{locationNo}
+	</select>
+	
+	<!-- 입고등록 승인여부 가져오기 -->
+	<select id="getApprovalCd" resultType="String">
+		<![CDATA[
+			SELECT APPROVAL_CD FROM TB_IN_OUT_WHS_ADM WHERE BARCODE_NO= #{barcodeNo}
+		]]>
+	</select>
+	
+	
+	<!-- 입고현황 목록조회 -->
+	<select id="inOutWhsStatusList" resultMap="InOutWhsAdmVo">
+		SELECT 
+			A.PO_NO
+			, A.PO_SEQ
+			, A.IN_SEQ
+			, APPROVAL_CD
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=A.APPROVAL_CD AND BASE_GROUP_CD='062') APPROVAL_NM
+			, A.INSPECT_DATE
+			, IN_WHS_DATE
+			, PRE_IN_WHS_DATE
+			, LOT_NO
+			, A.PART_CD
+			, A.PART_REV
+			, (SELECT PART_NM FROM TB_ITEM_PART_ADM X WHERE X.PART_CD=A.PART_CD AND X.PART_REV=A.PART_REV) PART_NM
+			, (SELECT PART_SPEC FROM TB_ITEM_PART_ADM X WHERE X.PART_CD=A.PART_CD AND X.PART_REV=A.PART_REV) PART_SPEC
+			,(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=(
+					SELECT PART_UNIT FROM TB_ITEM_PART_ADM X WHERE X.PART_CD=A.PART_CD AND X.PART_REV=A.PART_REV) AND X.BASE_GROUP_CD='036')PART_UNIT
+			, PART_QTY
+			, PRE_IN_WHS_QTY
+			, IN_WHS_QTY
+			, (PRE_IN_WHS_QTY-IN_WHS_QTY)DIFF_QTY
+			, BARCODE_NO
+			, LOCATION_CD
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=LOCATION_CD AND X.BASE_GROUP_CD='073') LOCATION_NM
+			, AREA_CD
+			, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=AREA_CD AND X.BASE_GROUP_CD='067') AREA_NM
+			, FLOOR_CD
+		    , FAULTY_QTY FAULTY_CNT
+			, PRE_IN_WHS_QTY-FAULTY_QTY PAIR_CNT
+			, (SELECT INSPECT_YN FROM TB_ITEM_PART_ADM X WHERE X.PART_CD=A.PART_CD AND X.PART_REV=A.PART_REV) INSPECT_YN
+		FROM TB_IN_OUT_WHS_ADM A
+		WHERE 1=1
+		<if test="approvalCd!=null and !approvalCd.equals('')">
+		AND APPROVAL_CD = #{approvalCd}
+		</if>
+		<if test="startDate!=null and !startDate.equals('')">
+			<if test="searchOption == '001'">
+				AND  IN_WHS_DATE BETWEEN #{startDate} AND #{endDate}
+				ORDER BY A.IN_WHS_DATE DESC
+			</if>
+			<if test="searchOption == '002'">
+				AND  PRE_IN_WHS_DATE BETWEEN #{startDate} AND #{endDate}
+				ORDER BY A.PRE_IN_WHS_DATE DESC
+			</if>
+			<if test="searchOption == '003'">
+				AND  A.INSPECT_DATE BETWEEN #{startDate} AND #{endDate}
+				ORDER BY A.INSPECT_DATE DESC
+			</if>
+			<if test="searchOption == ''">
+				ORDER BY A.PRE_IN_WHS_DATE DESC
+			</if>
+		</if>
+		
+	</select>
+	
+	<!-- 발주대비미입고현황 목록조회 -->
+	<select id="inOutWhsStatusList2" resultMap="InOutWhsAdmVo">
+		<![CDATA[
+			SELECT 
+				A.PO_NO
+				, PO_SEQ
+				, IN_SEQ
+				, PART_CD
+				, PART_REV
+				, (SELECT PART_NM FROM TB_ITEM_PART_ADM X WHERE X.PART_CD=A.PART_CD AND X.PART_REV=A.PART_REV) PART_NM
+				, (SELECT PART_SPEC FROM TB_ITEM_PART_ADM X WHERE X.PART_CD=A.PART_CD AND X.PART_REV=A.PART_REV) PART_SPEC
+				,(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=(
+						SELECT PART_UNIT FROM TB_ITEM_PART_ADM X WHERE X.PART_CD=A.PART_CD AND X.PART_REV=A.PART_REV) AND X.BASE_GROUP_CD='036')PART_UNIT
+				, PART_QTY
+				, PRE_IN_WHS_QTY
+				, IN_WHS_QTY
+				, (PART_QTY-IN_WHS_QTY) DIFF_QTY
+				, B.DEAL_CORP_CD
+				, (SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD=B.DEAL_CORP_CD)DEAL_CORP_NM
+				, B.PO_DATE
+				, (SELECT DLV_DATE FROM TB_PURCHASE_ORDER_DTL X WHERE X.PO_NO=A.PO_NO AND X.PO_SEQ=A.PO_SEQ)DLV_DATE
+				, B.RECEIPT_GUBUN
+				, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=B.RECEIPT_GUBUN AND X.BASE_GROUP_CD='051')RECEIPT_GUBUN_NM
+				, B.PO_DESC
+			FROM TB_IN_OUT_WHS_ADM A , TB_PURCHASE_ORDER_ADM B
+			WHERE A.PO_NO=B.PO_NO
+			AND A.STATUS_CD IN ('I','A')
+		]]>
+		<if test="startDate!=null and !startDate.equals('')">
+			<if test="searchOption == '001' or searchOption == null">
+				AND B.PO_DATE BETWEEN #{startDate} AND #{endDate}
+			</if>
+			<if test="searchOption == '002'">
+				AND (SELECT DLV_DATE FROM TB_PURCHASE_ORDER_DTL X WHERE X.PO_NO=A.PO_NO AND X.PO_SEQ=A.PO_SEQ) BETWEEN #{startDate} AND #{endDate}
+			</if>
+		</if>
+		
+	</select>
+	
+	
+	<!-- 재고현황 목록조회 -->
+	<select id="partInventoryDtlList" resultMap="InOutWhsAdmVo">
+		<![CDATA[
+			SELECT 
+				IN_WHS_DATE
+				, REMAIN_QTY
+				, A.LOT_NO
+				, A.PART_CD
+				, A.PART_REV
+				, (SELECT PART_NM FROM TB_ITEM_PART_ADM X WHERE X.PART_CD=A.PART_CD AND X.PART_REV=A.PART_REV) PART_NM
+				, (SELECT PART_SPEC FROM TB_ITEM_PART_ADM X WHERE X.PART_CD=A.PART_CD AND X.PART_REV=A.PART_REV) PART_SPEC
+				, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=(
+						SELECT PART_UNIT FROM TB_ITEM_PART_ADM X WHERE X.PART_CD=A.PART_CD AND X.PART_REV=A.PART_REV) AND X.BASE_GROUP_CD='036')PART_UNIT
+				, INSPECT_QTY
+				, A.BARCODE_NO
+				, LOCATION_CD
+				, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=LOCATION_CD AND X.BASE_GROUP_CD='073') LOCATION_NM
+				, AREA_CD
+				, (SELECT X.BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=AREA_CD AND X.BASE_GROUP_CD='067') AREA_NM
+				, FLOOR_CD
+			FROM TB_IN_OUT_WHS_ADM A
+			WHERE 
+			A.PART_CD=#{partCd}
+			AND A.PART_REV=#{partRev}
+			AND A.REMAIN_QTY!=0
+			AND IN_WHS_DATE LIKE #{tmMon}+'%'
+			AND A.STATUS_CD IN ('L')
+		]]>
+	</select>
+	
+	
+	<!-- 부품별 자재단가 가져오기 -->
+	<select id="getPartUnitCost" resultType="Integer">
+		SELECT ISNULL((SELECT ISNULL(A.PART_UNIT_COST,0) PART_UNIT_COST
+			FROM TB_PURCHASE_ORDER_DTL A, TB_IN_OUT_WHS_ADM B
+			WHERE A.PO_NO = B.PO_NO
+			AND A.PO_SEQ=B.PO_SEQ
+			AND BARCODE_NO= #{barcodeNo}),0) 
+	</select>
+	
+		
+	<!-- 수주상세별 입고현황 목록 -->
+	<select id="inMonitoringList" resultMap="InOutWhsAdmVo">
+		SELECT 
+				A.CONT_DTL_NO,
+				B.PART_CD,
+				B.PART_REV,
+				C.PART_NM,
+				C.PART_SPEC,
+				(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=C.PART_UNIT AND X.BASE_GROUP_CD='036') PART_UNIT,
+				D.BARCODE_NO,
+				D.PRE_IN_WHS_QTY,
+				D.IN_WHS_QTY,
+				D.REMAIN_QTY,
+				D.PRE_IN_WHS_DATE,
+				D.INSPECT_DATE,
+				D.IN_WHS_DATE,
+				D.STATUS_CD,
+				D.LOCATION_CD,
+				(SELECT BASE_INFO_NM+' / '+ETC2 FROM TB_BASE_INFO_ADM X WHERE X.BASE_INFO_TYPE='AR' AND X.ETC4=D.LOCATION_CD) LOCATION_NM
+		FROM TB_BIZ_ORDER_DTL A, TB_PURCHASE_ORDER_DTL B LEFT OUTER JOIN TB_ITEM_PART_ADM C
+		ON B.PART_CD=C.PART_CD
+		AND B.PART_REV=C.PART_REV
+		, TB_IN_OUT_WHS_ADM D
+		WHERE A.CONT_DTL_NO=B.CONT_DTL_NO
+		AND B.PO_NO=D.PO_NO
+		AND B.PO_SEQ=D.PO_SEQ
+		AND A.CONT_DTL_NO=#{contDtlNo}
+	</select>
+	
+	<!--개별입고등록 목록조회-->
+	<select id="individualAdmList" resultMap="InOutWhsAdmVo">
+		SELECT PO_NO,
+			PO_SEQ,
+			IN_SEQ,
+			SPPLY_CORP_CD,
+			(SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD=SPPLY_CORP_CD) SPPLY_CORP_NM,
+			A.PART_CD,
+			A.PART_REV,
+			B.PART_NM,
+			B.PART_SPEC,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=PART_UNIT AND X.BASE_GROUP_CD='036') PART_UNIT,
+			A.PAY_YN,
+			PRE_IN_WHS_QTY,
+			LOT_NO,
+			BARCODE_NO,
+			IN_WHS_DESC,
+			A.INSPECT_YN,
+			A.PRE_IN_WHS_DATE,
+			A.LOCATION_NO,
+	  		A.LOCATION_CD,
+	   		A.AREA_CD,
+	   		A.FLOOR_CD
+		FROM TB_IN_OUT_WHS_ADM A
+		LEFT OUTER JOIN TB_ITEM_PART_ADM B
+		ON A.PART_CD=B.PART_CD
+		AND A.PART_REV=B.PART_REV
+		WHERE SUBSTRING(PO_NO,1,1) = 'I'
+		<if test="startDate!=null and !startDate.equals('')">
+			AND A.PRE_IN_WHS_DATE BETWEEN #{startDate} AND #{endDate}
+		</if>
+	</select>
+	
+	<!-- 개별입고등록 발주번호 생성(가상 발주번호) -->
+	<select id="getPoNo" parameterType="String" resultType="String">
+		SELECT ISNULL(RIGHT('000' + CAST(MAX(RIGHT(PO_NO,3))+1 AS NVARCHAR),3), '001') 
+		FROM TB_IN_OUT_WHS_ADM
+		WHERE SUBSTRING(PO_NO,2,6) = #{today} 
+		AND SUBSTRING(PO_NO,1,1) = 'I' 
+	</select>
+	
+	<!-- PDA 품목 검색 -->
+	<select id="pdaItemList" resultMap="InOutWhsAdmVo">
+		SELECT 
+			A.BARCODE_NO
+			, A.IN_WHS_QTY
+			, A.IN_WHS_DATE
+			, B.ITEM_CD
+			, B.ITEM_NM
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=B.ITEM_MODEL AND X.BASE_GROUP_CD='099') ITEM_MODEL
+			, A.LOCATION_CD
+			, A.LOCATION_NO
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=A.LOCATION_CD AND X.BASE_GROUP_CD='073') LOCATION_NM
+			, A.AREA_CD
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=A.LOCATION_CD AND X.BASE_GROUP_CD='067') AREA_NM
+			, A.FLOOR_CD
+			, A.REMAIN_QTY
+		FROM TB_IN_OUT_WHS_ADM A
+		LEFT JOIN TB_ITEM_INFO_ADM B
+		ON A.ITEM_SEQ=B.ITEM_SEQ
+		WHERE 1=1
+		AND B.MAIN_GUBUN = #{mainGubun}
+		AND A.LOCATION_CD = #{locationCd}
+		AND A.AREA_CD = #{areaCd}
+	</select>
+	
+</mapper>

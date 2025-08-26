@@ -1,0 +1,1654 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mes.mappers.bm.itemPartAdmMapper">
+
+	<resultMap id="itemPartAdmVo"	type="mes.domain.bm.ItemPartAdmVo">
+		<result property="itemSeq" 			column="ITEM_SEQ"			/>
+		<result property="mainGubun" 		column="MAIN_GUBUN"			/>
+		<result property="mainGubunNm" 		column="MAIN_GUBUN_NM"		/>
+		<result property="itemCd" 			column="ITEM_CD"			/>
+		<result property="itemRev" 			column="ITEM_REV"			/>
+		<result property="itemGubun" 		column="ITEM_GUBUN"			/>
+		<result property="itemCus" 			column="ITEM_CUS"			/>
+		<result property="accCd" 			column="ACC_CD"				/>
+		<result property="itemNm" 			column="ITEM_NM"			/>
+		<result property="itemModel" 		column="ITEM_MODEL"			/>
+		<result property="itemSpec" 		column="ITEM_SPEC"			/>
+		<result property="itemType" 		column="ITEM_TYPE"			/>
+		<result property="itemMaker" 		column="ITEM_MAKER"			/>
+		<result property="exportCd" 		column="EXPORT_CD"			/>
+		<result property="itemGenre" 		column="ITEM_GENRE"			/>
+		<result property="importYn" 		column="IMPORT_YN"			/>
+		<result property="stateCd" 			column="STATE_CD"			/>
+		<result property="itemColor" 		column="ITEM_COLOR"			/>
+		<result property="locationCd" 		column="LOCATION_CD"		/>
+		<result property="locationNm" 		column="LOCATION_NM"		/>
+		<result property="moldCd" 			column="MOLD_CD"			/>
+		<result property="savelocCd" 		column="SAVELOC_CD"			/>
+		<result property="savelocCdNm" 		column="SAVELOC_CD_NM"		/>
+		<result property="locNo" 			column="LOC_NO"				/>
+		<result property="itemWorkplace" 	column="ITEM_WORKPLACE"		/>
+		<result property="itemWorkplaceNm" 	column="ITEM_WORKPLACE_NM"		/>
+		<result property="safetyStock" 		column="SAFETY_STOCK"		/>
+		<result property="payMethodCd" 		column="PAY_METHOD_CD"		/>
+		<result property="moldOne" 			column="MOLD_ONE"			/>
+		<result property="useYnOne" 		column="USE_YN_ONE"			/>
+		<result property="moldTwo" 			column="MOLD_TWO"			/>
+		<result property="useYnTwo" 		column="USE_YN_TWO"			/>
+		<result property="moldThree" 		column="MOLD_THREE"			/>
+		<result property="useYnThree" 		column="USE_YN_THREE"		/>
+		<result property="importCost" 		column="IMPORT_COST"		/>
+		<result property="importDate" 		column="IMPORT_DATE"		/>
+		<result property="exportCost" 		column="EXPORT_COST"		/>
+		<result property="exportDate" 		column="EXPORT_DATE"		/>
+		<result property="lhrhCd" 			column="LHRH_CD"			/>
+		<result property="paleBox" 			column="PALE_BOX"			/>
+		<result property="boxCount" 		column="BOX_COUNT"			/>
+		<result property="itemJustGubun" 	column="ITEM_JUST_GUBUN"	/>
+		<result property="itemFifoGubun" 	column="ITEM_FIFO_GUBUN"	/>
+		<result property="useYn" 			column="USE_YN"				/>
+		<result property="itemTransDate" 	column="ITEM_TRANS_DATE"	/>
+		<result property="itemUnit" 		column="ITEM_UNIT"			/>
+		<result property="itemUnitNm" 		column="ITEM_UNIT_NM"		/>
+		<result property="itemGrade" 		column="ITEM_GRADE"			/>
+		<result property="itemCel" 			column="ITEM_CEL"			/>
+		<result property="itemHr" 			column="ITEM_HR"			/>
+		<result property="itemPower" 		column="ITEM_POWER"			/>
+		<result property="itemTemp" 		column="ITEM_TEMP"			/>
+		<result property="itemSeal" 		column="ITEM_SEAL"			/>
+		<result property="itemPress" 		column="ITEM_PRESS"			/>
+		<result property="itemDesc" 		column="ITEM_DESC"			/>
+		<result property="workDesc" 		column="WORK_DESC"			/>
+		<result property="regId" 			column="REG_ID"				/>
+		<result property="regDate" 			column="REG_DATE"			/>
+		<result property="updId" 			column="UPD_ID"				/>
+		<result property="updDate" 			column="UPD_DATE"			/>
+		
+		<!-- 추가사항 -->
+		<result property="itemAttachSeq" 	column="ITEM_ATTACH_SEQ"	/>
+		<result property="contents" 		column="CONTENTS"			/>
+		<result property="fileNm" 			column="FILE_NM"			/>
+		
+		<result property="itemCostSeq" 		column="ITEM_COST_SEQ"		/>
+		<result property="changeDate" 		column="CHANGE_DATE"		/>
+		<result property="itemReason" 		column="ITEM_REASON"		/>
+		<result property="regNm" 			column="REG_NM"				/>
+		<result property="itemTypeNm" 		column="ITEM_TYPE_NM"		/>
+		<result property="itemModelNm" 		column="ITEM_MODEL_NM"		/>
+		<result property="itemGubunNm" 		column="ITEM_GUBUN_NM"		/>
+		<result property="lhrhCdNm" 		column="LHRH_CD_NM"			/>
+		<result property="stateCdNm" 		column="STATE_CD_NM"		/>
+		<result property="equipNo" 			column="EQUIP_NO"			/>
+		<result property="equipNm" 			column="EQUIP_NM"			/>
+		<result property="equipCavity" 		column="EQUIP_CAVITY"		/>
+		<result property="mfcCorpCd" 		column="MFC_CORP_CD"		/>
+		<result property="mfcDate" 			column="MFC_DATE"			/>
+		<result property="tmQty" 			column="TM_QTY"				/>
+		
+		<result property="bomCd" 			column="BOM_CD"				/>
+		<result property="ecoCd" 			column="ECO_CD"				/>
+		<result property="devCost" 			column="DEV_COST"			/>
+		<result property="confirCost" 		column="CONFIR_COST"		/>
+		<result property="startDate" 		column="START_DATE"			/>
+		<result property="endDate" 			column="END_DATE"			/>
+		<result property="complDate" 		column="COMPL_DATE"			/>
+		<result property="devStep" 			column="DEV_STEP"			/>
+		<result property="bomCheck" 		column="BOM_CHECK"			/>
+		<result property="itemCusNm" 		column="ITEM_CUS_NM"		/>
+		<result property="accCdNm" 			column="ACC_CD_NM"			/>
+		<result property="areaCd" 			column="AREA_CD"			/>
+		<result property="areaNm" 			column="AREA_NM"			/>
+		<result property="floorNm" 			column="FLOOR_NM"			/>
+		<result property="locCd" 			column="LOC_CD"				/>
+		
+		<!-- 개발관리 -->
+		<result property="upperItemSeq" 	column="UPPER_ITEM_SEQ"		/>
+		<result property="upperItemCd" 		column="UPPER_ITEM_CD"		/>
+		<result property="upperItemNm" 		column="UPPER_ITEM_NM"		/>
+		
+		
+		<result property="lowerItemSeq" 	column="LOWER_ITEM_SEQ"		/>
+		<result property="lowerItemNm" 		column="LOWER_ITEM_NM"		/>
+		<result property="itemConsumpt" 	column="ITEM_CONSUMPT"		/>
+		<result property="prcssCd" 			column="PRCSS_CD"			/>
+		<result property="prcssNm" 			column="PRCSS_NM"			/>
+		<result property="ebomDesc" 		column="EBOM_DESC"			/>
+		<result property="sSort" 			column="S_SORT"				/>
+		<result property="seqCon" 			column="SEQ_CON"			/>
+		<result property="itemLvl" 			column="ITEM_LVL"			/>
+		<result property="bomYn" 			column="BOM_YN"				/>
+		
+		<result property="imageFile1"		column="IMAGE_FILE1"		/>
+		<result property="imageFile2"		column="IMAGE_FILE2"		/>
+		<result property="imageFile3"		column="IMAGE_FILE3"		/>
+		<result property="imageFile4"		column="IMAGE_FILE4"		/>
+		<result property="imageFile1Nm"		column="IMAGE_FILE1_NM"		/>
+		<result property="imageFile2Nm"		column="IMAGE_FILE2_NM"		/>
+		<result property="imageFile3Nm"		column="IMAGE_FILE3_NM"		/>
+		<result property="imageFile4Nm"		column="IMAGE_FILE4_NM"		/>
+		<result property="smallPackage"		column="SMALL_PACKAGE"		/>
+		<result property="upperAmtCel"		column="UPPER_AMT_CEL"		/>
+		<result property="upperAmtHr"		column="UPPER_AMT_HR"		/>
+		<result property="lowerAmtCel"		column="LOWER_AMT_CEL"		/>
+		<result property="lowerAmtHr"		column="LOWER_AMT_HR"		/>
+		
+		<!-- 스페어관리 -->
+		<result property="spaBarcode"		column="SPA_BARCODE"		/>
+		<result property="spaSpec"			column="SPA_SPEC"			/>
+		<result property="spaSafyStock"		column="SPA_SAFY_STOCK"		/>
+		<result property="spaEquip"			column="SPA_EQUIP"			/>
+		<result property="spaWhse"			column="SPA_WHSE"			/>
+		
+		<result property="fillingWt"		column="FILLING_WT"			/>
+		<result property="itemPowerMax"		column="ITEM_POWER_MAX"		/>
+		<result property="itemPowerMin"		column="ITEM_POWER_MIN"		/>
+		<result property="itemTempMax"		column="ITEM_TEMP_MAX"		/>
+		<result property="itemTempMin"		column="ITEM_TEMP_MIN"		/>
+		<result property="itemPressMax"		column="ITEM_PRESS_MAX"		/>
+		<result property="itemPressMin"		column="ITEM_PRESS_MIN"		/>
+		<result property="itemTimeMax"		column="ITEM_TIME_MAX"		/>
+		<result property="itemTimeMin"		column="ITEM_TIME_MIN"		/>
+		<result property="prodWt"			column="PROD_WT"			/>
+		<result property="srWt"				column="SR_WT"				/>
+		<result property="shotWt"			column="SHOT_WT"			/>
+		<result property="cutSize"			column="CUT_SIZE"			/>
+		<result property="readyTime"		column="READY_TIME"			/>
+		<result property="processTime"		column="PROCESS_TIME"		/>
+		<result property="hallCount"		column="HALL_COUNT"			/>
+		<result property="fillingCount"		column="FILLING_COUNT"		/>
+		
+		<result property="mon"				column="MON"				/>
+		<result property="inQty"			column="IN_QTY"				/>
+		<result property="inCost"			column="IN_COST"			/>
+		<result property="outputQty"		column="OUTPUT_QTY"			/>
+		<result property="convOutputQty"	column="CONV_OUTPUT_QTY"	/>
+		<result property="outputCost"		column="OUTPUT_COST"		/>
+		<result property="initFaultyQty"	column="INIT_FAULTY_QTY"	/>
+		<result property="faultyQty"		column="FAULTY_QTY"			/>
+		<result property="convFaultyQty"	column="CONV_FAULTY_QTY"	/>
+		<result property="faultyCost"		column="FAULTY_COST"		/>
+		<result property="frHistCnt"		column="FR_HIST_CNT"		/>
+		<result property="frHistCost"		column="FR_HIST_COST"		/>
+		<result property="laserWorkNo"		column="LASER_WORK_NO"		/>                                                                                                                                                                                                                                                                                
+		                                                                                                                                                                                                                                                                                
+		<result property="prodGubun"		column="PROD_GUBUN"			/>
+		<result property="menuPath"			column="MENU_PATH"			/>
+	</resultMap>
+
+	<!-- 품목정보관리 목록 조회 -->
+	<select id="itemPartAdmList" resultMap="itemPartAdmVo"> 
+		SELECT	
+			A.ITEM_SEQ,
+			A.MAIN_GUBUN,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE B.BASE_GROUP_CD = '112' AND A.MAIN_GUBUN = B.BASE_CD) MAIN_GUBUN_NM,
+			A.ITEM_REV,
+			A.ITEM_CD,
+			A.ITEM_GUBUN,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE B.BASE_GROUP_CD = '091' AND A.ITEM_GUBUN = B.BASE_CD) ITEM_GUBUN_NM,
+			A.PROD_GUBUN,
+			A.ITEM_CUS,
+			(SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD = A.ITEM_CUS) ITEM_CUS_NM,
+			A.ACC_CD,
+			(SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD = A.ACC_CD) ACC_CD_NM,
+			A.ITEM_NM,
+			A.ITEM_MODEL,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE B.BASE_GROUP_CD = '099' AND A.ITEM_MODEL = B.BASE_CD) ITEM_MODEL_NM,
+			A.ITEM_SPEC,
+			A.ITEM_TYPE,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE B.BASE_GROUP_CD = '092' AND A.ITEM_TYPE = B.BASE_CD) ITEM_TYPE_NM, 
+			A.ITEM_MAKER,
+			A.EXPORT_CD,
+			A.ITEM_GENRE,
+			A.IMPORT_YN,
+			A.STATE_CD,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM B WHERE B.BASE_GROUP_CD = '095' AND A.STATE_CD = B.BASE_CD) STATE_CD_NM,
+			A.ITEM_COLOR,
+			A.LOCATION_CD,
+			A.LOC_NO,
+			(SELECT LOCATION_CD FROM TB_LOCATION_ADM WHERE LOC_NO=A.LOC_NO) LOCATION_CD,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=(SELECT LOCATION_CD FROM TB_LOCATION_ADM WHERE LOC_NO=A.LOC_NO) AND X.BASE_GROUP_CD='073')LOCATION_NM,
+			(SELECT AREA_CD FROM TB_LOCATION_ADM WHERE LOC_NO=A.LOC_NO) AREA_CD,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=(SELECT AREA_CD FROM TB_LOCATION_ADM WHERE LOC_NO=A.LOC_NO) AND X.BASE_GROUP_CD='067')AREA_NM,
+			(SELECT FLOOR_NM FROM TB_LOCATION_ADM WHERE LOC_NO=A.LOC_NO) FLOOR_NM,
+			A.MOLD_CD,
+			A.SAVELOC_CD,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM WHERE BASE_GROUP_CD = '073' AND BASE_CD = A.SAVELOC_CD) SAVELOC_CD_NM,
+			A.ITEM_WORKPLACE,
+			(CASE WHEN A.MAIN_GUBUN='001' THEN (SELECT PRCSS_NM FROM TB_PRCSS_CODE_ADM X WHERE X.PRCSS_CD=X.LOWER_PRCSS_CD AND X.PRCSS_GUBUN='001' AND X.PRCSS_TYPE = '001' AND X.PRCSS_CD=A.ITEM_WORKPLACE)
+				WHEN A.MAIN_GUBUN='002' THEN (SELECT PRCSS_NM FROM TB_PRCSS_CODE_ADM X WHERE X.PRCSS_CD=X.LOWER_PRCSS_CD AND X.PRCSS_GUBUN='002' AND X.PRCSS_TYPE='001' AND X.PRCSS_CD=A.ITEM_WORKPLACE)
+				END
+			) ITEM_WORKPLACE_NM,
+			A.SAFETY_STOCK,
+			A.PAY_METHOD_CD,
+			A.MOLD_ONE,
+			A.USE_YN_ONE,
+			A.MOLD_TWO,
+			A.USE_YN_TWO,
+			A.MOLD_THREE,
+			A.USE_YN_THREE,
+			A.IMPORT_COST,
+			A.IMPORT_DATE,
+			A.EXPORT_COST,
+			A.EXPORT_DATE,
+			A.LHRH_CD,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = A.LHRH_CD AND X.BASE_GROUP_CD = '097') LHRH_CD_NM,
+			A.BOX_COUNT,
+			A.ITEM_JUST_GUBUN,
+			A.ITEM_FIFO_GUBUN,
+			A.USE_YN,
+			A.ITEM_TRANS_DATE,
+			A.ITEM_UNIT,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = ITEM_UNIT AND X.BASE_GROUP_CD = '036') ITEM_UNIT_NM,
+			A.ITEM_GRADE,
+			A.ITEM_CEL,
+			A.ITEM_HR,
+			A.UPPER_AMT_CEL,
+			A.UPPER_AMT_HR,
+			A.LOWER_AMT_CEL,
+			A.LOWER_AMT_HR,
+			A.SMALL_PACKAGE,
+			A.BOM_CD,
+			A.ECO_CD,
+			A.DEV_COST,
+			A.CONFIR_COST,
+			A.DEV_STEP,
+			A.START_DATE,
+			A.COMPL_DATE,
+			A.SPA_BARCODE,
+			A.SPA_SPEC,
+			A.SPA_SAFY_STOCK,
+			A.SPA_EQUIP,
+			A.SPA_WHSE,
+			A.PROD_WT,
+			A.SR_WT,
+			A.SHOT_WT,
+			A.CUT_SIZE,
+			A.READY_TIME,
+			A.PROCESS_TIME,
+			A.HALL_COUNT,
+			A.FILLING_COUNT,
+			A.ITEM_DESC,
+			(SELECT MAX(CHANGE_DATE) CHANGE_DATE FROM TB_ITEM_COST_LIST C WHERE C.ITEM_SEQ = A.ITEM_SEQ) CHANGE_DATE,
+			(CASE WHEN (SELECT COUNT(*) FROM TB_ITEM_MOTOR_EBOM M WHERE M.ITEM_SEQ = A.ITEM_SEQ) > 0 THEN 'Y' ELSE 'N' END) BOM_YN,
+			X.TM_QTY,
+			A.FILLING_WT,
+			A.PALE_BOX,
+			A.ITEM_POWER_MAX,
+			A.ITEM_POWER_MIN,
+			A.ITEM_TEMP_MAX,
+			A.ITEM_TEMP_MIN,
+			A.LASER_WORK_NO
+		FROM TB_ITEM_INFO_ADM A
+		LEFT JOIN (
+			SELECT	
+				Z.ITEM_SEQ,
+				ISNULL(A.QTY,0) A_QTY,
+				ISNULL(B.QTY,0) B_QTY,
+				ISNULL(C.QTY,0) C_QTY,
+				ISNULL(D.QTY,0) D_QTY,
+				(ISNULL(A.QTY,0) + ISNULL(C.QTY,0)) IN_QTY,
+				(ISNULL(B.QTY,0) + ISNULL(D.QTY,0)) OUT_QTY,
+				(ISNULL(A.QTY,0) + ISNULL(C.QTY,0) - ISNULL(B.QTY,0) + ISNULL(D.QTY,0)) TM_QTY
+			FROM TB_ITEM_INFO_ADM Z
+			LEFT JOIN TB_STOCK_PAYMENT_ADM S
+			ON Z.ITEM_SEQ = S.SP_CD
+			LEFT OUTER JOIN
+				(
+				SELECT 
+				    SP_CD,
+					SUM(SP_QTY) QTY
+				FROM TB_STOCK_PAYMENT_ADM
+				WHERE SP_GUBUN = '001'
+				AND LOCATION_CD IN ('001', '002')
+				GROUP BY SP_CD
+			) A
+			ON S.SP_CD = A.SP_CD
+			LEFT OUTER JOIN
+			(
+				SELECT 
+				    SP_CD,
+					SUM(SP_QTY) QTY
+				FROM TB_STOCK_PAYMENT_ADM
+				WHERE SP_GUBUN = '002'
+				AND LOCATION_CD IN ('001', '002')
+				GROUP BY SP_CD
+			) B
+			ON S.SP_CD = B.SP_CD
+			LEFT OUTER JOIN
+			(
+				SELECT 
+				    SP_CD,
+					SUM(SP_QTY) QTY
+				FROM TB_STOCK_PAYMENT_ADM
+				WHERE SP_GUBUN = '003'
+				AND LOCATION_CD IN ('001', '002')
+				GROUP BY SP_CD
+			) C
+			ON S.SP_CD = C.SP_CD
+			LEFT OUTER JOIN
+			(
+				SELECT 
+				    SP_CD,
+					SUM(SP_QTY) QTY
+				FROM TB_STOCK_PAYMENT_ADM
+				WHERE SP_GUBUN = '004'
+				AND LOCATION_CD IN ('001', '002')
+				GROUP BY SP_CD
+			) D
+			ON S.SP_CD = D.SP_CD
+			WHERE 1=1
+			GROUP BY Z.ITEM_SEQ, A.QTY, B.QTY, C.QTY, D.QTY
+		) X
+		ON A.ITEM_SEQ = X.ITEM_SEQ
+		WHERE 1=1
+		<if test="itemGubun != '' and itemGubun != null"> 
+		AND A.ITEM_GUBUN = #{itemGubun}
+		</if>
+		<if test="itemGubunThree != '' and itemGubunThree != null"> 
+		OR A.ITEM_GUBUN = '003'
+		</if>
+		<if test="itemGubunFour != '' and itemGubunFour != null"> 
+		OR A.ITEM_GUBUN = '004'
+		</if>
+		<if test="itemGubunFive != '' and itemGubunFive != null"> 
+		OR A.ITEM_GUBUN = '005'
+		</if>
+		<if test="mainGubun != '' and mainGubun != null"> 
+		AND A.MAIN_GUBUN = #{mainGubun}
+		</if>
+		<if test="itemCus != '' and itemCus != null"> 
+		AND A.ITEM_CUS = #{itemCus}
+		</if>
+		<if test="moldCd != '' and moldCd != null"> 
+		AND A.MOLD_CD = #{moldCd}
+		</if>
+		<if test="stateCd != '' and stateCd != null"> 
+		AND A.STATE_CD = #{stateCd}
+		</if>
+		<if test="inspGubun != null and !inspGubun.equals('')">
+		AND (SELECT TOP(1) I.ITEM_SEQ FROM TB_INSP_ITEM_ADM I WHERE INSP_GUBUN = #{inspGubun} AND I.ITEM_SEQ = A.ITEM_SEQ) IS NULL		
+		</if>
+		<if test="spaBarcode != '' and spaBarcode != null"> 
+		AND A.SPA_BARCODE = #{spaBarcode}
+		</if>
+		<if test="itemGubunList != '' and itemGubunList != null"> 
+		AND A.ITEM_GUBUN IN
+			<foreach collection="itemGubunList" item="arr" open="(" close=")" separator=",">
+				#{arr}
+			</foreach>
+		</if>
+	</select>
+	
+	<!-- 품목정보관리 상세 조회 -->
+	<select id="itemPartDtlList" resultMap="itemPartAdmVo">
+		SELECT	
+			A.ITEM_SEQ,
+			A.MAIN_GUBUN,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = A.MAIN_GUBUN AND X.BASE_GROUP_CD = '112') MAIN_GUBUN_NM,
+			A.ITEM_REV,
+			A.ITEM_CD,
+			A.ITEM_GUBUN,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = A.ITEM_GUBUN AND X.BASE_GROUP_CD = '079') ITEM_GUBUN_NM,
+			A.PROD_GUBUN,
+			A.ITEM_CUS,
+			(SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD = A.ITEM_CUS) ITEM_CUS_NM,
+			A.ACC_CD,
+			(SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD = A.ACC_CD) ACC_CD_NM,
+			A.ITEM_NM,
+			A.ITEM_MODEL,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = A.ITEM_MODEL AND X.BASE_GROUP_CD = '099') ITEM_MODEL_NM,
+			A.ITEM_SPEC,
+			A.ITEM_TYPE,
+			A.ITEM_MAKER,
+			A.EXPORT_CD,
+			A.ITEM_GENRE,
+			A.IMPORT_YN,
+			A.STATE_CD,
+			A.ITEM_COLOR,
+			A.LOCATION_CD,
+			A.MOLD_CD,
+			A.SAVELOC_CD,
+			A.ITEM_WORKPLACE,
+			(CASE WHEN A.MAIN_GUBUN='001' THEN (SELECT PRCSS_NM FROM TB_PRCSS_CODE_ADM X WHERE X.PRCSS_CD=X.LOWER_PRCSS_CD AND X.PRCSS_GUBUN='001' AND X.PRCSS_CD=A.ITEM_WORKPLACE)
+				WHEN A.MAIN_GUBUN='002' THEN (SELECT PRCSS_NM FROM TB_PRCSS_CODE_ADM X WHERE X.PRCSS_CD=X.LOWER_PRCSS_CD AND X.PRCSS_GUBUN='002' AND X.PRCSS_TYPE='001' AND X.PRCSS_CD=A.ITEM_WORKPLACE)
+				END
+			) ITEM_WORKPLACE_NM,
+			A.SAFETY_STOCK,
+			A.PAY_METHOD_CD,
+			A.MOLD_ONE,
+			A.USE_YN_ONE,
+			A.MOLD_TWO,
+			A.USE_YN_TWO,
+			A.MOLD_THREE,
+			A.USE_YN_THREE,
+			A.IMPORT_COST,
+			A.IMPORT_DATE,
+			A.EXPORT_COST,
+			A.EXPORT_DATE,
+			A.LHRH_CD,
+			A.PALE_BOX,
+			A.BOX_COUNT,
+			A.ITEM_JUST_GUBUN,
+			A.ITEM_FIFO_GUBUN,
+			A.USE_YN AS useYn,
+			A.ITEM_TRANS_DATE,
+			A.ITEM_UNIT,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = A.ITEM_UNIT AND X.BASE_GROUP_CD = '036') ITEM_UNIT_NM,
+			A.ITEM_GRADE,
+			A.ITEM_CEL,
+			A.ITEM_HR,
+			A.ITEM_POWER,
+			A.ITEM_TEMP,
+			A.ITEM_SEAL,
+			A.ITEM_PRESS,
+			A.UPPER_AMT_CEL,
+			A.UPPER_AMT_HR,
+			A.LOWER_AMT_CEL,
+			A.LOWER_AMT_HR,
+			A.SMALL_PACKAGE,
+			A.BOM_CD,
+			A.ECO_CD,
+			A.DEV_COST,
+			A.CONFIR_COST,
+			A.DEV_STEP,
+			A.START_DATE,
+			A.COMPL_DATE,
+			A.SPA_BARCODE,
+			A.SPA_SPEC,
+			A.SPA_SAFY_STOCK,
+			A.SPA_EQUIP,
+			A.SPA_WHSE,
+			A.FILLING_WT,
+			A.ITEM_POWER_MAX,
+			A.ITEM_POWER_MIN,
+			A.ITEM_TEMP_MAX,
+			A.ITEM_TEMP_MIN,
+			A.ITEM_PRESS_MAX,
+			A.ITEM_PRESS_MIN,
+			A.ITEM_TIME_MAX,
+			A.ITEM_TIME_MIN,
+			A.PROD_WT,
+			A.SR_WT,
+			A.SHOT_WT,
+			A.CUT_SIZE,
+			A.READY_TIME,
+			A.PROCESS_TIME,
+			A.HALL_COUNT,
+			A.FILLING_COUNT,
+			A.ITEM_DESC,
+			A.WORK_DESC,
+			A.REG_ID,
+			A.REG_DATE,
+			A.UPD_ID,
+			A.UPD_DATE,
+			(SELECT EQUIP_NO FROM TB_EQUIP_CODE_ADM B WHERE B.EQUIP_CD = A.MOLD_CD) EQUIP_NO,
+			(SELECT EQUIP_NM FROM TB_EQUIP_CODE_ADM B WHERE B.EQUIP_CD = A.MOLD_CD) EQUIP_NM,
+			(SELECT EQUIP_CAVITY FROM TB_EQUIP_CODE_ADM B WHERE B.EQUIP_CD = A.MOLD_CD) EQUIP_CAVITY,
+			(SELECT MFC_CORP_CD FROM TB_EQUIP_CODE_ADM B WHERE B.EQUIP_CD = A.MOLD_CD) MFC_CORP_CD,
+			(SELECT MFC_DATE FROM TB_EQUIP_CODE_ADM B WHERE B.EQUIP_CD = A.MOLD_CD) MFC_DATE,
+			B.LOC_NO,
+			B.LOC_CD,
+			B.AREA_CD,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD = B.AREA_CD AND X.BASE_GROUP_CD = '067') AREA_NM,
+			B.FLOOR_NM,
+			X.TM_QTY,
+			M.EQUIP_NM,
+			M.MFC_CORP_CD,
+			M.MFC_DATE,
+			A.LASER_WORK_NO
+		FROM TB_ITEM_INFO_ADM A
+		LEFT JOIN TB_LOCATION_ADM B 
+		ON A.LOC_NO = B.LOC_NO
+		LEFT JOIN TB_EQUIP_CODE_ADM M
+		ON M.EQUIP_CD = A.MOLD_CD 
+		LEFT JOIN (
+			SELECT	
+				Z.ITEM_SEQ,
+				ISNULL(A.QTY,0) A_QTY,
+				ISNULL(B.QTY,0) B_QTY,
+				ISNULL(C.QTY,0) C_QTY,
+				ISNULL(D.QTY,0) D_QTY,
+				(ISNULL(A.QTY,0) + ISNULL(C.QTY,0)) IN_QTY,
+				(ISNULL(B.QTY,0) + ISNULL(D.QTY,0)) OUT_QTY,
+				(ISNULL(A.QTY,0) + ISNULL(C.QTY,0) - ISNULL(B.QTY,0) + ISNULL(D.QTY,0)) TM_QTY
+			FROM TB_ITEM_INFO_ADM Z
+			LEFT JOIN TB_STOCK_PAYMENT_ADM S
+			ON Z.ITEM_SEQ = S.SP_CD
+			LEFT OUTER JOIN
+				(
+				SELECT 
+				    SP_CD,
+					SUM(SP_QTY) QTY
+				FROM TB_STOCK_PAYMENT_ADM
+				WHERE SP_GUBUN = '001'
+				AND LOCATION_CD IN ('001', '002')
+				GROUP BY SP_CD
+			) A
+			ON S.SP_CD = A.SP_CD
+			LEFT OUTER JOIN
+			(
+				SELECT 
+				    SP_CD,
+					SUM(SP_QTY) QTY
+				FROM TB_STOCK_PAYMENT_ADM
+				WHERE SP_GUBUN = '002'
+				AND LOCATION_CD IN ('001', '002')
+				GROUP BY SP_CD
+			) B
+			ON S.SP_CD = B.SP_CD
+			LEFT OUTER JOIN
+			(
+				SELECT 
+				    SP_CD,
+					SUM(SP_QTY) QTY
+				FROM TB_STOCK_PAYMENT_ADM
+				WHERE SP_GUBUN = '003'
+				AND LOCATION_CD IN ('001', '002')
+				GROUP BY SP_CD
+			) C
+			ON S.SP_CD = C.SP_CD
+			LEFT OUTER JOIN
+			(
+				SELECT 
+				    SP_CD,
+					SUM(SP_QTY) QTY
+				FROM TB_STOCK_PAYMENT_ADM
+				WHERE SP_GUBUN = '004'
+				AND LOCATION_CD IN ('001', '002')
+				GROUP BY SP_CD
+			) D
+			ON S.SP_CD = D.SP_CD
+			WHERE 1=1
+			GROUP BY Z.ITEM_SEQ, A.QTY, B.QTY, C.QTY, D.QTY
+		) X
+		ON A.ITEM_SEQ = X.ITEM_SEQ
+		WHERE 1=1
+		<if test="itemSeq != '' and itemSeq != null"> 
+		AND A.ITEM_SEQ = #{itemSeq}
+		</if>
+		<if test="itemCd != '' and itemCd != null"> 
+		AND A.ITEM_CD = #{itemCd}
+		AND A.ITEM_REV = '00'
+		</if>
+		<if test="mainGubun != '' and mainGubun != null"> 
+		AND A.MAIN_GUBUN = #{mainGubun}
+		</if>
+		
+	</select>
+	
+	<!-- 부품수입검사기준서 조회 -->
+	<select id="itemPartInspectList" resultMap="itemPartAdmVo">
+		SELECT
+			ITEM_SEQ
+			, ITEM_ATTACH_SEQ
+			, REG_DATE
+			, REG_ID
+			, ISNULL((SELECT USER_NM FROM TB_USER B WHERE B.USER_ID = A.REG_ID), '관리자') AS  REG_NM
+			, FILE_NM
+		FROM TB_ITEM_ATTACH_DATA A		
+		WHERE ITEM_SEQ = #{itemSeq}
+	</select>
+	
+	<!-- 부품수입검사기준서 상세조회 -->
+	<select id="itemPartInspectRead" resultMap="itemPartAdmVo">
+		SELECT
+			PART_CD
+			, PART_REV
+			, PART_SEQ
+			, REG_DATE
+			, REG_ID
+			, ISNULL((SELECT USER_NM FROM TB_USER B WHERE B.USER_ID=A.REG_ID), '관리자') AS  REG_NM
+			, FILE_NM
+			, INSPECT_DATE
+		FROM TB_ITEM_PART_INSPECT A
+		WHERE 1=1
+		AND INSPECT_DATE IN (SELECT MAX(INSPECT_DATE) FROM TB_ITEM_PART_INSPECT)
+		AND PART_CD = #{partCd}
+		AND PART_REV = #{partRev}
+	</select>
+	
+	<!-- 부품관련자료 조회 -->
+	<select id="itemPartAttachDataList" resultMap="itemPartAdmVo">
+		SELECT
+			ITEM_SEQ
+			, ITEM_ATTACH_SEQ
+			, REG_ID
+			, ISNULL((SELECT USER_NM FROM TB_USER B WHERE B.USER_ID = A.REG_ID), '관리자') AS  REG_NM
+			, CONTENTS
+			, FILE_NM
+			, REG_DATE
+			, REG_ID
+		FROM TB_ITEM_ATTACH_DATA A	
+		WHERE ITEM_SEQ = #{itemSeq}
+	</select>
+	
+	<!-- 품목정보관리 등록 -->
+	<insert id="itemPartAdmCreate">
+		INSERT INTO TB_ITEM_INFO_ADM		(
+			ITEM_SEQ,
+			MAIN_GUBUN,
+			ITEM_REV,
+			ITEM_CD,
+			ITEM_GUBUN,
+			PROD_GUBUN,
+			ITEM_CUS,
+			ACC_CD,
+			ITEM_NM,
+			ITEM_SPEC,
+			ITEM_TYPE,
+			ITEM_MAKER,
+			EXPORT_CD,
+			ITEM_GENRE,
+			IMPORT_YN,
+			STATE_CD,
+			ITEM_COLOR,
+			LOCATION_CD,
+			MOLD_CD,
+			SAVELOC_CD,
+			LOC_NO,
+			ITEM_WORKPLACE,
+			SAFETY_STOCK,
+			PAY_METHOD_CD,
+			MOLD_ONE,
+			USE_YN_ONE,
+			MOLD_TWO,
+			USE_YN_TWO,
+			MOLD_THREE,
+			USE_YN_THREE,
+			IMPORT_COST,
+			IMPORT_DATE,
+			EXPORT_COST,
+			EXPORT_DATE,
+			LHRH_CD,
+			PALE_BOX,
+			BOX_COUNT,
+			ITEM_JUST_GUBUN,
+			ITEM_FIFO_GUBUN,
+			USE_YN,
+			ITEM_TRANS_DATE,
+			ITEM_UNIT,
+			ITEM_GRADE,
+			ITEM_CEL,
+			ITEM_HR,
+			ITEM_POWER,
+			ITEM_TEMP,
+			ITEM_SEAL,
+			ITEM_PRESS,
+			UPPER_AMT_CEL,
+			UPPER_AMT_HR,
+			LOWER_AMT_CEL,
+			LOWER_AMT_HR,
+			SMALL_PACKAGE,
+			ITEM_DESC,
+			WORK_DESC,
+			SPA_BARCODE,
+			SPA_SPEC,
+			SPA_SAFY_STOCK,
+			SPA_EQUIP,
+			SPA_WHSE,
+			FILLING_WT,
+			ITEM_POWER_MAX,
+			ITEM_POWER_MIN,
+			ITEM_TEMP_MAX,
+			ITEM_TEMP_MIN,
+			ITEM_PRESS_MAX,
+			ITEM_PRESS_MIN,
+			ITEM_TIME_MAX,
+			ITEM_TIME_MIN,
+			PROD_WT,
+			SR_WT,
+			SHOT_WT,
+			CUT_SIZE,
+			READY_TIME,
+			PROCESS_TIME,
+			HALL_COUNT,
+			FILLING_COUNT,
+			LASER_WORK_NO,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{itemSeq},
+			#{mainGubun},
+			#{itemRev},
+			#{itemCd},
+			#{itemGubun},
+			#{prodGubun},
+			#{itemCus},
+			#{accCd},
+			#{itemNm},
+			#{itemSpec},
+			#{itemType},
+			#{itemMaker},
+			#{exportCd},
+			#{itemGenre},
+			#{importYn},
+			#{stateCd},
+			#{itemColor},
+			#{locationCd},
+			#{moldCd},
+			#{savelocCd},
+			#{locNo},
+			#{itemWorkplace},
+			#{safetyStock},
+			#{payMethodCd},
+			#{moldOne},
+			#{useYnOne},
+			#{moldTwo},
+			#{useYnTwo},
+			#{moldThree},
+			#{useYnThree},
+			#{importCost},
+			#{importDate},
+			#{exportCost},
+			#{exportDate},
+			#{lhrhCd},
+			#{paleBox},
+			#{boxCount},
+			#{itemJustGubun},
+			#{itemFifoGubun},
+			#{useYn},
+			#{itemTransDate},
+			#{itemUnit},
+			#{itemGrade},
+			#{itemCel},
+			#{itemHr},
+			#{itemPower},
+			#{itemTemp},
+			#{itemSeal},
+			#{itemPress},
+			#{upperAmtCel},
+			#{upperAmtHr},
+			#{lowerAmtCel},
+			#{lowerAmtHr},
+			#{smallPackage},
+			#{itemDesc},
+			#{workDesc},
+			#{spaBarcode},
+			#{spaSpec},
+			#{spaSafyStock},
+			#{spaEquip},
+			#{spaWhse},
+			#{fillingWt},
+			#{itemPowerMax},
+			#{itemPowerMin},
+			#{itemTempMax},
+			#{itemTempMin},
+			#{itemPressMax},
+			#{itemPressMin},
+			#{itemTimeMax},
+			#{itemTimeMin},
+			#{prodWt},
+			#{srWt},
+			#{shotWt},
+			#{cutSize},
+			#{readyTime},
+			#{processTime},
+			#{hallCount},
+			#{fillingCount},
+			#{laserWorkNo},
+			#{regId},
+			getDate()
+		)
+	</insert>
+	
+	<!-- 품목정보관리 단가이력 등록 -->
+	<insert id="itemCostListCreate">
+		INSERT INTO TB_ITEM_COST_LIST(
+			ITEM_SEQ,
+			ITEM_COST_SEQ,
+			IMPORT_COST,
+			IMPORT_DATE,
+			EXPORT_COST,
+			EXPORT_DATE,
+			CHANGE_DATE,
+			ITEM_REASON,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{itemSeq},
+			#{itemCostSeq},
+			#{importCost},
+			#{importDate},
+			#{exportCost},
+			#{exportDate},
+			#{changeDate},
+			#{itemReason},
+			#{regId},
+			GETDATE()
+		)
+	</insert>
+	
+	<!-- 부품수입검사기준서 등록 -->
+	<insert id="itemPartInspectCreate">
+		INSERT INTO TB_ITEM_PART_INSPECT	(
+			PART_CD
+			, PART_REV
+			, PART_SEQ
+			, FILE_NM
+			, INSPECT_DATE
+			, REG_ID
+			, REG_DATE
+		) 
+		VALUES(
+			#{partCd}
+			, #{partRev}
+			, #{partSeq}
+			, #{fileNm}
+			, #{inspectDate}
+			, #{regId}
+			, getdate()
+		)
+	</insert>
+	
+	<!-- 부품관련자료 등록 -->
+	<insert id="itemPartAttachDataCreate">
+		INSERT INTO TB_ITEM_ATTACH_DATA		(
+			ITEM_SEQ
+			, ITEM_ATTACH_SEQ
+			, FILE_NM
+			, CONTENTS
+			, REG_ID
+			, REG_DATE
+		) 
+		VALUES(
+			#{itemSeq}
+			, #{itemAttachSeq}
+			, #{fileNm}
+			, #{contents}
+			, #{regId}
+			, getdate()
+		)
+	</insert>
+	
+	<!-- 품목정보관리 수정 -->
+	<update id="itemPartAdmUpdate">
+		UPDATE	TB_ITEM_INFO_ADM		 
+		SET	ITEM_SEQ = #{itemSeq},
+			<if test='bomCheck == null'>
+			MAIN_GUBUN = #{mainGubun},
+			ITEM_REV = #{itemRev},
+			ITEM_CD = #{itemCd},
+			ITEM_GUBUN = #{itemGubun},
+			PROD_GUBUN = #{prodGubun},
+			ITEM_CUS = #{itemCus},
+			ACC_CD = #{accCd},
+			ITEM_NM = #{itemNm},
+			ITEM_SPEC = #{itemSpec},
+			ITEM_TYPE = #{itemType},
+			ITEM_MAKER = #{itemMaker},
+			EXPORT_CD = #{exportCd},
+			ITEM_GENRE = #{itemGenre},
+			IMPORT_YN = #{importYn},
+			STATE_CD = #{stateCd},
+			ITEM_COLOR = #{itemColor},
+			LOCATION_CD = #{locationCd},
+			MOLD_CD = #{moldCd},
+			SAVELOC_CD = #{savelocCd},
+			LOC_NO = #{locNo},
+			ITEM_WORKPLACE = #{itemWorkplace},
+			SAFETY_STOCK = #{safetyStock},
+			PAY_METHOD_CD = #{payMethodCd},
+			MOLD_ONE = #{moldOne},
+			USE_YN_ONE = #{useYnOne},
+			MOLD_TWO = #{moldTwo},
+			USE_YN_TWO = #{useYnTwo},
+			MOLD_THREE = #{moldThree},
+			USE_YN_THREE = #{useYnThree},
+			IMPORT_COST = #{importCost},
+			IMPORT_DATE = #{importDate},
+			EXPORT_COST = #{exportCost},
+			EXPORT_DATE = #{exportDate},
+			LHRH_CD = #{lhrhCd},
+			PALE_BOX = #{paleBox},
+			BOX_COUNT = #{boxCount},
+			ITEM_JUST_GUBUN = #{itemJustGubun},
+			ITEM_FIFO_GUBUN = #{itemFifoGubun},
+			USE_YN = #{useYn},
+			ITEM_TRANS_DATE = #{itemTransDate},
+			ITEM_UNIT = #{itemUnit},
+			ITEM_GRADE = #{itemGrade},
+			ITEM_CEL = #{itemCel},
+			ITEM_HR = #{itemHr},
+			ITEM_POWER = #{itemPower},
+			ITEM_TEMP = #{itemTemp},
+			ITEM_SEAL = #{itemSeal},
+			ITEM_PRESS = #{itemPress},
+			UPPER_AMT_CEL = #{upperAmtCel},
+			UPPER_AMT_HR = #{upperAmtHr},
+			LOWER_AMT_CEL = #{lowerAmtCel},
+			LOWER_AMT_HR = #{lowerAmtHr},
+			SMALL_PACKAGE = #{smallPackage},
+			SPA_BARCODE = #{spaBarcode},
+			SPA_SPEC = #{spaSpec},
+			SPA_SAFY_STOCK = #{spaSafyStock},
+			SPA_EQUIP = #{spaEquip},
+			SPA_WHSE = #{spaWhse},
+			FILLING_WT = #{fillingWt},
+			ITEM_POWER_MAX = #{itemPowerMax},
+			ITEM_POWER_MIN = #{itemPowerMin},
+			ITEM_TEMP_MAX = #{itemTempMax},
+			ITEM_TEMP_MIN = #{itemTempMin},
+			ITEM_PRESS_MAX = #{itemPressMax},
+			ITEM_PRESS_MIN = #{itemPressMin},
+			ITEM_TIME_MAX = #{itemTimeMax},
+			ITEM_TIME_MIN = #{itemTimeMin},
+			PROD_WT = #{prodWt},
+			SR_WT = #{srWt},
+			SHOT_WT = #{shotWt},
+			CUT_SIZE = #{cutSize},
+			READY_TIME = #{readyTime},
+			PROCESS_TIME = #{processTime},
+			HALL_COUNT = #{hallCount},
+			FILLING_COUNT = #{fillingCount},
+			LASER_WORK_NO = #{laserWorkNo},
+			</if>
+			<if test='bomCheck != null'>
+			BOM_CD = #{bomCd},
+			ECO_CD = #{ecoCd},
+			DEV_COST = #{devCost},
+			CONFIR_COST = #{confirCost},
+			DEV_STEP = #{devStep},
+			START_DATE = #{startDate},
+			COMPL_DATE = #{complDate},
+			</if>
+			ITEM_DESC = #{itemDesc},
+			WORK_DESC = #{workDesc},
+			UPD_ID = #{updId},
+			UPD_DATE = getDate()
+		WHERE	ITEM_SEQ = #{itemSeq}
+	</update>
+	
+	<!-- 변경사유 수정 -->
+	<update id="itemReasonCreate">
+		UPDATE	TB_ITEM_COST_LIST 
+		SET	ITEM_REASON = #{itemReason},
+			UPD_ID = #{updId},
+			UPD_DATE = getdate()
+		WHERE	ITEM_SEQ = #{itemSeq}
+		AND ITEM_COST_SEQ = #{itemCostSeq}
+	</update>
+	
+	<!-- 부품수입검사기준서 삭제 -->
+	<delete id="itemPartInspectDelete">
+		DELETE 
+		FROM TB_ITEM_PART_INSPECT		
+		WHERE PART_CD = #{partCd}
+		AND PART_REV = #{partRev}
+		AND PART_SEQ = #{partSeq}
+	</delete>
+	
+	<!-- 부품관련자료 삭제 -->
+	<delete id="itemPartAttachDataDelete">
+		DELETE 
+		FROM TB_ITEM_ATTACH_DATA		
+		WHERE ITEM_SEQ = #{itemSeq}
+		<if test="itemAttachSeq != null and !itemAttachSeq.equals('')">
+		AND ITEM_ATTACH_SEQ = #{itemAttachSeq}
+		</if>
+	</delete>
+	
+	<!-- 단가이력 삭제 -->
+	<delete id="itemPartCostDataDelete">
+		DELETE 
+		FROM TB_ITEM_COST_LIST		
+		WHERE 1=1
+		AND ITEM_SEQ = #{itemSeq}
+		<if test="itemCostSeq != null and !itemCostSeq.equals('')">
+		AND ITEM_COST_SEQ = #{itemCostSeq}
+		</if>
+	</delete>
+	
+	<select id="overlapPartCd" resultType="Integer">
+		SELECT COUNT(*) FROM TB_ITEM_INFO_ADM WHERE ITEM_SEQ = #{itemSeq}
+	</select>
+	
+	<!-- 품목정보관리 itemRev값 가져오기 -->
+	<select id="getPartRev" resultMap="itemPartAdmVo">
+		SELECT REPLICATE('0',2-LEN(MAX(ITEM_REV)+1))+CAST(MAX(ITEM_REV)+1 AS VARCHAR) ITEM_REV FROM TB_ITEM_INFO_ADM WHERE ITEM_SEQ = #{itemSeq}
+	</select>
+	
+	<!-- 부품수입검사기준서 시퀀스 -->
+	<select id="getInspectPartSeq" resultType="int">
+		SELECT ISNULL(MAX(PART_SEQ)+1 ,0)
+		FROM TB_ITEM_PART_INSPECT	
+		WHERE PART_CD = #{partCd}
+		AND PART_REV = #{partRev}
+	</select>
+	
+	<!-- 부품관련자료 시퀀스 -->
+	<select id="getAttachPartSeq" resultType="String">
+		SELECT ISNULL(MAX(ITEM_ATTACH_SEQ)+1 ,0)
+		FROM TB_ITEM_ATTACH_DATA	
+		WHERE ITEM_SEQ = #{itemSeq}
+	</select>
+	
+	<!-- 단가이력 시퀀스 -->
+	<select id="getItemCostSeq" resultType="String">
+		SELECT ISNULL(MAX(ITEM_COST_SEQ)+1 ,0)
+		FROM TB_ITEM_COST_LIST	
+		WHERE ITEM_SEQ = #{itemSeq}
+	</select>
+	
+	<!-- 파일명 가져오기 -->
+	<select id="getFileNm" resultType="String">
+		SELECT FILE_NM 
+		FROM TB_ITEM_PART_INSPECT	
+		WHERE PART_CD = #{partCd}
+		AND PART_REV = #{partRev}
+		AND PART_SEQ = #{partSeq}
+	</select>
+	
+		
+	<!-- 파일명 가져오기 -->
+	<select id="getAttachFileNm" resultType="String">
+	  	SELECT FILE_NM 
+		FROM TB_ITEM_ATTACH_DATA	
+		WHERE ITEM_SEQ = #{itemSeq}
+		AND ITEM_ATTACH_SEQ = #{itemAttachSeq}
+	</select>
+	
+	<!-- 단가이력 조회 -->
+	<select id="itemInformationList" resultMap="itemPartAdmVo">
+		SELECT
+			A.ITEM_SEQ
+			, B.ITEM_CD
+			, B.ITEM_NM
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=B.ITEM_MODEL AND X.BASE_GROUP_CD='099') ITEM_MODEL
+			, (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=B.ITEM_UNIT AND X.BASE_GROUP_CD='036') ITEM_UNIT_NM
+			, A.ITEM_COST_SEQ
+			, A.IMPORT_COST
+			, A.IMPORT_DATE
+			, A.EXPORT_COST
+			, A.EXPORT_DATE
+			, A.CHANGE_DATE
+			, A.ITEM_REASON
+			, A.REG_ID
+			, ISNULL((SELECT USER_NM FROM TB_USER B WHERE B.USER_ID = A.REG_ID), '관리자') AS  REG_NM
+			, A.REG_DATE
+		FROM TB_ITEM_COST_LIST A
+		INNER JOIN TB_ITEM_INFO_ADM B
+		ON A.ITEM_SEQ = B.ITEM_SEQ
+		WHERE 1=1
+		AND A.ITEM_SEQ = #{itemSeq}
+		<if test='importCost != null and !importCost.equals("")'>
+		AND A.IMPORT_COST IS NOT NULL		
+		</if>
+		<if test='exportCost != null and !exportCost.equals("")'>
+		AND A.EXPORT_COST IS NOT NULL		
+		</if>
+		ORDER BY A.ITEM_COST_SEQ DESC
+	</select>
+	
+	
+	<!-- 출고단가적용일 기준 출고단가 값 가져오기 -->
+	<select id="getExportCost" resultType="String">
+		IF EXISTS (
+	    	SELECT TOP(1)
+				EXPORT_COST
+			FROM TB_ITEM_COST_LIST
+			WHERE 1=1
+			AND ITEM_SEQ=#{itemSeq}
+			AND EXPORT_DATE <![CDATA[<=]]> #{exportDate}
+			ORDER BY EXPORT_DATE DESC
+     	)
+      	BEGIN
+	      	SELECT TOP(1)
+				EXPORT_COST
+			FROM TB_ITEM_COST_LIST
+			WHERE 1=1
+			AND ITEM_SEQ=#{itemSeq}
+			AND EXPORT_DATE <![CDATA[<=]]> #{exportDate}
+			ORDER BY EXPORT_DATE DESC
+      	END
+      	ELSE
+      	BEGIN
+         	SELECT 0 EXPORT_COST
+      	END
+	</select>
+	
+	
+	
+	<!-- 품목정보관리(부품) 자재단가 수정 -->
+	<update id="updateUnitCost">
+		UPDATE	TB_ITEM_PART_ADM		 
+		SET	UNIT_COST = #{unitCost}
+		WHERE	PART_CD = #{partCd}
+		AND 	PART_REV = #{partRev}
+	</update>
+	
+	<!-- 코드시퀀스 값 조회 -->
+	<select id="getItemCdSeq" resultType="String">
+		SELECT ISNULL(CAST(MAX(ITEM_SEQ)+1 AS NVARCHAR), '100001') FROM TB_ITEM_INFO_ADM WHERE 1=1
+	</select>
+	
+	<!-- 삭제 -->
+	<delete id="itemInfoAdmDelete">
+		DELETE FROM TB_ITEM_INFO_ADM		
+		WHERE ITEM_SEQ = #{itemSeq}
+	</delete>
+	
+	
+	
+	<!-- 개발관리 -->
+	<!-- BOM 조회 -->
+	<select id="itemMotorEbomList" resultMap="itemPartAdmVo">
+		WITH TEMP (ITEM_SEQ, UPPER_ITEM_SEQ, ITEM_CONSUMPT, PRCSS_CD, S_SORT, SEQ_CON, ITEM_LVL) AS (
+	         SELECT
+	            A.ITEM_SEQ
+	            , A.UPPER_ITEM_SEQ
+				, A.ITEM_CONSUMPT
+				, IIA.ITEM_WORKPLACE PRCSS_CD
+	            , CONVERT(VARCHAR(500), A.ITEM_SEQ) SORT
+	            , CONVERT(VARCHAR(500), CONVERT(VARCHAR(500), A.ITEM_SEQ) + N'>' +CONVERT(VARCHAR(500), A.ITEM_CONSUMPT)) SEQ_CON
+	         	, 0 AS Level
+	         FROM TB_ITEM_MOTOR_EBOM A
+	         INNER JOIN TB_ITEM_INFO_ADM IIA
+			 ON A.ITEM_SEQ = IIA.ITEM_SEQ
+			 WHERE 1=1
+			 <if test="itemSeq != null and !itemSeq.equals('')">
+			 AND A.ITEM_SEQ = #{itemSeq}
+			 </if>
+			 <if test="upperItemSeq != null and !upperItemSeq.equals('')">
+			 AND A.UPPER_ITEM_SEQ = #{upperItemSeq}
+			 </if>
+			 <if test="itemSeqList != '' and itemSeqList != null"> 
+			 AND A.ITEM_SEQ IN
+				<foreach collection="itemSeqList" item="arr" open="(" close=")" separator=",">
+					#{arr}
+				</foreach>
+			 </if>
+			
+	         UNION ALL 
+	         
+	         SELECT 
+	            A.ITEM_SEQ
+	            , A.UPPER_ITEM_SEQ
+				, A.ITEM_CONSUMPT
+				, IIA.ITEM_WORKPLACE PRCSS_CD
+	            , CONVERT(VARCHAR(500), CONVERT(VARCHAR(500), B.S_SORT) + N'>' +CONVERT(VARCHAR(500), A.ITEM_SEQ)) SORT
+	            , CONVERT(VARCHAR(500), CONVERT(VARCHAR(500), B.SEQ_CON) + N'>' +CONVERT(VARCHAR(500), A.ITEM_CONSUMPT)) SECS
+				, B.ITEM_LVL + 1 AS Level
+	         FROM TB_ITEM_MOTOR_EBOM A
+			 INNER JOIN TB_ITEM_INFO_ADM IIA
+			 ON A.ITEM_SEQ=IIA.ITEM_SEQ
+			 INNER JOIN TEMP B
+	         ON A.UPPER_ITEM_SEQ = B.ITEM_SEQ
+		)
+		SELECT
+		    A.ITEM_SEQ
+		    , A.UPPER_ITEM_SEQ
+		    , (SELECT ITEM_CD FROM TB_ITEM_INFO_ADM X WHERE X.ITEM_SEQ=A.UPPER_ITEM_SEQ) UPPER_ITEM_CD
+		    , (SELECT ITEM_NM FROM TB_ITEM_INFO_ADM X WHERE X.ITEM_SEQ=A.UPPER_ITEM_SEQ) UPPER_ITEM_NM
+		    , A.ITEM_CONSUMPT
+		    , A.PRCSS_CD
+		    , ISNULL(
+		   		(
+		   			CASE WHEN B.MAIN_GUBUN = '001' 
+		   			THEN (SELECT PRCSS_NM FROM TB_PRCSS_CODE_ADM X WHERE X.PRCSS_CD=X.LOWER_PRCSS_CD AND X.PRCSS_GUBUN='001' AND X.PRCSS_CD=A.PRCSS_CD)
+					WHEN B.MAIN_GUBUN = '002'
+					THEN (SELECT PRCSS_NM FROM TB_PRCSS_CODE_ADM X WHERE X.PRCSS_CD=X.LOWER_PRCSS_CD AND X.PRCSS_GUBUN='002' AND X.PRCSS_TYPE='001' AND X.PRCSS_CD=A.PRCSS_CD)
+					END
+				), '삭제된 공정'
+			) PRCSS_NM
+		    , B.ITEM_CD
+   		    , B.ITEM_NM
+		    , (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=B.ITEM_GUBUN AND X.BASE_GROUP_CD='079') ITEM_GUBUN
+		    , (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=B.ITEM_MODEL AND X.BASE_GROUP_CD='099') ITEM_MODEL
+		    , (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=B.ITEM_UNIT AND X.BASE_GROUP_CD='036') ITEM_UNIT
+		    , B.ITEM_CUS
+		    , (SELECT X.DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD = B.ITEM_CUS) ITEM_CUS_NM
+		    , A.S_SORT
+		    , A.SEQ_CON
+		    , A.ITEM_LVL
+		    , X.TM_QTY
+		FROM TEMP A
+		LEFT OUTER JOIN TB_ITEM_INFO_ADM B
+		ON A.ITEM_SEQ = B.ITEM_SEQ
+		LEFT OUTER JOIN (
+			SELECT
+				Z.ITEM_SEQ
+				, ISNULL(A.QTY,0) A_QTY
+				, ISNULL(B.QTY,0) B_QTY
+				, ISNULL(C.QTY,0) C_QTY
+				, ISNULL(D.QTY,0) D_QTY
+				, (ISNULL(A.QTY,0)+ISNULL(C.QTY,0)) IN_QTY
+				, (ISNULL(B.QTY,0)+ISNULL(D.QTY,0)) OUT_QTY
+				, (ISNULL(A.QTY,0)+ISNULL(C.QTY,0) - ISNULL(B.QTY,0)+ISNULL(D.QTY,0)) TM_QTY
+			FROM TB_ITEM_INFO_ADM Z
+			LEFT OUTER JOIN TB_STOCK_PAYMENT_ADM S
+			ON Z.ITEM_SEQ = S.SP_CD
+			LEFT OUTER JOIN (
+				SELECT 
+				    SP_CD
+					, SUM(SP_QTY) QTY
+				FROM TB_STOCK_PAYMENT_ADM
+				WHERE SP_GUBUN = '001'
+				AND LOCATION_CD IN ('001', '002')
+				GROUP BY SP_CD
+			) A
+			ON S.SP_CD = A.SP_CD
+			LEFT OUTER JOIN (
+				SELECT
+				    SP_CD
+					, SUM(SP_QTY) QTY
+				FROM TB_STOCK_PAYMENT_ADM
+				WHERE SP_GUBUN = '002'
+				AND LOCATION_CD IN ('001', '002')
+				GROUP BY SP_CD
+			) B
+			ON S.SP_CD = B.SP_CD
+			LEFT OUTER JOIN (
+				SELECT
+				    SP_CD
+					, SUM(SP_QTY) QTY
+				FROM TB_STOCK_PAYMENT_ADM
+				WHERE SP_GUBUN = '003'
+				AND LOCATION_CD IN ('001', '002')
+				GROUP BY SP_CD
+			) C
+			ON S.SP_CD = C.SP_CD
+			LEFT OUTER JOIN (
+				SELECT
+				    SP_CD
+					, SUM(SP_QTY) QTY
+				FROM TB_STOCK_PAYMENT_ADM
+				WHERE SP_GUBUN = '004'
+				AND LOCATION_CD IN ('001', '002')
+				GROUP BY SP_CD
+			) D
+			ON S.SP_CD = D.SP_CD
+			WHERE 1=1
+			GROUP BY Z.ITEM_SEQ, A.QTY, B.QTY, C.QTY, D.QTY
+		) X
+		ON A.ITEM_SEQ = X.ITEM_SEQ
+		WHERE 1=1
+		<if test="itemLvl != null and !itemLvl.equals('')">
+		AND A.ITEM_LVL != #{itemLvl}
+		</if>
+		<if test="menuPath != null and menuPath.equals('wmsc0181')">
+		AND (B.ITEM_GUBUN = '003' OR ITEM_LVL = '0')
+		AND B.PROD_GUBUN != '003'
+		</if>
+		GROUP BY
+			A.ITEM_SEQ
+			, A.UPPER_ITEM_SEQ
+			, A.ITEM_CONSUMPT
+			, A.PRCSS_CD
+			, B.ITEM_CD
+			, B.ITEM_NM
+			, B.ITEM_GUBUN
+			, B.ITEM_MODEL
+			, B.ITEM_UNIT
+			, A.S_SORT
+			, A.SEQ_CON
+			, A.ITEM_LVL
+			, B.MAIN_GUBUN
+			, B.ITEM_CUS
+			, X.TM_QTY
+		HAVING 1=1
+		<if test="lowerItemSeq != null and !lowerItemSeq.equals('')">
+		AND A.ITEM_SEQ = #{lowerItemSeq}
+		</if>
+		ORDER BY S_SORT
+	</select>
+	
+	<!-- 중복체크 -->
+	<select id="ebomOverlapList" resultMap="itemPartAdmVo">
+		WITH TEMP (ITEM_SEQ,UPPER_ITEM_SEQ,ITEM_CONSUMPT,PRCSS_CD,sSORT,ITEM_LVL) 
+		as 
+		(
+	         SELECT
+	            A.ITEM_SEQ,
+	            A.UPPER_ITEM_SEQ,
+				A.ITEM_CONSUMPT,
+				A.PRCSS_CD,
+	            CONVERT(VARCHAR(500),A.ITEM_SEQ) SORT,
+	         	0 as Level
+	         FROM TB_ITEM_MOTOR_EBOM A
+			 WHERE 1=1
+			 AND A.UPPER_ITEM_SEQ=#{upperItemSeq}
+	         UNION ALL 
+	         
+	         SELECT 
+	            A.ITEM_SEQ,
+	            A.UPPER_ITEM_SEQ,
+				A.ITEM_CONSUMPT,
+				A.PRCSS_CD,
+	            CONVERT(VARCHAR(500),CONVERT(VARCHAR(500),B.sSORT) + N'>' +CONVERT(VARCHAR(500),A.ITEM_SEQ)) SORT,
+				B.ITEM_LVL + 1 as Level 
+	         FROM TB_ITEM_MOTOR_EBOM A 
+			 INNER JOIN TEMP B
+	         ON A.UPPER_ITEM_SEQ = B.ITEM_SEQ
+		)
+		SELECT 
+		   A.ITEM_SEQ,
+		   A.UPPER_ITEM_SEQ,
+		   A.ITEM_CONSUMPT,
+		   A.PRCSS_CD,
+		   B.ITEM_CD,
+   		   B.ITEM_NM,
+		   (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=B.ITEM_GUBUN AND X.BASE_GROUP_CD='079') ITEM_GUBUN,
+		   (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=B.ITEM_MODEL AND X.BASE_GROUP_CD='099') ITEM_MODEL,
+		   (SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=B.ITEM_UNIT AND X.BASE_GROUP_CD='036') ITEM_UNIT,
+		   A.sSORT,
+		   A.ITEM_LVL
+		FROM TEMP A
+		LEFT OUTER JOIN TB_ITEM_INFO_ADM B
+		ON A.ITEM_SEQ=B.ITEM_SEQ
+		WHERE 1=1
+		AND A.ITEM_SEQ = #{itemSeq}
+		GROUP BY A.ITEM_SEQ,A.UPPER_ITEM_SEQ,A.ITEM_CONSUMPT,A.PRCSS_CD,B.ITEM_CD,B.ITEM_NM,B.ITEM_GUBUN,B.ITEM_MODEL,B.ITEM_UNIT,A.sSORT,A.ITEM_LVL
+		ORDER BY sSORT
+	</select>
+	
+	<!-- BOM 상세조회 -->
+	<select id="itemMotorEbomRead" resultMap="itemPartAdmVo">
+		SELECT 
+			ITEM_SEQ,
+			UPPER_ITEM_SEQ,
+			ITEM_CONSUMPT,
+			PRCSS_CD
+		FROM TB_ITEM_MOTOR_EBOM
+		WHERE 1=1
+		AND ITEM_SEQ=#{itemSeq}
+		AND UPPER_ITEM_SEQ=#{upperItemSeq}
+	</select>
+	
+	<!-- BOM 등록 -->
+	<insert id="itemMotorEbomCreate">
+		INSERT INTO TB_ITEM_MOTOR_EBOM(
+			ITEM_SEQ,
+			UPPER_ITEM_SEQ,
+			ITEM_CONSUMPT,
+			PRCSS_CD,
+			EBOM_DESC,
+			REG_ID,
+			REG_DATE
+		) 
+		VALUES(
+			#{itemSeq},
+			#{upperItemSeq},
+			#{itemConsumpt},
+			#{prcssCd},
+			#{ebomDesc},
+			#{regId},
+			GETDATE()
+		)
+	</insert>
+	
+	<!-- BOM 수정 -->
+	<update id="itemMotorEbomUpdate">
+		UPDATE	TB_ITEM_MOTOR_EBOM 
+		SET	
+			ITEM_CONSUMPT = #{itemConsumpt},
+			EBOM_DESC = #{ebomDesc},
+			UPD_ID = #{updId},
+			UPD_DATE = GETDATE()
+		WHERE 1=1
+		AND ITEM_SEQ = #{itemSeq}
+		AND	UPPER_ITEM_SEQ = #{upperItemSeq}
+	</update>
+	
+	<!-- BOM 삭제 -->
+	<delete id="itemMotorEbomDelete">
+		DELETE FROM TB_ITEM_MOTOR_EBOM 
+		WHERE 1=1
+		AND ITEM_SEQ=#{itemSeq} 
+		AND UPPER_ITEM_SEQ=#{upperItemSeq} 
+	</delete>
+	
+	<!-- 색상 목록 조회 -->
+	<select id="itemColorList" resultMap="itemPartAdmVo"> 
+		SELECT ITEM_COLOR 
+		FROM TB_ITEM_INFO_ADM 
+		WHERE ITEM_COLOR != '' 
+		GROUP BY ITEM_COLOR
+	</select>
+
+	<!-- 이미지 등록 -->
+	<update id="itemInfoImageUpload">
+		UPDATE TB_ITEM_INFO_ADM
+		SET
+		<choose>
+			<when test="imageFile1 != null">
+				IMAGE_FILE1 = #{imageFile1}
+				, IMAGE_FILE1_NM = #{imageFile1Nm}
+			</when>
+			<when test="imageFile2 != null">
+				IMAGE_FILE2 = #{imageFile2}
+				, IMAGE_FILE2_NM = #{imageFile2Nm}
+			</when>
+			<when test="imageFile3 != null">
+				IMAGE_FILE3 = #{imageFile3}
+				, IMAGE_FILE3_NM = #{imageFile3Nm}
+			</when>
+			<when test="imageFile4 != null">
+				IMAGE_FILE4 = #{imageFile4}
+				, IMAGE_FILE4_NM = #{imageFile4Nm}
+			</when>
+		</choose>
+		WHERE 
+          	ITEM_SEQ = #{itemSeq}
+	</update>
+		
+	<!-- 이미지 삭제 -->	
+	<update id="itemInfoImageDelete">
+		UPDATE TB_ITEM_INFO_ADM
+		SET
+		<choose>
+			<when test="value == 1">
+				IMAGE_FILE1 = null
+				, IMAGE_FILE1_NM = null
+			</when>
+			<when test="value == 2">
+				IMAGE_FILE2 = null
+				, IMAGE_FILE2_NM = null
+			</when>
+			<when test="value == 3">
+				IMAGE_FILE3 = null
+				, IMAGE_FILE3_NM = null
+			</when>
+			<when test="value == 4">
+				IMAGE_FILE4 = null
+				, IMAGE_FILE4_NM = null
+			</when>
+		</choose>
+		WHERE 
+          	ITEM_SEQ = #{itemSeq}
+	</update>
+	
+	<!-- 이미지 경로조회 -->
+	<select id="itemInfoImageRead" resultMap="itemPartAdmVo">
+			SELECT
+				ITEM_SEQ
+				, IMAGE_FILE1
+				, IMAGE_FILE2
+				, IMAGE_FILE3
+				, IMAGE_FILE4
+				, IMAGE_FILE1_NM
+				, IMAGE_FILE2_NM
+				, IMAGE_FILE3_NM
+				, IMAGE_FILE4_NM
+			FROM TB_ITEM_INFO_ADM
+			WHERE ITEM_SEQ = #{itemSeq}
+	</select>
+	
+	<!-- 원단위관리 /////////////////////////////////////////////////////////////////// -->
+	<!-- 기준정보 -->
+	<select id="basicInfoList" resultMap="itemPartAdmVo">
+		SELECT
+			INFO.ITEM_SEQ,
+			ITEM_CUS,
+			(SELECT DEAL_CORP_NM FROM TB_DEAL_CORP_ADM X WHERE X.DEAL_CORP_CD=ITEM_CUS) ITEM_CUS_NM,
+			ITEM_MODEL,
+			(SELECT BASE_NM FROM TB_COMMON_CODE_ADM X WHERE X.BASE_CD=ITEM_MODEL AND X.BASE_GROUP_CD='099') ITEM_MODEL_NM,
+			INFO.ITEM_CD,
+			INFO.ITEM_NM,
+			EQ.EQUIP_CAVITY,
+			X.ITEM_SEQ LOWER_ITEM_SEQ,
+			X.ITEM_NM LOWER_ITEM_NM,
+			X.ITEM_GRADE,
+			PROD_WT,
+			SR_WT,
+			SHOT_WT
+		FROM TB_ITEM_INFO_ADM INFO
+		LEFT OUTER JOIN TB_EQUIP_CODE_ADM EQ
+		ON INFO.MOLD_CD=EQ.EQUIP_CD
+		AND EQ.MAIN_GUBUN='002'
+		LEFT OUTER JOIN (
+			SELECT
+				A.ITEM_SEQ,
+				A.UPPER_ITEM_SEQ,
+				B.ITEM_CD,
+				B.ITEM_NM,
+				B.ITEM_GRADE
+			FROM TB_ITEM_MOTOR_EBOM A
+			LEFT OUTER JOIN TB_ITEM_INFO_ADM B
+			ON A.ITEM_SEQ=B.ITEM_SEQ
+		)X
+		ON INFO.ITEM_SEQ=X.UPPER_ITEM_SEQ
+		WHERE INFO.MAIN_GUBUN='001'
+		AND INFO.ITEM_GUBUN IN ('001','002','003')
+		<if test="itemSeq!=null and !itemSeq.equals('')">
+			AND X.ITEM_SEQ = #{itemSeq}
+		</if>
+		<if test="itemInfo!=null and !itemInfo.equals('')">
+			AND (
+				X.ITEM_CD LIKE '%'+#{itemInfo}+'%'
+				OR X.ITEM_NM LIKE '%'+#{itemInfo}+'%'
+				OR INFO.ITEM_CD LIKE '%'+#{itemInfo}+'%'
+				OR INFO.ITEM_NM LIKE '%'+#{itemInfo}+'%'
+			)
+		</if>
+	</select>
+	
+	<!-- 원단위 정보 -->
+	<select id="wonUnitList" resultMap="itemPartAdmVo">
+		SELECT
+			A.MON,
+			IN_QTY,
+			ISNULL(CONVERT(NUMERIC(10,0),IMPORT_COST*IN_QTY),0) IN_COST,
+		    OUTPUT_QTY,
+			ISNULL(CONVERT(NUMERIC(10,0),ROUND(((OUTPUT_QTY*PROD_WT)/1000),0)),0) CONV_OUTPUT_QTY,
+			ISNULL(CONVERT(NUMERIC(10,0),ROUND((OUTPUT_QTY*PROD_WT)/1000,0)*IMPORT_COST),0)OUTPUT_COST,
+			INIT_FAULTY_QTY,
+			ISNULL(FAULTY_QTY,0)-ISNULL(INIT_FAULTY_QTY,0) FAULTY_QTY,
+			ISNULL(CONVERT(NUMERIC(10,0),ROUND(((FAULTY_QTY*PROD_WT)/1000),0)),0) CONV_FAULTY_QTY,
+			ISNULL(CONVERT(NUMERIC(10,0),ROUND((FAULTY_QTY*PROD_WT)/1000,0)*IMPORT_COST),0)FAULTY_COST,
+			FR_HIST_CNT,
+			ISNULL(CONVERT(NUMERIC(10,0),ROUND(FR_HIST_CNT*IMPORT_COST,2)),0) FR_HIST_COST
+		FROM
+		(
+			SELECT 
+					MON,
+					ISNULL(INPUT,0) IN_QTY,
+					ISNULL(OUTPUT,0) OUTPUT_QTY,
+					ISNULL(INIT_FAULTY,0) INIT_FAULTY_QTY,
+					ISNULL(FAULTY,0) FAULTY_QTY,
+					ISNULL(LOSS,0) FR_HIST_CNT,
+					(SELECT B.IMPORT_COST FROM TB_ITEM_MOTOR_EBOM A LEFT OUTER JOIN TB_ITEM_INFO_ADM B ON A.ITEM_SEQ=B.ITEM_SEQ WHERE A.UPPER_ITEM_SEQ='100001') IMPORT_COST,
+					(SELECT PROD_WT FROM TB_ITEM_INFO_ADM WHERE ITEM_SEQ='100001') PROD_WT
+				FROM
+				(
+			
+					SELECT 
+						Z.MON,
+						Z.GUBUN,
+						Z.QTY
+					FROM
+					(
+			
+	
+						SELECT
+							A.UPPER_ITEM_SEQ ITEM_SEQ,
+							SUBSTRING(C.SP_DATE,0,7) MON,
+							'INPUT' GUBUN,
+							ISNULL(CONVERT(NUMERIC(10,0),ROUND(SUM(SP_QTY),0)),0) QTY
+						FROM TB_ITEM_MOTOR_EBOM A
+						LEFT OUTER JOIN TB_ITEM_INFO_ADM B
+						ON A.ITEM_SEQ=B.ITEM_SEQ
+						LEFT OUTER JOIN TB_STOCK_PAYMENT_ADM C
+						ON A.ITEM_SEQ=C.SP_CD
+						AND C.SP_TYPE = '004'
+						AND C.SP_GUBUN = '001'
+						AND C.SP_SUB_GUBUN IN ('초기재고','자재입고')
+						AND SUBSTRING(C.SP_DATE,0,7) BETWEEN #{startDate} AND #{endDate}
+						WHERE SUBSTRING(C.SP_DATE,0,7) IS NOT NULL
+						GROUP BY A.ITEM_SEQ,A.UPPER_ITEM_SEQ,SUBSTRING(C.SP_DATE,0,7)
+			
+						UNION
+	
+						SELECT
+							W.ITEM_SEQ,
+							SUBSTRING(CONVERT(CHAR(8), WORK_START_TIME, 112),0,7) MON,
+							'OUTPUT' GUBUN,
+							ISNULL(CONVERT(NUMERIC(10,0),ROUND(SUM(FAIR_QTY),0)),0) QTY
+						FROM TB_WORK_ORDER_PRCSS W
+						LEFT OUTER JOIN TB_ITEM_INFO_ADM I
+						ON W.ITEM_SEQ=I.ITEM_SEQ
+						WHERE 1=1
+						AND SUBSTRING(CONVERT(CHAR(8), WORK_START_TIME, 112),0,7) BETWEEN #{startDate} AND #{endDate}
+						GROUP BY W.ITEM_SEQ,SUBSTRING(CONVERT(CHAR(8), WORK_START_TIME, 112),0,7),I.PROD_WT
+	
+						UNION
+	
+						SELECT
+							W.ITEM_SEQ,
+							SUBSTRING(CONVERT(CHAR(8), WORK_START_TIME, 112),0,7) MON,
+							'FAULTY' GUBUN,
+							ISNULL(CONVERT(NUMERIC(10,0),ROUND(SUM(FAULTY_QTY),0)),0) QTY
+						FROM TB_WORK_ORDER_PRCSS W
+						LEFT OUTER JOIN TB_ITEM_INFO_ADM I
+						ON W.ITEM_SEQ=I.ITEM_SEQ
+						WHERE 1=1
+						AND SUBSTRING(CONVERT(CHAR(8), WORK_START_TIME, 112),0,7) BETWEEN #{startDate} AND #{endDate}
+						GROUP BY W.ITEM_SEQ,SUBSTRING(CONVERT(CHAR(8), WORK_START_TIME, 112),0,7),I.PROD_WT
+	
+						UNION
+
+							SELECT
+							W.ITEM_SEQ,
+							SUBSTRING(CONVERT(CHAR(8), FAULTY_TYPE_DATE, 112),0,7) MON,
+							'INIT_FAULTY' GUBUN,
+							ISNULL(CONVERT(NUMERIC(10,0),ROUND(SUM(F.FAULTY_TYPE_QTY),0)),0) QTY
+						FROM TB_WORK_ORDER_FAULTY_TYPE F
+						LEFT OUTER JOIN TB_WORK_ORDER W
+						ON W.WORK_ORD_NO=F.WORK_ORD_NO
+						LEFT OUTER JOIN TB_ITEM_INFO_ADM I
+						ON W.ITEM_SEQ=I.ITEM_SEQ
+						WHERE 1=1
+						AND F.FAULTY_TYPE_CD='000026'
+						AND SUBSTRING(CONVERT(CHAR(8), F.FAULTY_TYPE_DATE, 112),0,7) BETWEEN #{startDate} AND #{endDate}
+						GROUP BY W.ITEM_SEQ,SUBSTRING(CONVERT(CHAR(8), FAULTY_TYPE_DATE, 112),0,7),I.PROD_WT
+	
+						UNION
+	
+						SELECT
+							WO.ITEM_SEQ,
+							SUBSTRING(FR_HIST_NO,0,7) MON,
+							'LOSS' GUBUN,
+							ISNULL(CONVERT(NUMERIC(10,0),ROUND(SUM(CONVERT(FLOAT,FR_HIST_CNT))/1000,0)),0) QTY
+						FROM TB_WORK_ORDER_FR_HIST_ADM FR
+						LEFT OUTER JOIN TB_WORK_ORDER WO
+						ON FR.WORK_ORD_NO=WO.WORK_ORD_NO
+						LEFT OUTER JOIN TB_ITEM_INFO_ADM I
+						ON WO.ITEM_SEQ=I.ITEM_SEQ
+						WHERE 1=1
+						AND SUBSTRING(FR_HIST_NO,0,7) BETWEEN #{startDate} AND #{endDate}
+						GROUP BY WO.ITEM_SEQ,SUBSTRING(FR_HIST_NO,0,7),I.EXPORT_COST
+	
+	
+					)Z
+					 WHERE ITEM_SEQ=#{itemSeq}
+				 ) AS RESULT
+				 PIVOT(
+				 SUM(QTY) FOR GUBUN IN ([INPUT],[OUTPUT],[INIT_FAULTY],[FAULTY],[LOSS])
+				 ) AS PIVOT_RESULT
+			 )A
+		 ORDER BY MON
+	</select>
+	
+</mapper>
